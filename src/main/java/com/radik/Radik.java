@@ -35,7 +35,6 @@ public class Radik implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-//		initializeAnnotatedMethods();
 		registerSounds();
 		register();
 		LogicInitialize.register();
@@ -46,21 +45,6 @@ public class Radik implements ModInitializer {
 		ServerLifecycleEvents.SERVER_STARTING.register(this::onServerStarted);
 	}
 
-//	private void initializeAnnotatedMethods() {
-//		ConfigurationBuilder config = new ConfigurationBuilder();
-//		config.setUrls(ClasspathHelper.forPackage("com.radik"));
-//		config.setScanners(new MethodAnnotationsScanner());
-//		Reflections reflections = new Reflections(config);
-//		Set<Method> annotatedMethods = reflections.getMethodsAnnotatedWith(RadikCore.class);
-//
-//		for (Method method : annotatedMethods) {
-//			try {
-//				Class<?> clazz = method.getDeclaringClass();
-//				Object instance = clazz.getDeclaredConstructor().newInstance();
-//				method.invoke(instance);
-//			} catch (Exception ignored) {}
-//		}
-//	}
 
 
 	public static void command(String command) {
