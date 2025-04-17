@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "christmas",
+  "key": {
+    "R": {
+      "item": "radik:winter_gingerbread"
+    }
+  },
+  "pattern": [
+    " R ",
+    "RRR",
+    "   "
+  ],
+  "result": {
+    "count": 2,
+    "id": "radik:winter_christmas_pudding"
+  }
+}

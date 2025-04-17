@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "radik:block/chisel/brick/gold",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "radik:block/chisel/brick/gold_top"
+    },
+    "axis=z": {
+      "model": "radik:block/chisel/brick/gold",
+      "x": 90
+    }
+  }
+}

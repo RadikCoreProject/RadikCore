@@ -1,0 +1,104 @@
+{
+  "crystal_peak": {
+    "sounds": [
+      {
+        "name": "radik:crystal_peak",
+        "stream": true
+      }
+    ]
+  },
+  "pure_vessel": {
+    "sounds": [
+      {
+        "name": "radik:pure_vessel",
+        "stream": true
+      }
+    ]
+  },
+  "savior_of_the_waking_world": {
+    "sounds": [
+      {
+        "name": "radik:savior_of_the_waking_world",
+        "stream": true
+      }
+    ]
+  },
+  "dirtmouth": {
+    "sounds": [
+      {
+        "name": "radik:dirtmouth",
+        "stream": true
+      }
+    ]
+  },
+  "nosk": {
+    "sounds": [
+      {
+        "name": "radik:nosk",
+        "stream": true
+      }
+    ]
+  },
+  "the_last_human": {
+    "sounds": [
+      {
+        "name": "radik:the_last_human",
+        "stream": true
+      }
+    ]
+  },
+  "neutron_stars": {
+    "sounds": [
+      {
+        "name": "radik:neutron_stars",
+        "stream": true
+      }
+    ]
+  },
+  "bonebottom": {
+    "sounds": [
+      {
+        "name": "radik:bonebottom",
+        "stream": true
+      }
+    ]
+  },
+  "homestuck": {
+    "sounds": [
+      {
+        "name": "radik:homestuck",
+        "stream": true
+      }
+    ]
+  },
+  "jingle_bells": {
+    "sounds": [
+      {
+        "name": "radik:jingle_bells",
+        "stream": true
+      }
+    ]
+  },
+  "penis_bolshoy": {
+    "sounds": [
+      {
+        "name": "radik:penis_bolshoy",
+        "stream": true
+      }
+    ]
+  },
+  "merry_christmas": {
+    "sounds": [
+      {
+        "name": "radik:merry_christmas",
+        "stream": true
+      }
+    ]
+  },
+  "warden": {
+    "subtitle": "sounds.radik.warden",
+    "sounds": [
+      "radik:warden"
+    ]
+  }
+}

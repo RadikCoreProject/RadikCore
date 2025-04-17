@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "Q": {
+      "item": "minecraft:spruce_log"
+    },
+    "R": {
+      "tag": "radik:froglights_item"
+    },
+    "S": {
+      "item": "radik:star"
+    }
+  },
+  "pattern": [
+    " S ",
+    " R ",
+    "RQR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "radik:elka"
+  }
+}

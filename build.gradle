@@ -1,0 +1,92 @@
+plugins {
+	id 'fabric-loom' version '1.9-SNAPSHOT'
+	id 'maven-publish'
+}
+
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+fabricApi {
+	configureDataGeneration()
+}
+
+version = '1.4-SNAPSHOT_1-1.21' // Укажите вашу версию мода
+group = 'com.radik' // Укажите вашу группу
+
+base {
+	archivesName = 'RadikFROG' // Укажите имя архива
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://plugins.gradle.org/m2/' }
+	maven { url 'https://jitpack.io' }
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"radik" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+}
+
+processResources {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+dependencies {
+	implementation include('org.reflections:reflections:0.9.12')
+	minecraft "com.mojang:minecraft:1.21"
+	mappings "net.fabricmc:yarn:1.21+build.9:v2"
+	modImplementation 'net.fabricmc:fabric-loader:0.16.9'
+	modImplementation 'net.fabricmc.fabric-api:fabric-api:0.102.0+1.21'
+}
+
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 21
+	options.compilerArgs << "-Xlint:deprecation"
+}
+
+java {
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+}
+
+
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${project.base.archivesName.get()}"}
+	}
+}
+
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			artifactId = project.archives_base_name
+			from components.java
+		}
+	}
+
+	repositories {
+	}
+}

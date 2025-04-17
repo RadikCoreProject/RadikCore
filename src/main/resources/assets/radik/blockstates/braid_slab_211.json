@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "radik:block/chisel/braid_slab/211"
+    },
+    "type=double": {
+      "model": "radik:block/chisel/braid/211"
+    },
+    "type=top": {
+      "model": "radik:block/chisel/braid_slab/211_top"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sugar_block_yellow": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:sugar_block_yellow"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "radik:sugar_yellow"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sugar_block_yellow"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "radik:sugar_yellow"
+    ]
+  }
+}

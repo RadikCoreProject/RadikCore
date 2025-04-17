@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "radik:block/frog/frog255_255_255_top",
+    "side": "radik:block/frog/frog255_255_255"
+  }
+}

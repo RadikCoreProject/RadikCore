@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "christmas",
+  "ingredients": [
+    {
+      "item": "radik:sugar_brown"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "radik:winter_gingerbread"
+  }
+}

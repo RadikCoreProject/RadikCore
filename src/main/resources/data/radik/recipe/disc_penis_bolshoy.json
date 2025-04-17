@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:large_fern"
+  },
+  "result": {
+    "count": 1,
+    "id": "radik:disc_penis_bolshoy"
+  }
+}

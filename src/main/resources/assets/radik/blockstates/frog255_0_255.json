@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "radik:block/frog/frog255_0_255_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "radik:block/frog/frog255_0_255"
+    },
+    "axis=z": {
+      "model": "radik:block/frog/frog255_0_255_horizontal",
+      "x": 90
+    }
+  }
+}

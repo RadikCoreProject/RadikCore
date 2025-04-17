@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#P#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "radik:froglights_item"
+    },
+    "P": {
+      "item": "minecraft:green_dye"
+    }
+  },
+  "result": {
+    "id": "minecraft:verdant_froglight",
+    "count": 8
+  }
+}
