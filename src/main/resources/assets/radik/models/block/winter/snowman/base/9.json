@@ -1,0 +1,6 @@
+{
+"parent": "radik:block/winter/snowman/snowman",
+"textures": {
+    "sharf": "radik:block/winter/present/9"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.radik.disc_savior_of_the_waking_world.desc"
+  },
+  "length_in_seconds": 147.0,
+  "sound_event": "radik:savior_of_the_waking_world"
+}

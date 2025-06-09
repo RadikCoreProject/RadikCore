@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.radik.disc_dirtmouth.desc"
+  },
+  "length_in_seconds": 116.0,
+  "sound_event": "radik:dirtmouth"
+}

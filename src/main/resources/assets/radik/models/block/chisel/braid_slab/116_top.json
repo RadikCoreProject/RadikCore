@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "radik:block/chisel/braid/116",
+    "side": "radik:block/chisel/braid/116",
+    "top": "radik:block/chisel/braid/116"
+  }
+}

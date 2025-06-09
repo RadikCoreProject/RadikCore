@@ -1,0 +1,25 @@
+{
+	"schemaVersion": 1,
+	"id": "radik",
+	"version": "1.21",
+	"name": "RadikFROG",
+	"description": "радэк",
+	"authors": [
+		"радек"
+	],
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.radik.Radik"
+		],
+		"fabric-datagen": [
+			"com.radik.datagen.TutorialModDataGenerator"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.15.7",
+		"minecraft": "1.21",
+		"fabric": "*"
+	}
+}

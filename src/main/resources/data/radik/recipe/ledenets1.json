@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "ledenets",
+  "key": {
+    "A": {
+      "item": "minecraft:green_dye"
+    },
+    "B": {
+      "item": "minecraft:red_dye"
+    },
+    "L": {
+      "item": "minecraft:sugar"
+    },
+    "R": {
+      "item": "minecraft:blue_dye"
+    },
+    "Y": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " AB",
+    " LR",
+    "Y  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "radik:ledenets1"
+  }
+}

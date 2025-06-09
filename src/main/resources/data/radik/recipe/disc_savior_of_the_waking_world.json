@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "minecraft:disc_fragment_5"
+    },
+    "Q": {
+      "item": "minecraft:tall_grass"
+    }
+  },
+  "pattern": [
+    " R ",
+    "RQR",
+    " R "
+  ],
+  "result": {
+    "count": 1,
+    "id": "radik:disc_savior_of_the_waking_world"
+  }
+}

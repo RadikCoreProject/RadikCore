@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "christmas",
+  "key": {
+    "L": {
+      "item": "minecraft:green_dye"
+    },
+    "R": {
+      "item": "radik:sugar_yellow"
+    },
+    "Y": {
+      "item": "radik:winter_gingerbread"
+    }
+  },
+  "pattern": [
+    "YRY",
+    "RLR",
+    "YRY"
+  ],
+  "result": {
+    "count": 2,
+    "id": "radik:winter_gingerbread_man"
+  }
+}

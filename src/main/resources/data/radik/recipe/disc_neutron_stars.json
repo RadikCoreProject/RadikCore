@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "minecraft:disc_fragment_5"
+    },
+    "A": {
+      "item": "radik:disc_bonebottom"
+    },
+    "D": {
+      "item": "radik:disc_homestuck"
+    },
+    "B": {
+      "item": "radik:disc_savior_of_the_waking_world"
+    },
+    "C": {
+      "item": "radik:disc_the_last_human"
+    },
+    "E": {
+      "item": "minecraft:emerald_block"
+    }
+  },
+  "pattern": [
+    "ARB",
+    "RER",
+    "DRC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "radik:disc_neutron_stars"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.radik.disc_neutron_stars.desc"
+  },
+  "length_in_seconds": 410.0,
+  "sound_event": "radik:neutron_stars"
+}

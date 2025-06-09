@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "christmas",
+  "key": {
+    "L": {
+      "item": "minecraft:sugar"
+    },
+    "Q": {
+      "item": "minecraft:egg"
+    },
+    "R": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "pattern": [
+    " L ",
+    " Q ",
+    " R "
+  ],
+  "result": {
+    "count": 1,
+    "id": "radik:winter_eggnog"
+  }
+}

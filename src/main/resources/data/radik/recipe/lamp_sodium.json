@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "minecraft:lantern"
+    },
+    "Q": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    " Q ",
+    "QRQ",
+    " Q "
+  ],
+  "result": {
+    "count": 1,
+    "id": "radik:lamp_sodium"
+  }
+}

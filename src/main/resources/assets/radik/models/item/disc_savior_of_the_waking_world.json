@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "radik:item/disc/savior_of_the_waking_world"
+  }
+}

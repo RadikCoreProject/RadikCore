@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "christmas",
+  "key": {
+    "L": {
+      "item": "minecraft:sugar"
+    },
+    "Q": {
+      "item": "radik:winter_chocolate_bar"
+    },
+    "R": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "pattern": [
+    " L ",
+    " Q ",
+    " R "
+  ],
+  "result": {
+    "count": 1,
+    "id": "radik:winter_hot_chocolate"
+  }
+}

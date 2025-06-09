@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "radik:winter_gingerbread_man"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_winter_gingerbread": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:winter_gingerbread"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_winter_gingerbread"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "radik:winter_gingerbread_man"
+    ]
+  }
+}

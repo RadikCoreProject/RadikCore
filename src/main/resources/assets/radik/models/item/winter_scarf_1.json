@@ -1,0 +1,6 @@
+{
+"parent": "radik:custom/scarf",
+"textures": {
+    "color": "radik:item/winter/scarf/1"
+  }
+}

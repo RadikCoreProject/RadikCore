@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "radik:brick6"
+  },
+  "result": {
+    "count": 1,
+    "id": "radik:brick_wall6"
+  }
+}

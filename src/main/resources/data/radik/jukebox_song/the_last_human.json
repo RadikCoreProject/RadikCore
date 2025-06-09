@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.radik.disc_the_last_human.desc"
+  },
+  "length_in_seconds": 415.0,
+  "sound_event": "radik:the_last_human"
+}

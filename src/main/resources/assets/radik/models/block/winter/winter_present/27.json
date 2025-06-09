@@ -1,0 +1,7 @@
+{
+"parent": "radik:block/winter/winter_present",
+"textures": {
+    "bant": "radik:block/winter/present/4",
+    "present": "radik:block/winter/present/3"
+  }
+}
