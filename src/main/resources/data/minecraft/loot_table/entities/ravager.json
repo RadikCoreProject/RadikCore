@@ -13,7 +13,12 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:saddle"
+          "name": "minecraft:saddle",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 1
         }
       ],
       "rolls": 1.0

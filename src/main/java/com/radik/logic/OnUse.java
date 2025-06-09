@@ -1,8 +1,5 @@
 package com.radik.logic;
 
-import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.ParseResults;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.radik.block.RegisterBlocks;
 import com.radik.item.RegisterItems;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -10,7 +7,6 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
@@ -18,8 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.scoreboard.ScoreHolder;
 import net.minecraft.scoreboard.Scoreboard;
-import net.minecraft.scoreboard.ScoreboardObjective;
-import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -30,8 +24,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Random;
 
+import static com.radik.Data.getDimension;
 import static com.radik.Radik.SERVER;
 import static com.radik.Radik.command;
 import static com.radik.block.RegisterBlocks.*;
@@ -50,6 +48,8 @@ public class OnUse {
 
 
     private static final ArrayList<Block> LOGGING = new ArrayList<>();
+    private static final ArrayList<Item> LOGGING2 = new ArrayList<>();
+    private static final ArrayList<Item> LOGGING3 = new ArrayList<>();
 
     static {
         PIX.put(30, new String[]{"radik:present_small", "1"});
@@ -78,12 +78,17 @@ public class OnUse {
         EQUIPPABLE.put(RegisterItems.SCARF_14, "head");
         EQUIPPABLE.put(RegisterItems.SCARF_15, "head");
         EQUIPPABLE.put(RegisterItems.SCARF_16, "head");
+        EQUIPPABLE.put(RegisterItems.ADVENTURE_HAT, "head");
+        EQUIPPABLE.put(RegisterItems.TASHERS_CRONE, "head");
 
         ROTATED_BLOCKS.add(SNOWMAN);
         ROTATED_BLOCKS.add(LEDENETS);
         ROTATED_BLOCKS.add(LEDENETS1);
         ROTATED_BLOCKS.add(LEDENETS2);
         ROTATED_BLOCKS.add(FONAR_LAMP20);
+        ROTATED_BLOCKS.add(TROPHY_NOSTALGIC_BRONZE);
+        ROTATED_BLOCKS.add(TROPHY_NOSTALGIC_SILVER);
+        ROTATED_BLOCKS.add(TROPHY_NOSTALGIC_GOLD);
 
         ROTATED_BLOCKS2.add(FONAR_LAMP2);
         ROTATED_BLOCKS2.add(FONAR_LAMP3);
@@ -101,6 +106,34 @@ public class OnUse {
         LOGGING.add(Blocks.CHEST);
         LOGGING.add(Blocks.TNT);
         LOGGING.add(Blocks.HOPPER);
+        LOGGING.add(Blocks.CRAFTER);
+        LOGGING.add(Blocks.ACACIA_SIGN);
+        LOGGING.add(Blocks.OAK_SIGN);
+        LOGGING.add(Blocks.CHERRY_SIGN);
+        LOGGING.add(Blocks.SPRUCE_SIGN);
+        LOGGING.add(Blocks.BIRCH_SIGN);
+        LOGGING.add(Blocks.JUNGLE_SIGN);
+        LOGGING.add(Blocks.ACACIA_HANGING_SIGN);
+        LOGGING.add(Blocks.OAK_HANGING_SIGN);
+        LOGGING.add(Blocks.CHERRY_HANGING_SIGN);
+        LOGGING.add(Blocks.SPRUCE_HANGING_SIGN);
+        LOGGING.add(Blocks.BIRCH_HANGING_SIGN);
+        LOGGING.add(Blocks.JUNGLE_HANGING_SIGN);
+        LOGGING.add(Blocks.CRIMSON_SIGN);
+        LOGGING.add(Blocks.WARPED_SIGN);
+        LOGGING.add(Blocks.CRIMSON_HANGING_SIGN);
+        LOGGING.add(Blocks.WARPED_HANGING_SIGN);
+        LOGGING.add(Blocks.BARREL);
+
+        LOGGING2.add(Items.EGG);
+        LOGGING2.add(Items.SPLASH_POTION);
+        LOGGING2.add(Items.LINGERING_POTION);
+
+        LOGGING3.add(Items.LAVA_BUCKET);
+        LOGGING3.add(Items.FLINT_AND_STEEL);
+        LOGGING3.add(Items.WATER_BUCKET);
+        LOGGING3.add(Items.FIRE_CHARGE);
+        LOGGING3.add(Items.WITHER_SKELETON_SKULL);
     }
 
     protected static void register() {
@@ -113,20 +146,28 @@ public class OnUse {
         Item item = stack.getItem();
         Inventory inventory = player.getInventory();
 
-        if (EQUIPPABLE.containsKey(item)) {
-            switch (EQUIPPABLE.get(item)) {
-                case "head":
-                    if (inventory.getStack(39).getItem().equals(Items.AIR)) {
-                        command(String.format("item replace entity %s armor.head with %s", player.getName().getString(), item));
-                        stack.decrement(1);
-                        return TypedActionResult.success(stack);
-                    }
+        if (!world.isClient) {
+            if (EQUIPPABLE.containsKey(item)) {
+                switch (EQUIPPABLE.get(item)) {
+                    case "head":
+                        if (inventory.getStack(39).getItem().equals(Items.AIR)) {
+                            command(String.format("item replace entity %s armor.head with %s", player.getName().getString(), item));
+                            stack.decrement(1);
+                            return TypedActionResult.success(stack);
+                        }
+                }
+                return TypedActionResult.success(stack);
             }
-            return TypedActionResult.success(stack);
+
+            if (LOGGING2.contains(item)) {
+                Logger(player.getName().getString(), item.getName().getString(), getDimension(world), player.getBlockX(), player.getBlockY(), player.getBlockZ(), "use");
+            }
         }
+
         return TypedActionResult.pass(stack);
     }
 
+    // пофиксить серверсайд баг с использованием дважды при повороте
     private static ActionResult onBlockUse(@NotNull PlayerEntity player, @NotNull World world, Hand hand, @NotNull BlockHitResult blockHitResult) {
         ItemStack stack = player.getStackInHand(hand);
         Item item = stack.getItem();
@@ -138,84 +179,79 @@ public class OnUse {
         String item_name = item.getName().toString();
         int x = blockPos.getX(), y = blockPos.getY(), z = blockPos.getZ();
 
-        if(LOGGING.contains(block)) {
-            Logger(player.getName().getString(), state.getBlock().getName().getString(), world.getDimension().toString().split("/ ")[1].split("]")[0], blockPos.getX(), blockPos.getY(), blockPos.getZ(), "use");
-        }
-
-        if(MINIGAME && block.equals(Blocks.CHEST)) {
-            command(String.format("fill %d %d %d %d %d %d air destroy", x, y, z, x, y, z));
-        }
-
-        if (player.getAbilities().allowFlying && !player.getAbilities().creativeMode && !player.isSpectator()) {
-            player.sendMessage(Text.literal("Ты находишься в режиме оценивания!"));
-            return ActionResult.SUCCESS;
-        }
-
-        if(block_name.equals("bicycle")) {
-            if (!world.isClient) { return ActionResult.SUCCESS_NO_ITEM_USED; }
-            happyBirhday(player_name, x, y, z);
+        if (item.equals(Items.ENDER_EYE)) {
             return ActionResult.SUCCESS_NO_ITEM_USED;
         }
 
-        if(block_name.equals("pix")) {
-            if (!world.isClient) { return ActionResult.SUCCESS_NO_ITEM_USED; }
-            pix(player);
-            return ActionResult.SUCCESS_NO_ITEM_USED;
-        }
-
-        else if (ROTATED_BLOCKS.contains(world.getBlockState(blockPos.up()).getBlock()) || ROTATED_BLOCKS2.contains(world.getBlockState(blockPos.up()).getBlock())) { return ActionResult.SUCCESS_NO_ITEM_USED; }
-
-        else if (ROTATED_BLOCKS.contains(block)) {
-            if (!world.isClient) { return ActionResult.SUCCESS_NO_ITEM_USED; }
-            world.setBlockState(blockPos, state.with(FACING2, (state.get(FACING2) + 1) % 4));
-            return ActionResult.SUCCESS_NO_ITEM_USED;
-        }
-
-        else if (DOWNFALLED_BLOCKS.containsKey(item)) {
-            if (!world.isAir(blockPos.up(2)) || !world.isAir(blockPos.up())) { return ActionResult.SUCCESS_NO_ITEM_USED; }
-            world.setBlockState(blockPos.up(2), DOWNFALLED_BLOCKS.get(item).getDefaultState());
-            player.getStackInHand(hand).decrement(1);
-            return ActionResult.SUCCESS;
-        }
-
-        else if (ROTATED_BLOCKS2.contains(block)) {
-            if (!world.isClient) { return ActionResult.SUCCESS_NO_ITEM_USED; }
-            world.setBlockState(blockPos, state.with(FACING, !state.get(FACING)));
-            return ActionResult.SUCCESS_NO_ITEM_USED;
-        }
-
-        else if (BLOCKITEMS.containsKey(item) && world.isAir(blockPos.up())) {
-            Random random = new Random();
-            int a = random.nextInt(1, 72);
-            if (item_name.contains("ledenets")) {
-                world.setBlockState(blockPos.offset(blockHitResult.getSide()), BLOCKITEMS.get(item).getDefaultState().with(TYPE2, a));
+        if (!world.isClient) {
+            if (LOGGING.contains(block)) {
+                Logger(player.getName().getString(), state.getBlock().getName().getString(), getDimension(world), blockPos.getX(), blockPos.getY(), blockPos.getZ(), "open");
+            } else if (LOGGING3.contains(item)) {
+                Logger(player.getName().getString(), item.getName().getString(), getDimension(world), blockPos.getX(), blockPos.getY(), blockPos.getZ(), "use");
             }
-            player.getStackInHand(hand).decrement(1);
-            return ActionResult.PASS;
-        }
 
-        else if(item.equals(Items.BONE_MEAL) && block.equals(Blocks.SUGAR_CANE)) {
-            if(world.getBlockState(blockPos.down(1)).getBlock().equals(Blocks.SUGAR_CANE) && world.getBlockState(blockPos.down(2)).getBlock().equals(Blocks.SUGAR_CANE)) {
+
+            if (MINIGAME && block.equals(Blocks.CHEST)) {
+                command(String.format("fill %d %d %d %d %d %d air destroy", x, y, z, x, y, z));
+            }
+
+            if (player.getAbilities().allowFlying && !player.getAbilities().creativeMode && !player.isSpectator()) {
+                player.sendMessage(Text.literal("Ты находишься в режиме оценивания!"));
+                return ActionResult.SUCCESS_NO_ITEM_USED;
+            }
+
+            if (block_name.equals("bicycle")) {
+                happyBirhday(player_name, x, y, z);
+                return ActionResult.SUCCESS_NO_ITEM_USED;
+            } else if (block_name.equals("pix")) {
+                pix(player);
+                return ActionResult.SUCCESS_NO_ITEM_USED;
+            } else if (ROTATED_BLOCKS.contains(world.getBlockState(blockPos.up()).getBlock()) || ROTATED_BLOCKS2.contains(world.getBlockState(blockPos.up()).getBlock())) {
+                return ActionResult.SUCCESS_NO_ITEM_USED;
+            } else if (ROTATED_BLOCKS.contains(block)) {
+                world.setBlockState(blockPos, state.with(FACING2, (state.get(FACING2) + 1) % 4));
+                return ActionResult.SUCCESS_NO_ITEM_USED;
+            } else if (ROTATED_BLOCKS2.contains(block)) {
+                world.setBlockState(blockPos, state.with(FACING, !state.get(FACING)));
+                return ActionResult.SUCCESS_NO_ITEM_USED;
+            } else if (DOWNFALLED_BLOCKS.containsKey(item)) {
+                if (!world.isAir(blockPos.up(2)) || !world.isAir(blockPos.up())) {
+                    return ActionResult.SUCCESS_NO_ITEM_USED;
+                }
+                world.setBlockState(blockPos.up(2), DOWNFALLED_BLOCKS.get(item).getDefaultState());
+                player.getStackInHand(hand).decrement(1);
+                return ActionResult.SUCCESS;
+            } else if (BLOCKITEMS.containsKey(item) && world.isAir(blockPos.up())) {
+                Random random = new Random();
+                int a = random.nextInt(1, 72);
+                if (item_name.contains("ledenets")) {
+                    world.setBlockState(blockPos.offset(blockHitResult.getSide()), BLOCKITEMS.get(item).getDefaultState().with(TYPE2, a));
+                }
+                player.getStackInHand(hand).decrement(1);
                 return ActionResult.PASS;
-            }
-            if(world.getBlockState(blockPos.down(1)).getBlock().equals(Blocks.SUGAR_CANE) && world.getBlockState(blockPos.up(1)).isAir()) {
-                world.setBlockState(blockPos.up(), Blocks.SUGAR_CANE.getDefaultState());
-                stack.decrement(1);
-                onGrow(x, y, z);
-                return ActionResult.SUCCESS;
-            }
-            if(world.getBlockState(blockPos.up(1)).isAir() && world.getBlockState(blockPos.up(2)).isAir()) {
-                world.setBlockState(blockPos.up(), Blocks.SUGAR_CANE.getDefaultState());
-                world.setBlockState(blockPos.up(2), Blocks.SUGAR_CANE.getDefaultState());
-                stack.decrement(1);
-                onGrow(x, y, z);
-                return ActionResult.SUCCESS;
-            }
-            if(world.getBlockState(blockPos.up(1)).isAir()) {
-                world.setBlockState(blockPos.up(), Blocks.SUGAR_CANE.getDefaultState());
-                stack.decrement(1);
-                onGrow(x, y, z);
-                return ActionResult.SUCCESS;
+            } else if (item.equals(Items.BONE_MEAL) && block.equals(Blocks.SUGAR_CANE)) {
+                if (world.getBlockState(blockPos.down(1)).getBlock().equals(Blocks.SUGAR_CANE) && world.getBlockState(blockPos.down(2)).getBlock().equals(Blocks.SUGAR_CANE)) {
+                    return ActionResult.PASS;
+                }
+                if (world.getBlockState(blockPos.down(1)).getBlock().equals(Blocks.SUGAR_CANE) && world.getBlockState(blockPos.up(1)).isAir()) {
+                    world.setBlockState(blockPos.up(), Blocks.SUGAR_CANE.getDefaultState());
+                    stack.decrement(1);
+                    onGrow(x, y, z);
+                    return ActionResult.SUCCESS;
+                }
+                if (world.getBlockState(blockPos.up(1)).isAir() && world.getBlockState(blockPos.up(2)).isAir()) {
+                    world.setBlockState(blockPos.up(), Blocks.SUGAR_CANE.getDefaultState());
+                    world.setBlockState(blockPos.up(2), Blocks.SUGAR_CANE.getDefaultState());
+                    stack.decrement(1);
+                    onGrow(x, y, z);
+                    return ActionResult.SUCCESS;
+                }
+                if (world.getBlockState(blockPos.up(1)).isAir()) {
+                    world.setBlockState(blockPos.up(), Blocks.SUGAR_CANE.getDefaultState());
+                    stack.decrement(1);
+                    onGrow(x, y, z);
+                    return ActionResult.SUCCESS;
+                }
             }
         }
         return ActionResult.PASS;
@@ -223,15 +259,16 @@ public class OnUse {
 
     private static void pix(@NotNull PlayerEntity player) {
         Scoreboard scoreboard = player.getScoreboard();
-        if(!Arrays.stream(SERVER.getPlayerNames()).toList().contains("catgirl_cute777")) { return; }
+        if(!Arrays.stream(SERVER.getPlayerNames()).toList().contains("X_xPIXx_X")) { return; }
         int c = player.getScoreboard().getOrCreateScore(ScoreHolder.fromName("PIX"), scoreboard.getNullableObjective("PIX")).incrementScore();
-        for(int i: PIX.keySet()) {
+        for(int i: PIX.keySet().stream().sorted().toList()) {
             if(c == i) {
-                command(String.format("give catgirl_cute777 %s %s", PIX.get(i)[0], PIX.get(i)[1]));
-                command("title catgirl_cute777 title \"С ДНЁМ РОЖДЕНИЯ, catgirl_cute777!\"");
+                command(String.format("give X_xPIXx_X %s %s", PIX.get(i)[0], PIX.get(i)[1]));
+                command("title X_xPIXx_X title \"С ДНЁМ РОЖДЕНИЯ, X_xPIXx_X!\"");
             }
             else if(c < i) {
                 player.sendMessage(Text.literal(String.format("%d / %s", c, i)));
+                break;
             }
         }
     }

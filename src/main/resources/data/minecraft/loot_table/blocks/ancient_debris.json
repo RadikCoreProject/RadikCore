@@ -11,7 +11,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:ancient_debris"
+          "name": "minecraft:ancient_debris",
+          "weight": 39
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:disc_debris",
+          "weight": 1
         }
       ],
       "rolls": 1.0

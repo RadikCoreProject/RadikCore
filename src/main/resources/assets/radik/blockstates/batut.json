@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "radik:block/chisel/bevel/2"
+      "model": "radik:custom/batut"
     }
   }
 }

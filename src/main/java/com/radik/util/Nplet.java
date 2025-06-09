@@ -1,4 +1,4 @@
-package org.radikutils.plets;
+package com.radik.util;
 
 import org.jetbrains.annotations.Nullable;
 

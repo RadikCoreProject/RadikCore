@@ -79,10 +79,34 @@
       }
     ]
   },
+  "penis_bolshoy": {
+    "sounds": [
+      {
+        "name": "radik:penis_bolshoy",
+        "stream": true
+      }
+    ]
+  },
   "merry_christmas": {
     "sounds": [
       {
         "name": "radik:merry_christmas",
+        "stream": true
+      }
+    ]
+  },
+  "debris": {
+    "sounds": [
+      {
+        "name": "radik:debris",
+        "stream": true
+      }
+    ]
+  },
+  "bolshoy_kush": {
+    "sounds": [
+      {
+        "name": "radik:bolshoy_kush",
         "stream": true
       }
     ]

@@ -1,6 +1,7 @@
 package com.radik;
 
 import net.minecraft.block.Block;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
@@ -32,6 +33,7 @@ public class ModTags {
         }
     }
 
-    @RadikCore
-    public static void register() {}
+
+
+    public static void registerTags() {}
 }

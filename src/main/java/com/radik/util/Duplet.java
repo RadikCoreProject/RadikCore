@@ -1,4 +1,4 @@
-package org.radikutils.plets;
+package com.radik.util;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -29,5 +29,10 @@ public class Duplet<T, P> implements Nplet<T, P> {
     public void setDuplet(T type, P parametrize) {
         this.t = type;
         this.p = parametrize;
+    }
+
+    @Override
+    public @NotNull String toString() {
+        return String.format("Type: %s, Parametrize: %s", this.t.toString(), this.p.toString());
     }
 }

@@ -7,12 +7,12 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 180
+          "weight": 19
         },
         {
           "type": "minecraft:item",
           "name": "radik:disc_crystal_peak",
-          "weight": 20
+          "weight": 1
         }
       ],
       "rolls": 1

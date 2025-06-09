@@ -52,6 +52,22 @@ public class ModGroup {
                         entries.add(BRICK14);
                         entries.add(BRICK15);
                         entries.add(BRICK16);
+                        entries.add(BRICK17);
+                        entries.add(BRICK18);
+                        entries.add(BRICK19);
+                        entries.add(BRICK20);
+                        entries.add(BRICK21);
+                        entries.add(BRICK22);
+                        entries.add(BRICK23);
+                        entries.add(BRICK24);
+                        entries.add(BRICK25);
+                        entries.add(BRICK26);
+                        entries.add(BRICK27);
+                        entries.add(BRICK28);
+                        entries.add(BRICK29);
+                        entries.add(BRICK30);
+                        entries.add(BRICK31);
+                        entries.add(BRICK32);
                         entries.add(BRICK_STAIR1);
                         entries.add(BRICK_STAIR2);
                         entries.add(BRICK_STAIR3);
@@ -68,6 +84,22 @@ public class ModGroup {
                         entries.add(BRICK_STAIR14);
                         entries.add(BRICK_STAIR15);
                         entries.add(BRICK_STAIR16);
+                        entries.add(BRICK_STAIR17);
+                        entries.add(BRICK_STAIR18);
+                        entries.add(BRICK_STAIR19);
+                        entries.add(BRICK_STAIR20);
+                        entries.add(BRICK_STAIR21);
+                        entries.add(BRICK_STAIR22);
+                        entries.add(BRICK_STAIR23);
+                        entries.add(BRICK_STAIR24);
+                        entries.add(BRICK_STAIR25);
+                        entries.add(BRICK_STAIR26);
+                        entries.add(BRICK_STAIR27);
+                        entries.add(BRICK_STAIR28);
+                        entries.add(BRICK_STAIR29);
+                        entries.add(BRICK_STAIR30);
+                        entries.add(BRICK_STAIR31);
+                        entries.add(BRICK_STAIR32);
                         entries.add(BRICK_SLAB1);
                         entries.add(BRICK_SLAB2);
                         entries.add(BRICK_SLAB3);
@@ -84,6 +116,22 @@ public class ModGroup {
                         entries.add(BRICK_SLAB14);
                         entries.add(BRICK_SLAB15);
                         entries.add(BRICK_SLAB16);
+                        entries.add(BRICK_SLAB17);
+                        entries.add(BRICK_SLAB18);
+                        entries.add(BRICK_SLAB19);
+                        entries.add(BRICK_SLAB20);
+                        entries.add(BRICK_SLAB21);
+                        entries.add(BRICK_SLAB22);
+                        entries.add(BRICK_SLAB23);
+                        entries.add(BRICK_SLAB24);
+                        entries.add(BRICK_SLAB25);
+                        entries.add(BRICK_SLAB26);
+                        entries.add(BRICK_SLAB27);
+                        entries.add(BRICK_SLAB28);
+                        entries.add(BRICK_SLAB29);
+                        entries.add(BRICK_SLAB30);
+                        entries.add(BRICK_SLAB31);
+                        entries.add(BRICK_SLAB32);
                         entries.add(BRICK_WALL1);
                         entries.add(BRICK_WALL2);
                         entries.add(BRICK_WALL3);
@@ -100,6 +148,22 @@ public class ModGroup {
                         entries.add(BRICK_WALL14);
                         entries.add(BRICK_WALL15);
                         entries.add(BRICK_WALL16);
+                        entries.add(BRICK_WALL17);
+                        entries.add(BRICK_WALL18);
+                        entries.add(BRICK_WALL19);
+                        entries.add(BRICK_WALL20);
+                        entries.add(BRICK_WALL21);
+                        entries.add(BRICK_WALL22);
+                        entries.add(BRICK_WALL23);
+                        entries.add(BRICK_WALL24);
+                        entries.add(BRICK_WALL25);
+                        entries.add(BRICK_WALL26);
+                        entries.add(BRICK_WALL27);
+                        entries.add(BRICK_WALL28);
+                        entries.add(BRICK_WALL29);
+                        entries.add(BRICK_WALL30);
+                        entries.add(BRICK_WALL31);
+                        entries.add(BRICK_WALL32);
 
                         entries.add(BRICK_ARRAY_1);
                         entries.add(BRICK_ARRAY_2);
@@ -407,8 +471,6 @@ public class ModGroup {
                         entries.add(FONAR_LAMP14);
                         entries.add(FONAR_LAMP20);
                         entries.add(LAMP);
-                        entries.add(BICYCLE);
-                        entries.add(PIX);
                     }).build());
 
     public static final ItemGroup RADIK_ITEMS = Registry.register(Registries.ITEM_GROUP,
@@ -521,6 +583,23 @@ public class ModGroup {
                         entries.add(SUGAR_BLOCK_BROWN);
                     }).build());
 
-    @RadikCore
-    public static void initialize() {}
+    public static final ItemGroup RADIK_PRESENTS = Registry.register(Registries.ITEM_GROUP,
+            Identifier.of(Radik.MOD_ID, "radik_presents"),
+            FabricItemGroup.builder().icon(() -> new ItemStack(ADVENTURE_HAT))
+                    .displayName(Text.translatable("itemGroup.radikpresents"))
+                    .entries((displayContext, entries) -> {
+                        entries.add(ADVENTURE_HAT);
+                        entries.add(PIX);
+                        entries.add(BICYCLE);
+                        entries.add(TASHERS_CRONE);
+                        entries.add(DISK_PENIS_BOLSHOY);
+                        entries.add(DISK_BOLSHOY_KUSH);
+                        entries.add(DISK_DEBRIS);
+                        entries.add(BATUT);
+                        entries.add(TROPHY_NOSTALGIC_BRONZE);
+                        entries.add(TROPHY_NOSTALGIC_SILVER);
+                        entries.add(TROPHY_NOSTALGIC_GOLD);
+                    }).build());
+
+    public static void registerGroup() {}
 }

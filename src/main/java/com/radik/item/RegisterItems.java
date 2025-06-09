@@ -2,14 +2,15 @@ package com.radik.item;
 
 import com.radik.Music;
 import com.radik.Radik;
-import com.radik.RadikCore;
-import net.fabricmc.fabric.api.item.v1.EquipmentSlotProvider;
-import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 
 import static com.radik.Data.FOOD_COMPONENTS;
 
@@ -59,22 +60,22 @@ public class RegisterItems {
     public static final Item GUMDROPS = registerItem("winter_gumdrops", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("ledenets"))));
     public static final Item HOT_CHOCOLATE = registerItem("winter_hot_chocolate", new Item(new Item.Settings().maxCount(16).food(FOOD_COMPONENTS.get("3"))));
     public static final Item PANETTONE = registerItem("winter_panettone", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("1"))));
-    public static final Item SCARF_1 = registerItem("winter_scarf_1", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_2 = registerItem("winter_scarf_2", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_3 = registerItem("winter_scarf_3", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_4 = registerItem("winter_scarf_4", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_5 = registerItem("winter_scarf_5", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_6 = registerItem("winter_scarf_6", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_7 = registerItem("winter_scarf_7", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_8 = registerItem("winter_scarf_8", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_9 = registerItem("winter_scarf_9", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_10 = registerItem("winter_scarf_10", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_11 = registerItem("winter_scarf_11", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_12 = registerItem("winter_scarf_12", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_13 = registerItem("winter_scarf_13", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_14 = registerItem("winter_scarf_14", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_15 = registerItem("winter_scarf_15", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
-    public static final Item SCARF_16 = registerItem("winter_scarf_16", new Item(new Item.Settings().food(FOOD_COMPONENTS.get("empty")).maxCount(1)));
+    public static final Item SCARF_1 = registerItem("winter_scarf_1", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_2 = registerItem("winter_scarf_2", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_3 = registerItem("winter_scarf_3", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_4 = registerItem("winter_scarf_4", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_5 = registerItem("winter_scarf_5", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_6 = registerItem("winter_scarf_6", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_7 = registerItem("winter_scarf_7", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_8 = registerItem("winter_scarf_8", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_9 = registerItem("winter_scarf_9", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_10 = registerItem("winter_scarf_10", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_11 = registerItem("winter_scarf_11", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_12 = registerItem("winter_scarf_12", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_13 = registerItem("winter_scarf_13", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_14 = registerItem("winter_scarf_14", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_15 = registerItem("winter_scarf_15", new Item(new Item.Settings().maxCount(1)));
+    public static final Item SCARF_16 = registerItem("winter_scarf_16", new Item(new Item.Settings().maxCount(1)));
     public static final Item SUGAR_BROWN = registerItem("sugar_brown", new Item(new Item.Settings()));
     public static final Item SUGAR_RED = registerItem("sugar_red", new Item(new Item.Settings()));
     public static final Item SUGAR_YELLOW = registerItem("sugar_yellow", new Item(new Item.Settings()));
@@ -82,12 +83,24 @@ public class RegisterItems {
     public static final Item SODIUM_LAMP = registerItem("lamp_sodium", new Item(new Item.Settings()));
     public static final Item MERCURY_LAMP = registerItem("lamp_mercury", new Item(new Item.Settings()));
 
+    public static final Item ADVENTURE_HAT = registerItem("adventure_hat", new Item(new Item.Settings().maxCount(1)));
+    public static final Item TASHERS_CRONE = registerItem("tasher_crone", new Item(new Item.Settings().maxCount(1)));
+    public static final Item DISK_PENIS_BOLSHOY = registerItem("disc_penis_bolshoy", new Item(new Item.Settings().jukeboxPlayable(Music.PENIS_BOLSHOY_KEY).maxCount(1)));
+    public static final Block DISK_DEBRIS = registerBlockItem("disc_debris", new Item.Settings().jukeboxPlayable(Music.DEBRIS_KEY).maxCount(1));
+    public static final Item DISK_BOLSHOY_KUSH = registerItem("disc_bolshoy_kush", new Item(new Item.Settings().jukeboxPlayable(Music.BOLSHOY_KUSH_KEY).maxCount(1)));
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(Radik.MOD_ID, name), item);
     }
 
-    @RadikCore
-    public static void initialize() {
+    private static Block registerBlockItem(@NotNull String name, Item.Settings settings) {
+        Block block = new Block(AbstractBlock.Settings.create().strength(1, 2).sounds(BlockSoundGroup.METAL).luminance(state -> 5).noCollision().nonOpaque());
+        Registry.register(Registries.BLOCK, Identifier.of(Radik.MOD_ID, name), block);
+        Registry.register(Registries.ITEM, Identifier.of(Radik.MOD_ID, name), new BlockItem(block, settings));
+        return block;
+    }
+
+    public static void registerItem() {
         Radik.LOGGER.info("Items initialized");
     }
 }

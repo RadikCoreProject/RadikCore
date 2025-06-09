@@ -1,9 +1,8 @@
 {
-	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "texture",
-		"particle": "texture"
+		"0": "#type",
+		"particle": "#type"
 	},
 	"elements": [
 		{

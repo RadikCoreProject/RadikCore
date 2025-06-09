@@ -5,6 +5,7 @@ import net.minecraft.component.type.FoodComponents;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Items;
+import net.minecraft.world.World;
 
 import java.util.HashMap;
 
@@ -19,7 +20,12 @@ public abstract class Data {
         FOOD_COMPONENTS.put("ledenets2", (new FoodComponent.Builder()).nutrition(5).usingConvertsTo(Items.STICK).saturationModifier(0.3F).build());
         FOOD_COMPONENTS.put("1", (new FoodComponent.Builder()).nutrition(8).saturationModifier(0.35F).build());
         FOOD_COMPONENTS.put("2", (new FoodComponent.Builder()).nutrition(5).saturationModifier(0.15F).build());
+        FOOD_COMPONENTS.put("3", (new FoodComponent.Builder()).nutrition(5).saturationModifier(0.4F).usingConvertsTo(Items.GLASS_BOTTLE).build());
         FOOD_COMPONENTS.put("4", (new FoodComponent.Builder()).nutrition(4).saturationModifier(0.15F).usingConvertsTo(Items.GLASS_BOTTLE).build());
         FOOD_COMPONENTS.put("empty", (new FoodComponent.Builder()).nutrition(0).saturationModifier(0).alwaysEdible().build());
+    }
+
+    public static String getDimension(World world) {
+        return world.getDimension().toString().split("/ ")[1].split("]")[0].split("_")[1];
     }
 }

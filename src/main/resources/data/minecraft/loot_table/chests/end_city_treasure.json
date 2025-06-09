@@ -7,17 +7,17 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 85
+          "weight": 36
         },
         {
           "type": "minecraft:item",
           "name": "radik:disc_nosk",
-          "weight": 10
+          "weight": 2
         },
         {
           "type": "minecraft:item",
           "name": "radik:star",
-          "weight": 5
+          "weight": 2
         }
       ],
       "rolls": 1

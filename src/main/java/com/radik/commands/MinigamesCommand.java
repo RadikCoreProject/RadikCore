@@ -32,11 +32,11 @@ public class MinigamesCommand {
     static {
         FLOOR_IS_LAVA_INFO.put(0, new HashMap<>(){{put(80, "§1");}});
         FLOOR_IS_LAVA_INFO.put(40, new HashMap<>(){{put(120, "§b");}});
-        FLOOR_IS_LAVA_INFO.put(80, new HashMap<>(){{put(300, "§2");}});
+        FLOOR_IS_LAVA_INFO.put(80, new HashMap<>(){{put(350, "§2");}});
         FLOOR_IS_LAVA_INFO.put(110, new HashMap<>(){{put(100, "§e");}});
-        FLOOR_IS_LAVA_INFO.put(150, new HashMap<>(){{put(60, "§6");}});
-        FLOOR_IS_LAVA_INFO.put(200, new HashMap<>(){{put(20, "§c");}});
-        FLOOR_IS_LAVA_INFO.put(275, new HashMap<>(){{put(40, "§4");}});
+        FLOOR_IS_LAVA_INFO.put(150, new HashMap<>(){{put(80, "§6");}});
+        FLOOR_IS_LAVA_INFO.put(200, new HashMap<>(){{put(40, "§c");}});
+        FLOOR_IS_LAVA_INFO.put(275, new HashMap<>(){{put(60, "§4");}});
         FLOOR_IS_LAVA_INFO.put(315, new HashMap<>(){{put(80, "§0");}});
     }
 

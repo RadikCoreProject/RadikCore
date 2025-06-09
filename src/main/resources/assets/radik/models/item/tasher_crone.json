@@ -2,9 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "crone",
-		"1": "block/crystal",
-		"particle": "crone"
+		"0": "radik:item/custom/tasher/crone",
+		"1": "radik:item/custom/tasher/crystal"
 	},
 	"elements": [
 		{

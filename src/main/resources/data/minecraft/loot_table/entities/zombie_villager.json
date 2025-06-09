@@ -116,10 +116,23 @@
           ],
           "conditions": [
             {
+              "condition": "minecraft:killed_by_player"
+            },
+            {
+              "condition": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "type": "minecraft:zombie_villager",
+                "conversion": {
+                  "time": 0
+                }
+              }
+            },
+            {
               "condition": "minecraft:random_chance",
               "chance": {
                 "type": "minecraft:constant",
-                "value": 0.005
+                "value": 0.01
               }
             }
           ]
