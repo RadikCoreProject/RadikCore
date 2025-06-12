@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.radik.disc_bolshoy_kush.desc"
+  },
+  "length_in_seconds": 196.0,
+  "sound_event": "radik:bolshoy_kush"
+}

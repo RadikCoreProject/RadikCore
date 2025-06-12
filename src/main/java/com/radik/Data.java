@@ -16,12 +16,12 @@ public abstract class Data {
     static {
         FOOD_COMPONENTS.put("apple", FoodComponents.APPLE);
         FOOD_COMPONENTS.put("ledenets", (new FoodComponent.Builder()).nutrition(3).saturationModifier(0.25F).build());
-        FOOD_COMPONENTS.put("ledenets1", (new FoodComponent.Builder()).nutrition(5).usingConvertsTo(Items.STICK).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 200), 0.5f).saturationModifier(0.5F).build());
-        FOOD_COMPONENTS.put("ledenets2", (new FoodComponent.Builder()).nutrition(5).usingConvertsTo(Items.STICK).saturationModifier(0.3F).build());
+        FOOD_COMPONENTS.put("ledenets1", (new FoodComponent.Builder()).nutrition(5).saturationModifier(0.5F).build());
+        FOOD_COMPONENTS.put("ledenets2", (new FoodComponent.Builder()).nutrition(5).saturationModifier(0.3F).build());
         FOOD_COMPONENTS.put("1", (new FoodComponent.Builder()).nutrition(8).saturationModifier(0.35F).build());
         FOOD_COMPONENTS.put("2", (new FoodComponent.Builder()).nutrition(5).saturationModifier(0.15F).build());
-        FOOD_COMPONENTS.put("3", (new FoodComponent.Builder()).nutrition(5).saturationModifier(0.4F).usingConvertsTo(Items.GLASS_BOTTLE).build());
-        FOOD_COMPONENTS.put("4", (new FoodComponent.Builder()).nutrition(4).saturationModifier(0.15F).usingConvertsTo(Items.GLASS_BOTTLE).build());
+        FOOD_COMPONENTS.put("3", (new FoodComponent.Builder()).nutrition(5).saturationModifier(0.4F).build());
+        FOOD_COMPONENTS.put("4", (new FoodComponent.Builder()).nutrition(4).saturationModifier(0.15F).build());
         FOOD_COMPONENTS.put("empty", (new FoodComponent.Builder()).nutrition(0).saturationModifier(0).alwaysEdible().build());
     }
 

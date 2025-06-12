@@ -18,7 +18,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -141,7 +140,7 @@ public class OnUse {
         UseBlockCallback.EVENT.register(OnUse::onBlockUse);
     }
 
-    private static TypedActionResult<ItemStack> onItemUse(@NotNull PlayerEntity player, World world, Hand hand) {
+    private static ActionResult onItemUse(@NotNull PlayerEntity player, World world, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
         Item item = stack.getItem();
         Inventory inventory = player.getInventory();
@@ -153,10 +152,10 @@ public class OnUse {
                         if (inventory.getStack(39).getItem().equals(Items.AIR)) {
                             command(String.format("item replace entity %s armor.head with %s", player.getName().getString(), item));
                             stack.decrement(1);
-                            return TypedActionResult.success(stack);
+                            return ActionResult.SUCCESS;
                         }
                 }
-                return TypedActionResult.success(stack);
+                return ActionResult.SUCCESS;
             }
 
             if (LOGGING2.contains(item)) {
@@ -164,7 +163,7 @@ public class OnUse {
             }
         }
 
-        return TypedActionResult.pass(stack);
+        return ActionResult.PASS;
     }
 
     // пофиксить серверсайд баг с использованием дважды при повороте
@@ -180,7 +179,7 @@ public class OnUse {
         int x = blockPos.getX(), y = blockPos.getY(), z = blockPos.getZ();
 
         if (item.equals(Items.ENDER_EYE)) {
-            return ActionResult.SUCCESS_NO_ITEM_USED;
+            return ActionResult.FAIL;
         }
 
         if (!world.isClient) {
@@ -196,27 +195,27 @@ public class OnUse {
             }
 
             if (player.getAbilities().allowFlying && !player.getAbilities().creativeMode && !player.isSpectator()) {
-                player.sendMessage(Text.literal("Ты находишься в режиме оценивания!"));
-                return ActionResult.SUCCESS_NO_ITEM_USED;
+                player.sendMessage(Text.literal("Ты находишься в режиме оценивания!"), false);
+                return ActionResult.FAIL;
             }
 
             if (block_name.equals("bicycle")) {
                 happyBirhday(player_name, x, y, z);
-                return ActionResult.SUCCESS_NO_ITEM_USED;
+                return ActionResult.FAIL;
             } else if (block_name.equals("pix")) {
                 pix(player);
-                return ActionResult.SUCCESS_NO_ITEM_USED;
+                return ActionResult.FAIL;
             } else if (ROTATED_BLOCKS.contains(world.getBlockState(blockPos.up()).getBlock()) || ROTATED_BLOCKS2.contains(world.getBlockState(blockPos.up()).getBlock())) {
-                return ActionResult.SUCCESS_NO_ITEM_USED;
+                return ActionResult.FAIL;
             } else if (ROTATED_BLOCKS.contains(block)) {
                 world.setBlockState(blockPos, state.with(FACING2, (state.get(FACING2) + 1) % 4));
-                return ActionResult.SUCCESS_NO_ITEM_USED;
+                return ActionResult.FAIL;
             } else if (ROTATED_BLOCKS2.contains(block)) {
                 world.setBlockState(blockPos, state.with(FACING, !state.get(FACING)));
-                return ActionResult.SUCCESS_NO_ITEM_USED;
+                return ActionResult.FAIL;
             } else if (DOWNFALLED_BLOCKS.containsKey(item)) {
                 if (!world.isAir(blockPos.up(2)) || !world.isAir(blockPos.up())) {
-                    return ActionResult.SUCCESS_NO_ITEM_USED;
+                    return ActionResult.FAIL;
                 }
                 world.setBlockState(blockPos.up(2), DOWNFALLED_BLOCKS.get(item).getDefaultState());
                 player.getStackInHand(hand).decrement(1);
@@ -267,7 +266,7 @@ public class OnUse {
                 command("title X_xPIXx_X title \"С ДНЁМ РОЖДЕНИЯ, X_xPIXx_X!\"");
             }
             else if(c < i) {
-                player.sendMessage(Text.literal(String.format("%d / %s", c, i)));
+                player.sendMessage(Text.literal(String.format("%d / %s", c, i)), false);
                 break;
             }
         }

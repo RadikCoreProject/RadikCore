@@ -3,6 +3,7 @@ package com.radik.block.custom;
 import com.radik.block.RegisterBlocks;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.*;
@@ -16,7 +17,7 @@ import static com.radik.block.custom.BlockData.TYPE2;
 
 public class Present extends Block {
 
-    public Present(AbstractBlock.Settings settings) {
+    public Present(Settings settings) {
         super(settings);
     }
 

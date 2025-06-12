@@ -2,7 +2,6 @@ package com.radik;
 
 
 import bot.Bot;
-import bot.Properties;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -34,12 +33,12 @@ public class Radik implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ServerLifecycleEvents.SERVER_STARTING.register(this::onServerStarted);
+		RegisterBlocks.registerBlock();
+		RegisterItems.registerItem();
 		Music.registerSounds();
 		ModTags.registerTags();
 		ModGroup.registerGroup();
 		LogicInitialize.registerLogic();
-		RegisterBlocks.registerBlock();
-		RegisterItems.registerItem();
 		RegisterCommands.registerCommand();
 		RegisterFluids.register();
 //		Properties.init();

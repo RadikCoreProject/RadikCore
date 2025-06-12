@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "radik:block/rainbow/brick/26",
+    "side": "radik:block/rainbow/brick/26",
+    "top": "radik:block/rainbow/brick/26"
+  }
+}

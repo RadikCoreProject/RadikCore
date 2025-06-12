@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:sugar",
+    "radik:sugar_brown",
+    "radik:sugar_red",
+    "radik:sugar_yellow"
+  ]
+}

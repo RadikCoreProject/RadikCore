@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#P#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "radik:bricks_item"
+    },
+    "P": {
+      "item": "radik:dye_maroon"
+    }
+  },
+  "result": {
+    "id": "radik:brick24",
+    "count": 8
+  }
+}
