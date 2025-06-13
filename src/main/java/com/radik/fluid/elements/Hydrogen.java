@@ -96,7 +96,7 @@ public abstract class Hydrogen extends Gas {
         int pLevel = toState.getFluidState().getLevel();
 
         if (toState.getFluidState().getFluid() instanceof Hydrogen) {
-            return direction.equals(Direction.UP) ? pLevel < 8 : pLevel < currentLevel;
+            return direction == Direction.UP || direction == Direction.DOWN ? pLevel < 8 : pLevel < currentLevel;
         }
 
         return false;
@@ -111,6 +111,10 @@ public abstract class Hydrogen extends Gas {
     @Override
     protected boolean canBeReplacedWith(FluidState state, BlockView world, BlockPos pos, Fluid fluid, Direction direction) {
         return fluid instanceof Gas;
+    }
+
+    public FluidState getMax() {
+        return getFlowing(8, true);
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.radik.world.features;
 
 import com.mojang.serialization.Codec;
+import com.radik.fluid.elements.Hydrogen;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -9,11 +11,19 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static com.radik.Data.getDimension;
+import static com.radik.fluid.RegisterFluids.FLOWING_HYDROGEN;
+import static net.minecraft.block.Blocks.END_STONE;
+import static net.minecraft.fluid.FlowableFluid.FALLING;
+import static net.minecraft.fluid.FlowableFluid.LEVEL;
 
 public class GasLakeFeature extends Feature<GasLakeFeatureConfig> {
 
@@ -28,8 +38,7 @@ public class GasLakeFeature extends Feature<GasLakeFeatureConfig> {
         Random random = context.getRandom();
         GasLakeFeatureConfig config = context.getConfig();
 
-        // Проверяем, что находимся в Энде и не на главном острове
-        if (!world.getBiome(origin).getKey().orElseThrow().getValue().getNamespace().equals("minecraft:the_end") ||
+        if (!getDimension(world).equals("end") ||
                 isOnMainIsland(origin)) {
             return false;
         }
@@ -44,8 +53,7 @@ public class GasLakeFeature extends Feature<GasLakeFeatureConfig> {
         return generateLake(world, surfacePos, random, config);
     }
 
-    private boolean isOnMainIsland(BlockPos pos) {
-        // Главный остров в Энде - примерно в радиусе 100 блоков от (100, 50, 0)
+    private boolean isOnMainIsland(@NotNull BlockPos pos) {
         int centerX = 0;
         int centerZ = 0;
         int radius = 1000;
@@ -55,22 +63,20 @@ public class GasLakeFeature extends Feature<GasLakeFeatureConfig> {
         return dx * dx + dz * dz < radius * radius;
     }
 
-    private BlockPos findSurfacePos(WorldAccess world, BlockPos pos) {
-        // Ищем позицию поверхности (первый не-воздушный блок сверху)
+    private @Nullable BlockPos findSurfacePos(@NotNull WorldAccess world, BlockPos pos) {
         for (int y = world.getTopY(Heightmap.Type.WORLD_SURFACE, pos); y > world.getBottomY(); y--) {
             BlockPos testPos = new BlockPos(pos.getX(), y, pos.getZ());
             if (!world.isAir(testPos)) {
-                return testPos.up(); // Позиция над поверхностью
+                return testPos;
             }
         }
         return null;
     }
 
-    private boolean generateLake(WorldAccess world, BlockPos center, Random random, GasLakeFeatureConfig config) {
+    private boolean generateLake(WorldAccess world, BlockPos center, @NotNull Random random, @NotNull GasLakeFeatureConfig config) {
         int maxBlocks = config.maxBlocks();
         int blocksPlaced = 0;
 
-        // Определяем форму озера (круг с случайным радиусом 2-4 блока)
         int radius = 2 + random.nextInt(3);
         List<BlockPos> lakePositions = new ArrayList<>();
 
@@ -93,45 +99,35 @@ public class GasLakeFeature extends Feature<GasLakeFeatureConfig> {
             return false;
         }
 
-        // Размещаем водород
         for (BlockPos pos : lakePositions) {
-            world.setBlockState(pos, config.hydrogenState(), 3);
+            world.setBlockState(pos, ((Hydrogen) FLOWING_HYDROGEN).getMax().getBlockState(), 3);
             blocksPlaced++;
         }
 
-        // Размещаем стены вокруг водорода
         placeWalls(world, lakePositions, config.wallBlock());
 
         return blocksPlaced > 0;
     }
 
-    private boolean canPlaceHydrogen(WorldAccess world, BlockPos pos) {
-        // Проверяем, что блок ниже - твердый
+    private boolean canPlaceHydrogen(@NotNull WorldAccess world, @NotNull BlockPos pos) {
         BlockPos below = pos.down();
-        if (!world.getBlockState(below).isSolidBlock(world, below)) {
-            return false;
-        }
-
-        // Проверяем, что текущая позиция - воздух
-        return world.isAir(pos);
+        return world.getBlockState(below).isSolidBlock(world, below) && world.getBlockState(pos.up()).isAir() && world.getBlockState(pos).getBlock().equals(END_STONE);
     }
 
-    private void placeWalls(WorldAccess world, List<BlockPos> lakePositions, BlockState wallBlock) {
+    private void placeWalls(WorldAccess world, @NotNull List<BlockPos> lakePositions, BlockState wallBlock) {
         Set<BlockPos> wallPositions = new HashSet<>();
 
-        // Находим все позиции вокруг водорода
         for (BlockPos pos : lakePositions) {
             for (Direction direction : Direction.values()) {
-                if (direction == Direction.UP) continue; // Пропускаем верх
+                if (direction == Direction.UP) continue;
 
                 BlockPos neighbor = pos.offset(direction);
-                if (!lakePositions.contains(neighbor) && world.isAir(neighbor)) {
+                if (!lakePositions.contains(neighbor) && (world.isAir(neighbor) || world.getBlockState(neighbor).equals(END_STONE.getDefaultState()))) {
                     wallPositions.add(neighbor);
                 }
             }
         }
 
-        // Размещаем стены
         for (BlockPos pos : wallPositions) {
             world.setBlockState(pos, wallBlock, 3);
         }

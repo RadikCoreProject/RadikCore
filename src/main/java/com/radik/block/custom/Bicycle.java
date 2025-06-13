@@ -7,8 +7,8 @@ import net.minecraft.util.shape.*;
 import net.minecraft.world.BlockView;
 
 public class Bicycle extends PillarBlock {
-    public Bicycle() {
-        super(AbstractBlock.Settings.create().sounds(BlockSoundGroup.GLASS).strength(3, 9999999).noBlockBreakParticles());
+    public Bicycle(Settings settings) {
+        super(settings);
     }
 
     @Override

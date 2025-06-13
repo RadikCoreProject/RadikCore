@@ -16,7 +16,7 @@ import java.util.Random;
 import static com.radik.block.custom.BlockData.*;
 
 public class Snowman extends Block {
-    public Snowman() {super(Settings.create().mapColor(MapColor.WHITE).strength(0.2F).sounds(BlockSoundGroup.SNOW));}
+    public Snowman(Settings settings) {super(settings);}
 
 
     @Override

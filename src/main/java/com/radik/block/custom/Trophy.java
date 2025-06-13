@@ -16,8 +16,8 @@ import org.jetbrains.annotations.NotNull;
 import static com.radik.block.custom.BlockData.FACING2;
 
 public class Trophy extends Block {
-    public Trophy() {
-        super(AbstractBlock.Settings.create().strength(3, 10).sounds(BlockSoundGroup.AMETHYST_BLOCK).noBlockBreakParticles());
+    public Trophy(Settings settings) {
+        super(settings);
         setDefaultState(getStateManager().getDefaultState().with(FACING2, 0));
     }
 

@@ -6,6 +6,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 import java.util.HashMap;
 
@@ -26,6 +27,10 @@ public abstract class Data {
     }
 
     public static String getDimension(World world) {
+        return world.getDimension().toString().split("/ ")[1].split("]")[0].split("_")[1];
+    }
+
+    public static String getDimension(WorldAccess world) {
         return world.getDimension().toString().split("/ ")[1].split("]")[0].split("_")[1];
     }
 }

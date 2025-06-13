@@ -98,6 +98,10 @@ public class RegisterBlocks {
     private static final Function<AbstractBlock.Settings, Block> frog = properties -> new PillarBlock(properties.mapColor(MapColor.PALE_YELLOW).strength(0.3F).luminance(state -> 15).sounds(BlockSoundGroup.FROGLIGHT));
     private static final Function<AbstractBlock.Settings, Block> smooth_stone = properties -> new Block(properties.mapColor(MapColor.STONE_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(2.0F, 6.0F));
     private static final Function<AbstractBlock.Settings, Block> stolb = properties -> new Fonar(properties.strength(0.5f, 5).sounds(BlockSoundGroup.METAL).noBlockBreakParticles());
+    private static final Function<AbstractBlock.Settings, Block> present = properties -> new Block(properties.mapColor(MapColor.BRIGHT_TEAL).strength(0.5F).sounds(BlockSoundGroup.SNOW));
+    private static final Function<AbstractBlock.Settings, Block> ledenets = properties -> new Ledenets(properties.mapColor(MapColor.WHITE).instrument(NoteBlockInstrument.GUITAR).strength(0.8F).sounds(BlockSoundGroup.WOOL).burnable().nonOpaque());
+    private static final Function<AbstractBlock.Settings, Block> birthday = properties -> new Block(properties.sounds(BlockSoundGroup.GLASS).strength(3, 9999999).noBlockBreakParticles());
+    private static final Function<AbstractBlock.Settings, Block> trophy = properties -> new Trophy(properties.strength(3, 10).sounds(BlockSoundGroup.AMETHYST_BLOCK).noBlockBreakParticles());
 
     public static final Block FROG0_255_0 = registerBlock(frog, "frog0_255_0");
     public static final Block FROG0_255_255 = registerBlock(frog, "frog0_255_255");
@@ -552,16 +556,16 @@ public class RegisterBlocks {
     public static final Block CELL_4 = registerBlock(emerald, "cell_4");
     public static final Block CELL_5 = registerBlock(lapis, "cell_5");
 
-    public static final Block PRESENT_SMALL = registerBlock(properties -> new Present(), "present_small");
-    public static final Block PRESENT_MEDIUM = registerBlock(properties -> new Present(), "present_medium");
-    public static final Block PRESENT_BIG = registerBlock(properties -> new Present(), "present_big");
-    public static final Block PRESENT_INSTRUMENT = registerBlock(properties -> new Present(), "present_instrument");
-    public static final Block PRESENT_WINTER = registerBlock(properties -> new Present(), "present_winter");
-    public static final Block ELKA = registerBlock(properties -> new Block(AbstractBlock.Settings.copy(BRAID_1).luminance(state -> 15).nonOpaque()), "elka");
-    public static final Block LEDENETS = registerBlockWithoutBlockItem(properties -> new Ledenets(), "ledenets");
-    public static final Block LEDENETS1 = registerBlockWithoutBlockItem(properties -> new Ledenets(), "ledenets1");
-    public static final Block LEDENETS2 = registerBlockWithoutBlockItem(properties -> new Ledenets(), "ledenets2");
-    public static final Block SNOWMAN = registerBlock(properties -> new Snowman(), "snowman");
+    public static final Block PRESENT_SMALL = registerBlock(present, "present_small");
+    public static final Block PRESENT_MEDIUM = registerBlock(present, "present_medium");
+    public static final Block PRESENT_BIG = registerBlock(present, "present_big");
+    public static final Block PRESENT_INSTRUMENT = registerBlock(present, "present_instrument");
+    public static final Block PRESENT_WINTER = registerBlock(present, "present_winter");
+    public static final Block ELKA = registerBlock(properties -> new Block(properties.mapColor(MapColor.ORANGE).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD).burnable().luminance(state -> 15).nonOpaque()), "elka");
+    public static final Block LEDENETS = registerBlockWithoutBlockItem(ledenets, "ledenets");
+    public static final Block LEDENETS1 = registerBlockWithoutBlockItem(ledenets, "ledenets1");
+    public static final Block LEDENETS2 = registerBlockWithoutBlockItem(ledenets, "ledenets2");
+    public static final Block SNOWMAN = registerBlock(properties -> new Snowman(properties.mapColor(MapColor.WHITE).strength(0.2F).sounds(BlockSoundGroup.SNOW)), "snowman");
     public static final Block WINTER_STONE1 = registerBlock(smooth_stone, "winter_stone_1");
     public static final Block WINTER_STONE2 = registerBlock(smooth_stone, "winter_stone_2");
     public static final Block WINTER_STONE3 = registerBlock(smooth_stone, "winter_stone_3");
@@ -583,14 +587,14 @@ public class RegisterBlocks {
     public static final Block SUGAR_BLOCK_RED = registerBlock(dirt, "sugar_block_red");
     public static final Block SUGAR_BLOCK_BROWN = registerBlock(dirt, "sugar_block_brown");
 
-    public static final Block LAMP = registerBlock(properties -> new LampBlock(), "lamp");
-    public static final Block BICYCLE = registerBlock(properties -> new Bicycle(), "bicycle");
-    public static final Block PIX = registerBlock(properties -> new Block(AbstractBlock.Settings.create().sounds(BlockSoundGroup.GLASS).strength(3, 9999999).noBlockBreakParticles()), "pix");
-    public static final Block BATUT = registerBlock(properties -> new Block(AbstractBlock.Settings.create().sounds(BlockSoundGroup.GLASS).strength(-1, 9999999).noBlockBreakParticles()), "batut");
+    public static final Block LAMP = registerBlock(birthday, "lamp");
+    public static final Block BICYCLE = registerBlock(birthday, "bicycle");
+    public static final Block PIX = registerBlock(birthday, "pix");
+    public static final Block BATUT = registerBlock(properties -> new Block(properties.sounds(BlockSoundGroup.GLASS).strength(-1, 9999999).noBlockBreakParticles()), "batut");
 
-    public static final Block TROPHY_NOSTALGIC_BRONZE = registerBlock(properties -> new Trophy(), "trophy_nostalgic_bronze");
-    public static final Block TROPHY_NOSTALGIC_SILVER = registerBlock(properties -> new Trophy(), "trophy_nostalgic_silver");
-    public static final Block TROPHY_NOSTALGIC_GOLD = registerBlock(properties -> new Trophy(), "trophy_nostalgic_gold");
+    public static final Block TROPHY_NOSTALGIC_BRONZE = registerBlock(trophy, "trophy_nostalgic_bronze");
+    public static final Block TROPHY_NOSTALGIC_SILVER = registerBlock(trophy, "trophy_nostalgic_silver");
+    public static final Block TROPHY_NOSTALGIC_GOLD = registerBlock(trophy, "trophy_nostalgic_gold");
 
     private static Block registerBlockWithoutBlockItem(Function<AbstractBlock.Settings, Block> function, String name) {
         return Registry.register(Registries.BLOCK, Identifier.of(Radik.MOD_ID, name),

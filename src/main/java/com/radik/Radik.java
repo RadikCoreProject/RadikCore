@@ -10,10 +10,16 @@ import com.radik.commands.RegisterCommands;
 import com.radik.fluid.RegisterFluids;
 import com.radik.item.RegisterItems;
 import com.radik.logic.LogicInitialize;
+import com.radik.world.WorldGenRegister;
+import com.radik.world.features.GasLakeFeature;
+import com.radik.world.features.GasLakeFeatureConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -42,6 +48,9 @@ public class Radik implements ModInitializer {
 		RegisterCommands.registerCommand();
 		RegisterFluids.register();
 //		Properties.init();
+
+		// Добавляем в биомы
+		WorldGenRegister.registerInBiomes();
 	}
 
 

@@ -47,7 +47,6 @@ public class ExplosiveGas extends FluidBlock {
     @Override
     public FluidState getFluidState(BlockState state) {
         return super.getFluidState(state)
-                .with(LEVEL, 8)
                 .with(FALLING, true);
     }
 

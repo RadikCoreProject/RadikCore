@@ -1,7 +1,6 @@
 package com.radik.block.custom;
 
 import com.radik.block.RegisterBlocks;
-import com.radik.item.RegisterItems;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
@@ -16,8 +15,8 @@ import java.util.Random;
 import static com.radik.block.custom.BlockData.*;
 
 public class Ledenets extends Block {
-    public Ledenets() {
-        super(Settings.copy(Blocks.WHITE_WOOL).nonOpaque());
+    public Ledenets(Settings settings) {
+        super(settings);
     }
 
     @Override
