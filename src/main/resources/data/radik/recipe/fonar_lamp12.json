@@ -1,21 +1,17 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "Q": {
-      "item": "minecraft:iron_bars"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "Q": "minecraft:iron_bars",
+        "R": "radik:lamp_mercury"
     },
-    "R": {
-      "item": "radik:lamp_mercury"
+    "pattern": [
+        "   ",
+        "   ",
+        "RQR"
+    ],
+    "result": {
+        "count": 1,
+        "id": "radik:fonar_lamp12"
     }
-  },
-  "pattern": [
-    "   ",
-    "   ",
-    "RQR"
-  ],
-  "result": {
-    "count": 1,
-    "id": "radik:fonar_lamp12"
-  }
 }

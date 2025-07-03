@@ -1,16 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "item": "minecraft:white_dye"
-    },
-    {
-      "item": "minecraft:brown_dye"
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        "minecraft:white_dye",
+        "minecraft:brown_dye"
+    ],
+    "result": {
+        "count": 2,
+        "id": "radik:dye_beige"
     }
-  ],
-  "result": {
-    "count": 2,
-    "id": "radik:dye_beige"
-  }
 }

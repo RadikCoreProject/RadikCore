@@ -1,26 +1,16 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "group": "christmas",
-  "ingredients": [
-    {
-      "item": "minecraft:sugar"
-    },
-    {
-      "item": "minecraft:green_dye"
-    },
-    {
-      "item": "minecraft:red_dye"
-    },
-    {
-      "item": "minecraft:yellow_dye"
-    },
-    {
-      "item": "minecraft:blue_dye"
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "group": "christmas",
+    "ingredients": [
+        "minecraft:sugar",
+        "minecraft:green_dye",
+        "minecraft:red_dye",
+        "minecraft:yellow_dye",
+        "minecraft:blue_dye"
+    ],
+    "result": {
+        "count": 4,
+        "id": "radik:winter_gumdrops"
     }
-  ],
-  "result": {
-    "count": 1,
-    "id": "radik:winter_gumdrops"
-  }
 }

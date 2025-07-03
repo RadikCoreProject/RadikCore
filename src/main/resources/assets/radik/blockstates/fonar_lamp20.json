@@ -1,8 +1,8 @@
 {
   "variants": {
     "facing=0": { "model": "radik:block/fonar/20" },
-    "facing=1": { "model": "radik:block/fonar/20_h" },
-    "facing=2": { "model": "radik:block/fonar/20_hh" },
-    "facing=3": { "model": "radik:block/fonar/20_hhh" }
+    "facing=1": { "model": "radik:block/fonar/20", "y": 90 },
+    "facing=2": { "model": "radik:block/fonar/20", "y": 180 },
+    "facing=3": { "model": "radik:block/fonar/20", "y": 270 }
   }
 }

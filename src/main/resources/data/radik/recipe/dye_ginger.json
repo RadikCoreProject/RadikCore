@@ -1,16 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "item": "minecraft:orange_dye"
-    },
-    {
-      "item": "minecraft:red_dye"
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        "minecraft:orange_dye",
+        "minecraft:red_dye"
+    ],
+    "result": {
+        "count": 2,
+        "id": "radik:dye_ginger"
     }
-  ],
-  "result": {
-    "count": 2,
-    "id": "radik:dye_ginger"
-  }
 }

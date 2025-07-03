@@ -1,24 +1,18 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "Q": {
-      "item": "minecraft:spruce_log"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "Q": "minecraft:spruce_log",
+        "R": "#radik:froglights_item",
+        "S": "radik:star"
     },
-    "R": {
-      "tag": "radik:froglights_item"
-    },
-    "S": {
-      "item": "radik:star"
+    "pattern": [
+        " S ",
+        " R ",
+        "RQR"
+    ],
+    "result": {
+        "count": 1,
+        "id": "radik:elka"
     }
-  },
-  "pattern": [
-    " S ",
-    " R ",
-    "RQR"
-  ],
-  "result": {
-    "count": 1,
-    "id": "radik:elka"
-  }
 }

@@ -14,9 +14,9 @@ import java.util.Random;
 
 import static com.radik.block.custom.BlockData.*;
 
-public class Ledenets extends Block {
-    public Ledenets() {
-        super(Settings.copy(Blocks.WHITE_WOOL).nonOpaque());
+public class Ledenets extends RotatableBlock {
+    public Ledenets(Settings settings) {
+        super(settings);
     }
 
     @Override

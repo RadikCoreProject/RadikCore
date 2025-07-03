@@ -2,7 +2,6 @@ package com.radik.block.custom;
 
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.*;
@@ -14,8 +13,8 @@ import java.util.Random;
 
 import static com.radik.block.custom.BlockData.*;
 
-public class Snowman extends Block {
-    public Snowman() {super(Settings.create().mapColor(MapColor.WHITE).strength(0.2F).sounds(BlockSoundGroup.SNOW));}
+public class Snowman extends RotatableBlock {
+    public Snowman(Settings settings) {super(settings);}
 
 
     @Override

@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "#P#",
+        "###"
+    ],
+    "key": {
+        "#": "#radik:bricks_item",
+        "P": "minecraft:lime_dye"
+    },
+    "result": {
+        "id": "radik:brick9",
+        "count": 8
+    }
+}

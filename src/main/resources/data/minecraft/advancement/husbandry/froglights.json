@@ -1,0 +1,63 @@
+{
+  "parent": "minecraft:husbandry/leash_all_frog_variants",
+  "criteria": {
+    "froglights": {
+      "conditions": {
+        "items": [
+          {"items": "minecraft:ochre_froglight"},
+          {"items": "minecraft:pearlescent_froglight"},
+          {"items": "minecraft:verdant_froglight"},
+          {"items": "radik:frog0_0_0"},
+          {"items": "radik:frog50_50_50"},
+          {"items": "radik:frog100_100_100"},
+          {"items": "radik:frog255_255_255"},
+          {"items": "radik:frog255_0_0"},
+          {"items": "radik:frog0_255_0"},
+          {"items": "radik:frog0_0_255"},
+          {"items": "radik:frog96_51_0"},
+          {"items": "radik:frog255_0_0r"},
+          {"items": "radik:frog0_255_255"},
+          {"items": "radik:frog255_0_255"},
+          {"items": "radik:frog100_100_255"},
+          {"items": "radik:frog255_100_0"},
+          {"items": "radik:frog1"},
+          {"items": "radik:frog2"},
+          {"items": "radik:frog3"},
+          {"items": "radik:frog4"},
+          {"items": "radik:frog5"},
+          {"items": "radik:frog6"},
+          {"items": "radik:frog7"},
+          {"items": "radik:frog8"},
+          {"items": "radik:frog9"},
+          {"items": "radik:frog10"},
+          {"items": "radik:frog11"},
+          {"items": "radik:frog12"},
+          {"items": "radik:frog13"},
+          {"items": "radik:frog14"},
+          {"items": "radik:frog15"},
+          {"items": "radik:frog16"}
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.husbandry.froglights.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "radik:frog255_0_255"
+    },
+    "title": {
+      "translate": "advancements.husbandry.froglights.title"
+    }
+  },
+  "requirements": [
+    [
+      "froglights"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

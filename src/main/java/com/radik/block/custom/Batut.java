@@ -22,10 +22,10 @@ public class Batut extends SlimeBlock {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        switch (this.TYPE) {
-            case 0: return VoxelShapes.cuboid(-0.5, 0.5, -0.5, 1.5, 0.625, 1.5);
-            default: return VoxelShapes.empty();
+        if (this.TYPE == 0) {
+            return VoxelShapes.cuboid(-0.5, 0.5, -0.5, 1.5, 0.625, 1.5);
         }
+        return VoxelShapes.empty();
     }
 
     @Override

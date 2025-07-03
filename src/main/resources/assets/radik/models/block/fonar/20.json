@@ -3,7 +3,8 @@
 	"textures": {
 		"0": "radik:block/super/stolb2",
 		"2": "radik:block/super/stolb",
-		"1": "radik:block/super/fonar2"
+		"1": "radik:block/super/fonar2",
+		"particle": "radik:block/super/stolb"
 	},
 	"elements": [
 		{

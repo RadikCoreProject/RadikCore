@@ -7,8 +7,8 @@ import net.minecraft.util.shape.*;
 import net.minecraft.world.BlockView;
 
 public class LampBlock extends Block {
-    public LampBlock() {
-        super(AbstractBlock.Settings.create().strength(0.2f).sounds(BlockSoundGroup.GLASS).luminance(state -> 15));
+    public LampBlock(Settings settings) {
+        super(settings);
     }
 
     @Override

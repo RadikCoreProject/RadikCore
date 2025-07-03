@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.radik.block.custom.BlockData.FACING2;
 
-public class Fonar2 extends Block {
+public class Fonar2 extends RotatableBlock {
     public Fonar2(AbstractBlock.Settings settings) {
         super(settings);
         setDefaultState(getStateManager().getDefaultState().with(FACING2, 0));
@@ -19,10 +19,5 @@ public class Fonar2 extends Block {
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1, 0.5625);
-    }
-
-    @Override
-    protected void appendProperties(StateManager.@NotNull Builder<Block, BlockState> builder) {
-        builder.add(FACING2);
     }
 }

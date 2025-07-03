@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "radik:block/super/stolb",
-		"1": "radik:block/super/fonar"
+		"1": "radik:block/super/fonar",
+		"particle": "radik:block/super/stolb"
 	},
 	"elements": [
 		{

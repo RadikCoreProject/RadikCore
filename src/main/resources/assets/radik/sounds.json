@@ -95,10 +95,20 @@
       }
     ]
   },
-  "warden": {
-    "subtitle": "sounds.radik.warden",
+  "debris": {
     "sounds": [
-      "radik:warden"
+      {
+        "name": "radik:debris",
+        "stream": true
+      }
+    ]
+  },
+  "bolshoy_kush": {
+    "sounds": [
+      {
+        "name": "radik:bolshoy_kush",
+        "stream": true
+      }
     ]
   }
 }

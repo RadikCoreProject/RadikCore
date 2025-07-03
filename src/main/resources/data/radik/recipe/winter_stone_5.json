@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "building",
+    "group": "ledenets",
+    "key": {
+        "A": "minecraft:smooth_stone",
+        "B": "minecraft:brown_dye"
+    },
+    "pattern": [
+        "AAA",
+        "ABA",
+        "AAA"
+    ],
+    "result": {
+        "count": 8,
+        "id": "radik:winter_stone_5"
+    }
+}

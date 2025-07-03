@@ -1,21 +1,17 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "R": {
-      "item": "minecraft:lantern"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "R": "minecraft:lantern",
+        "Q": "minecraft:soul_sand"
     },
-    "Q": {
-      "item": "minecraft:soul_sand"
+    "pattern": [
+        " Q ",
+        "QRQ",
+        " Q "
+    ],
+    "result": {
+        "count": 1,
+        "id": "radik:lamp_mercury"
     }
-  },
-  "pattern": [
-    " Q ",
-    "QRQ",
-    " Q "
-  ],
-  "result": {
-    "count": 1,
-    "id": "radik:lamp_mercury"
-  }
 }

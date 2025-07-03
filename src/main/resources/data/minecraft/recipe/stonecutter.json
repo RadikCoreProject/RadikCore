@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": "minecraft:iron_block",
+    "S": "minecraft:redstone",
+    "Q": "minecraft:stone_slab"
+  },
+  "pattern": [
+    "   ",
+    "SRS",
+    "QQQ"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:stonecutter"
+  }
+}

@@ -16,7 +16,7 @@ import static com.radik.block.custom.BlockData.TYPE2;
 
 public class Present extends Block {
 
-    public Present(AbstractBlock.Settings settings) {
+    public Present(Settings settings) {
         super(settings);
     }
 

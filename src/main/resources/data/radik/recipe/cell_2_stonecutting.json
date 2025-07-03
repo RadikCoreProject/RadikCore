@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": "minecraft:coarse_dirt",
+    "result": {
+        "count": 1,
+        "id": "radik:cell_2"
+    }
+}

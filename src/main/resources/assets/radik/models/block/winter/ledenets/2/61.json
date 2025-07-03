@@ -1,0 +1,7 @@
+{
+"parent": "radik:block/winter/ledenets/ledenets",
+"textures": {
+    "p1": "radik:block/winter/present/8",
+    "p2": "radik:block/winter/present/5"
+  }
+}

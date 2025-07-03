@@ -1,7 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "radik:block/chisel/chaotic_1/102"
+		"0": "radik:block/chisel/chaotic_1/102",
+		"particle": "radik:block/chisel/chaotic_1/102"
 	},
 	"elements": [
 		{

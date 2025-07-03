@@ -1,20 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "#P#",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "tag": "radik:froglights_item"
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "#P#",
+        "###"
+    ],
+    "key": {
+        "#": "#radik:froglights_item",
+        "P": "minecraft:yellow_dye"
     },
-    "P": {
-      "item": "minecraft:yellow_dye"
+    "result": {
+        "id": "minecraft:ochre_froglight",
+        "count": 8
     }
-  },
-  "result": {
-    "id": "minecraft:ochre_froglight",
-    "count": 8
-  }
 }

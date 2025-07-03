@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": "radik:brick14",
+    "result": {
+        "count": 1,
+        "id": "radik:brick_array_13"
+    }
+}

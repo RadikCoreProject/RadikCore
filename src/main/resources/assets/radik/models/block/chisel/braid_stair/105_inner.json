@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "radik:block/chisel/braid/105",
+    "side": "radik:block/chisel/braid/105",
+    "top": "radik:block/chisel/braid/105"
+  }
+}

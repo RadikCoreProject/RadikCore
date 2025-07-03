@@ -33,15 +33,16 @@ public class Music {
     public static final RegistryKey<JukeboxSong> MERRY_CHRISTMAS_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(Radik.MOD_ID, "merry_christmas"));
     public static final SoundEvent PENIS_BOLSHOY = registerSoundEvent("penis_bolshoy");
     public static final RegistryKey<JukeboxSong> PENIS_BOLSHOY_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(Radik.MOD_ID, "penis_bolshoy"));
-
-    public static final SoundEvent WARDEN = registerSoundEvent("warden");
+    public static final SoundEvent DEBRIS = registerSoundEvent("debris");
+    public static final RegistryKey<JukeboxSong> DEBRIS_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(Radik.MOD_ID, "debris"));
+    public static final SoundEvent BOLSHOY_KUSH = registerSoundEvent("bolshoy_kush");
+    public static final RegistryKey<JukeboxSong> BOLSHOY_KUSH_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(Radik.MOD_ID, "bolshoy_kush"));
 
     private static SoundEvent registerSoundEvent(String name) {
         Identifier id = Identifier.of(Radik.MOD_ID, name);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 
-    @RadikCore
     public static void registerSounds() {
         Radik.LOGGER.info("sounds registered");
     }

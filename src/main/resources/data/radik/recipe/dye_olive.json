@@ -1,16 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "item": "minecraft:black_dye"
-    },
-    {
-      "item": "minecraft:yellow_dye"
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        "minecraft:black_dye",
+        "minecraft:yellow_dye"
+    ],
+    "result": {
+        "count": 2,
+        "id": "radik:dye_olive"
     }
-  ],
-  "result": {
-    "count": 2,
-    "id": "radik:dye_olive"
-  }
 }

@@ -7,15 +7,72 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 180
+          "weight": 19
         },
         {
           "type": "minecraft:item",
           "name": "radik:disc_crystal_peak",
-          "weight": 20
+          "weight": 1
         }
       ],
       "rolls": 1
+    },
+    {
+      "bonus_rolls": 0,
+      "conditions": [],
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:present_small",
+          "weight": 30,
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 5.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:present_medium",
+          "weight": 20,
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:present_big",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:present_instrument",
+          "weight": 5
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 1.0
+      }
     },
     {
       "bonus_rolls": 0.0,

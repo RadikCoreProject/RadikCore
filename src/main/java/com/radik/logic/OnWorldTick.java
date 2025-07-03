@@ -1,26 +1,68 @@
 package com.radik.logic;
 
+import com.radik.util.Duplet;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
-import static com.radik.Radik.SERVER;
-import static com.radik.Radik.command;
+import static com.radik.Radik.*;
 import static com.radik.commands.MinigamesCommand.*;
+import static com.radik.logic.ServerStruct.li;
+import static com.radik.logic.ServerStruct.names;
 
 public class OnWorldTick {
+    protected static HashMap<ServerPlayerEntity, Duplet<Integer, Text>> KICK = new HashMap<>();
+    private static final Duplet<Integer, Text> KICKS = new Duplet<>(0, Text.of("Disconnected by server"));
+    protected static short HOUSE = -1;
+    protected static int YARIK = -1;
+    protected static Vec3d YARIK_POS = new Vec3d(0, 0, 0);
 
     protected static void register() {
         ServerTickEvents.END_WORLD_TICK.register(OnWorldTick::onTick);
     }
 
     private static void onTick(@NotNull ServerWorld serverWorld) {
-        List<ServerPlayerEntity> players = SERVER.getPlayerManager().getPlayerList();
+
+        if (!KICK.isEmpty()) {
+            CompletableFuture.runAsync(() -> {
+                Set<ServerPlayerEntity> players1 = new HashSet<>(KICK.keySet());
+
+                for (ServerPlayerEntity player : players1) {
+                    if (player == null || !player.isAlive() || player.isDisconnected()) {
+                        KICK.remove(player);
+                        continue;
+                    }
+                    Duplet<Integer, Text> kickData = KICK.get(player);
+                    if (kickData == null || kickData.getType() == null) {
+                        KICK.remove(player);
+                        continue;
+                    }
+                    try {
+                        int remainingTicks = kickData.getType();
+                        Text message = kickData.getParametrize() != null ? kickData.getParametrize() : KICKS.getParametrize();
+
+                        if (remainingTicks <= 1) {
+                            LOGGER.info("Kicking player: {}", player.getName().getString());
+                            player.networkHandler.disconnect(message);
+                            KICK.remove(player);
+                        } else {
+                            KICK.put(player, new Duplet<>(remainingTicks - 1, message));
+                        }
+                    } catch (Exception e) {
+                        LOGGER.error("Failed to process kick for player {}", player.getName().getString(), e);
+                        KICK.remove(player);
+                    }
+                }
+            });
+        }
 
         if (FLOOR_IS_LAVA_EVENT) {
             if(FLOOR_IS_LAVA_LVL == 315) {
@@ -28,12 +70,12 @@ public class OnWorldTick {
                 FLOOR_IS_LAVA_TICK = 0;
                 FLOOR_IS_LAVA_LVL = -64;
                 MINIGAME = false;
-                for(ServerPlayerEntity q: players) {
+                for(ServerPlayerEntity q: li.keySet()) {
                     q.sendMessage(Text.literal("Этап X: подъём лавы завершен.\nДлительность: ∞"));
                 }
             }
             else if(++FLOOR_IS_LAVA_TICK % 20 == 0 && FLOOR_IS_LAVA_TICK >= 20) {
-                for (int i : FLOOR_IS_LAVA_INFO.keySet().stream().toList().stream().sorted().toList()) {
+                for (int i : FLOOR_IS_LAVA_INFO.keySet().stream().sorted().toList()) {
                     if (FLOOR_IS_LAVA_LVL <= i && new ArrayList<>(FLOOR_IS_LAVA_INFO.get(i).keySet()).getFirst() <= FLOOR_IS_LAVA_TICK) {
                         command(String.format("title @a actionbar \"%sLAVA LEVEL: %d\"", FLOOR_IS_LAVA_INFO.get(i).get(FLOOR_IS_LAVA_TICK), FLOOR_IS_LAVA_LVL));
                         command(String.format("fill -64 %d -64 63 %d 63 lava", ++FLOOR_IS_LAVA_LVL, FLOOR_IS_LAVA_LVL));
@@ -77,7 +119,7 @@ public class OnWorldTick {
                         }
                         if(!message.isEmpty()) {
                             System.out.println("OK");
-                            for(ServerPlayerEntity q: players) {
+                            for(ServerPlayerEntity q: li.keySet()) {
                                 q.sendMessage(Text.literal(message));
                             }
                         }
@@ -87,5 +129,24 @@ public class OnWorldTick {
                 }
             }
         }
+
+        if (names.contains("Xreped") && HOUSE > 0) {
+            if (HOUSE > 1) HOUSE--;
+            else {
+                HOUSE = -1;
+                command("attribute Xreped minecraft:scale base set 1");
+            }
+        }
+
+        if (YARIK > 0) {
+            for (ServerPlayerEntity q : li.keySet()) {
+                if (q.getPos().isInRange(YARIK_POS, 6)) {
+                    q.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 20, 2, false, false));
+                }
+            }
+            YARIK--;
+        }
+        else if (YARIK == 0) YARIK = -7200;
+        else if (YARIK != -1) YARIK++;
     }
 }

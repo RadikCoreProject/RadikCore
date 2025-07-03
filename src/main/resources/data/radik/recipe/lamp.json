@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " L ",
+        "LPL",
+        "###"
+    ],
+    "key": {
+        "#": "minecraft:iron_ingot",
+        "P": "minecraft:redstone",
+        "L": "minecraft:glass"
+    },
+    "result": {
+        "id": "radik:lamp",
+        "count": 2
+    }
+}
