@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.radik.disc_jordanaires.desc"
+  },
+  "length_in_seconds": 146.0,
+  "sound_event": "radik:jordanaires"
+}

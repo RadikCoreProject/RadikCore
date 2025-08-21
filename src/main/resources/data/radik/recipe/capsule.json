@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " # ",
+        "#P#",
+        " # "
+    ],
+    "key": {
+        "#": "minecraft:iron_ingot",
+        "P": "minecraft:tinted_glass"
+    },
+    "result": {
+        "id": "radik:capsule",
+        "count": 1
+    }
+}

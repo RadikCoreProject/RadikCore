@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "#P#",
+        "###"
+    ],
+    "key": {
+        "#": "#radik:bricks_item",
+        "P": "radik:dye_aqua"
+    },
+    "result": {
+        "id": "radik:brick18",
+        "count": 8
+    }
+}

@@ -2,6 +2,7 @@ package com.radik.block;
 
 import com.radik.Radik;
 import com.radik.block.custom.*;
+import com.radik.registration.IRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.item.BlockItem;
@@ -17,7 +18,7 @@ import net.minecraft.util.Identifier;
 import java.util.function.Function;
 
 
-public class RegisterBlocks {
+public class RegisterBlocks implements IRegistry {
     private static final BlockState a = Blocks.BRICK_STAIRS.getDefaultState();
     private static final Function<AbstractBlock.Settings, Block> brick = properties -> new Block(properties.mapColor(MapColor.RED).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(2.0F, 6.0F));
     private static final Function<AbstractBlock.Settings, Block> brick_stair = properties -> new StairsBlock(a, properties.mapColor(MapColor.RED).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(2.0F, 6.0F));
@@ -927,7 +928,7 @@ public class RegisterBlocks {
 
     public static final Block JAVA_PROGRAMMER = registerBlock(properties -> new RotatableBlock(properties.nonOpaque().luminance(t -> 10).sounds(BlockSoundGroup.GLASS).strength(3, 9999999).noBlockBreakParticles().noCollision()), "java_programmer");
     public static final Block HOUSE = registerBlock(properties -> new House(properties.nonOpaque().luminance(t -> 15).sounds(BlockSoundGroup.GLASS).strength(4, 9999999).noBlockBreakParticles()), "house");
-    public static final Block LAMP = registerBlock(properties -> new LampBlock(properties.sounds(BlockSoundGroup.GLASS).strength(3, 5).noBlockBreakParticles().nonOpaque()), "lamp");
+    public static final Block LAMP = registerBlock(properties -> new LampBlock(properties.sounds(BlockSoundGroup.GLASS).strength(3, 5).noBlockBreakParticles().nonOpaque().luminance(t -> 15)), "lamp");
     public static final Block BICYCLE = registerBlock(properties -> new Bicycle(properties.sounds(BlockSoundGroup.GLASS).strength(3, 9999999).noBlockBreakParticles().nonOpaque()), "bicycle");
     public static final Block PIX = registerBlock(birthday, "pix");
     public static final Block BATUT = registerBlock(properties -> new Batut(properties.sounds(BlockSoundGroup.GLASS).strength(-1, 9999999).noBlockBreakParticles().nonOpaque(), (byte) 0), "batut");
@@ -953,7 +954,7 @@ public class RegisterBlocks {
                         .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Radik.MOD_ID, name)))));
     }
 
-    public static void registerBlock() {
+    public static void initialize() {
         Radik.LOGGER.info("BLOCK INCLUDED");
     }
 }

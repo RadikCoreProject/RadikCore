@@ -3,7 +3,8 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "radik:item/custom/batut/batut",
-		"1": "radik:item/custom/batut/opori"
+		"1": "radik:item/custom/batut/opori",
+		"particle": "radik:block/super/house"
 	},
 	"elements": [
 		{

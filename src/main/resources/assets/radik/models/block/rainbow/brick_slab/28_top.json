@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "radik:block/rainbow/brick/28",
+    "side": "radik:block/rainbow/brick/28",
+    "top": "radik:block/rainbow/brick/28"
+  }
+}

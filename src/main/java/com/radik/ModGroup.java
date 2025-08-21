@@ -1,6 +1,7 @@
 package com.radik;
 
-import com.radik.item.custom.Capsule;
+import com.radik.item.RegisterItems;
+import com.radik.registration.IRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
@@ -9,12 +10,11 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import com.radik.item.RegisterItems;
 
 import static com.radik.block.RegisterBlocks.*;
 import static com.radik.item.RegisterItems.*;
 
-public class ModGroup {
+public class ModGroup implements IRegistry {
     public static final ItemGroup RADIK_BLOCKS = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(Radik.MOD_ID, "radik_blocks"),
             FabricItemGroup.builder().icon(() -> new ItemStack(FROG0_255_0))
@@ -932,9 +932,11 @@ public class ModGroup {
                     .displayName(Text.translatable("itemGroup.radikpresents"))
                     .entries((displayContext, entries) -> {
                         entries.add(ADVENTURE_HAT);
+                        entries.add(ADVENTURE_1M_HAT);
                         entries.add(PIX);
                         entries.add(BICYCLE);
                         entries.add(HOUSE);
+                        entries.add(DISC_JORDANAIRES);
                         entries.add(JAVA_PROGRAMMER);
                         entries.add(TASHERS_CRONE);
                         entries.add(DISK_PENIS_BOLSHOY);
@@ -946,5 +948,13 @@ public class ModGroup {
                         entries.add(TROPHY_NOSTALGIC_GOLD);
                     }).build());
 
-    public static void registerGroup() {}
+    public static final ItemGroup RADIK_TEST = Registry.register(Registries.ITEM_GROUP,
+            Identifier.of(Radik.MOD_ID, "radik_test"),
+            FabricItemGroup.builder().icon(() -> new ItemStack(WIND_STAFF))
+                    .displayName(Text.literal("RadikCore test"))
+                    .entries((displayContext, entries) -> {
+                        entries.add(WIND_STAFF);
+                    }).build());
+
+    public static void initialize() {}
 }

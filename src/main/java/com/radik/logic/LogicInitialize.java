@@ -1,10 +1,11 @@
 package com.radik.logic;
 
-public class LogicInitialize {
-    public static void registerLogic() {
+import com.radik.registration.IRegistry;
 
+public class LogicInitialize implements IRegistry {
+    public static void initialize() {
         OnUse.register();
         OnWorldTick.register();
-        ServerStruct.register();
+
     }
 }

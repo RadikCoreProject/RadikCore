@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "level=0": { "model": "radik:fluid/hydrogen" },
+    "level=1": { "model": "radik:fluid/hydrogen" },
+    "level=2": { "model": "radik:fluid/hydrogen" },
+    "level=3": { "model": "radik:fluid/hydrogen" },
+    "level=4": { "model": "radik:fluid/hydrogen" },
+    "level=5": { "model": "radik:fluid/hydrogen" },
+    "level=6": { "model": "radik:fluid/hydrogen" },
+    "level=7": { "model": "radik:fluid/hydrogen" },
+    "level=8": { "model": "radik:fluid/hydrogen" },
+    "level=9": { "model": "radik:fluid/hydrogen" },
+    "level=10": { "model": "radik:fluid/hydrogen" },
+    "level=11": { "model": "radik:fluid/hydrogen" },
+    "level=12": { "model": "radik:fluid/hydrogen" },
+    "level=13": { "model": "radik:fluid/hydrogen" },
+    "level=14": { "model": "radik:fluid/hydrogen" },
+    "level=15": { "model": "radik:fluid/hydrogen" }
+  }
+}

@@ -23,7 +23,7 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 40
+          "weight": 38
         },
         {
           "type": "minecraft:item",
@@ -60,7 +60,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:present_big",
-          "weight": 5
+          "weight": 7
         },
         {
           "type": "minecraft:item",

@@ -2,18 +2,22 @@ package com.radik.block.custom;
 
 import net.minecraft.block.*;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.state.StateManager;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.*;
 import net.minecraft.world.BlockView;
-import org.jetbrains.annotations.NotNull;
 
 import static com.radik.block.custom.BlockData.FACING2;
 
 public class Fonar2 extends RotatableBlock {
-    public Fonar2(AbstractBlock.Settings settings) {
+    public Fonar2(Settings settings) {
         super(settings);
         setDefaultState(getStateManager().getDefaultState().with(FACING2, 0));
+    }
+
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        return this.getDefaultState().with(FACING2, Math.abs(ctx.getPlayerLookDirection().getHorizontalQuarterTurns()));
     }
 
     @Override

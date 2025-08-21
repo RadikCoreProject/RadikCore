@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "radik",
+  "version": "1.4-PRERELEASE_1",
+  "name": "RadikCore",
+  "description": "This is the RadikCore mod...",
+  "authors": [
+    "Radik"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.radik.Radik"
+    ],
+    "client": [
+      "com.radik.client.RadikClient"
+    ]
+  },
+  "mixins": [
+    "radik.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "minecraft": "1.21.5",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

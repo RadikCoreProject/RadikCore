@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=0": { "model": "radik:custom/trophy/type/1" },
+    "facing=1": { "model": "radik:custom/trophy/type/1", "y": 90 },
+    "facing=2": { "model": "radik:custom/trophy/type/1", "y": 180 },
+    "facing=3": { "model": "radik:custom/trophy/type/1", "y": 270 }
+  }
+}

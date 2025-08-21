@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "radik:block/rainbow/brick_slab/31"
+    },
+    "type=double": {
+      "model": "radik:block/rainbow/brick/31"
+    },
+    "type=top": {
+      "model": "radik:block/rainbow/brick_slab/31_top"
+    }
+  }
+}

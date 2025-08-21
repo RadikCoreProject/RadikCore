@@ -23,12 +23,12 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 25
+          "weight": 50
         },
         {
           "type": "minecraft:item",
           "name": "radik:present_small",
-          "weight": 65,
+          "weight": 40,
           "functions": [
             {
               "add": false,

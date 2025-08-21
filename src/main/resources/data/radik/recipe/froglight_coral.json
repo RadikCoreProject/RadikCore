@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#P#",
+    "###"
+  ],
+  "key": {
+    "#": "#radik:froglights_item",
+    "P": "radik:dye_coral"
+  },
+  "result": {
+    "id": "radik:frog4",
+    "count": 8
+  }
+}

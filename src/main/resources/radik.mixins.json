@@ -1,0 +1,32 @@
+{
+  "required": true,
+  "package": "com.radik.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AnvilScreenHandlerMixin",
+    "BookUpdateC2SPacketMixin",
+    "FarmlandStepMixin",
+    "FireworkRocketEntityLifeMixin",
+    "FireworkRocketEntityMixin",
+    "FireworkRocketEntityParticleMixin",
+    "FireworkRocketItemMixin",
+    "ServerPlayNetworkHandlerMixin",
+    "StructureBlockBlockEntityMixin",
+    "UpdateStructureBlockC2SPacketMixin",
+    "WritableBookContentComponentMixin",
+    "WrittenBookContentComponentMixin"
+  ],
+  "client": [
+    "AnvilScreenMixin",
+    "BookEditScreenMixin",
+    "CreditsAndAttributionScreenMixin",
+    "RealmsMainScreenMixin",
+    "StructureBlockScreenMixin",
+    "TitleScreenMixin"
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

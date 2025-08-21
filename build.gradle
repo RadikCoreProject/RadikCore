@@ -1,67 +1,30 @@
 plugins {
-	id 'fabric-loom' version '1.10.1'
+	id 'fabric-loom' version '1.11-SNAPSHOT'
 	id 'maven-publish'
 }
 
-java {
-	withSourcesJar()
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
-}
 
-fabricApi {
-	configureDataGeneration() {
-		client = true
-	}
-}
-
-version = '1.4-PRERELEASE_1-1.21.5' // Укажите вашу версию мода
-group = 'com.radik' // Укажите вашу группу
-
+version = '1.4-PRERELEASE_2-1.21.5'
+group = 'com.radik'
 base {
-	archivesName = 'RadikCore' // Укажите имя архива
+	archivesName = 'RadikCore'
 }
 
 repositories {
 	mavenCentral()
 	maven { url 'https://plugins.gradle.org/m2/' }
 	maven { url 'https://jitpack.io' }
-}
-
-loom {
-	splitEnvironmentSourceSets()
-
-	mods {
-		"radik" {
-			sourceSet sourceSets.main
-			sourceSet sourceSets.client
-		}
-	}
-}
-
-processResources {
-	duplicatesStrategy = DuplicatesStrategy.FAIL
+	maven { url 'https://maven.fabricmc.net/' } // Добавьте Fabric Maven
 }
 
 dependencies {
-//	implementation include('org.mindrot:jbcrypt:0.4')
-//	implementation include('com.zaxxer:HikariCP:5.1.0')
-// 	implementation include('org.apache.httpcomponents:httpclient:4.5.14')
-//	implementation include('org.apache.httpcomponents:httpcore:4.4.16')
-//	implementation include('org.xerial:sqlite-jdbc:3.30.1')
-//	implementation include('org.apache.httpcomponents:httpmime:4.5.13')
-//	implementation include('org.telegram:telegrambots:6.5.0')
-//	implementation include('org.telegram:telegrambots-meta:6.5.0')
-
-
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 }
 
-
+// Объединенный блок ресурсов
 processResources {
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 	inputs.property "version", project.version
@@ -78,12 +41,28 @@ tasks.withType(JavaCompile).configureEach {
 
 java {
 	withSourcesJar()
-
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
 	sourceCompatibility = JavaVersion.VERSION_21
 	targetCompatibility = JavaVersion.VERSION_21
 }
 
-
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src/main/java']
+		}
+		resources {
+			srcDirs = ['src/main/resources']
+		}
+	}
+	client {
+		java {
+			srcDirs = ['src/client/java']
+		}
+	}
+}
 
 jar {
 	from("LICENSE") {
@@ -94,11 +73,9 @@ jar {
 publishing {
 	publications {
 		create("mavenJava", MavenPublication) {
-			artifactId = project.archives_base_name
+			artifactId = base.archivesName.get()
 			from components.java
 		}
 	}
-
-	repositories {
-	}
+	repositories {}
 }

@@ -2,11 +2,14 @@ package com.radik.block.custom;
 
 import com.radik.block.RegisterBlocks;
 import net.minecraft.block.*;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.*;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,5 +49,12 @@ public class Present extends Block {
     @Override
     protected void appendProperties(StateManager.@NotNull Builder<Block, BlockState> builder) {
         builder.add(TYPE2);
+    }
+
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if (state.getBlock().equals(RegisterBlocks.PRESENT_BIG)) {
+            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+            world.setBlockState(pos.up(), state);
+        }
     }
 }

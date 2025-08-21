@@ -13,8 +13,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 8,
-                "max": 24
+                "min": 16,
+                "max": 32
               }
             }
           ]
@@ -29,8 +29,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 8,
-                "max": 24
+                "min": 16,
+                "max": 32
               }
             }
           ]
@@ -61,8 +61,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 8,
-                "max": 24
+                "min": 16,
+                "max": 32
               }
             }
           ]
@@ -185,7 +185,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:book",
-          "weight": 5,
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:enchant_randomly",

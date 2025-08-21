@@ -110,5 +110,13 @@
         "stream": true
       }
     ]
+  },
+  "jordanaires": {
+    "sounds": [
+      {
+        "name": "radik:jordanaires",
+        "stream": true
+      }
+    ]
   }
 }

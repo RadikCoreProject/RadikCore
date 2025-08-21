@@ -3,20 +3,20 @@ package com.radik.item;
 import com.radik.Music;
 import com.radik.Radik;
 import com.radik.item.custom.Capsule;
+import com.radik.item.custom.Teleporter;
+import com.radik.item.custom.staff.WindStaff;
+import com.radik.registration.IRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.item.equipment.ArmorMaterials;
-import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
@@ -24,7 +24,7 @@ import java.util.function.Function;
 import static com.radik.Data.*;
 import static com.radik.Music.*;
 
-public class RegisterItems {
+public class RegisterItems implements IRegistry {
     static final Function<Item.Settings, Item> neww = Item::new;
     static final Function<Item.Settings, Item> hat = setting -> new Item(setting.maxCount(1));
 
@@ -97,12 +97,19 @@ public class RegisterItems {
     public static final Item MERCURY_LAMP = registerItem("lamp_mercury", neww);
 
     public static final Item CAPSULE = registerItem("capsule", settings -> new Capsule(settings.maxCount(16)));
+    public static final Item TELEPORTER = registerItem("teleporter", settings -> new Teleporter(settings.maxCount(1), 0, Vec3d.ZERO, ""));
 
+    public static final Item DISC_JORDANAIRES = registerItem("disc_jordanaires", settings -> new Item(settings.jukeboxPlayable(JORDANAIRES_KEY).maxCount(1)));
     public static final Item ADVENTURE_HAT = registerItem("adventure_hat", hat);
+    public static final Item ADVENTURE_1M_HAT = registerItem("adventure_1m_hat", hat);
     public static final Item TASHERS_CRONE = registerItem("tasher_crone", hat);
     public static final Item DISK_PENIS_BOLSHOY = registerItem("disc_penis_bolshoy", settings -> new Item(settings.jukeboxPlayable(PENIS_BOLSHOY_KEY).maxCount(1)));
     public static final Block DISK_DEBRIS = registerBlockItem("disc_debris", new Item.Settings().jukeboxPlayable(Music.DEBRIS_KEY).maxCount(1));
     public static final Item DISK_BOLSHOY_KUSH = registerItem("disc_bolshoy_kush", settings -> new Item(settings.jukeboxPlayable(BOLSHOY_KUSH_KEY).maxCount(1)));
+
+
+    // TEST FEATURES
+    public static final Item WIND_STAFF = registerItem("wind_staff", settings -> new WindStaff(settings.maxCount(1)));
 
     private static Item registerItem(String name, Function<Item.Settings, Item> function) {
         return Registry.register(Registries.ITEM, Identifier.of(Radik.MOD_ID, name),
@@ -119,7 +126,7 @@ public class RegisterItems {
         return block;
     }
 
-    public static void registerItem() {
+    public static void initialize() {
         Radik.LOGGER.info("Items initialized");
     }
 }
