@@ -1,0 +1,42 @@
+{
+  "parent": "radik:pull2",
+  "criteria": {
+    "event": {
+      "conditions": {
+        "event": 0
+      },
+      "trigger": "radik:event_criterion"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "radik:event_block"
+    },
+    "title": {
+      "translate": "advancements.radik.event.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event"
+    ]
+  ],
+  "rewards": {
+    "experience": 10,
+    "function": "radik:advancements/event/block/base"
+  },
+  "sends_telemetry_event": true
+}

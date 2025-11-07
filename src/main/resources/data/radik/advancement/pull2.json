@@ -1,0 +1,31 @@
+{
+  "criteria": {
+    "pull2": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "radik:block/frog/2",
+    "description": {
+      "translate": "advancements.radik.RadikCoreEvent.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:amethyst_shard"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.radik.RadikCoreEvent.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull2"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

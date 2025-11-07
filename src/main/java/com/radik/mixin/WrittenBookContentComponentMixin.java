@@ -16,7 +16,7 @@ public class WrittenBookContentComponentMixin {
                     intValue = 32
             )}
     )
-    private static int longbooks$returnUpperBoundMaxTitleLengthForCodec(int original) {
+    private static int codec(int original) {
         return 32767;
     }
 
@@ -26,7 +26,7 @@ public class WrittenBookContentComponentMixin {
                     intValue = 32
             )}
     )
-    private static int longbooks$returnUpperBoundMaxTitleLengthForPacketCodec(int original) {
+    private static int packetCodec(int original) {
         return 32767;
     }
 }

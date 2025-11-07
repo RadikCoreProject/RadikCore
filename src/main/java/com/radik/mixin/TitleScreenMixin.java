@@ -1,10 +1,9 @@
 package com.radik.mixin;
 
 import net.minecraft.client.gui.screen.TitleScreen;
-import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.text.Text;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -36,6 +35,7 @@ public abstract class TitleScreenMixin {
         return x + 140;
     }
 
+    @Contract(pure = true)
     @ModifyArg(
             method = "render",
             at = @At(
@@ -45,20 +45,8 @@ public abstract class TitleScreenMixin {
             ),
             index = 1
     )
-    private String replaceVersionString(String original) {
+    private @NotNull String replaceVersionString(String original) {
         return "Minecraft 1.21.5";
-    }
-
-    @ModifyArg(
-            method = "addNormalWidgets",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/widget/ButtonWidget$Builder;tooltip(Lnet/minecraft/client/gui/tooltip/Tooltip;)Lnet/minecraft/client/gui/widget/ButtonWidget$Builder;",
-                    ordinal = 1
-            )
-    )
-    private @NotNull Tooltip replaceRealmsTooltip(@Nullable Tooltip tooltip) {
-        return Tooltip.of(Text.of("TEST CLIENT BUTTON"));
     }
 
     @ModifyArg(

@@ -694,6 +694,18 @@
     "radik:winter_stone_13",
     "radik:winter_stone_14",
     "radik:winter_stone_15",
-    "radik:winter_stone_16"
+    "radik:winter_stone_16",
+
+    "radik:old_iron_block",
+    "radik:old_coal_block",
+    "radik:old_netherrack",
+    "radik:old_mossy_cobblestone",
+    "radik:old_cobblestone",
+    "radik:old_lapis_block",
+    "radik:old_iron_block",
+    "radik:old_gold_block",
+    "radik:old_emerald_block",
+    "radik:old_diamond_block",
+    "radik:old_crying_obsidian"
   ]
 }

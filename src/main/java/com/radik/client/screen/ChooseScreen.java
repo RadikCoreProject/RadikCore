@@ -1,6 +1,6 @@
 package com.radik.client.screen;
 
-import com.radik.connecting.Decoration;
+import com.radik.client.screen.widget.CustomOptionListWidget;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.Screen;
@@ -24,7 +24,7 @@ public class ChooseScreen extends Screen {
     private final byte type;
     private final int data;
     private final Screen parent;
-    private static final String[] colors = new String[]{"§4Бордовый", "§cКрасный", "§6Оранжевый", "§eЖелтый", "§2Зелёный", "§aЛаймовый", "§bГолубой", "§3Бирюзовый", "§1Синий", "§9Морской", "§dРозовый", "§5Фиолетовый", "§7Светло-серый", "§8Серый", "§0Чёрный", "Белый"};
+    private static final String[] colors = new String[]{"§4Бордовый", "§cКрасный", "§6Оранжевый", "§eЖелтый", "§2Зелёный", "§aЛаймовый", "§bГолубой", "§3Бирюзовый", "§1Синий", "§9Морской", "§dРозовый", "§5Фиолетовый", "§7Светло-серый", "§8Серый", "§0Чёрный", "§fБелый"};
 
     public ChooseScreen(Screen parent, Text title, byte type, int data) {
         super(title);
@@ -53,8 +53,6 @@ public class ChooseScreen extends Screen {
                         .width(200)
                         .build()
         );
-
-        // Обновление позиций
         layout.refreshPositions();
     }
 
@@ -62,16 +60,17 @@ public class ChooseScreen extends Screen {
         if (this.body == null) return;
         List<ClickableWidget> widgets = new ArrayList<>();
 
-        for (Decoration i : DECORATIONS) {
-            if (i.type != this.type) continue;
-            int finalI = i.id;
-            ButtonWidget colorButton = ButtonWidget.builder(getColorText(finalI), button -> onColorSelected(finalI)).size(150, 20).build();
-            if (!i.own) {
-                colorButton.active = false;
-                colorButton.setTooltip(Tooltip.of(Text.of("У вас не куплен этот цвет\nЦена: " + i.cost + "₽")));
+        DECORATIONS.forEach((deco, own) -> {
+            if (deco.type == this.type) {
+                int finalI = deco.id;
+                ButtonWidget colorButton = ButtonWidget.builder(getColorText(finalI), button -> onColorSelected(finalI)).size(150, 20).build();
+                if (!own) {
+                    colorButton.active = false;
+                    colorButton.setTooltip(Tooltip.of(Text.of("У вас не куплен этот цвет\nЦена: " + deco.cost + "₽")));
+                }
+                widgets.add(colorButton);
             }
-            widgets.add(colorButton);
-        }
+        });
 
         ButtonWidget colorButton = ButtonWidget.builder(getColorText(17), button -> onColorSelected(17)).size(150, 20).build();
         widgets.add(colorButton);

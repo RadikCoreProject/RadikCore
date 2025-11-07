@@ -12,7 +12,7 @@ import java.util.List;
 public record GasLakeFeatureConfig(
         int maxBlocks,
         BlockState hydrogenState,
-        List<BlockState> wallBlocks // Изменено на список
+        List<BlockState> wallBlocks
 ) implements FeatureConfig {
 
     public GasLakeFeatureConfig {

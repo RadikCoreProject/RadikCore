@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "head",
+  "key": {
+    "#": "minecraft:skeleton_skull",
+    "X": "minecraft:clay_ball",
+	"T": "radik:dye_verdant",
+	"B": "minecraft:green_dye"
+  },
+  "pattern": [
+    "BXT",
+    "X#X",
+    "TXB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:player_head",
+	"components": {
+		"minecraft:lore": [
+			{
+				"text": "Cтаж игры: меньше годa",
+				"italic": false,
+				"color": "gold"
+			}
+		],
+		"minecraft:profile": "BulkGecko6535"
+	}
+  }
+}

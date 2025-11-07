@@ -43,7 +43,7 @@ public class ExplosiveGasFluid extends BasedGasFluid {
                 .with(FALLING, true);
     }
 
-    private void explode(@NotNull World world, BlockPos pos) {
+    private void explode(@NotNull World world, @NotNull BlockPos pos) {
         Vec3d center = pos.toCenterPos();
         FluidState fluidState = world.getFluidState(pos);
         int level = fluidState.getLevel();

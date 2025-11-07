@@ -21,8 +21,9 @@ import static com.radik.Data.*;
 import static com.radik.util.ScoreboardAction.changeScore;
 import static com.radik.util.ScoreboardAction.enough;
 
+// test
 public class WindStaff extends Item{
-    public WindStaff(Settings settings) {
+    public WindStaff(@NotNull Settings settings) {
         super(settings.sword(Materials.STAFF, 4, -2.4f).component(STAFF_TYPE, 0).component(STAFF_ATTACKS, 4));
     }
 
@@ -37,7 +38,7 @@ public class WindStaff extends Item{
         String attack = component == 1 ? "wind_staff_ultra" : "wind_staff_base";
 
         if (!enough(enough, user)) { return ActionResult.FAIL; }
-        if (!manaUsesTimer(user.getName().getString(), attack)) { return ActionResult.FAIL; }
+        if (manaUsesTimer(user.getName().getString(), attack)) { return ActionResult.FAIL; }
 
         if (!world.isClient) {
             shootWind(user, world, user.getYaw());
@@ -62,7 +63,7 @@ public class WindStaff extends Item{
         if (type == null) return ActionResult.FAIL;
 
         if (player != null && !world.isClient) {
-            if (!enough(800, player) || !manaUsesTimer(player.getName().getString(), "wind_staff_super") || type == 1) {
+            if (!enough(800, player) || manaUsesTimer(player.getName().getString(), "wind_staff_super") || type == 1) {
                 return ActionResult.FAIL;
             }
 
@@ -95,7 +96,7 @@ public class WindStaff extends Item{
         }
     }
 
-    private void shootWind(PlayerEntity user, World world, float yaw) {
+    private void shootWind(@NotNull PlayerEntity user, World world, float yaw) {
         WindChargeEntity projectile = new WindChargeEntity(EntityType.WIND_CHARGE, world);
         projectile.setPosition(user.getX(), user.getEyeY(), user.getZ());
         projectile.setVelocity(user, user.getPitch(), yaw, 0f, 1f, 1f);

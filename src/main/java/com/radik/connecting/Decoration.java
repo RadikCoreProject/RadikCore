@@ -1,19 +1,21 @@
 package com.radik.connecting;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 public class Decoration {
     public byte id;
     public byte type;
     public short cost;
-    public boolean own;
     public String owner;
     public String description;
     public String name;
 
-    public Decoration(byte[] bytes, short cost, boolean own, String[] strings) {
+    @Contract(pure = true)
+    public Decoration(byte @NotNull [] bytes, short cost, String @NotNull [] strings) {
         this.id = bytes[0];
         this.type = bytes[1];
         this.cost = cost;
-        this.own = own;
         this.owner = strings[0];
         this.description = strings[1];
         this.name = strings[2];
@@ -28,7 +30,6 @@ public class Decoration {
                 type - %d
                 description - %s
                 owner - %s
-                own - %b
-                """, name, id, cost, type, description, owner, own);
+                """, name, id, cost, type, description, owner);
     }
 }

@@ -1,15 +1,18 @@
 package com.radik.item;
 
+import com.radik.Data;
 import com.radik.Music;
 import com.radik.Radik;
-import com.radik.item.custom.Capsule;
-import com.radik.item.custom.Teleporter;
+import com.radik.connecting.event.ChallengeEvent;
+import com.radik.item.custom.*;
+import com.radik.item.custom.chemistry.Vial;
+import com.radik.item.custom.tool.*;
 import com.radik.item.custom.staff.WindStaff;
 import com.radik.registration.IRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -25,8 +28,10 @@ import static com.radik.Data.*;
 import static com.radik.Music.*;
 
 public class RegisterItems implements IRegistry {
-    static final Function<Item.Settings, Item> neww = Item::new;
-    static final Function<Item.Settings, Item> hat = setting -> new Item(setting.maxCount(1));
+    private static final Function<Item.Settings, Item> neww = Item::new;
+    private static final Function<Item.Settings, Item> hat = setting -> new Item(setting.maxCount(1).equippable(EquipmentSlot.HEAD));
+    private static final Function<Item.Settings, Item> halloween = settings -> new EventItem(settings.maxCount(99).component(EVENT_TYPE, ChallengeEvent.HALLOWEEN));
+    private static final Function<Item.Settings, Item> halloween_candy = settings -> new EventItem(settings.maxCount(99).component(EVENT_TYPE, ChallengeEvent.HALLOWEEN).food(FOOD_COMPONENTS.get("candy")));
 
     public static final Item DYE_AMBER = registerItem("dye_amber", neww);
     public static final Item DYE_AQUA = registerItem("dye_aqua", neww);
@@ -96,6 +101,7 @@ public class RegisterItems implements IRegistry {
     public static final Item SODIUM_LAMP = registerItem("lamp_sodium", neww);
     public static final Item MERCURY_LAMP = registerItem("lamp_mercury", neww);
 
+    public static final Item MEDAL = registerItem("medal", setting -> new Medal(setting.maxCount(99).equippable(EquipmentSlot.HEAD)));
     public static final Item CAPSULE = registerItem("capsule", settings -> new Capsule(settings.maxCount(16)));
     public static final Item TELEPORTER = registerItem("teleporter", settings -> new Teleporter(settings.maxCount(1), 0, Vec3d.ZERO, ""));
 
@@ -104,12 +110,33 @@ public class RegisterItems implements IRegistry {
     public static final Item ADVENTURE_1M_HAT = registerItem("adventure_1m_hat", hat);
     public static final Item TASHERS_CRONE = registerItem("tasher_crone", hat);
     public static final Item DISK_PENIS_BOLSHOY = registerItem("disc_penis_bolshoy", settings -> new Item(settings.jukeboxPlayable(PENIS_BOLSHOY_KEY).maxCount(1)));
-    public static final Block DISK_DEBRIS = registerBlockItem("disc_debris", new Item.Settings().jukeboxPlayable(Music.DEBRIS_KEY).maxCount(1));
+    public static final Block DISC_DEBRIS = registerBlockItem("disc_debris", new Item.Settings().jukeboxPlayable(Music.DEBRIS_KEY).maxCount(1));
     public static final Item DISK_BOLSHOY_KUSH = registerItem("disc_bolshoy_kush", settings -> new Item(settings.jukeboxPlayable(BOLSHOY_KUSH_KEY).maxCount(1)));
-
 
     // TEST FEATURES
     public static final Item WIND_STAFF = registerItem("wind_staff", settings -> new WindStaff(settings.maxCount(1)));
+    public static final Item VIAL = registerItem("vial", Vial::new);
+
+    public static final Item HALLOWEEN_PICKAXE = registerItem("halloween_pickaxe", settings -> new Pickaxe(Materials.HALLOWEEN, 1, -2.8F, settings.fireproof().component(EVENT_TYPE, ChallengeEvent.HALLOWEEN).component(BOOL, false)));
+    public static final Item HALLOWEEN_AXE = registerItem("halloween_axe", settings -> new Axe(Materials.HALLOWEEN, 5.0F, -3.0F, settings.fireproof().component(EVENT_TYPE, ChallengeEvent.HALLOWEEN).component(BOOL, false)));
+    public static final Item HALLOWEEN_HOE = registerItem("halloween_hoe", settings -> new Hoe(Materials.HALLOWEEN, -4.0F, 0.0F, settings.fireproof().component(EVENT_TYPE, ChallengeEvent.HALLOWEEN).component(BOOL, false)));
+    public static final Item HALLOWEEN_SWORD = registerItem("halloween_sword", settings -> new Sword(Materials.HALLOWEEN, 3.0F, -2.4F, settings.fireproof().component(EVENT_TYPE, ChallengeEvent.HALLOWEEN).component(BOOL, false)));
+    public static final Item HALLOWEEN_SHOVEL = registerItem("halloween_shovel", settings -> new Shovel(Materials.HALLOWEEN, 1.5F, -3.0F, settings.fireproof().component(EVENT_TYPE, ChallengeEvent.HALLOWEEN).component(BOOL, false)));
+    public static final Item CANDY_YELLOW = registerItem("halloween_candy_yellow", halloween_candy);
+    public static final Item CANDY_BLUE = registerItem("halloween_candy_blue", halloween_candy);
+    public static final Item CANDY_RED = registerItem("halloween_candy_red", halloween_candy);
+    public static final Item CANDY_GREEN = registerItem("halloween_candy_green", halloween_candy);
+    public static final Item CANDY_BASKET_YELLOW = registerItem("halloween_candy_basket_yellow", halloween);
+    public static final Item CANDY_BASKET_BLUE = registerItem("halloween_candy_basket_blue", halloween);
+    public static final Item CANDY_BASKET_RED = registerItem("halloween_candy_basket_red", halloween);
+    public static final Item CANDY_BASKET_GREEN = registerItem("halloween_candy_basket_green", halloween);
+    public static final Item CANDY_BASKET_EMPTY = registerItem("halloween_candy_basket_empty", halloween);
+    public static final Item CANDY_BASKET_LUCKY = registerItem("halloween_candy_basket_lucky", LuckyBasket::new);
+    public static final Item CANDY_BASKET_SUPER = registerItem("halloween_candy_basket_super", halloween);
+    public static final Item DISC_NETHER = registerItem("disc_nether", settings -> new EventItem(settings.jukeboxPlayable(NETHER_KEY).maxCount(1)));
+    public static final Item DISC_NEST = registerItem("disc_nest", settings -> new EventItem(settings.jukeboxPlayable(NEST_KEY).maxCount(1)));
+
+    public static final Item TEST_SWORD = registerItem("netherite_sword_1", settings -> new Item(settings.sword(ToolMaterial.NETHERITE, 3.0F, -2.4F).fireproof()));
 
     private static Item registerItem(String name, Function<Item.Settings, Item> function) {
         return Registry.register(Registries.ITEM, Identifier.of(Radik.MOD_ID, name),

@@ -1,0 +1,44 @@
+{
+  "parent": "radik:event_1_2",
+  "criteria": {
+    "instrument": {
+      "conditions": {
+        "elite": true,
+        "item": "radik:halloween_pickaxe"
+      },
+      "trigger": "radik:trade_criterion"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_1_7.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "radik:halloween_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.radik.event_1_7.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "instrument"
+    ]
+  ],
+  "rewards": {
+    "experience": 500,
+    "function": "radik:advancements/event/block/1/7"
+  },
+  "sends_telemetry_event": true
+}

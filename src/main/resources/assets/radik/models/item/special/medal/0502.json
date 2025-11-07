@@ -1,0 +1,7 @@
+{
+  "parent": "radik:item/special/medal/medal",
+  "textures": {
+    "medal": "radik:item/custom/medal/medal/2",
+    "wire": "radik:item/custom/medal/wire/5"
+  }
+}

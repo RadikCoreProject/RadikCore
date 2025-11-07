@@ -8,7 +8,7 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 
-public class ModTags implements IRegistry {
+public final class ModTags implements IRegistry {
     public static class Blocks {
         public static final TagKey<Block> FROGLIGHTS_BLOCK = createTag("froglights_block");
         public static final TagKey<Block> BRICKS_BLOCK = createTag("bricks_block");

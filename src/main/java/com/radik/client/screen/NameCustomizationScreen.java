@@ -1,6 +1,5 @@
 package com.radik.client.screen;
 
-import com.radik.client.screen.ChooseScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
@@ -8,8 +7,8 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextWidget;
-import net.minecraft.client.option.GameOptions;
 import net.minecraft.text.Text;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReference;
@@ -70,7 +69,7 @@ public class NameCustomizationScreen extends Screen {
         resetButton.setPosition(centerX - buttonWidth - 5, currentY);
         boldToggleButton.setPosition(centerX + 5, currentY);
 
-        if (!DECORATIONS.get(1).own) {
+        if (!DECORATIONS.get(DECORATIONS.keySet().stream().toList().getFirst())) {
             boldToggleButton.active = false;
             boldToggleButton.setTooltip(Tooltip.of(Text.of("У тебя не куплен жирный никнейм")));
         }
@@ -174,7 +173,7 @@ public class NameCustomizationScreen extends Screen {
         }
     }
 
-    private String getColoredName() {
+    private @NotNull String getColoredName() {
         StringBuilder ans = new StringBuilder();
         for (int i = 0; i < playerName.length(); i++) {
             ans.append("§").append(colorCode[i]).append(bold ? "§l" : "").append(playerName.charAt(i));

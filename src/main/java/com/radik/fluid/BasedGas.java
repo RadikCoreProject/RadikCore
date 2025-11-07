@@ -17,11 +17,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.TickPriority;
 import org.apache.http.annotation.Experimental;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import static com.radik.Data.getDimension;
-import static com.radik.fluid.RegisterFluids.swapFluids;
 
 public class BasedGas extends Gas {
 
@@ -33,9 +31,7 @@ public class BasedGas extends Gas {
         Direction d;
         if (currentLevel <= 0) return;
 
-        if (dimension.isEmpty()) {
-            dimension = getDimension(world);
-        }
+        if (dimension.isEmpty()) dimension = getDimension(world);
 
         if (dimension.equals("overworld")) {
             Pos = fluidPos.up();
@@ -94,19 +90,15 @@ public class BasedGas extends Gas {
     }
 
     @Override
-    protected boolean canFlow(BlockView world, BlockPos fromPos, FluidState fromState,
-                              Direction direction, BlockPos toPos) {
+    protected boolean canFlow(@NotNull BlockView world, BlockPos fromPos, FluidState fromState, Direction direction, BlockPos toPos) {
         int currentLevel = getLevel(fromState);
-
         BlockState toState = world.getBlockState(toPos);
         if (toState.isAir()) return true;
-
         int pLevel = toState.getFluidState().getLevel();
 
         if (toState.getFluidState().getFluid() instanceof BasedGas) {
             return (direction == Direction.UP || direction == Direction.DOWN) && toState.getBlock() == fromState.getBlockState().getBlock() ? pLevel < 8 : pLevel < currentLevel;
         }
-
         return false;
     }
 
@@ -131,12 +123,12 @@ public class BasedGas extends Gas {
     }
 
     @Override
-    public int getLevel(FluidState state) {
+    public int getLevel(@NotNull FluidState state) {
         return state.get(LEVEL);
     }
 
     @Override
-    public void randomDisplayTick(World world, BlockPos pos, FluidState state, Random random) {
+    public void randomDisplayTick(World world, BlockPos pos, @NotNull FluidState state, Random random) {
         super.randomDisplayTick(world, pos, state, random);
         if (state.isStill() && random.nextInt(30) == 0) {
             world.addParticleClient(
@@ -157,7 +149,7 @@ public class BasedGas extends Gas {
     // TODO: не реализовано
     // TODO: СРАВНЕНИЕ ПЛОТНОСТЕЙ ВЫЗЫВАЕТ КРАШ!
     @Experimental
-    private boolean density(World world, BlockPos pos) {
+    private boolean density(@NotNull World world, @NotNull BlockPos pos) {
         FluidBlock block_up = (FluidBlock) world.getBlockState(pos.up()).getBlock();
         FluidBlock block_this = (FluidBlock) world.getBlockState(pos).getBlock();
         return false;

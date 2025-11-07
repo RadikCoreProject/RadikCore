@@ -2,6 +2,7 @@ package com.radik.block.custom;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.state.StateManager;
 import org.jetbrains.annotations.NotNull;
 

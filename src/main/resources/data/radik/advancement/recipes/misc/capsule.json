@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_tinted_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:tinted_glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_tinted_glass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "radik:capsule"
+    ]
+  }
+}

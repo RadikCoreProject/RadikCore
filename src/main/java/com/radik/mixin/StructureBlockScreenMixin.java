@@ -10,6 +10,8 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -28,18 +30,12 @@ public abstract class StructureBlockScreenMixin {
     @Unique
     private static final int MAX_COORD = MAX_SIZE;
 
-    @Shadow
-    private TextFieldWidget inputPosX;
-    @Shadow
-    private TextFieldWidget inputPosY;
-    @Shadow
-    private TextFieldWidget inputPosZ;
-    @Shadow
-    private TextFieldWidget inputSizeX;
-    @Shadow
-    private TextFieldWidget inputSizeY;
-    @Shadow
-    private TextFieldWidget inputSizeZ;
+    @Shadow private TextFieldWidget inputPosX;
+    @Shadow private TextFieldWidget inputPosY;
+    @Shadow private TextFieldWidget inputPosZ;
+    @Shadow private TextFieldWidget inputSizeX;
+    @Shadow private TextFieldWidget inputSizeY;
+    @Shadow private TextFieldWidget inputSizeZ;
 
     @Inject(method = "init", at = @At("TAIL"))
     private void onInit(CallbackInfo ci) {
@@ -52,17 +48,15 @@ public abstract class StructureBlockScreenMixin {
     }
 
     @Unique
-    private void clampTextField(TextFieldWidget field, int min, int max) {
+    private void clampTextField(@NotNull TextFieldWidget field, int min, int max) {
         try {
             int value = Integer.parseInt(field.getText());
             int clamped = MathHelper.clamp(value, min, max);
-            if (value != clamped) {
-                field.setText(String.valueOf(clamped));
-            }
-        } catch (NumberFormatException e) {
-        }
+            if (value != clamped) field.setText(String.valueOf(clamped));
+        } catch (NumberFormatException ignored) {}
     }
 
+    @Contract("_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ -> new")
     @Redirect(
             method = "updateStructureBlock",
             at = @At(
@@ -70,8 +64,22 @@ public abstract class StructureBlockScreenMixin {
                     target = "net/minecraft/network/packet/c2s/play/UpdateStructureBlockC2SPacket"
             )
     )
-    private UpdateStructureBlockC2SPacket modifyPacket(
-            BlockPos pos, StructureBlockBlockEntity.Action action, StructureBlockMode mode, String templateName, BlockPos offset, Vec3i size, BlockMirror mirror, BlockRotation rotation, String metadata, boolean ignoreEntities, boolean strict, boolean showAir, boolean showBoundingBox, float integrity, long seed
+    private @NotNull UpdateStructureBlockC2SPacket modifyPacket(
+        BlockPos pos,
+        StructureBlockBlockEntity.Action action,
+        StructureBlockMode mode,
+        String templateName,
+        @NotNull BlockPos offset,
+        @NotNull Vec3i size,
+        BlockMirror mirror,
+        BlockRotation rotation,
+        String metadata,
+        boolean ignoreEntities,
+        boolean strict,
+        boolean showAir,
+        boolean showBoundingBox,
+        float integrity,
+        long seed
     ) {
         BlockPos clampedOffset = new BlockPos(
                 MathHelper.clamp(offset.getX(), MIN_COORD, MAX_COORD),

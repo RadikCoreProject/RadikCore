@@ -1,6 +1,7 @@
 package com.radik.item.custom;
 
 import com.radik.client.screen.game.TeleporterScreen;
+import com.radik.util.Duplet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -14,8 +15,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 
 import static com.radik.Data.*;
@@ -46,7 +49,46 @@ public class Teleporter extends Item {
 
         textConsumer.accept(Text.translatable("tooltip.radik.capsule.level").append(String.valueOf(level + 1)));
         textConsumer.accept(Text.translatable("tooltip.radik.teleporter.max").append(getDistance((int) level)));
-        textConsumer.accept(Text.translatable("tooltip.radik.teleporter.owner").append(owner));
+        textConsumer.accept(Text.translatable("tooltip.radik.owner").append(owner));
         super.appendTooltip(stack, context, displayComponent, textConsumer, type);
+    }
+
+    @Contract("_, _, _, _ -> new")
+    public static @NotNull Duplet<Integer, Boolean> calculateCooldown(@NotNull ItemStack stack, @NotNull Vec3d pos1, Vec3d pos2, World world) {
+        Integer type = stack.get(TELEPORTER);
+        double distance = pos1.distanceTo(pos2);
+        int max = getDistance(Objects.requireNonNull(type));
+        int cooldown = (int) (distance / 5.612 * getTeleporterK(type));
+        if (getDimension(world).equals("nether")) { max /= 8; cooldown *= 8; }
+        if (cooldown == 0) cooldown = 30;
+        return new Duplet<>(cooldown, max >= distance);
+    }
+
+    @Contract(pure = true)
+    public static @NotNull String getDistance(int lvl) {
+        return switch (lvl) {
+            case 0 -> "2.000";
+            case 1 -> "6.000";
+            case 2 -> "12.000";
+            default -> "0";
+        };
+    }
+
+    public static int getDistance(@NotNull Integer lvl) {
+        switch (lvl) {
+            case 0 -> {return 2000;}
+            case 1 -> {return 6000;}
+            case 2 -> {return 12000;}
+            default -> {return 0;}
+        }
+    }
+
+    @Contract(pure = true)
+    public static float getTeleporterK(@NotNull Integer type) {
+        switch (type) {
+            case 1 -> {return 0.9F;}
+            case 2 -> {return 0.75F;}
+            default -> {return 1;}
+        }
     }
 }

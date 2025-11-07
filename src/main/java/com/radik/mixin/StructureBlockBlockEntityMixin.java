@@ -6,6 +6,8 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
@@ -55,6 +57,7 @@ public abstract class StructureBlockBlockEntityMixin {
         return 512;
     }
 
+    @Contract("_ -> new")
     @ModifyArg(
             method = "saveStructure(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/Identifier;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Vec3i;ZLjava/lang/String;Z)Z",
             at = @At(
@@ -63,7 +66,7 @@ public abstract class StructureBlockBlockEntityMixin {
             ),
             index = 2
     )
-    private static Vec3i overrideSizeLimit(Vec3i original) {
+    private static @NotNull Vec3i overrideSizeLimit(@NotNull Vec3i original) {
         return new Vec3i(
                 Math.min(original.getX(), 512),
                 Math.min(original.getY(), 512),
@@ -72,12 +75,12 @@ public abstract class StructureBlockBlockEntityMixin {
     }
 
     @Inject(method = "writeNbt", at = @At("TAIL"))
-    private void writeBypassNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries, CallbackInfo ci) {
+    private void writeBypassNbt(@NotNull NbtCompound nbt, RegistryWrapper.WrapperLookup registries, CallbackInfo ci) {
         nbt.putBoolean("bypassProtection", this.bypassProtection);
     }
 
     @Inject(method = "readNbt", at = @At("TAIL"))
-    private void readBypassNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries, CallbackInfo ci) {
+    private void readBypassNbt(@NotNull NbtCompound nbt, RegistryWrapper.WrapperLookup registries, CallbackInfo ci) {
         Optional<Boolean> b = nbt.getBoolean("bypassProtection");
         b.ifPresent(aBoolean -> this.bypassProtection = aBoolean);
     }

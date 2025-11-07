@@ -19,8 +19,6 @@ public abstract class FireworkRocketEntityParticleMixin {
     )
     private void reduceParticles(CallbackInfo ci) {
         FireworkRocketEntity self = (FireworkRocketEntity)(Object)this;
-        if (self.age % 4 != 0) {
-            ci.cancel();
-        }
+        if (self.age % 4 != 0) ci.cancel();
     }
 }

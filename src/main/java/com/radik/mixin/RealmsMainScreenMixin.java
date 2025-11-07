@@ -56,22 +56,18 @@ public abstract class RealmsMainScreenMixin extends Screen{
 
         // TODO: butts
         Tooltip tooltip = Tooltip.of(Text.translatable("tooltip.radik.screen.future"));
-        client_settings.setTooltip(tooltip);
         account_settings.setTooltip(tooltip);
         decorations.setTooltip(tooltip);
-        client_settings.active = false;
         account_settings.active = false;
         decorations.active = false;
 
         if (PLAYER == null) {
             name_customization.active = false;
-//            client_settings.active = false;
 //            account_settings.active = false;
 //            decorations.active = false;
 
             Tooltip tooltip1 = Tooltip.of(Text.translatable("tooltip.radik.screen.no_data"));
             name_customization.setTooltip(tooltip1);
-//            client_settings.setTooltip(tooltip);
 //            account_settings.setTooltip(tooltip);
 //            decorations.setTooltip(tooltip);
         }

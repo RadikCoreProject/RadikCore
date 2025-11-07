@@ -5,7 +5,8 @@
     "1": "radik:item/weapon/wind_staff/aura1",
     "2": "radik:item/weapon/wind_staff/ball1",
     "3": "radik:item/weapon/wind_staff/wind1",
-    "4": "radik:item/weapon/wind_staff/fetch1"
+    "4": "radik:item/weapon/wind_staff/fetch1",
+    "particle": "radik:block/super/house"
   },
   "elements": [
     {

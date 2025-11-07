@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "event_type=0": { "model": "radik:block/event/base" },
+    "event_type=1": { "model": "radik:block/event/halloween" }
+  }
+}

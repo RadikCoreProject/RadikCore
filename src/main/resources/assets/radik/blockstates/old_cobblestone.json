@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "radik:block/old/cobblestone"
+    }
+  }
+}

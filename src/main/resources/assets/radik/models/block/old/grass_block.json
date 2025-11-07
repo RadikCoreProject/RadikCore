@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "radik:block/old/grass_down",
+    "particle": "radik:block/old/grass_down",
+    "side": "radik:block/old/grass_side",
+    "top": "radik:block/old/grass_top"
+  }
+}

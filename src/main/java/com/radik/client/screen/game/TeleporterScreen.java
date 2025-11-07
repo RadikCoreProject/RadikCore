@@ -1,6 +1,8 @@
 package com.radik.client.screen.game;
 
-import com.radik.packets.TeleportPayload;
+import com.radik.item.custom.Teleporter;
+import com.radik.packets.payload.VecPayload;
+import com.radik.util.Duplet;
 import com.radik.util.Triplet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -11,14 +13,14 @@ import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.TextWidget;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
-import org.lwjgl.glfw.GLFW;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import static com.radik.Data.*;
@@ -26,10 +28,15 @@ import static com.radik.client.RadikClient.CLIENT;
 
 @Environment(EnvType.CLIENT)
 public class TeleporterScreen extends Screen {
+    public static LocalDateTime cooldown = LocalDateTime.now();
+
     private TextFieldWidget xField, yField, zField;
     protected ItemStack parent;
     private final Vec3d lastPosition;
-    private Boolean pos = null;
+    private int cooldownAfter = 0;
+    private int cooldownAfterBack = 0;
+    private int pos = -1;
+    private int posBack = -1;
     private Text text = Text.of("-");
     private Vec3d position;
 
@@ -39,7 +46,7 @@ public class TeleporterScreen extends Screen {
         this.lastPosition = parent.get(POSITION);
     }
 
-    public TeleporterScreen(ItemStack teleporter, Boolean pos, Text text, Vec3d position) {
+    public TeleporterScreen(ItemStack teleporter, int pos, Text text, Vec3d position) {
         super(Text.literal("Окно Телепортера"));
         this.parent = teleporter;
         this.lastPosition = parent.get(POSITION);
@@ -51,6 +58,7 @@ public class TeleporterScreen extends Screen {
     @Override
     protected void init() {
         super.init();
+        calculateBack();
         int centerX = width / 2;
         int centerY = height / 2;
         int buttonWidth = 150;
@@ -89,8 +97,11 @@ public class TeleporterScreen extends Screen {
                 .size(buttonWidth, buttonHeight)
                 .build();
         ButtonWidget widget5 = ButtonWidget.builder(Text.literal("Вычислить"), button -> {
-                    Triplet<Text, Boolean, Vec3d> d = calculate();
-                    CLIENT.setScreen(new TeleporterScreen(this.parent, d.getParametrize(), d.getType(), d.getCount()));
+                    Triplet<Text, Integer, Vec3d> d = calculate();
+                    if (d.getParametrize() == null) return;
+                    TeleporterScreen screen = new TeleporterScreen(this.parent, d.getParametrize(), d.getType(), d.getCount());
+                    screen.cooldownAfter = this.cooldownAfter;
+                    CLIENT.setScreen(screen);
                 })
                 .position(centerX - 70, centerY + 30)
                 .size(buttonWidth - 40, buttonHeight)
@@ -101,25 +112,50 @@ public class TeleporterScreen extends Screen {
                 .build();
 
         if (CLIENT.player == null) return;
+
         label1: {
             if (!Objects.equals(CLIENT.player.getStackInHand(Hand.MAIN_HAND).get(OWNER), CLIENT.player.getName().getString())) {
+                widget5.active = false;
                 widget6.active = false;
                 widget4.active = false;
-                widget4.setTooltip(Tooltip.of(Text.of("Это не твой телепортер.")));
-                widget6.setTooltip(Tooltip.of(Text.of("Это не твой телепортер.")));
+                Tooltip t = Tooltip.of(Text.of("Это не твой телепортер."));
+                widget5.setTooltip(t);
+                widget4.setTooltip(t);
+                widget6.setTooltip(t);
                 break label1;
             }
-            if (CLIENT.player.getPos().distanceTo(lastPosition) > getDistance(Objects.requireNonNull(parent.get(TELEPORTER)))) {
+
+            if (cooldown.isAfter(LocalDateTime.now())) {
+                widget4.active = false;
+                widget5.active = false;
                 widget6.active = false;
-                widget6.setTooltip(Tooltip.of(Text.of("Слишком далеко!")));
+                Tooltip t = Tooltip.of(Text.of("§4Cooldown: " + Duration.between(cooldown, LocalDateTime.now()).abs().getSeconds() + "s"));
+                widget4.setTooltip(t);
+                widget5.setTooltip(t);
+                widget6.setTooltip(t);
+                break label1;
             }
-            if (pos == null) {
-                widget4.active = false;
-                widget4.setTooltip(Tooltip.of(Text.of("Вычисли расстояние перед телепортацией")));
+
+            widget6.active = false;
+            switch (posBack) {
+                case 0 -> {
+                    widget6.active = true;
+                    widget6.setTooltip(Tooltip.of(Text.of("Кулдаун после телепортации: " + cooldownAfterBack + "s")));
+                }
+                case -1 -> widget6.setTooltip(Tooltip.of(Text.of("Вычисли расстояние перед телепортацией")));
+                case -2 -> widget6.setTooltip(Tooltip.of(Text.of("Слишком далеко!")));
+                case -3 -> widget6.setTooltip(Tooltip.of(Text.of("Телепортация в энде запрещена")));
             }
-            else if (!pos) {
-                widget4.active = false;
-                widget4.setTooltip(Tooltip.of(Text.of("Слишком далеко!")));
+
+            widget4.active = false;
+            switch (pos) {
+                case 0 -> {
+                    widget4.active = true;
+                    widget4.setTooltip(Tooltip.of(Text.of("Кулдаун после телепортации: " + this.cooldownAfter + "s")));
+                }
+                case -1 -> widget4.setTooltip(Tooltip.of(Text.of("Вычисли расстояние перед телепортацией")));
+                case -2 -> widget4.setTooltip(Tooltip.of(Text.of("Слишком далеко!")));
+                case -3 -> widget4.setTooltip(Tooltip.of(Text.of("Телепортация в энде запрещена")));
             }
         }
 
@@ -136,23 +172,42 @@ public class TeleporterScreen extends Screen {
         return Text.literal("Недоступно");
     }
 
-    private Triplet<Text, Boolean, Vec3d> calculate() {
-        if (CLIENT.player == null) return new Triplet<>(Text.literal(""), false, null);
+    private Triplet<Text, Integer, Vec3d> calculate() {
+        if (CLIENT.player == null) return new Triplet<>(Text.literal(""), -1, null);
+        String worldType = getDimension(CLIENT.player.getWorld());
+
         try {
             double x = Double.parseDouble(xField.getText().replace(",", "."));
             double y = Double.parseDouble(yField.getText().replace(",", "."));
             double z = Double.parseDouble(zField.getText().replace(",", "."));
             Vec3d pos = CLIENT.player.getPos();
             Vec3d pos2 = new Vec3d(x, y, z);
-            double distance = pos.distanceTo(pos2);
-            int max = getDistance(Objects.requireNonNull(parent.get(TELEPORTER)));
-            return new Triplet<>(Text.literal(String.format("%s%.1f", distance <= max ? "§2" : "§4", distance)), distance <= max, pos2);
+            if (worldType.equals("end")) return new Triplet<>(Text.literal("-"), -3, pos2);
+            Duplet<Integer, Boolean> duplet = Teleporter.calculateCooldown(parent, pos, pos2, CLIENT.player.getWorld());
+            if (duplet.type() == null || duplet.parametrize() == null) throw new NumberFormatException();
+            boolean hasCooldown = duplet.parametrize();
+            this.cooldownAfter = duplet.type();
+            return new Triplet<>(Text.literal(String.format("%s%.1f", hasCooldown ? "§2" : "§4", pos.distanceTo(pos2))), hasCooldown ? 0 : -2, pos2);
         } catch (NumberFormatException e) {
             if (client != null && client.player != null) {
                 client.player.sendMessage(Text.literal("Некорректные координаты!"), true);
             }
         }
-        return new Triplet<>(Text.literal(""), false, Vec3d.ZERO);
+        return new Triplet<>(Text.literal(""), 0, Vec3d.ZERO);
+    }
+
+    private void calculateBack() {
+        if (CLIENT.player == null) return;
+        String worldType = getDimension(CLIENT.player.getWorld());
+        if (worldType.equals("end")) {
+            this.posBack = -3;
+            return;
+        }
+        Duplet<Integer, Boolean> duplet = Teleporter.calculateCooldown(parent, CLIENT.player.getPos(), lastPosition, CLIENT.player.getWorld());
+        if (duplet.type() == null || duplet.parametrize() == null) throw new NumberFormatException();
+        boolean hasCooldown = duplet.parametrize();
+        this.cooldownAfterBack = duplet.type();
+        this.posBack = hasCooldown ? 0 : -2;
     }
 
     private Text formatPosition(Vec3d pos) {
@@ -165,11 +220,10 @@ public class TeleporterScreen extends Screen {
             double y = Double.parseDouble(yField.getText().replace(",", "."));
             double z = Double.parseDouble(zField.getText().replace(",", "."));
 
-            ClientPlayerEntity player = CLIENT.player;
-            if (player != null) {
-                ClientPlayNetworking.send(new TeleportPayload(new Vec3d(x, y, z)));
-                close();
-            }
+            ClientPlayNetworking.send(new VecPayload(new Vec3d(x, y, z)));
+            cooldown = LocalDateTime.now().plusSeconds(cooldownAfter);
+            close();
+
         } catch (NumberFormatException e) {
             if (client != null && client.player != null) {
                 client.player.sendMessage(Text.literal("Некорректные координаты!"), true);
@@ -198,16 +252,5 @@ public class TeleporterScreen extends Screen {
         xField.render(context, mouseX, mouseY, delta);
         yField.render(context, mouseX, mouseY, delta);
         zField.render(context, mouseX, mouseY, delta);
-    }
-
-    @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (keyCode == GLFW.GLFW_KEY_ENTER) {
-            if (pos != null) {
-                if (pos) teleport();
-            }
-            return true;
-        }
-        return super.keyPressed(keyCode, scanCode, modifiers);
     }
 }

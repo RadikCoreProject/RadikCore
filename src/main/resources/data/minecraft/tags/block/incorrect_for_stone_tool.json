@@ -1,4 +1,8 @@
 {
   "values": [
+    "radik:old_iron_block",
+    "radik:old_gold_block",
+    "radik:old_emerald_block",
+    "radik:old_diamond_block"
   ]
 }

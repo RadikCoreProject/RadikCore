@@ -183,18 +183,6 @@
         },
 
         {
-          "type": "minecraft:item",
-          "name": "minecraft:book",
-          "weight": 2,
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ]
-        },
-
-        {
           "type": "minecraft:tag",
           "name": "radik:winter_stone",
           "weight": 20,

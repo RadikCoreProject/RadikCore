@@ -1,0 +1,46 @@
+{
+  "parent": "radik:medal",
+  "criteria": {
+    "get_medal": {
+      "conditions": {
+        "type": 1,
+        "material": -1
+      },
+      "trigger": "radik:medal_criterion"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_participant.description"
+    },
+    "icon": {
+      "components": {
+        "radik:medal": 1
+      },
+      "count": 1,
+      "id": "radik:medal"
+    },
+    "title": {
+      "translate": "advancements.radik.event_participant.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "get_medal"
+    ]
+  ],
+  "rewards": {
+    "experience": 20,
+    "function": "radik:advancements/event/medal/event_participant"
+  },
+  "sends_telemetry_event": true
+}

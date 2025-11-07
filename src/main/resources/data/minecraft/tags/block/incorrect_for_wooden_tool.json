@@ -21,6 +21,12 @@
     "radik:cell_1",
     "radik:cell_3",
     "radik:cell_4",
-    "radik:cell_5"
+    "radik:cell_5",
+    "radik:old_iron_block",
+    "radik:old_coal_block",
+    "radik:old_netherrack",
+    "radik:old_mossy_cobblestone",
+    "radik:old_cobblestone",
+    "radik:old_lapis_block"
   ]
 }

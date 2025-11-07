@@ -1,0 +1,48 @@
+{
+  "parent": "radik:server_support_1",
+  "criteria": {
+    "get_medal": {
+      "conditions": {
+        "type": 3,
+        "material": 6
+      },
+      "trigger": "radik:medal_criterion"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.server_support_2.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "components": {
+        "radik:material": 6,
+        "radik:medal": 3
+      },
+      "count": 1,
+      "id": "radik:medal"
+    },
+    "title": {
+      "translate": "advancements.radik.server_support_2.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "get_medal"
+    ]
+  ],
+  "rewards": {
+    "experience": 100,
+    "function": "radik:advancements/event/medal/server_support_2"
+  },
+  "sends_telemetry_event": true
+}

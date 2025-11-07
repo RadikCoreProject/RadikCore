@@ -41,11 +41,11 @@ public abstract class CreditsAndAttributionScreenMixin extends Screen {
                     target = "Lnet/minecraft/client/gui/widget/ThreePartsLayoutWidget;addFooter(Lnet/minecraft/client/gui/widget/Widget;)Lnet/minecraft/client/gui/widget/Widget;"
             )
     )
-    private void addCustomButtons(CallbackInfo ci) {
+    private void addButtons(CallbackInfo ci) {
         if (this.verticalLayout != null) {
-            GridWidget gridWidget = new GridWidget();
-            gridWidget.setColumnSpacing(6);
-            gridWidget.setRowSpacing(8);
+            GridWidget widget = new GridWidget();
+            widget.setColumnSpacing(6);
+            widget.setRowSpacing(8);
 
             this.verticalLayout.add(new TextWidget(100, 10, Text.literal("§cRadik§6Core"), this.textRenderer));
             ButtonWidget o = ButtonWidget.builder(
@@ -68,11 +68,11 @@ public abstract class CreditsAndAttributionScreenMixin extends Screen {
                     ConfirmLinkScreen.opening(this, "https://t.me/RadikDev")
             ).width(100).build();
 
-            gridWidget.add(o, 1, 1);
-            gridWidget.add(oo, 1, 2);
-            gridWidget.add(ooo, 2, 1);
-            gridWidget.add(oooo, 2, 2);
-            this.verticalLayout.add(gridWidget);
+            widget.add(o, 1, 1);
+            widget.add(oo, 1, 2);
+            widget.add(ooo, 2, 1);
+            widget.add(oooo, 2, 2);
+            this.verticalLayout.add(widget);
             this.layout.refreshPositions();
         }
     }

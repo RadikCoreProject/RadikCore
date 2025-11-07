@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 import static com.radik.Data.LOGGER;
 import static com.radik.Data.MOD_ID;
 
-public class Music implements IRegistry {
+public final class Music implements IRegistry {
     public static final SoundEvent CRYSTAL_PEAK = registerSoundEvent("crystal_peak");
     public static final RegistryKey<JukeboxSong> CRYSTAL_PEAK_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(MOD_ID, "crystal_peak"));
     public static final SoundEvent PURE_VESSEL = registerSoundEvent("pure_vessel");
@@ -43,6 +43,10 @@ public class Music implements IRegistry {
     public static final RegistryKey<JukeboxSong> BOLSHOY_KUSH_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(MOD_ID, "bolshoy_kush"));
     public static final SoundEvent JORDANAIRES = registerSoundEvent("jordanaires");
     public static final RegistryKey<JukeboxSong> JORDANAIRES_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(MOD_ID, "jordanaires"));
+    public static final SoundEvent NEST = registerSoundEvent("nest");
+    public static final RegistryKey<JukeboxSong> NEST_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(MOD_ID, "nest"));
+    public static final SoundEvent NETHER = registerSoundEvent("nether");
+    public static final RegistryKey<JukeboxSong> NETHER_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(MOD_ID, "nether"));
 
     private static SoundEvent registerSoundEvent(String name) {
         Identifier id = Identifier.of(MOD_ID, name);

@@ -1,0 +1,23 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "killed_villager": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:villager"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+	  "killed_villager"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+	  "radik:player_fufher_head"
+    ]
+  }
+}

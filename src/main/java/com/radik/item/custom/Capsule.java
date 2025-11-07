@@ -1,5 +1,7 @@
 package com.radik.item.custom;
 
+import com.radik.Radik;
+import com.radik.avancements.criteries.Criterias;
 import com.radik.fluid.Gas;
 import com.radik.fluid.RegisterFluids;
 import com.radik.fluid.elements.HydrogenFluid;
@@ -20,6 +22,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -30,6 +33,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.*;
 import net.minecraft.world.event.GameEvent;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,7 +46,7 @@ import static com.radik.item.RegisterItems.CAPSULE;
 import static net.minecraft.block.FluidBlock.LEVEL;
 
 public class Capsule extends Item implements FluidModificationItem {
-    public Capsule(Settings settings) {
+    public Capsule(@NotNull Settings settings) {
         super(settings.component(CAPSULE_LEVEL, 0).component(CAPSULE_FLUID, 0));
     }
 
@@ -64,7 +68,8 @@ public class Capsule extends Item implements FluidModificationItem {
         return 0;
     }
 
-    private static String getFluidName(int type) {
+    @Contract(pure = true)
+    private static @NotNull String getFluidName(int type) {
         switch (type) {
             case 1 -> {return "water";}
             case 2 -> {return "lava";}
@@ -75,7 +80,7 @@ public class Capsule extends Item implements FluidModificationItem {
     }
 
     @Override
-    public ActionResult use(World world, PlayerEntity user, Hand hand) {
+    public ActionResult use(World world, @NotNull PlayerEntity user, Hand hand) {
         ComponentMap map = user.getStackInHand(hand).getComponents();
         int level = Objects.requireNonNull(map.get(CAPSULE_LEVEL));
         Fluid fluid = getCapsule(Objects.requireNonNull(map.get(CAPSULE_FLUID)));
@@ -87,17 +92,7 @@ public class Capsule extends Item implements FluidModificationItem {
                 if (user.isSpectator() || user.isInCreativeMode()) return ActionResult.FAIL;
                 ItemUsage.exchangeStack(itemStack, user, CAPSULE.getDefaultStack());
 
-                var rotation = user.getRotationVector();
-                var currentVel = user.getVelocity();
-
-                double boostMultiplier = 3;
-                double baseBoost = 0.3;
-
-                Vec3d newVelocity = new Vec3d(
-                        currentVel.x + rotation.x * baseBoost + (rotation.x * boostMultiplier - currentVel.x) * level * 0.2,
-                        currentVel.y + rotation.y * baseBoost + (rotation.y * boostMultiplier - currentVel.y) * level * 0.2,
-                        currentVel.z + rotation.z * baseBoost + (rotation.z * boostMultiplier - currentVel.z) * level * 0.2
-                );
+                Vec3d newVelocity = getVec3d(user, level);
                 user.setVelocity(newVelocity);
                 world.createExplosion(user, user.capeX, user.capeY, user.capeZ, 4, true, World.ExplosionSourceType.MOB);
                 user.damage((ServerWorld) world, user.getDamageSources().explosion(user, user), 2);
@@ -122,7 +117,7 @@ public class Capsule extends Item implements FluidModificationItem {
                         user.incrementStat(Stats.USED.getOrCreateStat(this));
                         world.emitGameEvent(user, GameEvent.FLUID_PICKUP, blockPos);
                         ItemStack itemStack3 = ItemUsage.exchangeStack(itemStack, user, itemStack2);
-                        Criteria.FILLED_BUCKET.trigger((ServerPlayerEntity)user, itemStack2);
+                        Criterias.CAPSULE_FLUID_CRITERION.trigger((ServerPlayerEntity)user, user.getInventory());
                         return ActionResult.SUCCESS.withNewHandStack(itemStack3);
                     }
                     return ActionResult.FAIL;
@@ -148,14 +143,30 @@ public class Capsule extends Item implements FluidModificationItem {
         return ActionResult.PASS;
     }
 
+    private static @NotNull Vec3d getVec3d(@NotNull PlayerEntity user, int level) {
+        var rotation = user.getRotationVector();
+        var currentVel = user.getVelocity();
+
+        double boostMultiplier = 3;
+        double baseBoost = 0.3;
+
+        return new Vec3d(
+                currentVel.x + rotation.x * baseBoost + (rotation.x * boostMultiplier - currentVel.x) * level * 0.2,
+                currentVel.y + rotation.y * baseBoost + (rotation.y * boostMultiplier - currentVel.y) * level * 0.2,
+                currentVel.z + rotation.z * baseBoost + (rotation.z * boostMultiplier - currentVel.z) * level * 0.2
+        );
+    }
+
     public ItemStack tryDrainFluid(@NotNull ItemStack itemStack, World world, BlockPos pos, @NotNull BlockState blockState) {
         ComponentMap map = itemStack.getComponents();
         int level = Objects.requireNonNull(map.get(CAPSULE_LEVEL));
         Fluid fluid = getCapsule(Objects.requireNonNull(map.get(CAPSULE_FLUID)));
         FluidState fluidBlock = blockState.getFluidState();
+        Block block = blockState.getBlock();
         if (fluidBlock == null) return ItemStack.EMPTY;
-        Fluid fluid1 = ((FlowableFluid) fluidBlock.getFluid()).getStill();
         Fluid fluid2 = fluidBlock.getFluid();
+        if (fluid2.equals(Fluids.EMPTY)) return ItemStack.EMPTY;
+        Fluid fluid1 = ((FlowableFluid) fluidBlock.getFluid()).getStill();
 
         if (level == 8) return ItemStack.EMPTY;
         if (fluid != fluid1 && fluid != Fluids.EMPTY) return ItemStack.EMPTY;
@@ -163,7 +174,7 @@ public class Capsule extends Item implements FluidModificationItem {
             ItemStack newStack = itemStack.copyWithCount(1);
             newStack.set(CAPSULE_LEVEL, 8);
             newStack.set(CAPSULE_FLUID, getCapsuleType(fluid1));
-            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+            world.setBlockState(pos, block instanceof FluidFillable ? blockState.with(Properties.WATERLOGGED, false) : Blocks.AIR.getDefaultState());
             return newStack;
         }
         if (fluid1 instanceof Gas) {
@@ -223,7 +234,7 @@ public class Capsule extends Item implements FluidModificationItem {
             return true;
         } else {
             if (block instanceof FluidFillable fluidFillable && fluid == Fluids.WATER) {
-                fluidFillable.tryFillWithFluid(world, pos, blockState, fluid.getDefaultState().with(FlowableFluid.LEVEL, level));
+                fluidFillable.tryFillWithFluid(world, pos, blockState, fluid.getDefaultState());
                 this.playEmptyingSound(user, world, pos);
                 return true;
             }
@@ -247,7 +258,7 @@ public class Capsule extends Item implements FluidModificationItem {
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
+    public void appendTooltip(@NotNull ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
         Integer level = stack.get(CAPSULE_LEVEL);
         Integer fluid = stack.get(CAPSULE_FLUID);
         if (level == null || fluid == null) {return;}

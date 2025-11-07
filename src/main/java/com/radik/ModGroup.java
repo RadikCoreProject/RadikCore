@@ -11,10 +11,27 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+import static com.radik.Data.CAPSULE_FLUID;
+import static com.radik.Data.CAPSULE_LEVEL;
 import static com.radik.block.RegisterBlocks.*;
 import static com.radik.item.RegisterItems.*;
 
-public class ModGroup implements IRegistry {
+public final class ModGroup implements IRegistry {
+    private static final ItemStack CAPSULE_WATER = CAPSULE.getDefaultStack();
+    private static final ItemStack CAPSULE_LAVA;
+    private static final ItemStack CAPSULE_HYDROGEN;
+    private static final ItemStack CAPSULE_HELIUM;
+    static {
+        CAPSULE_WATER.set(CAPSULE_LEVEL, 8);
+        CAPSULE_LAVA = CAPSULE_WATER.copy();
+        CAPSULE_HYDROGEN = CAPSULE_WATER.copy();
+        CAPSULE_HELIUM = CAPSULE_WATER.copy();
+        CAPSULE_WATER.set(CAPSULE_FLUID, 1);
+        CAPSULE_LAVA.set(CAPSULE_FLUID, 2);
+        CAPSULE_HYDROGEN.set(CAPSULE_FLUID, 3);
+        CAPSULE_HELIUM.set(CAPSULE_FLUID, 4);
+    }
+
     public static final ItemGroup RADIK_BLOCKS = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(Radik.MOD_ID, "radik_blocks"),
             FabricItemGroup.builder().icon(() -> new ItemStack(FROG0_255_0))
@@ -812,6 +829,20 @@ public class ModGroup implements IRegistry {
                         entries.add(FONAR_LAMP14);
                         entries.add(FONAR_LAMP20);
                         entries.add(LAMP);
+
+                        entries.add(OLD_GRASS_BLOCK);
+                        entries.add(OLD_COBBLESTONE);
+                        entries.add(OLD_MOSSY_COBBLESTONE);
+                        entries.add(OLD_COAL_BLOCK);
+                        entries.add(OLD_IRON_BLOCK);
+                        entries.add(OLD_GOLD_BLOCK);
+                        entries.add(OLD_EMERALD_BLOCK);
+                        entries.add(OLD_LAPIS_BLOCK);
+                        entries.add(OLD_DIAMOND_BLOCK);
+                        entries.add(OLD_NETHERRACK);
+                        entries.add(OLD_GLOWSTONE);
+                        entries.add(OLD_CRYING_OBSIDIAN);
+                        entries.add(OLD_BEDROCK);
                     }).build());
 
     public static final ItemGroup RADIK_ITEMS = Registry.register(Registries.ITEM_GROUP,
@@ -850,6 +881,10 @@ public class ModGroup implements IRegistry {
                         entries.add(MERCURY_LAMP);
 
                         entries.add(CAPSULE);
+                        entries.add(CAPSULE_WATER);
+                        entries.add(CAPSULE_LAVA);
+                        entries.add(CAPSULE_HYDROGEN);
+                        entries.add(CAPSULE_HELIUM);
                     }).build());
 
     public static final ItemGroup RADIK_WINTER = Registry.register(Registries.ITEM_GROUP,
@@ -857,11 +892,6 @@ public class ModGroup implements IRegistry {
             FabricItemGroup.builder().icon(() -> new ItemStack(PRESENT_SMALL))
                     .displayName(Text.translatable("itemGroup.radikwinter"))
                     .entries((displayContext, entries) -> {
-                        entries.add(PRESENT_SMALL);
-                        entries.add(PRESENT_MEDIUM);
-                        entries.add(PRESENT_BIG);
-                        entries.add(PRESENT_INSTRUMENT);
-                        entries.add(PRESENT_WINTER);
                         entries.add(ELKA);
                         entries.add(STAR);
                         entries.add(RegisterItems.LEDENETS);
@@ -926,11 +956,42 @@ public class ModGroup implements IRegistry {
                         entries.add(SUGAR_BLOCK_BROWN);
                     }).build());
 
+    public static final ItemGroup RADIK_HALLOWEEN = Registry.register(Registries.ITEM_GROUP,
+            Identifier.of(Radik.MOD_ID, "radik_halloween"),
+            FabricItemGroup.builder().icon(() -> new ItemStack(HALLOWEEN_PICKAXE))
+                    .displayName(Text.translatable("itemGroup.radikhalloween"))
+                    .entries((displayContext, entries) -> {
+                        entries.add(HALLOWEEN_PICKAXE);
+                        entries.add(HALLOWEEN_SHOVEL);
+                        entries.add(HALLOWEEN_HOE);
+                        entries.add(HALLOWEEN_AXE);
+                        entries.add(HALLOWEEN_SWORD);
+                        entries.add(CANDY_RED);
+                        entries.add(CANDY_YELLOW);
+                        entries.add(CANDY_GREEN);
+                        entries.add(CANDY_BLUE);
+                        entries.add(CANDY_BASKET_RED);
+                        entries.add(CANDY_BASKET_YELLOW);
+                        entries.add(CANDY_BASKET_GREEN);
+                        entries.add(CANDY_BASKET_BLUE);
+                        entries.add(CANDY_BASKET_EMPTY);
+                        entries.add(CANDY_BASKET_LUCKY);
+                        entries.add(CANDY_BASKET_SUPER);
+                        entries.add(DISC_NETHER);
+                        entries.add(DISC_NEST);
+                    }).build());
+
     public static final ItemGroup RADIK_PRESENTS = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(Radik.MOD_ID, "radik_presents"),
             FabricItemGroup.builder().icon(() -> new ItemStack(ADVENTURE_HAT))
                     .displayName(Text.translatable("itemGroup.radikpresents"))
                     .entries((displayContext, entries) -> {
+                        entries.add(PRESENT_SMALL);
+                        entries.add(PRESENT_MEDIUM);
+                        entries.add(PRESENT_BIG);
+                        entries.add(PRESENT_INSTRUMENT);
+                        entries.add(PRESENT_WINTER);
+                        entries.add(PRESENT_OLD);
                         entries.add(ADVENTURE_HAT);
                         entries.add(ADVENTURE_1M_HAT);
                         entries.add(PIX);
@@ -941,11 +1002,14 @@ public class ModGroup implements IRegistry {
                         entries.add(TASHERS_CRONE);
                         entries.add(DISK_PENIS_BOLSHOY);
                         entries.add(DISK_BOLSHOY_KUSH);
-                        entries.add(DISK_DEBRIS);
+                        entries.add(DISC_DEBRIS);
                         entries.add(BATUT);
                         entries.add(TROPHY_NOSTALGIC_BRONZE);
                         entries.add(TROPHY_NOSTALGIC_SILVER);
                         entries.add(TROPHY_NOSTALGIC_GOLD);
+                        entries.add(TROPHY_PARKOUR_BRONZE);
+                        entries.add(TROPHY_PARKOUR_SILVER);
+                        entries.add(TROPHY_PARKOUR_GOLD);
                     }).build());
 
     public static final ItemGroup RADIK_TEST = Registry.register(Registries.ITEM_GROUP,
@@ -954,6 +1018,9 @@ public class ModGroup implements IRegistry {
                     .displayName(Text.literal("RadikCore test"))
                     .entries((displayContext, entries) -> {
                         entries.add(WIND_STAFF);
+//                        entries.add(ELECTROLYZER);
+                        entries.add(EVENT_BLOCK);
+                        entries.add(TEST_SWORD);
                     }).build());
 
     public static void initialize() {}

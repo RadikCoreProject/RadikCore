@@ -13,16 +13,13 @@ import java.util.List;
 
 @Mixin({WritableBookContentComponent.class})
 public class WritableBookContentComponentMixin {
-    public WritableBookContentComponentMixin() {
-    }
-
     @ModifyConstant(
             method = {"<clinit>"},
             constant = {@Constant(
                     intValue = 100
             )}
     )
-    private static int longbooks$returnUpperBoundMaxPages(int original) {
+    private static int maxPagesBound(int original) {
         return 32767;
     }
 
@@ -32,7 +29,7 @@ public class WritableBookContentComponentMixin {
                     intValue = 100
             )}
     )
-    private int longbooks$returnMaxPages(int original) {
+    private int maxPages(int original) {
         return 32767;
     }
 }

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "head",
+  "key": {
+    "#": "minecraft:skeleton_skull",
+    "X": "minecraft:clay_ball",
+	"Q": "radik:dye_maroon",
+	"T": "radik:dye_forest",
+	"Y": "radik:dye_navy",
+	"B": "minecraft:black_dye"
+  },
+  "pattern": [
+    "QXT",
+    "X#X",
+    "YXB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:player_head"
+  }
+}

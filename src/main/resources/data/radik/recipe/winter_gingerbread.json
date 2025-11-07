@@ -3,6 +3,8 @@
     "category": "misc",
     "group": "christmas",
     "ingredients": [
+        "minecraft:wheat",
+        "minecraft:wheat",
         "radik:sugar_brown",
         "minecraft:egg"
     ],

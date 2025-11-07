@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_skeleton_skull": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:skeleton_skull"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+	  "has_skeleton_skull"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "radik:player_head",
+	  "radik:player_xreped_head",
+	  "radik:player_boomboxcuff_head",
+	  "radik:player_frovem_head",
+	  "radik:player_bulkgecko_head"
+    ]
+  }
+}

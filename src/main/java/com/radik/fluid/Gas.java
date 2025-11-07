@@ -1,7 +1,5 @@
 package com.radik.fluid;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 import net.minecraft.block.*;
@@ -20,6 +18,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class Gas extends FlowableFluid {
     @Override
@@ -46,7 +45,7 @@ public abstract class Gas extends FlowableFluid {
     }
 
     @Override
-    public void randomDisplayTick(World world, BlockPos pos, FluidState state, Random random) {
+    public void randomDisplayTick(World world, BlockPos pos, @NotNull FluidState state, Random random) {
         if (!state.isStill() && !(Boolean)state.get(FALLING)) {
             if (random.nextInt(64) == 0) {
                 world.playSound(null, (double)pos.getX() + (double)0.5F, (double)pos.getY() + (double)0.5F, (double)pos.getZ() + (double)0.5F, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.75F, random.nextFloat() + 0.5F);
@@ -55,7 +54,7 @@ public abstract class Gas extends FlowableFluid {
     }
 
     @Override
-    protected void beforeBreakingBlock(WorldAccess world, BlockPos pos, BlockState state) {
+    protected void beforeBreakingBlock(WorldAccess world, BlockPos pos, @NotNull BlockState state) {
         BlockEntity blockEntity = state.hasBlockEntity() ? world.getBlockEntity(pos) : null;
         Block.dropStacks(state, world, pos, blockEntity);
     }

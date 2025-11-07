@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_gold_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:raw_gold_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_gold_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "radik:gold_block_from_blasting_raw_gold_block",
+	  "radik:gold_block_from_smelting_raw_gold_block"
+    ]
+  }
+}

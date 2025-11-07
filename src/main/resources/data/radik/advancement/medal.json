@@ -1,0 +1,46 @@
+{
+  "parent": "radik:pull2",
+  "criteria": {
+    "get_medal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:medal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.medal.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "radik:medal"
+    },
+    "title": {
+      "translate": "advancements.radik.medal.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "get_medal"
+    ]
+  ],
+  "rewards": {
+    "experience": 10,
+    "function": "radik:advancements/event/medal/medal"
+  },
+  "sends_telemetry_event": true
+}

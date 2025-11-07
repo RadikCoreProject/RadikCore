@@ -24,11 +24,11 @@ public class ScoreboardAction {
         access.setScore(access.getScore() + count);
     }
 
-    private static void addObjective(Scoreboard scoreboard, String name, String name2) {
+    private static void addObjective(@NotNull Scoreboard scoreboard, String name, String name2) {
         scoreboard.addObjective(name, ScoreboardCriterion.DUMMY, Text.literal(name2), ScoreboardCriterion.RenderType.INTEGER, false, null);
     }
 
-    public static ScoreboardObjective getObjective(Scoreboard scoreboard, String name) {
+    public static ScoreboardObjective getObjective(@NotNull Scoreboard scoreboard, String name) {
         if (scoreboard.getNullableObjective(name) == null) addObjective(scoreboard, name, name);
         return scoreboard.getNullableObjective(name);
     }

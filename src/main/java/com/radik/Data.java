@@ -3,7 +3,13 @@ package com.radik;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.serialization.Codec;
+import com.radik.connecting.event.ChallengeEvent;
+import com.radik.item.custom.Medal;
+import com.radik.item.custom.chemistry.VialContainer;
 import com.radik.packets.Packets;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FireBlock;
 import net.minecraft.component.ComponentType;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.component.type.FoodComponents;
@@ -27,8 +33,9 @@ import java.util.List;
 import java.util.function.UnaryOperator;
 
 import static com.radik.Codecs.VEC_3D;
+import static com.radik.block.RegisterBlocks.*;
 
-public abstract class Data {
+public final class Data {
     public static MinecraftServer SERVER;
     static ServerCommandSource commandSource;
     public static CommandDispatcher<ServerCommandSource> dispatcher;
@@ -37,18 +44,47 @@ public abstract class Data {
     public static List<Character> colors = List.of('l', '4', 'c', '6', 'e', '2', 'a', 'b', '3', '1', '9', 'd', '5', '7', '8', '0');
 
     public static final HashMap<String, FoodComponent> FOOD_COMPONENTS = new HashMap<>();
+    public static final ComponentType<Boolean> BOOL = register("bool", builder -> builder.codec(Codec.BOOL).packetCodec(PacketCodecs.BOOLEAN));
     public static final ComponentType<String> OWNER = register("owner", builder -> builder.codec(Codecs.PLAYER_NAME).packetCodec(PacketCodecs.STRING));
     public static final ComponentType<Vec3d> POSITION = register("pos", builder -> builder.codec(VEC_3D).packetCodec(Packets.VEC3D));
     public static final ComponentType<Integer> CAPSULE_LEVEL = register("level", (builder) -> builder.codec(Codecs.rangedInt(0, 8)).packetCodec(PacketCodecs.VAR_INT));
     public static final ComponentType<Integer> CAPSULE_FLUID = register("fluid", (builder) -> builder.codec(Codecs.rangedInt(0, 4)).packetCodec(PacketCodecs.VAR_INT));
     public static final ComponentType<Integer> TELEPORTER = register("type", (builder) -> builder.codec(Codecs.rangedInt(0, 2)).packetCodec(PacketCodecs.VAR_INT));
+    public static final ComponentType<ChallengeEvent> EVENT_TYPE = register("event_type", (builder) -> builder.codec(com.radik.Codecs.EVENT_TYPE).packetCodec(Packets.EVENT_TYPE_CODEC));
+    public static final ComponentType<Integer> MEDAL = register("medal", (builder) -> builder.codec(Codecs.rangedInt(0, Medal.MAX_TYPE)).packetCodec(PacketCodecs.VAR_INT));
+    public static final ComponentType<Integer> MEDAL_MATERIAL = register("material", (builder) -> builder.codec(Codecs.rangedInt(0, Medal.MAX_MATERIAL)).packetCodec(PacketCodecs.VAR_INT));
+    public static final ComponentType<String> TEXT = register("text", builder -> builder.codec(Codecs.PLAYER_NAME).packetCodec(PacketCodecs.STRING));
+
+    // TESTTTT
     public static final ComponentType<Integer> STAFF_TYPE = register("staff_type", (builder) -> builder.codec(Codecs.rangedInt(0, 3)).packetCodec(PacketCodecs.VAR_INT));
     public static final ComponentType<Integer> STAFF_ATTACKS = register("staff_attacks", (builder) -> builder.codec(Codecs.rangedInt(0, 500)).packetCodec(PacketCodecs.VAR_INT));
+
+    // CHEMISTRY
+    public static final ComponentType<VialContainer> VIAL_CONTAINER = register("container", (builder) -> builder.codec(com.radik.Codecs.VIAL_CONTAINER).packetCodec(Packets.VIAL_CONTAINER_CODEC));
 
     public static final HashMap<String, HashMap<String, LocalDateTime>> MANA_USES_TIMER = new HashMap<>();
     public static final HashMap<String, Integer> MANA_TYPES = new HashMap<>();
 
     static {
+        FireBlock fireBlock = (FireBlock) Blocks.FIRE;
+        fireBlock.registerFlammableBlock(BRAID_SLAB_1, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_SLAB_2, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_SLAB_3, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_SLAB_5, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_SLAB_6, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_SLAB_7, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_STAIR_1, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_STAIR_2, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_STAIR_3, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_STAIR_5, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_STAIR_6, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_STAIR_7, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_1, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_2, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_3, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_5, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_6, 5, 20);
+        fireBlock.registerFlammableBlock(BRAID_7, 5, 20);
         MANA_TYPES.put("wind_staff_base", 3);
         MANA_TYPES.put("wind_staff_super", 120);
         MANA_TYPES.put("wind_staff_ultra", 5);
@@ -64,6 +100,7 @@ public abstract class Data {
         FOOD_COMPONENTS.put("3", (new FoodComponent.Builder()).nutrition(5).saturationModifier(0.4F).build());
         FOOD_COMPONENTS.put("4", (new FoodComponent.Builder()).nutrition(4).saturationModifier(0.15F).build());
         FOOD_COMPONENTS.put("empty", (new FoodComponent.Builder()).nutrition(0).saturationModifier(0).alwaysEdible().build());
+        FOOD_COMPONENTS.put("candy", (new FoodComponent.Builder()).nutrition(2).saturationModifier(2).build());
     }
 
     public static byte getDecorationType(String v) {
@@ -74,32 +111,6 @@ public abstract class Data {
             case "particle" -> 3;
             default -> -1;
         };
-    }
-
-    public static String getDistance(int lvl) {
-        return switch (lvl) {
-            case 0 -> "2.000";
-            case 1 -> "6.000";
-            case 2 -> "12.000";
-            default -> "0";
-        };
-    }
-
-    public static int getDistance(Integer lvl) {
-        switch (lvl) {
-            case 0 -> {return 2000;}
-            case 1 -> {return 6000;}
-            case 2 -> {return 12000;}
-            default -> {return 0;}
-        }
-    }
-
-    public static float getTeleporterK(Integer type) {
-        switch (type) {
-            case 1 -> {return 0.9F;}
-            case 2 -> {return 0.75F;}
-            default -> {return 1;}
-        }
     }
 
     public static String getDimension(@NotNull World world) {
@@ -138,10 +149,10 @@ public abstract class Data {
 
     public static boolean manaUsesTimer(String name, String type) {
         HashMap<String, LocalDateTime> need = MANA_USES_TIMER.get(name);
-        if (need == null) { return true; }
+        if (need == null) { return false; }
         if (need.containsKey(type)) {
-            return !need.get(type).plusSeconds(MANA_TYPES.get(type)).isAfter(LocalDateTime.now());
+            return need.get(type).plusSeconds(MANA_TYPES.get(type)).isAfter(LocalDateTime.now());
         }
-        return true;
+        return false;
     }
 }

@@ -1,6 +1,7 @@
 {
     "type": "minecraft:crafting_shapeless",
     "category": "misc",
+    "group": "dye",
     "ingredients": [
         "minecraft:purple_dye",
         "minecraft:black_dye"

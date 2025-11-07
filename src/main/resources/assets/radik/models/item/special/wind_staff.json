@@ -3,7 +3,8 @@
     "0": "radik:item/weapon/wind_staff/texture",
     "1": "radik:item/weapon/wind_staff/aura",
     "2": "radik:item/weapon/wind_staff/ball",
-    "3": "radik:item/weapon/wind_staff/wind"
+    "3": "radik:item/weapon/wind_staff/wind",
+    "particle": "radik:block/super/house"
   },
   "elements": [
     {

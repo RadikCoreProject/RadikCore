@@ -3,7 +3,9 @@ package com.radik.registration;
 import com.radik.Radik;
 import com.radik.block.RegisterBlocks;
 import com.radik.client.GasFluidRenderer;
+import com.radik.property.client.SettingsProperties;
 import com.radik.fluid.RegisterFluids;
+import com.radik.ui.ClientHandlers;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.minecraft.client.render.RenderLayer;
@@ -12,6 +14,7 @@ import net.minecraft.util.Identifier;
 
 public class ClientRegistrationController {
     public static void init() {
+        SettingsProperties.initialize();
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlocks.BATUT, RenderLayer.getCutout());
 
         BlockRenderLayerMap.INSTANCE.putBlocks(
@@ -33,6 +36,8 @@ public class ClientRegistrationController {
                 Identifier.of(Radik.MOD_ID, "block/fluid/helium_still"),
                 Identifier.of(Radik.MOD_ID, "block/fluid/helium_flow")
         );
+
+        ClientHandlers.initialize();
     }
 
     private static void registerGasRenderer(FlowableFluid still, FlowableFluid flowing, Identifier stillTexture, Identifier flowingTexture) {

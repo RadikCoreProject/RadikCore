@@ -18,7 +18,7 @@ public enum Colors {
     DARK_GRAY ('8'),
     BLACK ('0');
 
-    private char color;
+    private final char color;
 
     Colors(char color) {
         this.color = color;

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "head",
+  "key": {
+    "#": "minecraft:skeleton_skull",
+    "X": "minecraft:clay_ball",
+	"T": "minecraft:blue_dye",
+	"B": "minecraft:yellow_dye"
+  },
+  "pattern": [
+    "TXT",
+    "X#X",
+    "BXB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:player_head",
+	"components": {
+		"minecraft:lore": [
+			{
+				"text": "Cтаж игры: 2 годa",
+				"italic": false,
+				"color": "gold"
+			}
+		],
+		"minecraft:profile": "Boomboxcuff"
+	}
+  }
+}

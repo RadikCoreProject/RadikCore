@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "radik",
-  "version": "1.4-PRERELEASE_1",
+  "version": "1.4-PRERELEASE_3",
   "name": "RadikCore",
   "description": "This is the RadikCore mod...",
   "authors": [
@@ -15,6 +15,9 @@
     ],
     "client": [
       "com.radik.client.RadikClient"
+    ],
+    "fabric-datagen": [
+      "com.radik.datagen.DataGenerator"
     ]
   },
   "mixins": [

@@ -1,8 +1,8 @@
 {
   "variants": {
-    "facing=0": { "model": "radik:custom/trophy/type/2" },
-    "facing=1": { "model": "radik:custom/trophy/type/2", "y": 90 },
-    "facing=2": { "model": "radik:custom/trophy/type/2", "y": 180 },
-    "facing=3": { "model": "radik:custom/trophy/type/2", "y": 270 }
+    "facing=0": { "model": "radik:custom/trophy/nostalgic/2" },
+    "facing=1": { "model": "radik:custom/trophy/nostalgic/2", "y": 90 },
+    "facing=2": { "model": "radik:custom/trophy/nostalgic/2", "y": 180 },
+    "facing=3": { "model": "radik:custom/trophy/nostalgic/2", "y": 270 }
   }
 }

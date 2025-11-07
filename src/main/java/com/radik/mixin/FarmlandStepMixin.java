@@ -5,6 +5,7 @@ import net.minecraft.block.FarmlandBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,7 +18,7 @@ public class FarmlandStepMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, double distance, CallbackInfo ci) {
+    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, double distance, @NotNull CallbackInfo ci) {
         ci.cancel();
     }
 }

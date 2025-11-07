@@ -1,0 +1,125 @@
+{
+  "parent": "radik:event_1_1",
+  "criteria": {
+    "blue_candy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:halloween_candy_basket_blue"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "empty_candy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:halloween_candy_basket_empty"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "green_candy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:halloween_candy_basket_green"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "lucky_candy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:halloween_candy_basket_lucky"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    },
+    "red_candy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:halloween_candy_basket_red"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "super_candy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:halloween_candy_basket_super"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "yellow_candy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:halloween_candy_basket_yellow"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_1_2.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "radik:halloween_candy_basket_blue"
+    },
+    "title": {
+      "translate": "advancements.radik.event_1_2.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "red_candy"
+    ],
+    [
+      "blue_candy"
+    ],
+    [
+      "yellow_candy"
+    ],
+    [
+      "green_candy"
+    ],
+    [
+      "empty_candy"
+    ],
+    [
+      "lucky_candy"
+    ],
+    [
+      "super_candy"
+    ]
+  ],
+  "rewards": {
+    "experience": 80,
+    "function": "radik:advancements/event/block/1/2"
+  },
+  "sends_telemetry_event": true
+}

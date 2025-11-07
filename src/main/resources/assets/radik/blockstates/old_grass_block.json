@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "radik:block/old/grass_block"
+      },
+      {
+        "model": "radik:block/old/grass_block",
+        "y": 90
+      },
+      {
+        "model": "radik:block/old/grass_block",
+        "y": 180
+      },
+      {
+        "model": "radik:block/old/grass_block",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "radik:block/old/grass_block_snowy"
+    }
+  }
+}

@@ -13,6 +13,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.LightType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
@@ -32,8 +33,7 @@ public class GasFluidRenderer implements FluidRenderHandler {
     }
 
     @Override
-    public void renderFluid(BlockPos pos, BlockRenderView world, VertexConsumer vertexConsumer,
-                            BlockState blockState, FluidState fluidState) {
+    public void renderFluid(BlockPos pos, BlockRenderView world, VertexConsumer vertexConsumer, BlockState blockState, FluidState fluidState) {
         if (vertexConsumer == null) return;
 
         int level = fluidState.getLevel();
@@ -49,8 +49,8 @@ public class GasFluidRenderer implements FluidRenderHandler {
         renderLayeredFluid(pos, world, vertexConsumer, sprites[0], height, packedLight);
     }
 
-    private void renderLayeredFluid(BlockPos pos, BlockRenderView world,
-                                    VertexConsumer vertexConsumer, Sprite sprite,
+    private void renderLayeredFluid(@NotNull BlockPos pos, BlockRenderView world,
+                                    @NotNull VertexConsumer vertexConsumer, @NotNull Sprite sprite,
                                     float height, int packedLight) {
         MatrixStack matrixStack = new MatrixStack();
         matrixStack.translate(pos.getX(), pos.getY(), pos.getZ());
@@ -93,6 +93,7 @@ public class GasFluidRenderer implements FluidRenderHandler {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public Sprite[] getFluidSprites(@Nullable BlockRenderView view, @Nullable BlockPos pos, FluidState state) {
         if (stillSprite == null || flowingSprite == null) {
             MinecraftClient client = MinecraftClient.getInstance();

@@ -34,7 +34,7 @@ public class WindStaffProjectile extends ProjectileEntity {
 
 
     @Override
-    protected void onEntityHit(EntityHitResult entityHitResult) { // called on entity hit.
+    protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         System.out.println(entityHitResult.getType().name());
         Entity entity = entityHitResult.getEntity();

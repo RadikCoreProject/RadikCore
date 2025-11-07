@@ -25,21 +25,15 @@ public class GasLakeFeature extends Feature<GasLakeFeatureConfig> {
     }
 
     @Override
-    public boolean generate(FeatureContext<GasLakeFeatureConfig> context) {
+    public boolean generate(@NotNull FeatureContext<GasLakeFeatureConfig> context) {
         WorldAccess world = context.getWorld();
         BlockPos origin = context.getOrigin();
         Random random = context.getRandom();
         GasLakeFeatureConfig config = context.getConfig();
 
-        if (!getDimension(world).equals("end") || isOnMainIsland(origin)) {
-            return false;
-        }
-
+        if (!getDimension(world).equals("end") || isOnMainIsland(origin)) return false;
         BlockPos surfacePos = findSurfacePos(world, origin);
-        if (surfacePos == null) {
-            return false;
-        }
-
+        if (surfacePos == null) return false;
         return generateLake(world, surfacePos, random, config);
     }
 
@@ -54,9 +48,7 @@ public class GasLakeFeature extends Feature<GasLakeFeatureConfig> {
     private @Nullable BlockPos findSurfacePos(@NotNull WorldAccess world, BlockPos pos) {
         for (int y = world.getTopY(Heightmap.Type.WORLD_SURFACE, pos); y > world.getBottomY(); y--) {
             BlockPos testPos = new BlockPos(pos.getX(), y, pos.getZ());
-            if (!world.isAir(testPos)) {
-                return testPos;
-            }
+            if (!world.isAir(testPos)) return testPos;
         }
         return null;
     }
@@ -72,17 +64,12 @@ public class GasLakeFeature extends Feature<GasLakeFeatureConfig> {
             for (int z = -radius; z <= radius; z++) {
                 if (x * x + z * z <= radius * radius) {
                     BlockPos pos = center.add(x, 0, z);
-
-                    if (canPlaceHydrogen(world, pos)) {
-                        lakePositions.add(pos);
-                    }
+                    if (canPlaceHydrogen(world, pos)) lakePositions.add(pos);
                 }
             }
         }
 
-        if (lakePositions.size() > maxBlocks || lakePositions.isEmpty()) {
-            return false;
-        }
+        if (lakePositions.size() > maxBlocks || lakePositions.isEmpty()) return false;
 
         for (BlockPos pos : lakePositions) {
             world.setBlockState(pos, ((BasedGas) config.hydrogenState().getFluidState().getFluid()).getFlowing().getDefaultState().getBlockState(), 3);
@@ -90,7 +77,6 @@ public class GasLakeFeature extends Feature<GasLakeFeatureConfig> {
         }
 
         placeWalls(world, lakePositions, config.wallBlocks());
-
         return blocksPlaced > 0;
     }
 
@@ -99,7 +85,7 @@ public class GasLakeFeature extends Feature<GasLakeFeatureConfig> {
         return world.getBlockState(below).isSolidBlock(world, below) && world.getBlockState(pos.up()).isAir() && world.getBlockState(pos).getBlock().equals(END_STONE);
     }
 
-    private void placeWalls(WorldAccess world, @NotNull List<BlockPos> lakePositions, List<BlockState> wallBlock) {
+    private void placeWalls(@NotNull WorldAccess world, @NotNull List<BlockPos> lakePositions, @NotNull List<BlockState> wallBlock) {
         Random random = world.getRandom();
         HashMap<BlockPos, Byte> wallPositions = new HashMap<>();
         byte l = (byte) wallBlock.size();

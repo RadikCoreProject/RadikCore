@@ -13,7 +13,7 @@ public abstract class BookUpdateC2SPacketMixin {
                     intValue = 100
             )}
     )
-    private static int longbooks$returnUpperBoundMaxTitleLength(int original) {
+    private static int maxPages(int original) {
         return 32767;
     }
 
@@ -23,7 +23,5 @@ public abstract class BookUpdateC2SPacketMixin {
                     intValue = 32
             )}
     )
-    private static int longbooks$returnUpperBoundMaxPages(int original) {
-        return 32767;
-    }
+    private static int titleLength(int original) { return 32767; }
 }

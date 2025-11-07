@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "head",
+  "key": {
+    "#": "minecraft:skeleton_skull",
+    "X": "minecraft:clay_ball",
+	"T": "minecraft:redstone_block",
+	"B": "minecraft:wither_rose"
+  },
+  "pattern": [
+    "BXT",
+    "X#X",
+    "TXB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:player_head",
+	"components": {
+		"minecraft:item_name": "§eГолова Гитлера",
+		"minecraft:profile": "1488"
+	}
+  }
+}

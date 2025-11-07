@@ -16,7 +16,6 @@ import net.minecraft.world.gen.feature.PlacedFeature;
 import net.minecraft.world.gen.placementmodifier.BiomePlacementModifier;
 import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class WorldGenRegister implements IRegistry {
     public static final RegistryKey<PlacedFeature> HELIUM_LAKE_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MOD_ID, "helium_lake_placed"));
 
     // configured feature
-    public static void bootstrapConfigured(@NotNull Registerable<ConfiguredFeature<?, ?>> context) {
+    public static void bootstrapConfigured(Registerable<ConfiguredFeature<?, ?>> context) {
         context.register(
                 HYDROGEN_LAKE_KEY,
                 new ConfiguredFeature<>(GAS_LAKE_FEATURE,
