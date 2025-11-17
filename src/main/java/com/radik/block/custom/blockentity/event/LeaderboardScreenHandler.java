@@ -1,20 +1,17 @@
 package com.radik.block.custom.blockentity.event;
 
 import com.radik.Radik;
-import com.radik.ui.ClientHandlers;
-import net.minecraft.client.network.ClientPlayerEntity;
+import com.radik.ui.Handlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 
-import javax.annotation.Nullable;
-
 public class LeaderboardScreenHandler extends ScreenHandler {
     private final EventBlockEntity be;
 
     public LeaderboardScreenHandler(int id, PlayerInventory inv) {
-        super(ClientHandlers.LEADERBOARD_SCREEN_HANDLER, id);
+        super(Radik.LEADERBOARD_SCREEN_HANDLER, id);
         be = (EventBlockEntity) inv.player.getWorld().getBlockEntity(Radik.EVENT_BLOCK_POS);
     }
 

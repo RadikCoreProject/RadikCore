@@ -62,11 +62,4 @@ public class Present extends Block implements Waterloggable{
     protected void appendProperties(StateManager.@NotNull Builder<Block, BlockState> builder) {
         builder.add(TYPE2, WATERLOGGED);
     }
-
-    public void onPlaced(World world, BlockPos pos, @NotNull BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        if (state.getBlock().equals(RegisterBlocks.PRESENT_BIG)) {
-            world.setBlockState(pos, Blocks.AIR.getDefaultState());
-            world.setBlockState(pos.up(), state);
-        }
-    }
 }

@@ -2,11 +2,7 @@ package com.radik.block.custom.blockentity.event;
 
 import com.radik.Radik;
 import com.radik.connecting.event.Trade;
-import com.radik.packets.PacketType;
-import com.radik.packets.payload.IntegerPayload;
-import com.radik.ui.ClientHandlers;
-import com.radik.util.Triplet;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import com.radik.ui.Handlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -20,7 +16,7 @@ public class ShopScreenHandler extends ScreenHandler {
     private static List<Trade> trades = new ArrayList<>();
 
     public ShopScreenHandler(int syncId, PlayerInventory playerInventory) {
-        super(ClientHandlers.SHOP_SCREEN_HANDLER, syncId);
+        super(Radik.SHOP_SCREEN_HANDLER, syncId);
         trades = getSafeClientTrades();
     }
 
@@ -114,7 +110,7 @@ public class ShopScreenHandler extends ScreenHandler {
         private final Trade trade;
 
         public ShopAccessScreenHandler(int syncId, PlayerInventory playerInventory) {
-            super(ClientHandlers.SHOP_ACCESS_SCREEN_HANDLER, syncId);
+            super(Radik.SHOP_ACCESS_SCREEN_HANDLER, syncId);
             this.trade = getSafeClientTrade();
         }
 

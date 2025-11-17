@@ -12,12 +12,13 @@ import static com.radik.block.RegisterBlocks.*;
 public final class MixinData {
     public static final int MAX_BOOK_PAGES = 256;
     public static final int MAX_TITLE_WORDS = 100;
-
     public static final HashMap<Item, Block> DOWNFALLED_BLOCKS = new HashMap<>();
     public static final HashMap<Item, Block> BLOCKITEMS = new HashMap<>();
+
     static {
         DOWNFALLED_BLOCKS.put(ELKA.asItem(), ELKA);
         DOWNFALLED_BLOCKS.put(RegisterBlocks.PIX.asItem(), RegisterBlocks.PIX);
+        DOWNFALLED_BLOCKS.put(PRESENT_BIG.asItem(), PRESENT_BIG);
 
         BLOCKITEMS.put(RegisterItems.LEDENETS, LEDENETS);
         BLOCKITEMS.put(RegisterItems.LEDENETS1, LEDENETS1);

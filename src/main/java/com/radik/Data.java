@@ -23,7 +23,9 @@ import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,8 +39,6 @@ import static com.radik.block.RegisterBlocks.*;
 
 public final class Data {
     public static MinecraftServer SERVER;
-    static ServerCommandSource commandSource;
-    public static CommandDispatcher<ServerCommandSource> dispatcher;
     public static final String MOD_ID = "radik";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static List<Character> colors = List.of('l', '4', 'c', '6', 'e', '2', 'a', 'b', '3', '1', '9', 'd', '5', '7', '8', '0');
@@ -103,7 +103,8 @@ public final class Data {
         FOOD_COMPONENTS.put("candy", (new FoodComponent.Builder()).nutrition(2).saturationModifier(2).build());
     }
 
-    public static byte getDecorationType(String v) {
+    @Contract(pure = true)
+    public static byte getDecorationType(@NotNull String v) {
         return switch (v) {
             case "bold" -> 0;
             case "color" -> 1;
@@ -121,27 +122,38 @@ public final class Data {
         return world.getDimension().toString().split("/ ")[1].split("]")[0].split("_")[1];
     }
 
-    private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
+    private static <T>ComponentType<T> register(String name, @NotNull UnaryOperator<ComponentType.Builder<T>> builderOperator) {
         return Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of(MOD_ID, name),
                 builderOperator.apply(ComponentType.builder()).build());
     }
 
     public static void command(String command) {
-        command(command, commandSource);
+        ServerCommandSource source = createCommandSource();
+        if (source != null) command(command, source);
+        else LOGGER.error("Cannot execute command: server not initialized");
+    }
+
+    public static @Nullable ServerCommandSource createCommandSource() {
+        if (SERVER == null) return null;
+        return SERVER.getCommandSource().withWorld(SERVER.getWorld(World.OVERWORLD));
     }
 
     public static void command(String command, boolean flag) throws CommandSyntaxException {
-        if (flag) command(command, commandSource);
-        else commandWithException(command, commandSource);
+        ServerCommandSource source = createCommandSource();
+        if (source == null) return;
+        if (flag) command(command, source);
+        else commandWithException(command, source);
     }
 
-    public static void commandWithException(String command, ServerCommandSource source) throws CommandSyntaxException {
+    public static void commandWithException(String command, @NotNull ServerCommandSource source) throws CommandSyntaxException {
+        CommandDispatcher<ServerCommandSource> dispatcher = source.getServer().getCommandManager().getDispatcher();
         ParseResults<ServerCommandSource> parseResults = dispatcher.parse(command, source);
         LOGGER.info(command);
         dispatcher.execute(parseResults);
     }
 
-    public static void command(String command, ServerCommandSource source) {
+    public static void command(String command, @NotNull ServerCommandSource source) {
+        CommandDispatcher<ServerCommandSource> dispatcher = source.getServer().getCommandManager().getDispatcher();
         ParseResults<ServerCommandSource> parseResults = dispatcher.parse(command, source);
         LOGGER.info(command);
         try { dispatcher.execute(parseResults); } catch (CommandSyntaxException e) { LOGGER.error(e.getMessage()); }

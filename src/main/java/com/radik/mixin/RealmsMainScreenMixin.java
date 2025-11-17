@@ -1,5 +1,6 @@
 package com.radik.mixin;
 
+import com.radik.Radik;
 import com.radik.client.screen.AccountSettingsScreen;
 import com.radik.client.screen.ClientSettingsScreen;
 import com.radik.client.screen.DecorationsScreen;
@@ -26,12 +27,9 @@ import static com.radik.client.RadikClient.PLAYER;
 
 @Environment(EnvType.CLIENT)
 @Mixin({RealmsMainScreen.class})
-public abstract class RealmsMainScreenMixin extends Screen{
+public abstract class RealmsMainScreenMixin extends Screen {
 
     @Shadow public abstract void close();
-
-    @Unique
-    private final ThreePartsLayoutWidget layout = new ThreePartsLayoutWidget(this, 100, 50);
 
     protected RealmsMainScreenMixin(Text title) {
         super(title);
@@ -39,20 +37,25 @@ public abstract class RealmsMainScreenMixin extends Screen{
 
     @Inject(method = "init", at = @At("HEAD"), cancellable = true)
     private void onInit(@NotNull CallbackInfo ci) {
-        super.init();
         if (this.client == null) {ci.cancel(); return;}
-        // header
-        DirectionalLayoutWidget dir = this.layout.addHeader(DirectionalLayoutWidget.vertical().spacing(8));
-        DirectionalLayoutWidget dir2 = dir.add(DirectionalLayoutWidget.horizontal()).spacing(8);
-        ButtonWidget client_settings = ButtonWidget.builder(Text.translatable("text.radik.client_settings"), button -> this.client.setScreen(new ClientSettingsScreen(this))).width(200).build();
-        ButtonWidget account_settings = ButtonWidget.builder(Text.translatable("text.radik.account_settings"), button -> this.client.setScreen(new AccountSettingsScreen(this))).width(200).build();
-        //body
-        GridWidget grid = new GridWidget();
-        grid.getMainPositioner().marginX(4).marginBottom(5).alignHorizontalCenter();
-        GridWidget.Adder adder = grid.createAdder(2);
-        ButtonWidget name_customization = ButtonWidget.builder(Text.translatable("text.radik.name_customization"), button -> this.client.setScreen(new NameCustomizationScreen(this))).build();
-        ButtonWidget decorations = ButtonWidget.builder(Text.translatable("text.radik.decorations"), button -> this.client.setScreen(new DecorationsScreen(this))).build();
-        // off butts
+
+        this.addDrawableChild(ButtonWidget.builder(
+            Text.translatable("text.radik.client_settings"), button -> this.client.setScreen(new ClientSettingsScreen(this)))
+                .dimensions(this.width / 2 - 210, this.height / 2 - 30, 200, 20)
+            .build());
+        ButtonWidget account_settings = this.addDrawableChild(ButtonWidget.builder(
+            Text.translatable("text.radik.account_settings"), button -> this.client.setScreen(new AccountSettingsScreen(this)))
+            .dimensions(this.width / 2 + 10, this.height / 2 - 30, 200, 20)
+            .build());
+        ButtonWidget name_customization = this.addDrawableChild(ButtonWidget.builder(
+            Text.translatable("text.radik.name_customization"), button -> this.client.setScreen(new NameCustomizationScreen(this)))
+            .dimensions(this.width / 2 - 210, this.height / 2 + 10, 200, 20)
+            .build());
+        ButtonWidget decorations = this.addDrawableChild(ButtonWidget.builder(
+            Text.translatable("text.radik.decorations"), button -> this.client.setScreen(new DecorationsScreen(this)))
+            .dimensions(this.width / 2 + 10, this.height / 2 + 10, 200, 20)
+            .build());
+
 
         // TODO: butts
         Tooltip tooltip = Tooltip.of(Text.translatable("tooltip.radik.screen.future"));
@@ -72,17 +75,6 @@ public abstract class RealmsMainScreenMixin extends Screen{
 //            decorations.setTooltip(tooltip);
         }
 
-        // add header
-        dir2.add(client_settings);
-        dir2.add(account_settings);
-        // add body
-        adder.add(name_customization);
-        adder.add(decorations);
-        this.layout.addBody(grid);
-        // add footer
-        this.layout.addFooter(ButtonWidget.builder(ScreenTexts.DONE, button -> this.close()).width(200).build());
-        this.layout.forEachChild(this::addDrawableChild);
-        this.layout.refreshPositions();
         ci.cancel();
     }
 

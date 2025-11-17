@@ -102,7 +102,7 @@ public class EventScreen extends HandledScreen<EventScreenHandler> {
         context.drawText(this.textRenderer, Text.literal("Событие: §6§lхеллуин"),
                 10, EVENT_LABEL_Y, 0x000000, false);
 
-        context.drawText(this.textRenderer, Text.literal("Время события: 01.10.2025-01.12.2025"),
+        context.drawText(this.textRenderer, Text.literal("Время события: 01.10.2025-15.12.2025"),
                 10, TIME_LABEL_Y, 0x000000, false);
     }
 

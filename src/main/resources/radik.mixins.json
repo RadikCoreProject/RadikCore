@@ -5,7 +5,6 @@
   "mixins": [
     "AbstractMinecartEntityMixin",
     "AnvilScreenHandlerMixin",
-    "BlockItemMixin",
     "BookUpdateC2SPacketMixin",
     "ExperimentalMinecartControllerMixin",
     "FarmlandStepMixin",
@@ -14,10 +13,9 @@
     "FireworkRocketEntityParticleMixin",
     "FireworkRocketItemMixin",
     "MinecartControllerAccessor",
+    "PlayerManagerMixin",
     "ServerPlayerEntityMixin",
     "ServerPlayNetworkHandlerMixin",
-    "StructureBlockBlockEntityMixin",
-    "UpdateStructureBlockC2SPacketMixin",
     "WritableBookContentComponentMixin",
     "WrittenBookContentComponentMixin"
   ],

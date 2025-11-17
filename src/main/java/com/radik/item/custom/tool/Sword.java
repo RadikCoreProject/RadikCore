@@ -3,6 +3,7 @@ package com.radik.item.custom.tool;
 import com.radik.Radik;
 import com.radik.connecting.event.ChallengeEvent;
 import com.radik.item.RegisterItems;
+import com.radik.property.EventProperties;
 import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -27,7 +28,7 @@ public class Sword extends Item implements Tools {
 
     public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (!(target instanceof PlayerEntity) && (attacker instanceof PlayerEntity) && (target instanceof LivingEntity) && Boolean.TRUE.equals(stack.get(BOOL))) {
-            if (Radik.RANDOM.nextInt(1, 100) == 1) {
+            if (Radik.RANDOM.nextInt(1, EventProperties.get("yellow_candy_drop_chance") + 1) == 1) {
                 ServerWorld world = (ServerWorld) target.getWorld();
                 world.spawnEntity(new ItemEntity(world, target.getX(), target.getY(), target.getZ(), new ItemStack(RegisterItems.CANDY_YELLOW, 1)));
                 Radik.sendEventToPlayers(0, target.getBlockPos(), 0, world);

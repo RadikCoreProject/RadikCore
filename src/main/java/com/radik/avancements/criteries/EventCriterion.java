@@ -28,8 +28,8 @@ public class EventCriterion extends AbstractCriterion<EventCriterion.Conditions>
 
     public record Conditions(Optional<LootContextPredicate> playerPredicate, int event) implements AbstractCriterion.Conditions {
         public static Codec<EventCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
-                Codec.INT.fieldOf("event").forGetter(Conditions::event)
+            LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
+            Codec.INT.fieldOf("event").forGetter(Conditions::event)
         ).apply(instance, Conditions::new));
 
         @Override

@@ -6,10 +6,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.*;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.util.*;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +38,11 @@ public class EventBlock extends BlockWithEntity {
     }
 
     @Override
+    protected ActionResult onUse(BlockState state, @NotNull World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        return ActionResult.SUCCESS;
+    }
+
+    @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return this.getDefaultState().with(EVENT_TYPE, 0);
     }
@@ -53,11 +61,11 @@ public class EventBlock extends BlockWithEntity {
     @Nullable
     protected static <T extends BlockEntity> BlockEntityTicker<T> validateTicker(World world, BlockEntityType<T> givenType) {
         return world instanceof ServerWorld serverWorld
-                ? validateTicker(
-                    givenType,
+            ? validateTicker(
+            givenType,
             (BlockEntityType<? extends EventBlockEntity>) BlockEntities.EVENT_BLOCK_ENTITY,
             (worldx, pos, state, blockEntity) ->
                 EventBlockEntity.tick(serverWorld, pos, state, blockEntity))
-                : null;
+            : null;
     }
 }

@@ -20,9 +20,9 @@ public class LuckyBasket extends EventItem {
     private static final HashMap<Item, Integer> rewards = new HashMap<>();
     private static final Random random = new Random();
     static {
-        rewards.put(RegisterItems.CANDY_GREEN, 51);
-        rewards.put(RegisterItems.CANDY_BLUE, 51);
-        rewards.put(RegisterItems.CANDY_RED, 51);
+        rewards.put(RegisterItems.CANDY_GREEN, 41);
+        rewards.put(RegisterItems.CANDY_BLUE, 31);
+        rewards.put(RegisterItems.CANDY_RED, 31);
         rewards.put(RegisterItems.CANDY_YELLOW, 51);
         rewards.put(RegisterItems.CANDY_BASKET_EMPTY, 6);
     }

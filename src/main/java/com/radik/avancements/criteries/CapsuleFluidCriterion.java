@@ -26,9 +26,9 @@ public class CapsuleFluidCriterion extends AbstractCriterion<CapsuleFluidCriteri
 
     public record Conditions(Optional<LootContextPredicate> playerPredicate, int count, int value) implements AbstractCriterion.Conditions {
         public static Codec<CapsuleFluidCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
-                Codec.INT.fieldOf("count").forGetter(Conditions::count),
-                Codec.INT.fieldOf("value").forGetter(Conditions::value)
+            LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
+            Codec.INT.fieldOf("count").forGetter(Conditions::count),
+            Codec.INT.fieldOf("value").forGetter(Conditions::value)
         ).apply(instance, Conditions::new));
 
         @Override

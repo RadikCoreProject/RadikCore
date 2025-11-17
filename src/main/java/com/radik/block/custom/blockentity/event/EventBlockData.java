@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public final class EventBlockData {
     public static boolean canPurchase(@NotNull Trade trade, PlayerInventory inventory) {
@@ -29,8 +30,6 @@ public final class EventBlockData {
 
         return found >= required;
     }
-
-
 
     public static boolean purchase(@NotNull Trade trade, PlayerInventory inventory) {
         if (!canPurchase(trade, inventory)) return false;
@@ -70,5 +69,17 @@ public final class EventBlockData {
             item.equals(RegisterItems.CANDY_BASKET_YELLOW) ||
             item.equals(RegisterItems.CANDY_BASKET_RED) ||
             item.equals(RegisterItems.CANDY_BASKET_BLUE);
+    }
+
+    public static LinkedHashMap<String, Integer> getTop10Players(@NotNull HashMap<String, Integer> leaderboard) {
+        return leaderboard.entrySet().stream()
+            .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+            .limit(10)
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                Map.Entry::getValue,
+                (i1, i2) -> i1,
+                LinkedHashMap::new
+            ));
     }
 }

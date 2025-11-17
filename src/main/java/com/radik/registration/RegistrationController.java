@@ -14,6 +14,9 @@ import com.radik.fluid.RegisterFluids;
 import com.radik.item.RegisterItems;
 import com.radik.logic.LogicInitialize;
 import com.radik.packets.PacketRegistration;
+import com.radik.property.EventProperties;
+import com.radik.property.server.InGameProperties;
+//import com.radik.ui.Handlers;
 import com.radik.world.WorldGenRegister;
 
 public class RegistrationController {
@@ -31,8 +34,13 @@ public class RegistrationController {
         RegisterFluids.initialize();
         BlockEntities.initialize();
         RegisterEffect.initialize();
+//        Handlers.initialize();
 
         // Генерация озер с водородом/гелием
         WorldGenRegister.initialize();
+
+        // SERVERONLY
+        EventProperties.initialize();
+        InGameProperties.initialize();
     }
 }

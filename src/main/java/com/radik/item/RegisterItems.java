@@ -137,6 +137,7 @@ public class RegisterItems implements IRegistry {
     public static final Item DISC_NEST = registerItem("disc_nest", settings -> new EventItem(settings.jukeboxPlayable(NEST_KEY).maxCount(1)));
 
     public static final Item TEST_SWORD = registerItem("netherite_sword_1", settings -> new Item(settings.sword(ToolMaterial.NETHERITE, 3.0F, -2.4F).fireproof()));
+//    public static final Item TOMMY = registerItem("tommy", settings -> new Tommy(settings.maxDamage(1000).maxCount(1)));
 
     private static Item registerItem(String name, Function<Item.Settings, Item> function) {
         return Registry.register(Registries.ITEM, Identifier.of(Radik.MOD_ID, name),

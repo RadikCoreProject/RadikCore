@@ -1,7 +1,6 @@
 package com.radik.block.custom.blockentity.event;
 
 import com.radik.Radik;
-import com.radik.ui.ClientHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -17,7 +16,7 @@ public class ChallengesScreenHandler extends ScreenHandler {
     }
 
     public ChallengesScreenHandler(int id, PlayerInventory inv, @Nullable EventBlockEntity be) {
-        super(ClientHandlers.CHALLENGES_SCREEN_HANDLER, id);
+        super(Radik.CHALLENGES_SCREEN_HANDLER, id);
         this.be = be;
     }
 

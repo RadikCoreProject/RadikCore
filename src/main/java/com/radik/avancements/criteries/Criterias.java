@@ -1,6 +1,5 @@
 package com.radik.avancements.criteries;
 
-import com.radik.Radik;
 import net.minecraft.advancement.criterion.Criteria;
 
 public class Criterias {

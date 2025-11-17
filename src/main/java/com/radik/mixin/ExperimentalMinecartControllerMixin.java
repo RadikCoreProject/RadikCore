@@ -1,5 +1,6 @@
 package com.radik.mixin;
 
+import com.radik.property.server.InGameProperties;
 import net.minecraft.entity.vehicle.ExperimentalMinecartController;
 import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,6 +14,6 @@ public abstract class ExperimentalMinecartControllerMixin implements MinecartCon
      */
     @Overwrite
     public double getMaxSpeed(ServerWorld world) {
-        return (getMinecart().isTouchingWater() ? 0.5 : 1.0) / 20.0;
+        return InGameProperties.get("minecart_multiplier") * (getMinecart().isTouchingWater() ? 0.5 : 1.0) / 20.0;
     }
 }

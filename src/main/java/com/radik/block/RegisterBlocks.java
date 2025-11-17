@@ -957,6 +957,7 @@ public class RegisterBlocks implements IRegistry {
     public static final Block LAMP = registerBlock(properties -> new LampBlock(properties.sounds(BlockSoundGroup.GLASS).strength(3, 5).noBlockBreakParticles().nonOpaque().luminance(t -> 15)), "lamp");
     public static final Block BICYCLE = registerBlock(properties -> new Bicycle(properties.sounds(BlockSoundGroup.GLASS).strength(3, 9999999).noBlockBreakParticles().nonOpaque()), "bicycle");
     public static final Block PIX = registerBlock(birthday, "pix");
+    public static final Block BAG = registerBlock(birthday, "bag", new Item.Settings().equippable(EquipmentSlot.CHEST));
     public static final Block BATUT = registerBlock(properties -> new Batut(properties.sounds(BlockSoundGroup.GLASS).strength(7, 9999999).noBlockBreakParticles().nonOpaque()), "batut", new Item.Settings().equippable(EquipmentSlot.HEAD).maxCount(1));
 
     public static final Block TROPHY_NOSTALGIC_BRONZE = registerBlock(trophy, "trophy_nostalgic_bronze");

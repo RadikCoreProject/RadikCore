@@ -9,7 +9,9 @@ import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.LootContextPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.radik.Data.*;
@@ -36,13 +38,13 @@ public class MedalCriterion extends AbstractCriterion<MedalCriterion.Conditions>
             return playerPredicate;
         }
 
-        public boolean matches(PlayerInventory inventory) {
+        public boolean matches(@NotNull PlayerInventory inventory) {
             for (ItemStack stack : inventory) {
                 Integer i = stack.get(MEDAL);
                 Integer j = stack.get(MEDAL_MATERIAL);
-                if (i == null || j == null) continue;
-                Radik.LOGGER.error("{} {}", type, material);
-                if (i == type && j == material || i == type && material == -1) return true;
+                String k = stack.get(OWNER);
+                if (i == null || j == null || k == null) continue;
+                if ((i == type && j == material || i == type && material == -1) && k.equals(inventory.player.getName().getString())) return true;
             }
             return false;
         }

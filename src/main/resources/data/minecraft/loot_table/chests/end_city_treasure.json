@@ -13,11 +13,6 @@
           "type": "minecraft:item",
           "name": "radik:disc_nosk",
           "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "radik:star",
-          "weight": 2
         }
       ],
       "rolls": 1

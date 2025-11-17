@@ -90,11 +90,15 @@ public class Capsule extends Item implements FluidModificationItem {
         if (!world.isClient) {
             if (user.isGliding() && fluid instanceof HydrogenFluid) {
                 if (user.isSpectator() || user.isInCreativeMode()) return ActionResult.FAIL;
-                ItemUsage.exchangeStack(itemStack, user, CAPSULE.getDefaultStack());
+                Integer power = itemStack.get(CAPSULE_LEVEL);
+                itemStack.decrementUnlessCreative(1, user);
+                if (!user.getInventory().insertStack(CAPSULE.getDefaultStack())) {
+                    user.dropItem(CAPSULE.getDefaultStack(), false);
+                }
 
                 Vec3d newVelocity = getVec3d(user, level);
                 user.setVelocity(newVelocity);
-                world.createExplosion(user, user.capeX, user.capeY, user.capeZ, 4, true, World.ExplosionSourceType.MOB);
+                world.createExplosion(user, user.capeX, user.capeY, user.capeZ, power == null ? 1 : (float) power / 2, true, World.ExplosionSourceType.MOB);
                 user.damage((ServerWorld) world, user.getDamageSources().explosion(user, user), 2);
                 return ActionResult.SUCCESS_SERVER;
             }

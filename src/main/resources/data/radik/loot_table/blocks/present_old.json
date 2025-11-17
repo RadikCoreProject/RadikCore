@@ -108,7 +108,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:halloween_candy_yellow",
-          "weight": 30,
+          "weight": 10,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -123,7 +123,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:halloween_candy_blue",
-          "weight": 30,
+          "weight": 10,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -138,7 +138,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:halloween_candy_red",
-          "weight": 30,
+          "weight": 10,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -153,7 +153,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:halloween_candy_green",
-          "weight": 30,
+          "weight": 10,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -228,7 +228,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:halloween_candy_basket_lucky",
-          "weight": 15,
+          "weight": 5,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -243,7 +243,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:halloween_candy_basket_empty",
-          "weight": 30,
+          "weight": 20,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -289,7 +289,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_coal_block",
-          "weight": 25,
+          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -304,7 +304,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_iron_block",
-          "weight": 25,
+          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -319,7 +319,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_cobblestone",
-          "weight": 25,
+          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -334,7 +334,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_crying_obsidian",
-          "weight": 25,
+          "weight": 30,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -349,7 +349,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_diamond_block",
-          "weight": 25,
+          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -364,7 +364,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_emerald_block",
-          "weight": 25,
+          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -379,7 +379,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_gold_block",
-          "weight": 25,
+          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -394,7 +394,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_grass_block",
-          "weight": 10,
+          "weight": 20,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -409,7 +409,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_glowstone",
-          "weight": 25,
+          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -424,7 +424,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_lapis_block",
-          "weight": 25,
+          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -439,7 +439,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_mossy_cobblestone",
-          "weight": 25,
+          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -454,7 +454,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_netherrack",
-          "weight": 25,
+          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -474,16 +474,6 @@
         {
           "type": "minecraft:item",
           "name": "radik:halloween_hoe",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "radik:halloween_axe",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "radik:halloween_pickaxe",
           "weight": 1
         },
         {

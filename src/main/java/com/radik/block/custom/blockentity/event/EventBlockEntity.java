@@ -58,7 +58,6 @@ public class EventBlockEntity extends BlockEntity {
         super(BlockEntities.EVENT_BLOCK_ENTITY, pos, state);
     }
 
-
     public static void tick(ServerWorld world, BlockPos pos, @NotNull BlockState state, EventBlockEntity blockEntity) {
     }
 
@@ -108,10 +107,7 @@ public class EventBlockEntity extends BlockEntity {
                     if (parametrizeList != null) {
                         for (int i = 0; i < parametrizeList.size(); i++) {
                             try {
-                                String param = parametrizeList.getString(i).orElse(null);
-                                if (param != null) {
-                                    parametrize.add(param);
-                                }
+                                parametrizeList.getString(i).ifPresent(parametrize::add);
                             } catch (Exception e) {
                                 Radik.LOGGER.warn("Failed to read parametrize at index {}", i, e);
                             }

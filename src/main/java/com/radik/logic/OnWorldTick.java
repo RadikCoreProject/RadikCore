@@ -1,6 +1,5 @@
 package com.radik.logic;
 
-import com.radik.util.Duplet;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.scoreboard.ScoreAccess;
@@ -9,21 +8,15 @@ import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
-import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static com.radik.Data.*;
 import static com.radik.util.ScoreboardAction.getObjective;
 
 public class OnWorldTick {
-    public static ConcurrentHashMap<UUID, Duplet<Integer, Text>> KICK = new ConcurrentHashMap<>();
-    private static final Duplet<Integer, Text> KICKS = new Duplet<>(0, Text.of("Disconnected by server"));
     public static short HOUSE = -1;
-    public static int YARIK = -1;
-    public static Vec3d YARIK_POS = new Vec3d(0, 0, 0);
     // TEST
     public static boolean MANA = false;
 
