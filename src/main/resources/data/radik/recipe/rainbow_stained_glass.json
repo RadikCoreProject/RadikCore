@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "G": "minecraft:glass",
+        "R": "radik:rainbow_dye"
+    },
+    "pattern": [
+        "GGG",
+        "GRG",
+        "GGG"
+    ],
+    "result": {
+        "count": 8,
+        "id": "radik:rainbow_stained_glass"
+    }
+}

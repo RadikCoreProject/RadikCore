@@ -1,0 +1,47 @@
+{
+  "parent": "radik:event_2_4",
+  "criteria": {
+    "event": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:freezer"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_2_5.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "radik:freezer"
+    },
+    "title": {
+      "translate": "advancements.radik.event_2_5.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event"
+    ]
+  ],
+  "rewards": {
+    "experience": 1000,
+    "function": "radik:advancements/event/block/2/5"
+  },
+  "sends_telemetry_event": true
+}

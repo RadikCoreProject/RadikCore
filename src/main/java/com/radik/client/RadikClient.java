@@ -1,39 +1,49 @@
 package com.radik.client;
 
-import com.mojang.brigadier.Message;
 import com.radik.Radik;
+import com.radik.block.RegisterBlocks;
 import com.radik.block.custom.blockentity.event.*;
 import com.radik.client.logic.OnWorldTick;
-import com.radik.client.packet.SendPacket;
 import com.radik.client.screen.game.TeleporterScreen;
 import com.radik.connecting.Decoration;
 import com.radik.connecting.Player;
-import com.radik.connecting.event.Event;
+import com.radik.connecting.PlayerSettings;
 import com.radik.connecting.event.Eventer;
 import com.radik.connecting.event.Trade;
-import com.radik.connecting.event.factory.EventData;
+import com.radik.entity.RegisterEntities;
+import com.radik.entity.projictile.bullet.BulletEntityModel;
+import com.radik.entity.projictile.bullet.BulletEntityRenderer;
+import com.radik.entity.projictile.ice_shard.IceShardModel;
+import com.radik.entity.projictile.ice_shard.IceShardRenderer;
 import com.radik.packets.*;
 import com.radik.packets.payload.*;
-import com.radik.property.client.Property;
-import com.radik.property.client.SettingsProperties;
+import com.radik.property.Property;
+import com.radik.property.SettingsProperties;
 import com.radik.registration.ClientRegistrationController;
+import com.radik.packets.PacketType;
+import com.radik.util.Duplet;
 import com.radik.util.Triplet;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ingame.HandledScreens;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.render.BlockRenderLayer;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.particle.ParticleUtil;
-import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import org.lwjgl.glfw.GLFW;
 
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -44,11 +54,11 @@ public class RadikClient implements ClientModInitializer {
     public static Player PLAYER;
 
     public static Triplet<Integer, Integer, LinkedHashMap<String, Integer>> LEADERBOARD;
-    public static ArrayList<Event<EventData>> EVENTS;
     public static List<Trade> TRADES = new ArrayList<>();
     public static Eventer[] CHALLENGES;
     public static Eventer GLOBAL_CHALLENGE;
 
+    public static KeyBinding.Category CORE_CATEGORY = new KeyBinding.Category(Identifier.of(Radik.MOD_ID, "core"));
     public static KeyBinding keyBinding;
 
     // TODO: вынести регистрацию логики в отдельный регистратор
@@ -57,11 +67,54 @@ public class RadikClient implements ClientModInitializer {
         ClientRegistrationController.init(); // регистрация
         if (Radik.enablePackets) registerPackets();
         registerLogic();
+
+//        ClientCommandRegistrationCallback.EVENT.register(((commandDispatcher, commandRegistryAccess) -> {
+//            TestTeleportCommand.register(commandDispatcher, commandRegistryAccess);
+//            TestNoFallCommand.register(commandDispatcher, commandRegistryAccess);
+//        }));
+
+        EntityModelLayerRegistry.registerModelLayer(BulletEntityModel.BULLET_LAYER, BulletEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(IceShardModel.ICE_SHARD_LAYER, IceShardModel::getTexturedModelData);
+        // TODO: update deprecated method
+        EntityRendererRegistry.register(RegisterEntities.BULLET, BulletEntityRenderer::new);
+        EntityRendererRegistry.register(RegisterEntities.ICE_SHARD, IceShardRenderer::new);
+
+        BlockRenderLayerMap.putBlocks(BlockRenderLayer.TRANSLUCENT,
+            RegisterBlocks.RAINBOW_STAINED_GLASS,
+            RegisterBlocks.RAINBOW_STAINED_GLASS_PANE,
+            RegisterBlocks.FREEZER,
+            RegisterBlocks.GARLAND,
+            RegisterBlocks.EVENT_BLOCK
+        );
     }
 
     // TODO: вынести пакеты
     private void registerPackets() {
-        SendPacket.register();
+        ClientPlayNetworking.registerGlobalReceiver(StringPayload.ID, ((payload, context) -> {
+            ClientPlayerEntity player = context.player();
+            Duplet<String, PacketType> d = payload.packet();
+            String s = d.type();
+            PacketType p = d.parametrize();
+            if (s == null || p == null) return;
+            switch (p) {
+                case PASSWORD -> {
+                    try {
+                        File file = new File("core/pwd/" + player.getName().getString() + ".PWD");
+                        File parentDir = file.getParentFile();
+                        if (parentDir != null && !parentDir.exists()) {
+                            if (!parentDir.mkdirs()) {
+                                throw new IOException("Cannot create directories: " + parentDir.getPath());
+                            }
+                        }
+                        try (FileWriter writer = new FileWriter(file)) {
+                            writer.write(s);
+                        }
+                    } catch (IOException e) {
+                        Radik.LOGGER.error("Failed to save password: " + e.getMessage());
+                    }
+                }
+            }
+        }));
 
         ClientPlayNetworking.registerGlobalReceiver(LoginPayload.ID, (payload, context) -> {
             PLAYER = payload.player();
@@ -95,25 +148,35 @@ public class RadikClient implements ClientModInitializer {
             BlockPos pos = payload.pos();
             int p = Property.getOrdinal(SettingsProperties.get("event_particles"));
             switch (eventId) {
-                case 0 -> ParticleUtil.spawnParticle(context.player().clientWorld, pos, ParticleTypes.LANDING_HONEY, UniformIntProvider.create(p * p, p * p * p));
+                case 0 -> ParticleUtil.spawnParticle(context.player().getEntityWorld(), pos, ParticleTypes.LANDING_HONEY, UniformIntProvider.create(p * p, p * p * p));
             }
         });
 
         ClientPlayNetworking.registerGlobalReceiver(TradeListPayload.ID, (payload, context) -> {
-            MinecraftClient client = context.client();
-            if (client == null || client.player == null) return;
-            boolean b = TRADES.isEmpty();
-            TRADES = payload.trades();
-            client.player.sendMessage(Text.of(b ? "Торги для блока событий получены!" : "Торги были обновлены!"), false);
+            try {
+                MinecraftClient client = context.client();
+                if (client == null || client.player == null) return;
+
+                boolean b = TRADES.isEmpty();
+                TRADES = payload.trades();
+//                client.player.sendMessage(Text.of(b ? "Торги для блока событий получены!" : "Торги были обновлены!"), false);
+            } catch (Exception e) {
+                Radik.LOGGER.error("Error handling TradeListPayload: {}", e.getMessage());
+            }
         });
 
         ClientPlayNetworking.registerGlobalReceiver(ChallengesDataPayload.ID, (payload, context) -> {
-            MinecraftClient client = context.client();
-            if (client == null || client.player == null) return;
-            boolean b = CHALLENGES == null;
-            CHALLENGES = payload.playerEvents();
-            GLOBAL_CHALLENGE = payload.globalEvent();
-            client.player.sendMessage(Text.of(b ? "Задания для блока событий получены!" : "Задания были обновлены!"), false);
+            try {
+                MinecraftClient client = context.client();
+                if (client == null || client.player == null) return;
+
+                boolean b = CHALLENGES == null;
+                CHALLENGES = payload.playerEvents();
+                GLOBAL_CHALLENGE = payload.globalEvent();
+//                client.player.sendMessage(Text.of(b ? "Задания для блока событий получены!" : "Задания были обновлены!"), false);
+            } catch (Exception e) {
+                Radik.LOGGER.error("Error handling ChallengesDataPayload: {}", e.getMessage());
+            }
         });
 
         ClientPlayNetworking.registerGlobalReceiver(LeaderboardPayload.ID, (payload, context) -> {
@@ -127,6 +190,44 @@ public class RadikClient implements ClientModInitializer {
                 }
             });
         });
+
+        ClientPlayNetworking.registerGlobalReceiver(ActionPayload.ID, ((actionPayload, context) -> {
+            Action action = actionPayload.action();
+            MinecraftClient client = context.client();
+            ClientPlayerEntity player = client.player;
+            if (player == null) return;
+
+            switch (action) {
+                case SEND_PASSWORD -> {
+                    String playerName = player.getName().getString();
+
+                    context.client().send(() -> {
+                        File file = new File("core/pwd/" + playerName + ".PWD");
+                        if (!file.exists()) return;
+                        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                            String pwd = reader.readLine();
+                            if (pwd == null || pwd.trim().isEmpty()) return;
+                            ClientPlayNetworking.send(new StringPayload(new Duplet<>(pwd.trim(), PacketType.PASSWORD)));
+                        } catch (IOException e) {
+                            Radik.LOGGER.error("Failed to read password: " + e.getMessage());
+                        }
+                    });
+                }
+                case LOGIN -> {
+                    try {
+                        ClientPlayNetworking.send(new LoginPayload(PLAYER));
+                        ClientPlayNetworking.send(new PlayerSettingsPayload(new PlayerSettings(
+                            SettingsProperties.getBoolean(Property.NETHER_PLACES),
+                            SettingsProperties.getBoolean(Property.OVERWORLD_PLACES),
+                            SettingsProperties.getBoolean(Property.PRESENT_NOTIFY),
+                            SettingsProperties.getBoolean(Property.ME_NOTIFY)
+                        )));
+                    } catch (Exception e) {
+                        Radik.LOGGER.error(e.getMessage());
+                    }
+                }
+            }
+        }));
     }
 
     // TODO: вынести кейбиндинги
@@ -135,7 +236,7 @@ public class RadikClient implements ClientModInitializer {
                 "key.radik.change_ability",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_R,
-                "category.radik.core"
+                CORE_CATEGORY
         ));
 
         OnWorldTick.register();

@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "winter_2026",
+    "pattern": [
+        "###",
+        "P P",
+        "   "
+    ],
+    "key": {
+        "#": "minecraft:redstone",
+        "P": "minecraft:light"
+    },
+    "result": {
+        "id": "radik:garland",
+        "count": 4
+    }
+}

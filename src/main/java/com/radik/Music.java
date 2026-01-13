@@ -47,6 +47,8 @@ public final class Music implements IRegistry {
     public static final RegistryKey<JukeboxSong> NEST_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(MOD_ID, "nest"));
     public static final SoundEvent NETHER = registerSoundEvent("nether");
     public static final RegistryKey<JukeboxSong> NETHER_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(MOD_ID, "nether"));
+    public static final SoundEvent PRESIDENT_IS_DEAD = registerSoundEvent("president_is_dead");
+    public static final RegistryKey<JukeboxSong> PRESIDENT_IS_DEAD_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(MOD_ID, "president_is_dead"));
 
     private static SoundEvent registerSoundEvent(String name) {
         Identifier id = Identifier.of(MOD_ID, name);

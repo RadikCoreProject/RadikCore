@@ -1,0 +1,8 @@
+{
+  "comparator_output": 11,
+  "description": {
+    "translate": "item.radik.disc_president_is_dead.desc"
+  },
+  "length_in_seconds": 468.0,
+  "sound_event": "radik:president_is_dead"
+}

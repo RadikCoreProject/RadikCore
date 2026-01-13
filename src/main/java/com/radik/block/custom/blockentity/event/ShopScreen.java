@@ -1,6 +1,5 @@
 package com.radik.block.custom.blockentity.event;
 
-import com.radik.Radik;
 import com.radik.connecting.event.Trade;
 import com.radik.packets.PacketType;
 import com.radik.packets.payload.IntegerPayload;
@@ -8,11 +7,12 @@ import com.radik.util.Triplet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.PressableWidget;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.input.AbstractInput;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 
@@ -25,22 +25,18 @@ import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class ShopScreen extends HandledScreen<ShopScreenHandler> {
-    private static final int BACKGROUND_WIDTH = 256;
-    private static final int BACKGROUND_HEIGHT = 166;
     private static final int TRADE_HEIGHT = 30;
 
     private static final Identifier GOAL = Identifier.ofVanilla("textures/gui/sprites/advancements/goal_frame_unobtained.png");
     private static final Identifier CHALLENGE = Identifier.ofVanilla("textures/gui/sprites/advancements/challenge_frame_unobtained.png");
-    private static final Identifier GOAL1 = Identifier.ofVanilla("textures/gui/sprites/advancements/goal_frame_obtained.png");
-    private static final Identifier CHALLENGE1 = Identifier.ofVanilla("textures/gui/sprites/advancements/challenge_frame_obtained.png");
 
     private final List<Trade> trades;
     private final List<TradeButton> tradeButtons = new ArrayList<>();
 
     public ShopScreen(ShopScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
-        this.backgroundWidth = BACKGROUND_WIDTH;
-        this.backgroundHeight = BACKGROUND_HEIGHT;
+        this.backgroundWidth = 256;
+        this.backgroundHeight = 166;
         this.trades = handler.getTrades();
     }
 
@@ -69,11 +65,11 @@ public class ShopScreen extends HandledScreen<ShopScreenHandler> {
 
     @Override
     protected void drawBackground(@NotNull DrawContext context, float delta, int mouseX, int mouseY) {
-        context.drawTexture(RenderLayer::getGuiTextured, EventScreen.BACKGROUND_TEXTURE, this.x, this.y, 0.0F, 0.0F, this.backgroundWidth, this.backgroundHeight, 256, 256);
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, EventScreen.BACKGROUND_TEXTURE, this.x, this.y, 0.0F, 0.0F, this.backgroundWidth, this.backgroundHeight, 256, 256);
 
         for (int i = 0; i < 5; i++) {
             context.drawTexture(
-                RenderLayer::getGuiTextured,
+                RenderPipelines.GUI_TEXTURED,
                 i == 4 ? CHALLENGE : GOAL,
                 x + 49 + TRADE_HEIGHT * i,
                 y + backgroundHeight / 2 - 14,
@@ -85,7 +81,7 @@ public class ShopScreen extends HandledScreen<ShopScreenHandler> {
     protected void drawForeground(@NotNull DrawContext context, int mouseX, int mouseY) {
         context.drawText(this.textRenderer, Text.literal("§lМагазин"),
                 (this.backgroundWidth - this.textRenderer.getWidth("Магазин")) / 2 - 10,
-                6, 0x00FF00, true);
+                6, 0xFF00FF00, true);
     }
 
     @Override
@@ -116,7 +112,7 @@ public class ShopScreen extends HandledScreen<ShopScreenHandler> {
         }
 
         @Override
-        public void onPress() {
+        public void onPress(AbstractInput input) {
             onPress.run();
         }
 

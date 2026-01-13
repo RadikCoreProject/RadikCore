@@ -8,11 +8,12 @@ import com.radik.util.Triplet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.PressableWidget;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.input.AbstractInput;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -30,9 +31,6 @@ public class ShopAccessScreen extends HandledScreen<ShopScreenHandler.ShopAccess
     static final Identifier CHECK_TEXTURE = Identifier.of(Radik.MOD_ID, "textures/gui/butts/check.png");
     static final Identifier CROSS_TEXTURE = Identifier.of(Radik.MOD_ID, "textures/gui/butts/cross.png");
 
-    private static final int BACKGROUND_WIDTH = 256;
-    private static final int BACKGROUND_HEIGHT = 166;
-
     private final Trade trade;
 
     public static Integer COUNT;
@@ -41,8 +39,8 @@ public class ShopAccessScreen extends HandledScreen<ShopScreenHandler.ShopAccess
     public ShopAccessScreen(ShopScreenHandler.ShopAccessScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
         Trade trades1;
-        this.backgroundWidth = BACKGROUND_WIDTH;
-        this.backgroundHeight = BACKGROUND_HEIGHT;
+        this.backgroundWidth = 256;
+        this.backgroundHeight = 166;
 
         trades1 = handler.getTrade();
         if (trades1 == null) trades1 = createSampleTrade();
@@ -60,15 +58,15 @@ public class ShopAccessScreen extends HandledScreen<ShopScreenHandler.ShopAccess
         if (client == null || client.player == null) return;
 
         int buttonY = (int) (this.y + this.backgroundHeight / 2.8);
-        context.drawTexture(RenderLayer::getGuiTextured, EventScreen.BACKGROUND_TEXTURE, this.x, this.y, 0.0F, 0.0F, this.backgroundWidth, this.backgroundHeight, 256, 256);
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, EventScreen.BACKGROUND_TEXTURE, this.x, this.y, 0.0F, 0.0F, this.backgroundWidth, this.backgroundHeight, 256, 256);
         if (!Objects.equals(COUNT, -1)) drawTrade(context, mouseX, mouseY);
 
         if (COUNT != null && !Objects.equals(COUNT, -1)) {
             PressableWidget widget = new TradeButton(
                 this.x + this.backgroundWidth / 2 - 125 , buttonY, 50, 50,
                 () -> {
-                    if (EventBlockData.canPurchase(trade, client.player.getInventory())) {
-                        EventBlockData.purchase(trade, client.player.getInventory());
+                    if (CommonEventData.canPurchaseClient(trade, client.player.getInventory())) {
+                        CommonEventData.purchaseClient(trade, client.player.getInventory());
                         ShopAccessScreen.COUNT--;
                         ClientPlayNetworking.send(new IntegerPayload(new Triplet<>(0, TRADE, PacketType.BUY)));
                     }
@@ -84,16 +82,16 @@ public class ShopAccessScreen extends HandledScreen<ShopScreenHandler.ShopAccess
 
         context.drawText(this.textRenderer, Text.literal("§lМагазин"),
             (this.backgroundWidth - this.textRenderer.getWidth("Магазин")) / 2 - 10,
-            6, 0x00FF00, true);
+            6, 0xFF00FF00, true);
 
         if (Objects.equals(COUNT, -1)) {
             context.drawText(this.textRenderer, Text.literal("Произошла ошибка ☹"),
-                65, 75, 0x000000, false);
+                65, 75, 0xFF000000, false);
             return;
         }
 
         context.drawText(this.textRenderer, Text.literal(String.format("Количество предметов: §%s§l%d", t ? "4" : "2", t ? 0 : COUNT)),
-            10, 45, 0x000000, false);
+            10, 45, 0xFF000000, false);
     }
 
     private void drawTrade(DrawContext context, int mouseX, int mouseY) {
@@ -111,15 +109,15 @@ public class ShopAccessScreen extends HandledScreen<ShopScreenHandler.ShopAccess
             x += 20;
 
             if (i < trade.buyer().length - 1) {
-                context.drawTexture(RenderLayer::getGuiTextured, PLUS_TEXTURE, x - 2, y + 2, 0, 0, 12, 12, 12, 12);
+                context.drawTexture(RenderPipelines.GUI_TEXTURED, PLUS_TEXTURE, x - 2, y + 2, 0, 0, 12, 12, 12, 12);
                 x += 12;
             }
         }
 
         x += 5;
-        boolean canPurchase = EventBlockData.canPurchase(trade, client.player.getInventory());
+        boolean canPurchase = CommonEventData.canPurchaseClient(trade, client.player.getInventory());
         Identifier arrowTexture = canPurchase ? ARROW_TEXTURE : ARROW_STRICT_TEXTURE;
-        context.drawTexture(RenderLayer::getGuiTextured, arrowTexture, x - 7, y - 4, 0, 0, 24, 24, 24, 24);
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, arrowTexture, x - 7, y - 4, 0, 0, 24, 24, 24, 24);
         x += 20;
 
         context.drawItem(trade.seller(), x, y);
@@ -162,8 +160,8 @@ public class ShopAccessScreen extends HandledScreen<ShopScreenHandler.ShopAccess
         }
 
         @Override
-        public void onPress() {
-            if (client != null && client.player != null && EventBlockData.canPurchase(trade, client.player.getInventory()) && COUNT > 0) {
+        public void onPress(AbstractInput input) {
+            if (client != null && client.player != null && CommonEventData.canPurchaseClient(trade, client.player.getInventory()) && COUNT > 0) {
                 onPress.run();
             }
         }
@@ -171,10 +169,10 @@ public class ShopAccessScreen extends HandledScreen<ShopScreenHandler.ShopAccess
         @Override
         public void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
             if (client == null || client.player == null) return;
-            boolean canPurchase = EventBlockData.canPurchase(trade, client.player.getInventory()) && COUNT > 0;
+            boolean canPurchase = CommonEventData.canPurchaseClient(trade, client.player.getInventory()) && COUNT > 0;
             Identifier texture = canPurchase ? CHECK_TEXTURE : CROSS_TEXTURE;
 
-            context.drawTexture(RenderLayer::getGuiTextured, texture, this.getX(), this.getY(), 0f, 0f, this.width, this.height, this.width, this.height);
+            context.drawTexture(RenderPipelines.GUI_TEXTURED, texture, this.getX(), this.getY(), 0f, 0f, this.width, this.height, this.width, this.height);
             if (this.isMouseOver(mouseX + 10, mouseY + 10)) {
                 Text tooltip = canPurchase ? Text.literal("Купить") : COUNT == null || COUNT.equals(0) ? Text.literal("Предметов не осталось в магазине") : Text.literal("Недостаточно предметов для покупки");
                 context.drawTooltip(ShopAccessScreen.this.textRenderer, tooltip, mouseX, mouseY);

@@ -30,7 +30,7 @@ public class CustomOptionListWidget extends ElementListWidget<CustomOptionListWi
             int bottom,
             Screen chooseScreen
     ) {
-        super(client, width, height, top, bottom, ROW_HEIGHT);
+        super(client, width, height, top, bottom);
         this.chooseScreen = chooseScreen;
     }
 
@@ -86,7 +86,6 @@ public class CustomOptionListWidget extends ElementListWidget<CustomOptionListWi
                 clickableWidget.render(context, mouseX, mouseY, tickProgress);
                 i += 160;
             }
-
         }
 
         @Override
@@ -97,6 +96,11 @@ public class CustomOptionListWidget extends ElementListWidget<CustomOptionListWi
         @Override
         public List<? extends Selectable> selectableChildren() {
             return widgets;
+        }
+
+        @Override
+        public void render(DrawContext context, int mouseX, int mouseY, boolean hovered, float deltaTicks) {
+
         }
     }
 }

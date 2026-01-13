@@ -2,10 +2,8 @@ package com.radik.packets.payload;
 
 import com.radik.Radik;
 import com.radik.packets.PacketType;
-import com.radik.util.Duplet;
 import com.radik.util.Triplet;
 import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.util.Identifier;
 

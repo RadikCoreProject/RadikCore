@@ -1,1 +1,0 @@
-give @s radik:present_small 3

@@ -1,7 +1,6 @@
 package com.radik.item.custom;
 
 import com.radik.Radik;
-import com.radik.avancements.criteries.Criterias;
 import com.radik.fluid.Gas;
 import com.radik.fluid.RegisterFluids;
 import com.radik.fluid.elements.HydrogenFluid;
@@ -11,7 +10,9 @@ import net.minecraft.component.ComponentMap;
 import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.*;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.particle.ParticleTypes;
@@ -46,6 +47,9 @@ import static com.radik.item.RegisterItems.CAPSULE;
 import static net.minecraft.block.FluidBlock.LEVEL;
 
 public class Capsule extends Item implements FluidModificationItem {
+    private static java.lang.reflect.Method method = null;
+    private static boolean init = false;
+
     public Capsule(@NotNull Settings settings) {
         super(settings.component(CAPSULE_LEVEL, 0).component(CAPSULE_FLUID, 0));
     }
@@ -87,18 +91,18 @@ public class Capsule extends Item implements FluidModificationItem {
         ItemStack itemStack = user.getStackInHand(hand);
         BlockHitResult blockHitResult = raycast(world, user, level == 8 ? RaycastContext.FluidHandling.NONE : RaycastContext.FluidHandling.ANY);
 
-        if (!world.isClient) {
+        if (!world.isClient()) {
             if (user.isGliding() && fluid instanceof HydrogenFluid) {
                 if (user.isSpectator() || user.isInCreativeMode()) return ActionResult.FAIL;
                 Integer power = itemStack.get(CAPSULE_LEVEL);
-                itemStack.decrementUnlessCreative(1, user);
                 if (!user.getInventory().insertStack(CAPSULE.getDefaultStack())) {
                     user.dropItem(CAPSULE.getDefaultStack(), false);
                 }
+                itemStack.decrementUnlessCreative(1, user);
 
                 Vec3d newVelocity = getVec3d(user, level);
                 user.setVelocity(newVelocity);
-                world.createExplosion(user, user.capeX, user.capeY, user.capeZ, power == null ? 1 : (float) power / 2, true, World.ExplosionSourceType.MOB);
+                world.createExplosion(user, user.getX(), user.getY(), user.getZ(), power == null ? 1 : (float) power / 2, true, World.ExplosionSourceType.MOB);
                 user.damage((ServerWorld) world, user.getDamageSources().explosion(user, user), 2);
                 return ActionResult.SUCCESS_SERVER;
             }
@@ -121,7 +125,9 @@ public class Capsule extends Item implements FluidModificationItem {
                         user.incrementStat(Stats.USED.getOrCreateStat(this));
                         world.emitGameEvent(user, GameEvent.FLUID_PICKUP, blockPos);
                         ItemStack itemStack3 = ItemUsage.exchangeStack(itemStack, user, itemStack2);
-                        Criterias.CAPSULE_FLUID_CRITERION.trigger((ServerPlayerEntity)user, user.getInventory());
+                        if (user instanceof ServerPlayerEntity) {
+                            trigger((ServerPlayerEntity)user, user.getInventory());
+                        }
                         return ActionResult.SUCCESS.withNewHandStack(itemStack3);
                     }
                     return ActionResult.FAIL;
@@ -242,7 +248,7 @@ public class Capsule extends Item implements FluidModificationItem {
                 this.playEmptyingSound(user, world, pos);
                 return true;
             }
-            if (!world.isClient && bl && !blockState.isLiquid()) {
+            if (!world.isClient() && bl && !blockState.isLiquid()) {
                 world.breakBlock(pos, true);
             }
 
@@ -262,6 +268,7 @@ public class Capsule extends Item implements FluidModificationItem {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void appendTooltip(@NotNull ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
         Integer level = stack.get(CAPSULE_LEVEL);
         Integer fluid = stack.get(CAPSULE_FLUID);
@@ -292,5 +299,33 @@ public class Capsule extends Item implements FluidModificationItem {
             return true;
         }
         return false;
+    }
+
+    private void trigger(ServerPlayerEntity player, Inventory inventory) {
+        try {
+            if (!init) {
+                initializeCapsuleCriterionMethod();
+                init = true;
+            }
+
+            if (method != null) method.invoke(null, player, inventory);
+
+        } catch (Exception e) {
+            if (player.getEntityWorld() != null && !player.getEntityWorld().isClient()) {
+                Radik.LOGGER.error(e.getMessage());
+            }
+        }
+    }
+
+    private static synchronized void initializeCapsuleCriterionMethod() {
+        try {
+            Class<?> clazz = Class.forName("com.radik.server.reflection.CriterionHandler");
+            method = clazz.getMethod("triggerCapsuleFluidCriterion", ServerPlayerEntity.class, PlayerInventory.class);
+        } catch (ClassNotFoundException e) {
+            method = null;
+        } catch (Exception e) {
+            method = null;
+            Radik.LOGGER.error(e.getMessage());
+        }
     }
 }

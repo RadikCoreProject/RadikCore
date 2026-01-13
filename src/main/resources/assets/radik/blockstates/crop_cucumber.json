@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "age=0,stick=false,fruit=false": { "model": "radik:block/crop/cucumber/0" },
+    "age=1,stick=false,fruit=false": { "model": "radik:block/crop/cucumber/1" },
+    "age=2,stick=false,fruit=false": { "model": "radik:block/crop/cucumber/2" },
+    "age=3,stick=false,fruit=false": { "model": "radik:block/crop/cucumber/3" },
+    "age=4,stick=false,fruit=false": { "model": "radik:block/crop/cucumber/4_stick" },
+    "age=5,stick=false,fruit=false": { "model": "radik:block/crop/cucumber/5_stick" },
+    "age=6,stick=false,fruit=false": { "model": "radik:block/crop/cucumber/6_stick" },
+    "age=7,stick=false,fruit=false": { "model": "radik:block/crop/cucumber/7_stick" },
+
+    "age=0,stick=true,fruit=false": { "model": "radik:block/crop/cucumber/0_stick" },
+    "age=1,stick=true,fruit=false": { "model": "radik:block/crop/cucumber/1_stick" },
+    "age=2,stick=true,fruit=false": { "model": "radik:block/crop/cucumber/2_stick" },
+    "age=3,stick=true,fruit=false": { "model": "radik:block/crop/cucumber/3_stick" },
+    "age=4,stick=true,fruit=false": { "model": "radik:block/crop/cucumber/4_stick" },
+    "age=5,stick=true,fruit=false": { "model": "radik:block/crop/cucumber/5_stick" },
+    "age=6,stick=true,fruit=false": { "model": "radik:block/crop/cucumber/6_stick" },
+    "age=7,stick=true,fruit=false": { "model": "radik:block/crop/cucumber/7_stick" },
+
+
+    "age=0,stick=false,fruit=true": { "model": "radik:block/crop/cucumber/0" },
+    "age=1,stick=false,fruit=true": { "model": "radik:block/crop/cucumber/1" },
+    "age=2,stick=false,fruit=true": { "model": "radik:block/crop/cucumber/2" },
+    "age=3,stick=false,fruit=true": { "model": "radik:block/crop/cucumber/3" },
+    "age=4,stick=false,fruit=true": { "model": "radik:block/crop/cucumber/4_stick_fruit" },
+    "age=5,stick=false,fruit=true": { "model": "radik:block/crop/cucumber/5_stick_fruit" },
+    "age=6,stick=false,fruit=true": { "model": "radik:block/crop/cucumber/6_stick_fruit" },
+    "age=7,stick=false,fruit=true": { "model": "radik:block/crop/cucumber/7_stick_fruit" },
+
+    "age=0,stick=true,fruit=true": { "model": "radik:block/crop/cucumber/0_stick" },
+    "age=1,stick=true,fruit=true": { "model": "radik:block/crop/cucumber/1_stick" },
+    "age=2,stick=true,fruit=true": { "model": "radik:block/crop/cucumber/2_stick" },
+    "age=3,stick=true,fruit=true": { "model": "radik:block/crop/cucumber/3_stick" },
+    "age=4,stick=true,fruit=true": { "model": "radik:block/crop/cucumber/4_stick_fruit" },
+    "age=5,stick=true,fruit=true": { "model": "radik:block/crop/cucumber/5_stick_fruit" },
+    "age=6,stick=true,fruit=true": { "model": "radik:block/crop/cucumber/6_stick_fruit" },
+    "age=7,stick=true,fruit=true": { "model": "radik:block/crop/cucumber/7_stick_fruit" }
+  }
+}

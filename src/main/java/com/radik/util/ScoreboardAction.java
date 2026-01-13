@@ -5,21 +5,23 @@ import net.minecraft.scoreboard.*;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 
+import static com.radik.Data.SERVER;
+
 public class ScoreboardAction {
     public static boolean enough(int count, @NotNull PlayerEntity player) {
-        Scoreboard scoreboard = player.getScoreboard();
+        Scoreboard scoreboard = SERVER.getScoreboard();
         ScoreAccess access = getAccess(scoreboard, "mana", player.getNameForScoreboard());
         return access.getScore() >= count;
     }
 
     public static void setScore(String name, int count, @NotNull PlayerEntity player) {
-        Scoreboard scoreboard = player.getScoreboard();
+        Scoreboard scoreboard = SERVER.getScoreboard();
         ScoreAccess access = getAccess(scoreboard, name, player.getNameForScoreboard());
         access.setScore(count);
     }
 
     public static void changeScore(String name, int count, @NotNull PlayerEntity player) {
-        Scoreboard scoreboard = player.getScoreboard();
+        Scoreboard scoreboard = SERVER.getScoreboard();
         ScoreAccess access = getAccess(scoreboard, name, player.getNameForScoreboard());
         access.setScore(access.getScore() + count);
     }

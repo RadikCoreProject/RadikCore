@@ -73,8 +73,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 10
+                "min": 5,
+                "max": 15
               }
             }
           ]
@@ -96,78 +96,128 @@
         },
         {
           "type": "minecraft:item",
-          "name": "radik:disc_nether",
+          "name": "radik:disc_jingle_bells",
           "weight": 5
         },
         {
           "type": "minecraft:item",
-          "name": "radik:disc_nest",
+          "name": "radik:disc_merry_christmas",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:winter_hat",
           "weight": 5
         },
 
         {
           "type": "minecraft:item",
-          "name": "radik:halloween_candy_yellow",
+          "name": "radik:snowflake",
           "weight": 10,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 128
+                "min": 64,
+                "max": 256
               }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "radik:halloween_candy_blue",
+          "name": "radik:crop_tomato",
           "weight": 10,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 128
+                "min": 5,
+                "max": 15
               }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "radik:halloween_candy_red",
+          "name": "radik:dye_rainbow",
           "weight": 10,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 128
+                "min": 8,
+                "max": 32
               }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "radik:halloween_candy_green",
+          "name": "radik:ice_shard",
           "weight": 10,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 128
+                "min": 16,
+                "max": 48
               }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "radik:halloween_candy_basket_yellow",
+          "name": "radik:christmas_balls",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 5,
+                "max": 24
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:orange",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 5,
+                "max": 24
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:salad",
+          "weight": 7,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 7
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:red_wine",
           "weight": 5,
           "functions": [
             {
@@ -182,7 +232,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "radik:halloween_candy_basket_green",
+          "name": "radik:champagne",
           "weight": 5,
           "functions": [
             {
@@ -197,30 +247,15 @@
         },
         {
           "type": "minecraft:item",
-          "name": "radik:halloween_candy_basket_red",
+          "name": "radik:garland",
           "weight": 5,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "radik:halloween_candy_basket_blue",
-          "weight": 5,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 3
+                "min": 3,
+                "max": 10
               }
             }
           ]
@@ -236,36 +271,6 @@
                 "type": "minecraft:uniform",
                 "min": 1,
                 "max": 10
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "radik:halloween_candy_basket_empty",
-          "weight": 20,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 15
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "radik:halloween_candy_basket_super",
-          "weight": 5,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 2
               }
             }
           ]
@@ -289,7 +294,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_coal_block",
-          "weight": 50,
+          "weight": 30,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -304,7 +309,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_iron_block",
-          "weight": 50,
+          "weight": 30,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -319,7 +324,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_cobblestone",
-          "weight": 50,
+          "weight": 30,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -349,7 +354,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_diamond_block",
-          "weight": 50,
+          "weight": 30,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -364,7 +369,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_emerald_block",
-          "weight": 50,
+          "weight": 30,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -379,7 +384,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_gold_block",
-          "weight": 50,
+          "weight": 30,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -394,7 +399,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_grass_block",
-          "weight": 20,
+          "weight": 15,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -409,7 +414,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_glowstone",
-          "weight": 50,
+          "weight": 30,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -424,7 +429,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_lapis_block",
-          "weight": 50,
+          "weight": 30,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -439,7 +444,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_mossy_cobblestone",
-          "weight": 50,
+          "weight": 30,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -454,7 +459,7 @@
         {
           "type": "minecraft:item",
           "name": "radik:old_netherrack",
-          "weight": 50,
+          "weight": 30,
           "functions": [
             {
               "function": "minecraft:set_count",

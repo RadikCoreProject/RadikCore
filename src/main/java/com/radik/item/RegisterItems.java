@@ -1,16 +1,22 @@
 package com.radik.item;
 
-import com.radik.Data;
 import com.radik.Music;
 import com.radik.Radik;
+import com.radik.block.RegisterBlocks;
 import com.radik.connecting.event.ChallengeEvent;
 import com.radik.item.custom.*;
 import com.radik.item.custom.chemistry.Vial;
+import com.radik.item.custom.projectile.IceShard;
+import com.radik.item.custom.reward.Magazine;
+import com.radik.item.custom.reward.Medal;
+import com.radik.item.custom.reward.Teleporter;
+import com.radik.item.custom.reward.Tommy;
 import com.radik.item.custom.tool.*;
 import com.radik.item.custom.staff.WindStaff;
 import com.radik.registration.IRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.component.type.FoodComponents;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
@@ -20,6 +26,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
@@ -30,8 +37,9 @@ import static com.radik.Music.*;
 public class RegisterItems implements IRegistry {
     private static final Function<Item.Settings, Item> neww = Item::new;
     private static final Function<Item.Settings, Item> hat = setting -> new Item(setting.maxCount(1).equippable(EquipmentSlot.HEAD));
-    private static final Function<Item.Settings, Item> halloween = settings -> new EventItem(settings.maxCount(99).component(EVENT_TYPE, ChallengeEvent.HALLOWEEN));
-    private static final Function<Item.Settings, Item> halloween_candy = settings -> new EventItem(settings.maxCount(99).component(EVENT_TYPE, ChallengeEvent.HALLOWEEN).food(FOOD_COMPONENTS.get("candy")));
+    private static final Function<Item.Settings, Item> winter = settings -> new EventItem(settings.maxCount(99), ChallengeEvent.WINTER);
+    private static final Function<Item.Settings, Item> halloween = settings -> new EventItem(settings.maxCount(99), ChallengeEvent.HALLOWEEN);
+    private static final Function<Item.Settings, Item> halloween_candy = settings -> new EventItem(settings.maxCount(99).food(FOOD_COMPONENTS.get("candy")), ChallengeEvent.HALLOWEEN);
 
     public static final Item DYE_AMBER = registerItem("dye_amber", neww);
     public static final Item DYE_AQUA = registerItem("dye_aqua", neww);
@@ -49,6 +57,7 @@ public class RegisterItems implements IRegistry {
     public static final Item DYE_TAN = registerItem("dye_tan", neww);
     public static final Item DYE_TEAL = registerItem("dye_teal", neww);
     public static final Item DYE_VERDANT = registerItem("dye_verdant", neww);
+    public static final Item DYE_RAINBOW = registerItem("dye_rainbow", neww);
 
     public static final Item DISC_CRYSTAL_PEAK = registerItem("disc_crystal_peak", settings -> new Item(settings.jukeboxPlayable(CRYSTAL_PEAK_KEY).maxCount(1)));
     public static final Item DISC_PURE_VESSEL = registerItem("disc_pure_vessel", settings -> new Item(settings.jukeboxPlayable(PURE_VESSEL_KEY).maxCount(1)));
@@ -59,6 +68,7 @@ public class RegisterItems implements IRegistry {
     public static final Item DISC_NOSK = registerItem("disc_nosk", settings -> new Item(settings.jukeboxPlayable(NOSK_KEY).maxCount(1)));
     public static final Item DISC_THE_LAST_HUMAN = registerItem("disc_the_last_human", settings -> new Item(settings.jukeboxPlayable(THE_LAST_HUMAN_KEY).maxCount(1)));
     public static final Item DISC_NEUTRON_STARS = registerItem("disc_neutron_stars", settings -> new Item(settings.jukeboxPlayable(NEUTRON_STARS_KEY).maxCount(1)));
+    public static final Item DISC_PRESIDENT_IS_DEAD = registerItem("disc_president_is_dead", settings -> new Item(settings.jukeboxPlayable(PRESIDENT_IS_DEAD_KEY).maxCount(1)));
 
     public static final Item LEDENETS = registerItem("ledenets", settings -> new Item(settings.food(FOOD_COMPONENTS.get("ledenets"))));
     public static final Item LEDENETS1 = registerItem("ledenets1", settings -> new Item(settings.food(FOOD_COMPONENTS.get("ledenets1"))));
@@ -97,6 +107,14 @@ public class RegisterItems implements IRegistry {
     public static final Item SUGAR_BROWN = registerItem("sugar_brown", neww);
     public static final Item SUGAR_RED = registerItem("sugar_red", neww);
     public static final Item SUGAR_YELLOW = registerItem("sugar_yellow", neww);
+    public static final Item SALAD = registerItem("salad", settings -> new EventItem(settings.food(FOOD_COMPONENTS.get("1")).maxCount(16), ChallengeEvent.WINTER));
+    public static final Item CHAMPAGNE = registerItem("champagne", settings -> new EventItem(settings.food(FOOD_COMPONENTS.get("wine")), ChallengeEvent.WINTER));
+    public static final Item RED_WINE = registerItem("red_wine", settings -> new EventItem(settings.food(FOOD_COMPONENTS.get("wine")), ChallengeEvent.WINTER));
+    public static final Item ORANGE = registerItem("orange", settings -> new EventItem(settings.food(FoodComponents.APPLE), ChallengeEvent.WINTER));
+    public static final Item SNOWFLAKE = registerItem("snowflake", winter);
+    public static final Item CHRISTMAS_BALLS = registerItem("christmas_balls", winter);
+    public static final Item WINTER_HAT = registerItem("winter_hat", setting -> new EventItem(setting.maxCount(1).equippable(EquipmentSlot.HEAD), ChallengeEvent.WINTER));
+    public static final Item ICE_SHARD = registerItem("ice_shard", IceShard::new);
 
     public static final Item SODIUM_LAMP = registerItem("lamp_sodium", neww);
     public static final Item MERCURY_LAMP = registerItem("lamp_mercury", neww);
@@ -133,18 +151,37 @@ public class RegisterItems implements IRegistry {
     public static final Item CANDY_BASKET_EMPTY = registerItem("halloween_candy_basket_empty", halloween);
     public static final Item CANDY_BASKET_LUCKY = registerItem("halloween_candy_basket_lucky", LuckyBasket::new);
     public static final Item CANDY_BASKET_SUPER = registerItem("halloween_candy_basket_super", halloween);
-    public static final Item DISC_NETHER = registerItem("disc_nether", settings -> new EventItem(settings.jukeboxPlayable(NETHER_KEY).maxCount(1)));
-    public static final Item DISC_NEST = registerItem("disc_nest", settings -> new EventItem(settings.jukeboxPlayable(NEST_KEY).maxCount(1)));
+    public static final Item DISC_NETHER = registerItem("disc_nether", settings -> new EventItem(settings.jukeboxPlayable(NETHER_KEY).maxCount(1), ChallengeEvent.HALLOWEEN));
+    public static final Item DISC_NEST = registerItem("disc_nest", settings -> new EventItem(settings.jukeboxPlayable(NEST_KEY).maxCount(1), ChallengeEvent.HALLOWEEN));
 
     public static final Item TEST_SWORD = registerItem("netherite_sword_1", settings -> new Item(settings.sword(ToolMaterial.NETHERITE, 3.0F, -2.4F).fireproof()));
-//    public static final Item TOMMY = registerItem("tommy", settings -> new Tommy(settings.maxDamage(1000).maxCount(1)));
+    public static final Item TOMMY = registerItem("tommy", Tommy::new);
+    public static final Item CARTRIDGE = registerItem("cartridge", neww);
+    public static final Item MAGAZINE = registerItem("magazine", Magazine::new);
 
-    private static Item registerItem(String name, Function<Item.Settings, Item> function) {
+    public static final Item CUCUMBER_SEEDS = registerSeeds("crop_cucumber_seeds", RegisterBlocks.CUCUMBER);
+    public static final Item CUCUMBER = registerItem("crop_cucumber", settings -> new Item(settings.food(FoodComponents.APPLE)));
+    public static final Item TOMATO = registerItem("crop_tomato", settings -> new Item(settings.food(FoodComponents.APPLE)));
+    public static final Item JAR = registerItem("jar", settings -> new Jar(settings, 0));
+    public static final Item JAR_CUCMBERS = registerItem("jar_cucumbers", settings -> new Jar(settings, 1));
+    public static final Item CIGARETTE_PACK = registerItem("cigarette_pack", settings -> new Jar(settings, 2));
+    public static final Item CIGARETTE = registerItem("cigarette", ItemWithEffect::new);
+
+    private static Item registerItem(String name, @NotNull Function<Item.Settings, Item> function) {
         return Registry.register(Registries.ITEM, Identifier.of(Radik.MOD_ID, name),
                 function.apply(new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Radik.MOD_ID, name)))));
     }
 
-    private static Block registerBlockItem(@NotNull String name, Item.Settings settings) {
+    @Contract(pure = true)
+    private static @NotNull Function<Item.Settings, Item> createBlockItemWithUniqueName(Block block) {
+        return settings -> new BlockItem(block, settings.useItemPrefixedTranslationKey());
+    }
+
+    private static Item registerSeeds(String name, Block cropBlock) {
+        return registerItem(name, createBlockItemWithUniqueName(cropBlock));
+    }
+
+    private static Block registerBlockItem(@NotNull String name, Item.@NotNull Settings settings) {
         Function<AbstractBlock.Settings, Block> function1 = sets -> new Block(sets.strength(1, 2).sounds(BlockSoundGroup.METAL).luminance(state -> 5).noCollision().nonOpaque());
         Block block = function1.apply(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Radik.MOD_ID, name))));
         Registry.register(Registries.BLOCK, Identifier.of(Radik.MOD_ID, name), block);

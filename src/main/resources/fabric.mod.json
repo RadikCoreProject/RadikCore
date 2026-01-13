@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "radik",
-  "version": "1.4-PRERELEASE_3",
+  "version": "1.4.1",
   "name": "RadikCore",
   "description": "This is the RadikCore mod...",
   "authors": [
@@ -25,7 +25,7 @@
   ],
   "depends": {
     "fabricloader": ">=0.15.11",
-    "minecraft": "1.21.5",
+    "minecraft": "1.21.10",
     "java": ">=21",
     "fabric-api": "*"
   }

@@ -8,7 +8,6 @@ import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -16,25 +15,19 @@ import static com.radik.Data.*;
 import static com.radik.util.ScoreboardAction.getObjective;
 
 public class OnWorldTick {
-    public static short HOUSE = -1;
-    // TEST
     public static boolean MANA = false;
 
     protected static void register() {
-        ServerTickEvents.START_WORLD_TICK.register(OnWorldTick::ticking);
+        ServerTickEvents.START_WORLD_TICK.register(OnWorldTick::mana);
     }
 
-    /**
-    * @author Radik
-    * @test
-    **/
-    private static void ticking(@NotNull ServerWorld serverWorld) {
+    public static void mana(ServerWorld world) {
         if (!MANA) return;
         List<ServerPlayerEntity> players = SERVER.getPlayerManager().getPlayerList();
-        Scoreboard scoreboard = serverWorld.getScoreboard();
+        Scoreboard scoreboard = world.getScoreboard();
 
         for (ServerPlayerEntity player : players) {
-            Scoreboard scoreboard1 = player.getScoreboard();
+            Scoreboard scoreboard1 = SERVER.getScoreboard();
             String name = player.getNameForScoreboard();
             ScoreAccess access = scoreboard1.getOrCreateScore(ScoreHolder.fromName(name), getObjective(scoreboard, "mana"));
             ScoreAccess access1 = scoreboard1.getOrCreateScore(ScoreHolder.fromName(name), getObjective(scoreboard, "max_mana"));

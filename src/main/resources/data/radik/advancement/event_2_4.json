@@ -1,0 +1,86 @@
+{
+  "parent": "radik:event_2",
+  "criteria": {
+    "champagne": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:champagne"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "orange": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:orange"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    },
+    "salad": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:salad"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "wine": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:red_wine"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_2_4.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "radik:champagne"
+    },
+    "title": {
+      "translate": "advancements.radik.event_2_4.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "wine"
+    ],
+    [
+      "champagne"
+    ],
+    [
+      "salad"
+    ],
+    [
+      "orange"
+    ]
+  ],
+  "rewards": {
+    "experience": 200,
+    "function": "radik:advancements/event/block/2/4"
+  },
+  "sends_telemetry_event": true
+}

@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 import static com.radik.block.custom.BlockData.*;
 
 public class Ledenets extends RotatableBlock {
-
     public Ledenets(Settings settings) {
         super(settings);
     }

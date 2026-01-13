@@ -1,0 +1,88 @@
+{
+  "parent": "radik:capsule_2",
+  "criteria": {
+    "get_empty": {
+      "conditions": {
+        "count": 16,
+        "value": 0
+      },
+      "trigger": "radik:capsule_fluid_criterion"
+    },
+    "get_helium": {
+      "conditions": {
+        "count": 16,
+        "value": 4
+      },
+      "trigger": "radik:capsule_fluid_criterion"
+    },
+    "get_hydrogen": {
+      "conditions": {
+        "count": 16,
+        "value": 3
+      },
+      "trigger": "radik:capsule_fluid_criterion"
+    },
+    "get_lava": {
+      "conditions": {
+        "count": 16,
+        "value": 2
+      },
+      "trigger": "radik:capsule_fluid_criterion"
+    },
+    "get_water": {
+      "conditions": {
+        "count": 16,
+        "value": 1
+      },
+      "trigger": "radik:capsule_fluid_criterion"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.capsule_3.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "components": {
+        "radik:fluid": 2,
+        "radik:level": 8
+      },
+      "count": 1,
+      "id": "radik:capsule"
+    },
+    "title": {
+      "translate": "advancements.radik.capsule_3.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "get_empty"
+    ],
+    [
+      "get_water"
+    ],
+    [
+      "get_lava"
+    ],
+    [
+      "get_hydrogen"
+    ],
+    [
+      "get_helium"
+    ]
+  ],
+  "rewards": {
+    "experience": 400,
+    "function": "radik:advancements/base/capsule_3"
+  },
+  "sends_telemetry_event": true
+}

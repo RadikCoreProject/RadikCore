@@ -7,9 +7,12 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.client.gui.widget.TextWidget;
 import net.minecraft.client.gui.widget.ThreePartsLayoutWidget;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,8 @@ public class ChooseScreen extends Screen {
 
     @Override
     protected void init() {
+        TextWidget text = this.addDrawableChild(new TextWidget(Text.literal("Choose screen").withColor(0xBB0000).formatted(Formatting.BOLD), textRenderer));
+        text.setPosition(width / 2 - 50, height / 8);
         super.init();
         initLayout();
         layout.forEachChild(this::addDrawableChild);

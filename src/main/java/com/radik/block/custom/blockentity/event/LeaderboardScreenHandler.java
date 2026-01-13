@@ -1,18 +1,18 @@
 package com.radik.block.custom.blockentity.event;
 
 import com.radik.Radik;
-import com.radik.ui.Handlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
+import org.jetbrains.annotations.NotNull;
 
 public class LeaderboardScreenHandler extends ScreenHandler {
     private final EventBlockEntity be;
 
-    public LeaderboardScreenHandler(int id, PlayerInventory inv) {
+    public LeaderboardScreenHandler(int id, @NotNull PlayerInventory inv) {
         super(Radik.LEADERBOARD_SCREEN_HANDLER, id);
-        be = (EventBlockEntity) inv.player.getWorld().getBlockEntity(Radik.EVENT_BLOCK_POS);
+        be = (EventBlockEntity) inv.player.getEntityWorld().getBlockEntity(Radik.EVENT_BLOCK_POS);
     }
 
     @Override
@@ -30,9 +30,5 @@ public class LeaderboardScreenHandler extends ScreenHandler {
             ) <= 64.0;
         }
         return true;
-    }
-
-    public EventBlockEntity getBlockEntity() {
-        return be;
     }
 }

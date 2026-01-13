@@ -7,7 +7,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import com.radik.item.RegisterItems;
-import com.radik.item.custom.Medal;
+import com.radik.item.custom.reward.Medal;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,13 +25,12 @@ import static com.radik.Data.*;
 
 public class GetCommand {
     protected static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess ignoredRegistryAccess, CommandManager.RegistrationEnvironment ignoredEnvironment) {
-
         dispatcher.register(CommandManager.literal("get")
                 .requires(source -> source.hasPermissionLevel(2))
                 .then(CommandManager.literal("teleporter")
                     .then(CommandManager.literal("get")
                                 .then(CommandManager.argument("player", StringArgumentType.string())
-                                        .suggests(GetCommand::suggestOnlinePlayers)
+                                        .suggests(RegisterCommands::suggestOnlinePlayers)
                                         .then(CommandManager.argument("level", IntegerArgumentType.integer(0, 2))
                                                 .suggests((context, builder) -> suggestLevels(builder))
                                                 .executes(context -> executeGet(
@@ -42,7 +41,7 @@ public class GetCommand {
                                 .executes(context -> executeUpgrade(context.getSource()))))
                 .then(CommandManager.literal("medal")
                         .then(CommandManager.argument("player", StringArgumentType.string())
-                                .suggests(GetCommand::suggestOnlinePlayers)
+                                .suggests(RegisterCommands::suggestOnlinePlayers)
                                 .then(CommandManager.argument("type", IntegerArgumentType.integer(0, Medal.MAX_TYPE))
                                         .then(CommandManager.argument("material", IntegerArgumentType.integer(0, Medal.MAX_MATERIAL))
                                                 .then(CommandManager.argument("text", StringArgumentType.string())
@@ -53,19 +52,6 @@ public class GetCommand {
                                                         IntegerArgumentType.getInteger(context, "material"),
                                                         StringArgumentType.getString(context, "text")
                                                 ))))))));
-    }
-
-    private static CompletableFuture<Suggestions> suggestOnlinePlayers(@NotNull CommandContext<ServerCommandSource> context, @NotNull SuggestionsBuilder builder) {
-        String input = builder.getRemaining().toLowerCase();
-
-        SERVER.getPlayerManager().getPlayerList().forEach(player -> {
-            String name = player.getName().getString();
-            if (name.toLowerCase().contains(input)) {
-                builder.suggest(name);
-            }
-        });
-
-        return builder.buildFuture();
     }
 
     private static CompletableFuture<Suggestions> suggestLevels(SuggestionsBuilder builder) {

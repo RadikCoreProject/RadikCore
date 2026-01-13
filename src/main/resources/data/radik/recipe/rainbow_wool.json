@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "group": "dye",
+    "ingredients": [
+        "minecraft:white_wool",
+        "radik:dye_rainbow"
+    ],
+    "result": {
+        "count": 1,
+        "id": "radik:rainbow_wool"
+    }
+}

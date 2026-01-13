@@ -104,7 +104,7 @@ public class ExplosiveGasFluid extends BasedGasFluid {
     }
 
     private void scheduleExplosion(@NotNull World world, BlockPos pos) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             world.scheduleBlockTick(pos, this, 2);
         }
     }
@@ -114,7 +114,6 @@ public class ExplosiveGasFluid extends BasedGasFluid {
             BlockState state = world.getBlockState(pos.offset(dir));
             if (state.isIn(BlockTags.FIRE)) return true;
 
-            // Объединенные проверки
             if (state.isOf(Blocks.LAVA) ||
                     state.isOf(Blocks.MAGMA_BLOCK) ||
                     state.isOf(Blocks.CAMPFIRE) ||

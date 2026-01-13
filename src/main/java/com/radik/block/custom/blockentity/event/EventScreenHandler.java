@@ -13,7 +13,7 @@ public class EventScreenHandler extends ScreenHandler {
 
     public EventScreenHandler(int id, PlayerInventory inv) {
         super(EVENT_SCREEN_HANDLER, id);
-        be = (EventBlockEntity) inv.player.getWorld().getBlockEntity(Radik.EVENT_BLOCK_POS);
+        be = (EventBlockEntity) inv.player.getEntityWorld().getBlockEntity(Radik.EVENT_BLOCK_POS);
     }
 
     @Override

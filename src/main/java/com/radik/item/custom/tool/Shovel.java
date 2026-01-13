@@ -2,6 +2,7 @@ package com.radik.item.custom.tool;
 
 import com.radik.Radik;
 import com.radik.connecting.event.ChallengeEvent;
+import com.radik.item.RegisterItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -26,10 +27,11 @@ public class Shovel extends ShovelItem implements Tools {
     static {
         proccess.put(Blocks.SAND, new Item[]{Items.DEAD_BUSH, Items.CACTUS, Items.OAK_SAPLING});
         proccess.put(Blocks.RED_SAND, new Item[]{Items.DEAD_BUSH, Items.CACTUS});
-        proccess.put(Blocks.DIRT, new Item[]{Items.POTATO, Items.BEETROOT_SEEDS, Items.CARROT, Items.BUSH, Items.ACACIA_SAPLING});
+        proccess.put(Blocks.DIRT, new Item[]{Items.POTATO, Items.BEETROOT_SEEDS, Items.CARROT, Items.BUSH, Items.ACACIA_SAPLING, RegisterItems.CUCUMBER_SEEDS});
         proccess.put(Blocks.GRASS_BLOCK, new Item[]{Items.POTATO, Items.BEETROOT_SEEDS, Items.CARROT, Items.WHEAT_SEEDS, Items.BIRCH_SAPLING, Items.CHERRY_SAPLING, Items.OAK_SAPLING, Items.DARK_OAK_SAPLING, Items.JUNGLE_SAPLING});
         proccess.put(Blocks.PODZOL, new Item[]{Items.SPRUCE_SAPLING, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.BUSH, Items.WILDFLOWERS});
         proccess.put(Blocks.MYCELIUM, new Item[]{Items.BROWN_MUSHROOM, Items.RED_MUSHROOM, Items.CORNFLOWER, Items.TORCHFLOWER_SEEDS, Items.PALE_OAK_SAPLING});
+        proccess.put(Blocks.SNOW_BLOCK, new Item[]{RegisterItems.SNOWFLAKE, RegisterItems.ICE_SHARD});
     }
 
     public Shovel(ToolMaterial material, float attackDamage, float attackSpeed, Item.Settings settings) {

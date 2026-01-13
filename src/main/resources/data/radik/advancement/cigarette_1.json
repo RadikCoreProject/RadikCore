@@ -1,0 +1,47 @@
+{
+  "parent": "radik:pull",
+  "criteria": {
+    "event": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:cigarette"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.food_cigarette_1.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "radik:cigarette"
+    },
+    "title": {
+      "translate": "advancements.radik.food_cigarette_1.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event"
+    ]
+  ],
+  "rewards": {
+    "experience": 10,
+    "function": "radik:advancements/base/food/cigarette_1"
+  },
+  "sends_telemetry_event": true
+}

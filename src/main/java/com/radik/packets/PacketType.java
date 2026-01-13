@@ -7,5 +7,6 @@ public enum PacketType {
     BUY,
     GET_CHALLENGE_COUNT,
     GET_REWARD,
-    UPDATE_LEADERBOARD
+    UPDATE_LEADERBOARD,
+    PASSWORD
 }

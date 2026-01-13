@@ -2,8 +2,6 @@ package com.radik.item.custom.tool;
 
 import com.radik.Radik;
 import com.radik.connecting.event.ChallengeEvent;
-import com.radik.item.RegisterItems;
-import com.radik.property.EventProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -68,8 +66,6 @@ public class Hoe extends HoeItem implements Tools {
                         stack1.decrement(1);
                         world.setBlockState(pos, block.getDefaultState());
                         Radik.sendEventToPlayers(0, pos, 0, (ServerWorld) world);
-                        if (Radik.RANDOM.nextInt(1, EventProperties.get("green_candy_drop_chance") + 1) == 1)
-                            world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(RegisterItems.CANDY_GREEN, 1)));
                     }
                 });
             }

@@ -2,12 +2,14 @@ package com.radik.block.custom.blockentity.event;
 
 import com.radik.Radik;
 import com.radik.connecting.event.Trade;
-import com.radik.ui.Handlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandler;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +70,8 @@ public class ShopScreenHandler extends ScreenHandler {
         return trades;
     }
 
-    private static List<Trade> createDefaultTrades() {
+    @Contract(" -> new")
+    private static @NotNull @Unmodifiable List<Trade> createDefaultTrades() {
         return List.of(
             new Trade(
                 new ItemStack(Items.DIAMOND, 10),

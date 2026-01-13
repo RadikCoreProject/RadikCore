@@ -1,0 +1,46 @@
+{
+  "parent": "radik:industry_2",
+  "criteria": {
+    "event": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:lamp_sodium"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.industry_3.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "radik:lamp_sodium"
+    },
+    "title": {
+      "translate": "advancements.radik.industry_3.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event"
+    ]
+  ],
+  "rewards": {
+    "experience": 10,
+    "function": "radik:advancements/base/industry/3"
+  },
+  "sends_telemetry_event": true
+}

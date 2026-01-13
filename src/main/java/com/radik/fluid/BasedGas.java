@@ -84,7 +84,7 @@ public class BasedGas extends Gas {
     public void onScheduledTick(ServerWorld world, BlockPos pos, BlockState blockState, FluidState fluidState) {
         this.tryFlow(world, pos, blockState, fluidState);
 
-        if (!world.isClient && world.getFluidState(pos).getFluid() instanceof BasedGas) {
+        if (!world.isClient() && world.getFluidState(pos).getFluid() instanceof BasedGas) {
             world.scheduleFluidTick(pos, fluidState.getFluid(), this.getTickRate(world), TickPriority.NORMAL);
         }
     }

@@ -67,7 +67,7 @@ public class ElectrolyzerScreenHandler extends AbstractRecipeScreenHandler{
         checkDataCount(propertyDelegate, 4);
         this.inventory = inventory;
         this.propertyDelegate = propertyDelegate;
-        this.world = playerInventory.player.getWorld();
+        this.world = playerInventory.player.getEntityWorld();
         this.recipePropertySet = this.world.getRecipeManager().getPropertySet(recipePropertySetKey);
         this.addSlot(new Slot(inventory, 0, 56, 17));
 //        this.addSlot(new FurnaceFuelSlot(this, inventory, 1, 56, 53));

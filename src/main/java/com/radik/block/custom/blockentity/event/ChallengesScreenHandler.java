@@ -12,7 +12,7 @@ public class ChallengesScreenHandler extends ScreenHandler {
     private final EventBlockEntity be;
 
     public ChallengesScreenHandler(int id, PlayerInventory inv) {
-        this(id, inv, (EventBlockEntity) inv.player.getWorld().getBlockEntity(Radik.EVENT_BLOCK_POS));
+        this(id, inv, (EventBlockEntity) inv.player.getEntityWorld().getBlockEntity(Radik.EVENT_BLOCK_POS));
     }
 
     public ChallengesScreenHandler(int id, PlayerInventory inv, @Nullable EventBlockEntity be) {

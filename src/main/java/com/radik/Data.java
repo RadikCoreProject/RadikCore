@@ -5,7 +5,7 @@ import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import com.radik.connecting.event.ChallengeEvent;
-import com.radik.item.custom.Medal;
+import com.radik.item.custom.reward.Medal;
 import com.radik.item.custom.chemistry.VialContainer;
 import com.radik.packets.Packets;
 import net.minecraft.block.Blocks;
@@ -54,6 +54,8 @@ public final class Data {
     public static final ComponentType<Integer> MEDAL = register("medal", (builder) -> builder.codec(Codecs.rangedInt(0, Medal.MAX_TYPE)).packetCodec(PacketCodecs.VAR_INT));
     public static final ComponentType<Integer> MEDAL_MATERIAL = register("material", (builder) -> builder.codec(Codecs.rangedInt(0, Medal.MAX_MATERIAL)).packetCodec(PacketCodecs.VAR_INT));
     public static final ComponentType<String> TEXT = register("text", builder -> builder.codec(Codecs.PLAYER_NAME).packetCodec(PacketCodecs.STRING));
+    public static final ComponentType<Integer> JAR = register("jar_type", (builder) -> builder.codec(Codecs.rangedInt(0, 1)).packetCodec(PacketCodecs.VAR_INT));
+    public static final ComponentType<Integer> STORAGE = register("storage", builder -> builder.codec(Codecs.rangedInt(0, 400)).packetCodec(PacketCodecs.VAR_INT));
 
     // TESTTTT
     public static final ComponentType<Integer> STAFF_TYPE = register("staff_type", (builder) -> builder.codec(Codecs.rangedInt(0, 3)).packetCodec(PacketCodecs.VAR_INT));
@@ -91,16 +93,16 @@ public final class Data {
     }
 
     static {
-        FOOD_COMPONENTS.put("apple", FoodComponents.APPLE);
-        FOOD_COMPONENTS.put("ledenets", (new FoodComponent.Builder()).nutrition(3).saturationModifier(0.6F).build());
-        FOOD_COMPONENTS.put("ledenets1", (new FoodComponent.Builder()).nutrition(5).saturationModifier(0.6F).build());
-        FOOD_COMPONENTS.put("ledenets2", (new FoodComponent.Builder()).nutrition(5).saturationModifier(0.3F).build());
-        FOOD_COMPONENTS.put("1", (new FoodComponent.Builder()).nutrition(8).saturationModifier(0.75F).build());
-        FOOD_COMPONENTS.put("2", (new FoodComponent.Builder()).nutrition(5).saturationModifier(1F).build());
-        FOOD_COMPONENTS.put("3", (new FoodComponent.Builder()).nutrition(5).saturationModifier(0.4F).build());
-        FOOD_COMPONENTS.put("4", (new FoodComponent.Builder()).nutrition(4).saturationModifier(0.15F).build());
-        FOOD_COMPONENTS.put("empty", (new FoodComponent.Builder()).nutrition(0).saturationModifier(0).alwaysEdible().build());
-        FOOD_COMPONENTS.put("candy", (new FoodComponent.Builder()).nutrition(2).saturationModifier(2).build());
+        FOOD_COMPONENTS.put("wine", new FoodComponent(10, 1F, true));
+        FOOD_COMPONENTS.put("ledenets", new FoodComponent(3, 0.6F, false));
+        FOOD_COMPONENTS.put("ledenets1", new FoodComponent(5, 0.6F, false));
+        FOOD_COMPONENTS.put("ledenets2", new FoodComponent(5, 0.3F, false));
+        FOOD_COMPONENTS.put("1", new FoodComponent(8, 0.75F, false));
+        FOOD_COMPONENTS.put("2", new FoodComponent(5, 1F, false));
+        FOOD_COMPONENTS.put("3", new FoodComponent(5, 0.4F, false));
+        FOOD_COMPONENTS.put("4", new FoodComponent(4, 0.15F, false));
+        FOOD_COMPONENTS.put("empty", new FoodComponent(0, 0F, true));
+        FOOD_COMPONENTS.put("candy", new FoodComponent(2, 2F, false));
     }
 
     @Contract(pure = true)

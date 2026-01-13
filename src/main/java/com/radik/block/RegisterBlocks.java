@@ -3,15 +3,15 @@ package com.radik.block;
 import com.radik.Radik;
 import com.radik.block.custom.blockentity.event.EventBlock;
 import com.radik.block.custom.*;
+import com.radik.block.custom.crop.CucumberCrop;
 import com.radik.block.custom.reward.Batut;
-import com.radik.block.custom.reward.Bicycle;
-import com.radik.block.custom.reward.House;
+import com.radik.block.custom.reward.Birthday;
+import com.radik.block.custom.reward.JavaProgrammer;
 import com.radik.block.custom.tech.Fonar;
 import com.radik.block.custom.tech.Fonar2;
 import com.radik.block.custom.tech.LampBlock;
-import com.radik.block.custom.winter.Ledenets;
-import com.radik.block.custom.winter.Present;
-import com.radik.block.custom.winter.Snowman;
+import com.radik.block.custom.winter.*;
+import com.radik.connecting.event.ChallengeEvent;
 import com.radik.registration.IRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
@@ -25,6 +25,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
@@ -112,7 +113,6 @@ public class RegisterBlocks implements IRegistry {
     private static final Function<AbstractBlock.Settings, Block> stolb = properties -> new Fonar(properties.strength(0.5f, 5).sounds(BlockSoundGroup.METAL).noBlockBreakParticles());
     private static final Function<AbstractBlock.Settings, Block> present = properties -> new Present(properties.mapColor(MapColor.BRIGHT_TEAL).strength(0.5F).sounds(BlockSoundGroup.SNOW));
     private static final Function<AbstractBlock.Settings, Block> ledenets = properties -> new Ledenets(properties.mapColor(MapColor.WHITE).instrument(NoteBlockInstrument.GUITAR).strength(0.8F).sounds(BlockSoundGroup.WOOL).burnable().nonOpaque());
-    private static final Function<AbstractBlock.Settings, Block> birthday = properties -> new Block(properties.sounds(BlockSoundGroup.GLASS).strength(3, 9999999).noBlockBreakParticles().nonOpaque());
     private static final Function<AbstractBlock.Settings, Block> trophy = properties -> new Trophy(properties.strength(3, 10).sounds(BlockSoundGroup.AMETHYST_BLOCK).noBlockBreakParticles());
 
     public static final Block FROG0_255_0 = registerBlock(frog, "frog0_255_0");
@@ -937,6 +937,11 @@ public class RegisterBlocks implements IRegistry {
     public static final Block SUGAR_BLOCK_YELLOW = registerBlock(dirt, "sugar_block_yellow");
     public static final Block SUGAR_BLOCK_RED = registerBlock(dirt, "sugar_block_red");
     public static final Block SUGAR_BLOCK_BROWN = registerBlock(dirt, "sugar_block_brown");
+    public static final Block GARLAND = registerEventBlock(settings -> new Garland(settings.strength(0, 0).luminance(t -> 14).noCollision().nonOpaque()), "garland", ChallengeEvent.WINTER);
+    public static final Block FREEZER = registerEventBlock(Freezer::new, "freezer", ChallengeEvent.WINTER);
+    public static final Block RAINBOW_WOOL = registerBlock(settings -> new Block(settings.mapColor(MapColor.BLACK).instrument(NoteBlockInstrument.GUITAR).strength(0.8F).sounds(BlockSoundGroup.WOOL).burnable()), "rainbow_wool");
+    public static final Block RAINBOW_STAINED_GLASS = registerBlock(settings -> new StainedGlassBlock(DyeColor.WHITE, settings.mapColor(DyeColor.RED).instrument(NoteBlockInstrument.HAT).strength(0.3F).sounds(BlockSoundGroup.GLASS).nonOpaque().allowsSpawning(Blocks::never).solidBlock(Blocks::never).suffocates(Blocks::never).blockVision(Blocks::never)), "rainbow_stained_glass");
+    public static final Block RAINBOW_STAINED_GLASS_PANE = registerBlock(settings -> new StainedGlassPaneBlock(DyeColor.WHITE, settings.mapColor(DyeColor.RED).instrument(NoteBlockInstrument.HAT).strength(0.3F).sounds(BlockSoundGroup.GLASS).nonOpaque().allowsSpawning(Blocks::never).solidBlock(Blocks::never).suffocates(Blocks::never).blockVision(Blocks::never)), "rainbow_stained_glass_pane");
 
     public static final Block OLD_GRASS_BLOCK = registerBlock(settings -> new GrassBlock(settings.mapColor(MapColor.PALE_GREEN).ticksRandomly().strength(0.6F).sounds(BlockSoundGroup.GRASS)), "old_grass_block");
     public static final Block OLD_CRYING_OBSIDIAN = registerBlock(settings -> new CryingObsidianBlock(settings.mapColor(MapColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(50.0F, 1200.0F).luminance(state -> 10)), "old_crying_obsidian");
@@ -952,13 +957,13 @@ public class RegisterBlocks implements IRegistry {
     public static final Block OLD_COBBLESTONE = registerBlock(settings -> new Block(settings.mapColor(MapColor.STONE_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(2.0F, 6.0F)), "old_cobblestone");
     public static final Block OLD_BEDROCK = registerBlock(settings -> new Block(settings.mapColor(MapColor.STONE_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(2F, 3600000.0F).allowsSpawning(Blocks::never)), "old_bedrock");
 
-    public static final Block JAVA_PROGRAMMER = registerBlock(properties -> new RotatableBlock(properties.nonOpaque().luminance(t -> 10).sounds(BlockSoundGroup.GLASS).strength(3, 9999999).noBlockBreakParticles()), "java_programmer", new Item.Settings().equippable(EquipmentSlot.HEAD).maxCount(1));
-    public static final Block HOUSE = registerBlock(properties -> new House(properties.nonOpaque().luminance(t -> 15).sounds(BlockSoundGroup.GLASS).strength(4, 9999999).noBlockBreakParticles()), "house");
     public static final Block LAMP = registerBlock(properties -> new LampBlock(properties.sounds(BlockSoundGroup.GLASS).strength(3, 5).noBlockBreakParticles().nonOpaque().luminance(t -> 15)), "lamp");
-    public static final Block BICYCLE = registerBlock(properties -> new Bicycle(properties.sounds(BlockSoundGroup.GLASS).strength(3, 9999999).noBlockBreakParticles().nonOpaque()), "bicycle");
-    public static final Block PIX = registerBlock(birthday, "pix");
-    public static final Block BAG = registerBlock(birthday, "bag", new Item.Settings().equippable(EquipmentSlot.CHEST));
     public static final Block BATUT = registerBlock(properties -> new Batut(properties.sounds(BlockSoundGroup.GLASS).strength(7, 9999999).noBlockBreakParticles().nonOpaque()), "batut", new Item.Settings().equippable(EquipmentSlot.HEAD).maxCount(1));
+    public static final Block JAVA_PROGRAMMER = registerBlock(properties -> new JavaProgrammer(properties, "Yar1kGG"), "java_programmer", new Item.Settings().equippable(EquipmentSlot.HEAD).maxCount(1));
+    public static final Block BICYCLE = registerBlock(properties -> new Birthday(properties, "Boomboxcuff"), "bicycle");
+    public static final Block PIX = registerBlock(properties -> new Birthday(properties, "X_xPIXx_X"), "pix");
+    public static final Block BAG = registerBlock(properties -> new Birthday(properties, "Boomboxcuff"), "bag", new Item.Settings().equippable(EquipmentSlot.CHEST));
+    public static final Block HOUSE = registerBlock(properties -> new Birthday(properties, "Xreped"), "house");
 
     public static final Block TROPHY_NOSTALGIC_BRONZE = registerBlock(trophy, "trophy_nostalgic_bronze");
     public static final Block TROPHY_NOSTALGIC_SILVER = registerBlock(trophy, "trophy_nostalgic_silver");
@@ -970,24 +975,44 @@ public class RegisterBlocks implements IRegistry {
 //    public static final Block ELECTROLYZER = registerBlock(Electrolyzer::new, "electrolyzer");
     public static final Block EVENT_BLOCK = registerBlock(EventBlock::new, "event_block");
 
-    private static Block registerBlockWithoutBlockItem(Function<AbstractBlock.Settings, Block> function, String name) {
+    public static final Block CUCUMBER = registerCropBlock(CucumberCrop::new, "crop_cucumber");
+
+    private static Block registerCropBlock(Function<AbstractBlock.Settings, Block> function, String name) {
+        Block block = function.apply(AbstractBlock.Settings.create()
+            .registryKey(RegistryKey.of(RegistryKeys.BLOCK,
+                Identifier.of(Radik.MOD_ID, name))));
+        return Registry.register(Registries.BLOCK,
+            Identifier.of(Radik.MOD_ID, name), block);
+    }
+
+    private static Block registerBlockWithoutBlockItem(@NotNull Function<AbstractBlock.Settings, Block> function, String name) {
         return Registry.register(Registries.BLOCK, Identifier.of(Radik.MOD_ID, name),
                 function.apply(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Radik.MOD_ID, name)))));
     }
 
-    private static Block registerBlock(Function<AbstractBlock.Settings, Block> function, String name, Item.Settings settings) {
+    private static Block registerBlock(@NotNull Function<AbstractBlock.Settings, Block> function, String name, Item.Settings settings) {
         Block toRegister = function.apply(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Radik.MOD_ID, name))));
         registerBlockItem(name, toRegister, settings);
         return Registry.register(Registries.BLOCK, Identifier.of(Radik.MOD_ID, name), toRegister);
     }
 
-    private static Block registerBlock(Function<AbstractBlock.Settings, Block> function, String name) {
+    private static Block registerEventBlock(@NotNull Function<AbstractBlock.Settings, Block> function, String name, ChallengeEvent event) {
         Block toRegister = function.apply(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Radik.MOD_ID, name))));
-        registerBlockItem(name, toRegister, new Item.Settings());
+        registerEventBlockItem(name, toRegister, new Item.Settings(), event);
         return Registry.register(Registries.BLOCK, Identifier.of(Radik.MOD_ID, name), toRegister);
     }
 
-    private static void registerBlockItem(String name, Block block, Item.Settings settings) {
+    private static void registerEventBlockItem(String name, Block block, Item.@NotNull Settings settings, ChallengeEvent event) {
+        Registry.register(Registries.ITEM, Identifier.of(Radik.MOD_ID, name),
+            new EventBlockItem(block, settings.useBlockPrefixedTranslationKey()
+                .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Radik.MOD_ID, name))), event));
+    }
+
+    private static Block registerBlock(@NotNull Function<AbstractBlock.Settings, Block> function, String name) {
+        return registerBlock(function, name, new Item.Settings());
+    }
+
+    private static void registerBlockItem(String name, Block block, Item.@NotNull Settings settings) {
         Registry.register(Registries.ITEM, Identifier.of(Radik.MOD_ID, name),
                 new BlockItem(block, settings.useBlockPrefixedTranslationKey()
                         .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Radik.MOD_ID, name)))));

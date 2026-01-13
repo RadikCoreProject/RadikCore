@@ -40,7 +40,7 @@ public class WindStaff extends Item{
         if (!enough(enough, user)) { return ActionResult.FAIL; }
         if (manaUsesTimer(user.getName().getString(), attack)) { return ActionResult.FAIL; }
 
-        if (!world.isClient) {
+        if (!world.isClient()) {
             shootWind(user, world, user.getYaw());
             changeScore("mana", -enough, user);
             stack.damage(1, user, EquipmentSlot.MAINHAND);
@@ -62,7 +62,7 @@ public class WindStaff extends Item{
         Integer type = stack.getComponents().get(STAFF_TYPE);
         if (type == null) return ActionResult.FAIL;
 
-        if (player != null && !world.isClient) {
+        if (player != null && !world.isClient()) {
             if (!enough(800, player) || manaUsesTimer(player.getName().getString(), "wind_staff_super") || type == 1) {
                 return ActionResult.FAIL;
             }
@@ -83,16 +83,16 @@ public class WindStaff extends Item{
         Integer type = stack.getComponents().get(STAFF_TYPE);
         if (type == null) return;
         if (type == 0) {
-            target.damage((ServerWorld) target.getWorld(), attacker.getDamageSources().magic(), 4.0f);
+            target.damage((ServerWorld) target.getEntityWorld(), attacker.getDamageSources().magic(), 4.0f);
         } else {
-            target.damage((ServerWorld) target.getWorld(), attacker.getDamageSources().magic(), 8.0f);
+            target.damage((ServerWorld) target.getEntityWorld(), attacker.getDamageSources().magic(), 8.0f);
         }
         stack.damage(1, attacker, EquipmentSlot.MAINHAND);
     }
 
     private void shootWindProjectiles(PlayerEntity user, World world, int count) {
         for (int i = 0; i < count; i++) {
-            if (!world.isClient) {shootWind(user, world, user.getYaw() + (i * 45)); }
+            if (!world.isClient()) {shootWind(user, world, user.getYaw() + (i * 45)); }
         }
     }
 

@@ -1,0 +1,451 @@
+{
+  "parent": "radik:pull",
+  "criteria": {
+    "1": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:red_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "10": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:gray_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "11": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:light_gray_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "12": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:white_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "13": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:cyan_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "14": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:pink_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "15": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:brown_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "16": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:blue_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "17": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_navy"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "18": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_amber"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "19": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_beige"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "2": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:orange_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "20": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_aqua"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "21": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_coral"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "22": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_forest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "23": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_ginger"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "24": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_indigo"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "25": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_maroon"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "26": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_mint"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "27": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_olive"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "28": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_rose"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "29": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_slate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "3": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:yellow_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "30": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_verdant"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "31": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_tan"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "32": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_teal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "4": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:green_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "5": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:lime_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "6": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:magenta_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "7": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:purple_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "8": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:black_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "9": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:light_blue_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.dye_1.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "radik:dye_navy"
+    },
+    "title": {
+      "translate": "advancements.radik.dye_1.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "1"
+    ],
+    [
+      "2"
+    ],
+    [
+      "3"
+    ],
+    [
+      "4"
+    ],
+    [
+      "5"
+    ],
+    [
+      "6"
+    ],
+    [
+      "7"
+    ],
+    [
+      "8"
+    ],
+    [
+      "9"
+    ],
+    [
+      "10"
+    ],
+    [
+      "11"
+    ],
+    [
+      "12"
+    ],
+    [
+      "13"
+    ],
+    [
+      "14"
+    ],
+    [
+      "15"
+    ],
+    [
+      "16"
+    ],
+    [
+      "17"
+    ],
+    [
+      "18"
+    ],
+    [
+      "19"
+    ],
+    [
+      "20"
+    ],
+    [
+      "21"
+    ],
+    [
+      "22"
+    ],
+    [
+      "23"
+    ],
+    [
+      "24"
+    ],
+    [
+      "25"
+    ],
+    [
+      "26"
+    ],
+    [
+      "27"
+    ],
+    [
+      "28"
+    ],
+    [
+      "29"
+    ],
+    [
+      "30"
+    ],
+    [
+      "31"
+    ],
+    [
+      "32"
+    ]
+  ],
+  "rewards": {
+    "experience": 350,
+    "function": "radik:advancements/base/dye/1"
+  },
+  "sends_telemetry_event": true
+}

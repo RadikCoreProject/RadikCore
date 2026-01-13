@@ -1,1 +1,0 @@
-give @s amethyst_shard 5

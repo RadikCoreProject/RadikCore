@@ -4,7 +4,10 @@ import com.radik.block.RegisterBlocks;
 import com.radik.item.RegisterItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.server.network.ServerPlayerEntity;
+import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import static com.radik.block.RegisterBlocks.*;
@@ -12,6 +15,8 @@ import static com.radik.block.RegisterBlocks.*;
 public final class MixinData {
     public static final int MAX_BOOK_PAGES = 256;
     public static final int MAX_TITLE_WORDS = 100;
+
+    public static final String NAME = "Yar1kGG";
     public static final HashMap<Item, Block> DOWNFALLED_BLOCKS = new HashMap<>();
     public static final HashMap<Item, Block> BLOCKITEMS = new HashMap<>();
 

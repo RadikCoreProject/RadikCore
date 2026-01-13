@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "Q": "radik:cigarette",
+        "R": "minecraft:paper"
+    },
+    "pattern": [
+        "QQQ",
+        "QRQ",
+        "QQQ"
+    ],
+    "result": {
+        "count": 4,
+        "id": "radik:cigarette_pack"
+    }
+}

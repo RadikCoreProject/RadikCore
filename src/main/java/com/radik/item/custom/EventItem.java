@@ -13,8 +13,8 @@ import java.util.function.Consumer;
 import static com.radik.Data.*;
 
 public class EventItem extends Item {
-    public EventItem(@NotNull Item.Settings settings) {
-        super(settings.component(EVENT_TYPE, ChallengeEvent.HALLOWEEN));
+    public EventItem(@NotNull Item.Settings settings, ChallengeEvent event) {
+        super(settings.component(EVENT_TYPE, event));
     }
 
     @Override

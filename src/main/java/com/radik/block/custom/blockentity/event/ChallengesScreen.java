@@ -13,11 +13,13 @@ import com.radik.util.Triplet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.gl.RenderPipelines;
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.PressableWidget;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.input.AbstractInput;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -33,21 +35,16 @@ import static com.radik.client.RadikClient.GLOBAL_CHALLENGE;
 
 @Environment(EnvType.CLIENT)
 public class ChallengesScreen extends HandledScreen<ChallengesScreenHandler> {
-    protected static final Identifier BACKGROUND_TEXTURE = Identifier.of(Radik.MOD_ID, "textures/gui/event/halloween/background.png");
     private static final Identifier CHECK_TEXTURE = Identifier.of(Radik.MOD_ID, "textures/gui/butts/check.png");
     private static final Identifier CROSS_TEXTURE = Identifier.of(Radik.MOD_ID, "textures/gui/butts/cross.png");
-
-    private static final int BACKGROUND_WIDTH = 256;
-    private static final int BACKGROUND_HEIGHT = 166;
-    private static final int TITLE_Y = 15;
 
     private final List<Eventer> challenges = new ArrayList<>();
     private final List<RewardButton> rewardButtons = new ArrayList<>();
 
     public ChallengesScreen(ChallengesScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
-        this.backgroundWidth = BACKGROUND_WIDTH;
-        this.backgroundHeight = BACKGROUND_HEIGHT;
+        this.backgroundWidth = 256;
+        this.backgroundHeight = 166;
     }
 
     @Override
@@ -87,7 +84,7 @@ public class ChallengesScreen extends HandledScreen<ChallengesScreenHandler> {
 
     @Override
     protected void drawBackground(@NotNull DrawContext context, float delta, int mouseX, int mouseY) {
-        context.drawTexture(RenderLayer::getGuiTextured, BACKGROUND_TEXTURE, this.x, this.y, 0.0F, 0.0F, this.backgroundWidth, this.backgroundHeight, 256, 256);
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, EventScreen.BACKGROUND_TEXTURE, this.x, this.y, 0.0F, 0.0F, this.backgroundWidth, this.backgroundHeight, 256, 256);
         drawProgressBars(context);
     }
 
@@ -112,7 +109,7 @@ public class ChallengesScreen extends HandledScreen<ChallengesScreenHandler> {
 
             String text = challenge.getValue() + "/" + challenge.getCount();
             int tw = textRenderer.getWidth(text);
-            context.drawText(textRenderer, text, barX + (w - tw) / 2, barY, 0x111111, false);
+            context.drawText(textRenderer, text, barX + (w - tw) / 2, barY, 0xFF111111, false);
         }
     }
 
@@ -135,7 +132,7 @@ public class ChallengesScreen extends HandledScreen<ChallengesScreenHandler> {
     protected void drawForeground(@NotNull DrawContext context, int mouseX, int mouseY) {
         context.drawText(this.textRenderer, Text.literal("§lЗадания"),
             (this.backgroundWidth - this.textRenderer.getWidth("Задания")) / 2 - 10,
-            TITLE_Y, 0x00FF00, true);
+            15, 0xFF00FF00, true);
 
         drawDis(context);
     }
@@ -145,16 +142,16 @@ public class ChallengesScreen extends HandledScreen<ChallengesScreenHandler> {
         int textSpacing = 29;
 
         for (int i = 0; i < challenges.size(); i++) {
-            Event<?> challenge = (Event<?>) challenges.get(i);
+            Event challenge = (Event) challenges.get(i);
             if (challenge == null) continue;
 
             int textY = startY + i * textSpacing;
             String challengeType = getText(challenge);
 
-            context.getMatrices().push();
-            context.getMatrices().scale(0.85f, 0.85f, 1.0f);
-            context.drawText(textRenderer, Text.literal(challengeType), 10, textY, 0xFFFFFF, true);
-            context.getMatrices().pop();
+            context.getMatrices().pushMatrix();
+            context.getMatrices().scale(0.85f, 0.85f);
+            context.drawText(textRenderer, Text.literal(challengeType), 10, textY, 0xFFFFFFFF, true);
+            context.getMatrices().popMatrix();
 
             EventData data = challenge.data();
             Text name = switch (data.getType()) {
@@ -164,11 +161,11 @@ public class ChallengesScreen extends HandledScreen<ChallengesScreenHandler> {
                 default -> Text.of("ERROR");
             };
 
-            context.getMatrices().push();
-            context.getMatrices().scale(0.7f, 0.7f, 1.0f);
+            context.getMatrices().pushMatrix();
+            context.getMatrices().scale(0.7f, 0.7f);
             Text description = Text.translatable(challenge.getText().getString()).append(" ").append(String.valueOf(challenge.count())).append(" ").append(name);
-            context.drawText(textRenderer, description, 107, (int) (textY * 1.25 - 14), 0xCCCCCC, false);
-            context.getMatrices().pop();
+            context.drawText(textRenderer, description, 107, (int) (textY * 1.25 - 14), 0xFFCCCCCC, false);
+            context.getMatrices().popMatrix();
         }
     }
 
@@ -209,8 +206,12 @@ public class ChallengesScreen extends HandledScreen<ChallengesScreenHandler> {
             update();
         }
 
+        private void update() {
+            this.active = challenge.isCompleted() && !challenge.isClaimed();
+        }
+
         @Override
-        public void onPress() {
+        public void onPress(AbstractInput input) {
             if (client == null || client.player == null) return;
             EventBlockEntity be = handler.getBlockEntity();
 
@@ -223,14 +224,10 @@ public class ChallengesScreen extends HandledScreen<ChallengesScreenHandler> {
             }
         }
 
-        private void update() {
-            this.active = challenge.isCompleted() && !challenge.isClaimed();
-        }
-
         @Override
         public void renderWidget(@NotNull DrawContext context, int mouseX, int mouseY, float delta) {
             Identifier texture = challenge.isClaimed() ? CHECK_TEXTURE : challenge.isCompleted() ? CHECK_TEXTURE : CROSS_TEXTURE;
-            context.drawTexture(RenderLayer::getGuiTextured, texture, getX(), getY(), 0, 0, width, height, width, height);
+            context.drawTexture(RenderPipelines.GUI_TEXTURED, texture, getX(), getY(), 0, 0, width, height, width, height);
             if (!this.active) context.fill(getX(), getY(), getX() + width, getY() + height, 0x80000000);
         }
 
@@ -281,9 +278,9 @@ public class ChallengesScreen extends HandledScreen<ChallengesScreenHandler> {
         }
 
         @Override
-        public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        public boolean mouseClicked(Click click, boolean doubled) {
             showingRewardTooltip = false;
-            return super.mouseClicked(mouseX, mouseY, button);
+            return super.mouseClicked(click, doubled);
         }
 
         @Override

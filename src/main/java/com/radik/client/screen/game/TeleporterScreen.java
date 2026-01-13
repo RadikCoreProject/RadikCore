@@ -1,6 +1,6 @@
 package com.radik.client.screen.game;
 
-import com.radik.item.custom.Teleporter;
+import com.radik.item.custom.reward.Teleporter;
 import com.radik.packets.payload.VecPayload;
 import com.radik.util.Duplet;
 import com.radik.util.Triplet;
@@ -18,6 +18,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -167,23 +169,24 @@ public class TeleporterScreen extends Screen {
     private Text getPlayerPositionText() {
         PlayerEntity player = CLIENT.player;
         if (player != null) {
-            return formatPosition(player.getPos());
+            return formatPosition(player.getEntityPos());
         }
         return Text.literal("Недоступно");
     }
 
-    private Triplet<Text, Integer, Vec3d> calculate() {
+    @Contract(" -> new")
+    private @NotNull Triplet<Text, Integer, Vec3d> calculate() {
         if (CLIENT.player == null) return new Triplet<>(Text.literal(""), -1, null);
-        String worldType = getDimension(CLIENT.player.getWorld());
+        String worldType = getDimension(CLIENT.player.getEntityWorld());
 
         try {
             double x = Double.parseDouble(xField.getText().replace(",", "."));
             double y = Double.parseDouble(yField.getText().replace(",", "."));
             double z = Double.parseDouble(zField.getText().replace(",", "."));
-            Vec3d pos = CLIENT.player.getPos();
+            Vec3d pos = CLIENT.player.getEntityPos();
             Vec3d pos2 = new Vec3d(x, y, z);
             if (worldType.equals("end")) return new Triplet<>(Text.literal("-"), -3, pos2);
-            Duplet<Integer, Boolean> duplet = Teleporter.calculateCooldown(parent, pos, pos2, CLIENT.player.getWorld());
+            Duplet<Integer, Boolean> duplet = Teleporter.calculateCooldown(parent, pos, pos2, CLIENT.player.getEntityWorld());
             if (duplet.type() == null || duplet.parametrize() == null) throw new NumberFormatException();
             boolean hasCooldown = duplet.parametrize();
             this.cooldownAfter = duplet.type();
@@ -198,19 +201,20 @@ public class TeleporterScreen extends Screen {
 
     private void calculateBack() {
         if (CLIENT.player == null) return;
-        String worldType = getDimension(CLIENT.player.getWorld());
+        String worldType = getDimension(CLIENT.player.getEntityWorld());
         if (worldType.equals("end")) {
             this.posBack = -3;
             return;
         }
-        Duplet<Integer, Boolean> duplet = Teleporter.calculateCooldown(parent, CLIENT.player.getPos(), lastPosition, CLIENT.player.getWorld());
+        Duplet<Integer, Boolean> duplet = Teleporter.calculateCooldown(parent, CLIENT.player.getEntityPos(), lastPosition, CLIENT.player.getEntityWorld());
         if (duplet.type() == null || duplet.parametrize() == null) throw new NumberFormatException();
         boolean hasCooldown = duplet.parametrize();
         this.cooldownAfterBack = duplet.type();
         this.posBack = hasCooldown ? 0 : -2;
     }
 
-    private Text formatPosition(Vec3d pos) {
+    @Contract("_ -> new")
+    private @NotNull Text formatPosition(@NotNull Vec3d pos) {
         return Text.literal(String.format("%.1f, %.1f, %.1f", pos.x, pos.y, pos.z));
     }
 
@@ -236,6 +240,7 @@ public class TeleporterScreen extends Screen {
             xField.setText(String.format("%.1f", lastPosition.x));
             yField.setText(String.format("%.1f", lastPosition.y));
             zField.setText(String.format("%.1f", lastPosition.z));
+            this.cooldownAfter = this.cooldownAfterBack;
             teleport();
         }
     }
@@ -245,7 +250,6 @@ public class TeleporterScreen extends Screen {
         renderBackground(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
 
-        // texts
         context.drawText(textRenderer, "X:", width / 2 - 160, height / 2 - 15, 0xFFFFFF, false);
         context.drawText(textRenderer, "Y:", width / 2 - 50, height / 2 - 15, 0xFFFFFF, false);
         context.drawText(textRenderer, "Z:", width / 2 + 60, height / 2 - 15, 0xFFFFFF, false);

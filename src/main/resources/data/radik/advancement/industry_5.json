@@ -1,0 +1,46 @@
+{
+  "parent": "radik:industry_2",
+  "criteria": {
+    "event": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:lamp"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.industry_5.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "radik:lamp"
+    },
+    "title": {
+      "translate": "advancements.radik.industry_5.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event"
+    ]
+  ],
+  "rewards": {
+    "experience": 10,
+    "function": "radik:advancements/base/industry/5"
+  },
+  "sends_telemetry_event": true
+}

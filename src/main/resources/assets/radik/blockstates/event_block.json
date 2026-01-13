@@ -1,6 +1,9 @@
 {
   "variants": {
     "event_type=0": { "model": "radik:block/event/base" },
-    "event_type=1": { "model": "radik:block/event/halloween" }
+    "event_type=1": { "model": "radik:block/event/halloween" },
+    "event_type=2": { "model": "radik:block/event/winter" },
+    "event_type=3": { "model": "radik:block/event/flower" },
+    "event_type=4": { "model": "radik:block/event/grass" }
   }
 }

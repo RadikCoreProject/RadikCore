@@ -1,5 +1,6 @@
 package com.radik.block.custom.winter;
 
+import com.radik.Radik;
 import com.radik.block.custom.RotatableBlock;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
@@ -21,7 +22,9 @@ public class Snowman extends RotatableBlock {
 
     @Override
     public BlockState getPlacementState(@NotNull ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING2, Math.abs(ctx.getPlayerLookDirection().getHorizontalQuarterTurns()));
+        return this.getDefaultState()
+            .with(FACING2, Math.abs(ctx.getPlayerLookDirection().getHorizontalQuarterTurns()))
+            .with(TYPE, Radik.RANDOM.nextInt(1, 10));
     }
 
     @Override

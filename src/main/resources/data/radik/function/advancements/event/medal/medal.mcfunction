@@ -1,1 +1,0 @@
-give @s radik:cell_2 16

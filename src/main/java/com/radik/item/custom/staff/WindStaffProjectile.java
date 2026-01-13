@@ -39,7 +39,7 @@ public class WindStaffProjectile extends ProjectileEntity {
         System.out.println(entityHitResult.getType().name());
         Entity entity = entityHitResult.getEntity();
         int i = entity instanceof BlazeEntity ? 3 : 0;
-        entity.damage((ServerWorld) entity.getWorld(), new DamageSource(RegistryEntry.of(new DamageType("убит посохом", 2))), (float)i); // deals damage
+        entity.damage((ServerWorld) entity.getEntityWorld(), new DamageSource(RegistryEntry.of(new DamageType("убит посохом", 2))), (float)i); // deals damage
 
         if (entity instanceof LivingEntity livingEntity) { // checks if entity is an instance of LivingEntity (meaning it is not a boat or minecart)
             livingEntity.addStatusEffect((new StatusEffectInstance(StatusEffects.BLINDNESS, 20 * 3, 0))); // applies a status effect
@@ -52,9 +52,9 @@ public class WindStaffProjectile extends ProjectileEntity {
     @Override
     protected void onBlockCollision(BlockState state) { // called on collision with a block
         super.onBlockCollision(state);
-        if (!this.getWorld().isClient) { // checks if the world is client
-            this.getWorld().sendEntityStatus(this, (byte)3); // particle?
-            this.kill((ServerWorld) this.getWorld()); // kills the projectile
+        if (!this.getEntityWorld().isClient()) { // checks if the world is client
+            this.getEntityWorld().sendEntityStatus(this, (byte)3); // particle?
+            this.kill((ServerWorld) this.getEntityWorld()); // kills the projectile
         }
 
     }

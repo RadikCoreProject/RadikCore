@@ -37,7 +37,6 @@ public class Batut extends SlimeBlock {
         Vec3d vec3d = entity.getVelocity();
         if (vec3d.y < 0.0D && Math.abs(vec3d.y) < 200.0D)
             entity.setVelocity(vec3d.x, -vec3d.y * (entity instanceof LivingEntity ? 2.0D : 0.8D), vec3d.z);
-
     }
 
     @Override

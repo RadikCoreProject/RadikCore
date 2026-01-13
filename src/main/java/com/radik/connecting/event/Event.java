@@ -1,26 +1,93 @@
 package com.radik.connecting.event;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.radik.Radik;
 import com.radik.connecting.event.factory.*;
+import com.radik.util.Duplet;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.storage.NbtReadView;
+import net.minecraft.storage.NbtWriteView;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.text.Text;
+import net.minecraft.util.ErrorReporter;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
-public class Event<T extends EventData> implements Comparable<Event<?>>, Eventer {
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+/**
+ * <p>глобальная переработка событий для зимнего обновления.</p>
+ * <p>убрана типизация, добавлены кодеки для сериализации</p>
+ * @see Eventer
+ * @see EventData
+ * @since 1.4.1
+ * @author radik
+ */
+public class Event implements Comparable<Event>, Eventer {
     private ChallengeTime time;
     private final ChallengeType type;
     private ChallengeEvent event;
-    private T data;
+    private EventData data;
     private ItemStack reward;
     private int count;
     private int completion = 0;
-    private static final EventDataFactory DATA_FACTORY = new EventDataFactoryImpl();
     private boolean claimed = false;
 
+    public static final Codec<Event> CODEC = RecordCodecBuilder.create(instance ->
+        instance.group(
+            Codec.STRING.fieldOf("time").xmap(
+                ChallengeTime::valueOf,
+                ChallengeTime::name
+            ).forGetter(Event::time),
+            Codec.STRING.fieldOf("type").xmap(
+                ChallengeType::valueOf,
+                ChallengeType::name
+            ).forGetter(Event::type),
+            Codec.STRING.fieldOf("event").xmap(
+                ChallengeEvent::valueOf,
+                ChallengeEvent::name
+            ).forGetter(Event::event),
+            Codec.STRING.fieldOf("dataType").forGetter(e -> e.data.getType()),
+            Codec.STRING.fieldOf("dataValue").forGetter(e -> e.data.getStringValue()),
+            ItemStack.CODEC.fieldOf("reward").forGetter(Event::reward),
+            Codec.INT.fieldOf("count").forGetter(Event::count),
+            Codec.INT.fieldOf("completion").forGetter(Event::completion),
+            Codec.BOOL.fieldOf("claimed").forGetter(Event::isClaimed)
+        ).apply(instance, (timeStr, typeStr, eventStr, dataType, dataValue, reward, count, completion, claimed) -> {
+            EventData data = createEventData(dataType, dataValue);
+            Event eventObj = new Event(
+                timeStr,
+                typeStr,
+                eventStr,
+                data, reward, count
+            );
+            eventObj.completion = completion;
+            eventObj.claimed = claimed;
+            return eventObj;
+        })
+    );
+
+    private static EventData createEventData(String type, String value) {
+        Identifier id = Identifier.tryParse(value);
+        if (id == null) return null;
+
+        return switch (type) {
+            case "block" -> new BlockEventData(id);
+            case "item" -> new ItemEventData(id);
+            case "entity" -> new EntityEventData(id);
+            default -> null;
+        };
+    }
+
     public Event(ChallengeTime time, ChallengeType type,
-                 ChallengeEvent event, T data, ItemStack reward, int count) {
+                 ChallengeEvent event, EventData data, ItemStack reward, int count) {
         this.time = time;
         this.type = type;
         this.event = event;
@@ -30,12 +97,11 @@ public class Event<T extends EventData> implements Comparable<Event<?>>, Eventer
     }
 
     @Override
-    public int compareTo(@NotNull Event<?> o) {
+    public int compareTo(@NotNull Event o) {
         int timeComparison = Integer.compare(o.time().ordinal(), time().ordinal());
         return timeComparison != 0 ? timeComparison :
-                Float.compare((float) o.completion() / o.count(), (float) completion() / count());
+            Float.compare((float) o.completion() / o.count(), (float) completion() / count());
     }
-
 
     public Text getText() { return Text.translatable("radik.util." + type); }
     @Override
@@ -51,7 +117,7 @@ public class Event<T extends EventData> implements Comparable<Event<?>>, Eventer
     public int getCount() { return count; }
     public void setCount(int c) { count = c; }
     public void setTime(ChallengeTime challengeTime) { time = challengeTime; }
-    public void setData(T data) { this.data = data; }
+    public void setData(EventData data) { this.data = data; }
     public void setReward(ItemStack itemStack) { reward = itemStack; }
     public void setEvent(ChallengeEvent challengeEvent) { event = challengeEvent; }
     @Override
@@ -64,57 +130,33 @@ public class Event<T extends EventData> implements Comparable<Event<?>>, Eventer
     public ChallengeTime time() { return time; }
     public ChallengeType type() { return type; }
     public ChallengeEvent event() { return event; }
-    public T data() { return data; }
+    public EventData data() { return data; }
     public ItemStack reward() { return reward; }
     public int count() { return count; }
     public int completion() { return completion; }
 
     @Override
     public NbtCompound toNbt(RegistryWrapper.WrapperLookup registries) {
-        NbtCompound nbt = new NbtCompound();
-        nbt.putString("time", time.name());
-        nbt.putString("type", type.name());
-        nbt.putString("event", event.name());
-        nbt.put("data", data.toNbt());
-
-        ItemStack reward = this.reward.copy();
-        if (reward.getCount() > reward.getMaxCount()) reward.setCount(reward.getMaxCount());
-        nbt.put("reward", reward.toNbt(registries));
-
-        nbt.putString("dataType", data.getType());
-        nbt.putInt("count", count);
-        nbt.putInt("completion", completion);
-        nbt.putBoolean("rewardClaimed", claimed);
-        return nbt;
+        try (ErrorReporter.Logging logging = new ErrorReporter.Logging(ErrorReporter.Impl.CONTEXT, Radik.LOGGER)) {
+            NbtWriteView writeView = NbtWriteView.create(logging, registries);
+            writeView.put("event", CODEC, this);
+            return writeView.getNbt();
+        }
     }
 
-    public static @NotNull Event<?> fromNbt(@NotNull NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        ChallengeTime time = ChallengeTime.valueOf(nbt.getString("time").orElse("DAY"));
-        ChallengeType type = ChallengeType.valueOf(nbt.getString("type").orElse("BROKE"));
-        ChallengeEvent event = ChallengeEvent.valueOf(nbt.getString("event").orElse("HALLOWEEN"));
-        int count = nbt.getInt("count").orElse(0);
-        int completion = nbt.getInt("completion").orElse(0);
+    public static Event fromNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
+        try (ErrorReporter.Logging logging = new ErrorReporter.Logging(ErrorReporter.Impl.CONTEXT, Radik.LOGGER)) {
+            NbtReadView readView = (NbtReadView) NbtReadView.create(logging, registries, nbt);
+            return readView.read("event", CODEC).orElse(null);
+        }
+    }
 
-        ItemStack reward = ItemStack.EMPTY;
-        NbtElement rewardNbt = nbt.get("reward");
-        if (rewardNbt != null) reward = ItemStack.fromNbt(registries, rewardNbt).orElse(ItemStack.EMPTY);
+    public static Event fromReadView(@NotNull ReadView view) {
+        return view.read("event", CODEC).orElse(null);
+    }
 
-        NbtElement dataNbt = nbt.get("data");
-        String dataType = nbt.getString("dataType").orElse("item");
-        EventData data = DATA_FACTORY.fromNbt(dataNbt);
-
-        boolean rewardClaimed = nbt.getBoolean("rewardClaimed").orElse(false);
-
-        Event<?> result = switch (dataType) {
-            case "block" -> new Event<>(time, type, event, (BlockEventData) data, reward, count);
-            case "item" -> new Event<>(time, type, event, (ItemEventData) data, reward, count);
-            case "entity" -> new Event<>(time, type, event, (EntityEventData) data, reward, count);
-            default -> throw new IllegalArgumentException("Unknown data type: " + dataType);
-        };
-
-        result.completion = completion;
-        result.claimed = rewardClaimed;
-        return result;
+    public void toWriteView(@NotNull WriteView view) {
+        view.put("event", CODEC, this);
     }
 
     @Override
@@ -129,13 +171,56 @@ public class Event<T extends EventData> implements Comparable<Event<?>>, Eventer
     @Override
     public String toString() {
         return String.format("Event: {" +
-            "time: [%s], " +
-            "type: [%s], " +
-            "event: [%s], " +
-            "<T>data: [%s], " +
-            "reward: [%s], " +
-            "count: [%s], " +
-            "claimed: [%s]}",
+                "time: [%s], " +
+                "type: [%s], " +
+                "event: [%s], " +
+                "data: [%s], " +
+                "reward: [%s], " +
+                "count: [%s], " +
+                "claimed: [%s]}",
             time, type, event, data, reward, count, claimed);
     }
+
+    private static final Codec<Duplet<String, Eventer[]>> SINGLE_ENTRY_CODEC =
+        RecordCodecBuilder.create(instance -> instance.group(
+            Codec.STRING.fieldOf("player").forGetter(Duplet::type),
+            Codec.list(Event.CODEC)
+                .xmap(
+                    eventList -> {
+                        Eventer[] array = new Eventer[4];
+                        for (int i = 0; i < Math.min(eventList.size(), 4); i++) {
+                            array[i] = eventList.get(i);
+                        }
+                        return array;
+                    },
+                    eventerArray -> {
+                        return Arrays.stream(eventerArray)
+                            .filter(eventer -> eventer instanceof Event)
+                            .map(eventer -> (Event) eventer)
+                            .collect(Collectors.toList());
+                    }
+                )
+                .fieldOf("events").forGetter(Duplet::parametrize)
+        ).apply(instance, Duplet::new));
+
+    public static final Codec<Map<String, Eventer[]>> PLAYER_EVENTS_CODEC =
+        Codec.list(SINGLE_ENTRY_CODEC)
+            .xmap(
+                dupletList -> dupletList.stream()
+                    .collect(Collectors.toMap(
+                        Duplet::type,
+                        Duplet::parametrize
+                    )),
+                map -> map.entrySet().stream()
+                    .map(entry -> new Duplet<>(entry.getKey(), entry.getValue()))
+                    .collect(Collectors.toList())
+            );
+
+    public static final Codec<Duplet<Eventer, List<String>>> GLOBAL_EVENT_CODEC =
+        RecordCodecBuilder.create(instance ->
+            instance.group(
+                Event.CODEC.fieldOf("event").forGetter(d -> (Event) d.type()),
+                Codec.list(Codec.STRING).fieldOf("params").forGetter(Duplet::parametrize)
+            ).apply(instance, Duplet::new)
+        );
 }

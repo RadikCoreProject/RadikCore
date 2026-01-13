@@ -1,13 +1,14 @@
 package com.radik.client.screen;
 
-import com.radik.property.client.SettingsProperties;
-import com.radik.property.client.Property;
+import com.radik.property.SettingsProperties;
+import com.radik.property.Property;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.*;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class ClientSettingsScreen extends Screen {
 
     @Override
     protected void init() {
+        TextWidget text = this.addDrawableChild(new TextWidget(Text.literal("Client settings").withColor(0xBB0000).formatted(Formatting.BOLD), textRenderer));
+        text.setPosition(width / 2 - 50, height / 8);
         if (this.layout != null && client != null) {
             GridWidget gridWidget = new GridWidget();
             gridWidget.setColumnSpacing(6);
@@ -57,7 +60,6 @@ public class ClientSettingsScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        renderBackground(context, mouseX, mouseY, delta);
         context.drawCenteredTextWithShadow(textRenderer, title, width / 2, 20, 0xFFFFFF);
         super.render(context, mouseX, mouseY, delta);
     }

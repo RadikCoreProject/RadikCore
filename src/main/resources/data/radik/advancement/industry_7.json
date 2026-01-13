@@ -1,0 +1,86 @@
+{
+  "parent": "radik:industry_3",
+  "criteria": {
+    "1": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:fonar_lamp1"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "2": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:fonar_lamp2"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "3": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:fonar_lamp3"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "4": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:fonar_lamp4"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.industry_7.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "radik:fonar_lamp4"
+    },
+    "title": {
+      "translate": "advancements.radik.industry_7.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "1"
+    ],
+    [
+      "2"
+    ],
+    [
+      "3"
+    ],
+    [
+      "4"
+    ]
+  ],
+  "rewards": {
+    "experience": 60,
+    "function": "radik:advancements/base/industry/7"
+  },
+  "sends_telemetry_event": true
+}

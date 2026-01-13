@@ -1,5 +1,6 @@
 package com.radik.item.custom;
 
+import com.radik.block.RegisterBlocks;
 import com.radik.connecting.event.ChallengeEvent;
 import com.radik.item.RegisterItems;
 import net.minecraft.entity.ItemEntity;
@@ -14,27 +15,29 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Random;
 
-import static com.radik.Data.EVENT_TYPE;
-
 public class LuckyBasket extends EventItem {
     private static final HashMap<Item, Integer> rewards = new HashMap<>();
     private static final Random random = new Random();
     static {
-        rewards.put(RegisterItems.CANDY_GREEN, 41);
-        rewards.put(RegisterItems.CANDY_BLUE, 31);
-        rewards.put(RegisterItems.CANDY_RED, 31);
-        rewards.put(RegisterItems.CANDY_YELLOW, 51);
-        rewards.put(RegisterItems.CANDY_BASKET_EMPTY, 6);
+        rewards.put(RegisterItems.SNOWFLAKE, 99);
+        rewards.put(RegisterItems.ICE_SHARD, 40);
+        rewards.put(RegisterItems.CHRISTMAS_BALLS, 60);
+        rewards.put(RegisterItems.TOMATO, 20);
+        rewards.put(RegisterItems.CHAMPAGNE, 3);
+        rewards.put(RegisterItems.RED_WINE, 3);
+        rewards.put(RegisterItems.SALAD, 10);
+        rewards.put(RegisterBlocks.GARLAND.asItem(), 5);
+        rewards.put(RegisterItems.ORANGE, 50);
     }
 
     public LuckyBasket(@NotNull Item.Settings settings) {
-        super(settings.maxCount(99).component(EVENT_TYPE, ChallengeEvent.HALLOWEEN));
+        super(settings.maxCount(99), ChallengeEvent.HALLOWEEN);
     }
 
     public ActionResult use(World world, PlayerEntity user, Hand hand) {
         super.use(world, user, hand);
-        Item item = rewards.keySet().toArray(new Item[5])[random.nextInt(5)];
-        ItemEntity stack = new ItemEntity(world, user.getX(), user.getY(), user.getZ(), new ItemStack(item, random.nextInt(1, rewards.get(item))));
+        Item item = rewards.keySet().toArray(new Item[9])[random.nextInt(9)];
+        ItemEntity stack = new ItemEntity(world, user.getX(), user.getY(), user.getZ(), new ItemStack(item, random.nextInt(1, rewards.get(item) + 1)));
         world.spawnEntity(stack);
         user.getStackInHand(hand).decrementUnlessCreative(1, user);
         return ActionResult.SUCCESS;

@@ -15,6 +15,7 @@ import static com.radik.Data.CAPSULE_FLUID;
 import static com.radik.Data.CAPSULE_LEVEL;
 import static com.radik.block.RegisterBlocks.*;
 import static com.radik.item.RegisterItems.*;
+import static com.radik.item.RegisterItems.CUCUMBER;
 
 public final class ModGroup implements IRegistry {
     private static final ItemStack CAPSULE_WATER = CAPSULE.getDefaultStack();
@@ -885,6 +886,14 @@ public final class ModGroup implements IRegistry {
                         entries.add(CAPSULE_LAVA);
                         entries.add(CAPSULE_HYDROGEN);
                         entries.add(CAPSULE_HELIUM);
+
+                        entries.add(CUCUMBER_SEEDS);
+                        entries.add(CUCUMBER);
+                        entries.add(TOMATO);
+                        entries.add(JAR);
+                        entries.add(JAR_CUCMBERS);
+                        entries.add(CIGARETTE);
+                        entries.add(CIGARETTE_PACK);
                     }).build());
 
     public static final ItemGroup RADIK_WINTER = Registry.register(Registries.ITEM_GROUP,
@@ -954,6 +963,21 @@ public final class ModGroup implements IRegistry {
                         entries.add(SUGAR_BLOCK_RED);
                         entries.add(SUGAR_BROWN);
                         entries.add(SUGAR_BLOCK_BROWN);
+
+                        entries.add(GARLAND);
+                        entries.add(CHRISTMAS_BALLS);
+                        entries.add(SNOWFLAKE);
+                        entries.add(WINTER_HAT);
+                        entries.add(DYE_RAINBOW);
+                        entries.add(RAINBOW_WOOL);
+                        entries.add(RAINBOW_STAINED_GLASS);
+                        entries.add(RAINBOW_STAINED_GLASS_PANE);
+                        entries.add(FREEZER);
+                        entries.add(ICE_SHARD);
+                        entries.add(SALAD);
+                        entries.add(CHAMPAGNE);
+                        entries.add(RED_WINE);
+                        entries.add(ORANGE);
                     }).build());
 
     public static final ItemGroup RADIK_HALLOWEEN = Registry.register(Registries.ITEM_GROUP,
@@ -995,7 +1019,9 @@ public final class ModGroup implements IRegistry {
                         entries.add(ADVENTURE_HAT);
                         entries.add(ADVENTURE_1M_HAT);
                         entries.add(PIX);
+                        entries.add(DISC_PRESIDENT_IS_DEAD);
                         entries.add(BICYCLE);
+                        entries.add(BAG);
                         entries.add(HOUSE);
                         entries.add(DISC_JORDANAIRES);
                         entries.add(JAVA_PROGRAMMER);
@@ -1004,6 +1030,7 @@ public final class ModGroup implements IRegistry {
                         entries.add(DISK_BOLSHOY_KUSH);
                         entries.add(DISC_DEBRIS);
                         entries.add(BATUT);
+                        entries.add(TOMMY);
                         entries.add(TROPHY_NOSTALGIC_BRONZE);
                         entries.add(TROPHY_NOSTALGIC_SILVER);
                         entries.add(TROPHY_NOSTALGIC_GOLD);
@@ -1020,7 +1047,7 @@ public final class ModGroup implements IRegistry {
                         entries.add(WIND_STAFF);
 //                        entries.add(ELECTROLYZER);
                         entries.add(EVENT_BLOCK);
-                        entries.add(TEST_SWORD);
+//                        entries.add(TEST_SWORD);
                     }).build());
 
     public static void initialize() {}

@@ -1,15 +1,12 @@
 package com.radik.packets.payload;
 
 import com.radik.connecting.Decoration;
-import io.netty.buffer.ByteBuf;
-import io.netty.handler.codec.DecoderException;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
