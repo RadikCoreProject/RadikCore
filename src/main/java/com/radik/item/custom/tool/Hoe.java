@@ -65,7 +65,6 @@ public class Hoe extends HoeItem implements Tools {
                     if (stack1.getItem().equals(need_item)) {
                         stack1.decrement(1);
                         world.setBlockState(pos, block.getDefaultState());
-                        Radik.sendEventToPlayers(0, pos, 0, (ServerWorld) world);
                     }
                 });
             }
