@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "radik:lead_helmet",
+    "radik:lead_chestplate",
+    "radik:lead_leggings",
+    "radik:lead_boots"
+  ]
+}

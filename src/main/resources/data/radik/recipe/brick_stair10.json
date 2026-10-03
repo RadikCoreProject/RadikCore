@@ -1,18 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "R": {
-      "item": "radik:brick10"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "R": "radik:brick10"
+    },
+    "pattern": [
+        "  R",
+        " RR",
+        "RRR"
+    ],
+    "result": {
+        "count": 4,
+        "id": "radik:brick_stair10"
     }
-  },
-  "pattern": [
-    "  R",
-    " RR",
-    "RRR"
-  ],
-  "result": {
-    "count": 4,
-    "id": "radik:brick_stair10"
-  }
 }

@@ -1,10 +1,8 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:coarse_dirt"
-  },
-  "result": {
-    "count": 1,
-    "id": "radik:brick_dirt_3"
-  }
+    "type": "minecraft:stonecutting",
+    "ingredient": "minecraft:coarse_dirt",
+    "result": {
+        "count": 1,
+        "id": "radik:brick_dirt_3"
+    }
 }

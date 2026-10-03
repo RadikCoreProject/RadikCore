@@ -1,0 +1,89 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/chestplate/quartz"
+        },
+        "when": "minecraft:quartz"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/chestplate/iron"
+        },
+        "when": "minecraft:iron"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/chestplate/netherite"
+        },
+        "when": "minecraft:netherite"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/chestplate/redstone"
+        },
+        "when": "minecraft:redstone"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/chestplate/copper"
+        },
+        "when": "minecraft:copper"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/chestplate/gold"
+        },
+        "when": "minecraft:gold"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/chestplate/emerald"
+        },
+        "when": "minecraft:emerald"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/chestplate/diamond"
+        },
+        "when": "minecraft:diamond"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/chestplate/lapis"
+        },
+        "when": "minecraft:lapis"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/chestplate/amethyst"
+        },
+        "when": "minecraft:amethyst"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/chestplate/resin"
+        },
+        "when": "minecraft:resin"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "radik:item/radioactive/lead/chestplate"
+    },
+    "property": "minecraft:trim_material"
+  }
+}

@@ -6,12 +6,8 @@
     "###"
   ],
   "key": {
-    "#": {
-      "tag": "radik:froglights_item"
-    },
-    "P": {
-      "item": "minecraft:green_dye"
-    }
+    "#": "#radik:froglights_item",
+    "P": "radik:dye_verdant"
   },
   "result": {
     "id": "minecraft:verdant_froglight",

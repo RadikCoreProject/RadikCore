@@ -91,7 +91,7 @@ import org.jetbrains.annotations.Nullable;
 //        public List<? extends Selectable> selectableChildren() {
 //            return ImmutableList.of(new Selectable() {
 //                @Override
-//                public Selectable.SelectionType getType() {
+//                public Selectable.SelectionType type() {
 //                    return Selectable.SelectionType.HOVERED;
 //                }
 //

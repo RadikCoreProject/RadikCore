@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "radik:radiation_suit"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "radik:radiation_suit"
+      }
+    ]
+  }
+}

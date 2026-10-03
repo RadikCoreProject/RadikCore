@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "radik:block/chisel/chaotic_slab_2/108"
+    },
+    "type=double": {
+      "model": "radik:block/chisel/chaotic_2/108"
+    },
+    "type=top": {
+      "model": "radik:block/chisel/chaotic_slab_2/108_top"
+    }
+  }
+}

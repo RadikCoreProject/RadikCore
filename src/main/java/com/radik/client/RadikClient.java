@@ -178,6 +178,7 @@ public class RadikClient implements ClientModInitializer {
             switch (eventId) {
                 case 0 -> ParticleUtil.spawnParticle(world, pos, ParticleTypes.LANDING_HONEY, UniformIntProvider.create(min, max));
                 case 2 -> ParticleUtil.spawnParticle(world, pos, RegisterParticles.FLOWERY_PARTICLE, UniformIntProvider.create(min, max));
+                case 3 -> ParticleUtil.spawnParticle(world, pos, ParticleTypes.COMPOSTER, UniformIntProvider.create(min, max));
             }
         });
 
@@ -198,8 +199,8 @@ public class RadikClient implements ClientModInitializer {
 
         ClientPlayNetworking.registerGlobalReceiver(LeaderboardPayload.ID, (payload, context) -> {
             Triplet<Integer, Integer, LinkedHashMap<String, Integer>> data = payload.leaderboard();
-            if (data.getCount() == null || data.getParametrize() == null || data.getType() == null) return;
-            LEADERBOARD = new Triplet<>(data.getType(), data.getParametrize(), data.getCount());
+            if (data.getCount() == null || data.parametrize() == null || data.type() == null) return;
+            LEADERBOARD = new Triplet<>(data.type(), data.parametrize(), data.getCount());
 
             context.client().execute(() -> {
                 if (context.client().player == null) return;

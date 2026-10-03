@@ -1,5 +1,16 @@
 {
   "replace": false,
   "values": [
+    "radik:uranus_ore",
+    "radik:uranus_deepslate_ore",
+    "radik:uranus_ore_block",
+    "radik:uranus_block",
+    "radik:lead_ore",
+    "radik:lead_deepslate_ore",
+    "radik:lead_ore_block",
+    "radik:lead_block",
+    "radik:lead_brick",
+    "radik:lead_radioactive_block",
+    "radik:old_crying_obsidian"
   ]
 }

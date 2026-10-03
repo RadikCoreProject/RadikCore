@@ -19,14 +19,14 @@ public record LeaderboardPayload(Triplet<Integer, Integer, LinkedHashMap<String,
 
         @Override
         public void encode(@NotNull RegistryByteBuf buf, @NotNull Triplet<Integer, Integer, LinkedHashMap<String, Integer>> leaderboard) {
-            if (leaderboard.getType() == null || leaderboard.getParametrize() == null || leaderboard.getCount() == null) {
+            if (leaderboard.type() == null || leaderboard.parametrize() == null || leaderboard.getCount() == null) {
                 buf.writeBoolean(true);
                 return;
             }
 
             buf.writeBoolean(false);
-            buf.writeInt(leaderboard.getType());
-            buf.writeInt(leaderboard.getParametrize());
+            buf.writeInt(leaderboard.type());
+            buf.writeInt(leaderboard.parametrize());
 
             LinkedHashMap<String, Integer> topPlayers = leaderboard.getCount();
             buf.writeVarInt(topPlayers.size());

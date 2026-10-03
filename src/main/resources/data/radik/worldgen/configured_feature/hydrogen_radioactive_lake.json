@@ -1,0 +1,31 @@
+{
+  "type": "radik:lake_feature",
+  "config": {
+    "hydrogen_block": {
+      "Name": "radik:hydrogen",
+      "Properties": {
+        "level": "0"
+      }
+    },
+    "max_blocks": 150,
+    "replace_block": {
+      "Name": "minecraft:stone"
+    },
+    "underground": true,
+    "deep": true,
+    "wall_blocks": [
+      {
+        "Name": "radik:chaotic_1_4"
+      },
+      {
+        "Name": "radik:chaotic_2_4"
+      },
+      {
+        "Name": "radik:chaotic_3_4"
+      },
+      {
+        "Name": "minecraft:stone"
+      }
+    ]
+  }
+}

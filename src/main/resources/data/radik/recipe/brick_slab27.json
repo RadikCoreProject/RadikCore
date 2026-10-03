@@ -1,10 +1,8 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "radik:brick27"
-  },
-  "result": {
-    "count": 2,
-    "id": "radik:brick_slab27"
-  }
+    "type": "minecraft:stonecutting",
+    "ingredient": "radik:brick27",
+    "result": {
+        "count": 2,
+        "id": "radik:brick_slab27"
+    }
 }

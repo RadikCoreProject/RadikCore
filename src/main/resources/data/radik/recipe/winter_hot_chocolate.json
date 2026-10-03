@@ -1,25 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "group": "christmas",
-  "key": {
-    "L": {
-      "item": "minecraft:sugar"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "christmas",
+    "key": {
+        "L": "minecraft:sugar",
+        "Q": "radik:winter_chocolate_bar",
+        "R": "minecraft:glass_bottle"
     },
-    "Q": {
-      "item": "radik:winter_chocolate_bar"
-    },
-    "R": {
-      "item": "minecraft:glass_bottle"
+    "pattern": [
+        " L ",
+        " Q ",
+        " R "
+    ],
+    "result": {
+        "count": 1,
+        "id": "radik:winter_hot_chocolate"
     }
-  },
-  "pattern": [
-    " L ",
-    " Q ",
-    " R "
-  ],
-  "result": {
-    "count": 1,
-    "id": "radik:winter_hot_chocolate"
-  }
 }

@@ -14,11 +14,11 @@ public class Triplet<T, P, C> implements Nplet<T, P> {
         this.c = count;
     }
 
-    public @Nullable T getType() {
+    public @Nullable T type() {
         return this.t;
     }
 
-    public @Nullable P getParametrize() {
+    public @Nullable P parametrize() {
         return this.p;
     }
 

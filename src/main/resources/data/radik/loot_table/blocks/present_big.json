@@ -13,8 +13,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 8
+                "min": 16,
+                "max": 32
               }
             }
           ]
@@ -29,8 +29,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 8
+                "min": 16,
+                "max": 32
               }
             }
           ]
@@ -45,8 +45,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 10
+                "min": 5,
+                "max": 16
               }
             }
           ]
@@ -61,8 +61,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 6
+                "min": 16,
+                "max": 32
               }
             }
           ]
@@ -105,8 +105,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 8
+                "min": 8,
+                "max": 24
               }
             }
           ]
@@ -183,18 +183,6 @@
         },
 
         {
-          "type": "minecraft:item",
-          "name": "minecraft:book",
-          "weight": 5,
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ]
-        },
-
-        {
           "type": "minecraft:tag",
           "name": "radik:winter_stone",
           "weight": 20,
@@ -204,7 +192,7 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
+                "min": 32,
                 "max": 64
               }
             }
@@ -236,7 +224,7 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
+                "min": 16,
                 "max": 32
               }
             }
@@ -252,7 +240,7 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
+                "min": 16,
                 "max": 32
               }
             }
@@ -268,7 +256,7 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
+                "min": 16,
                 "max": 32
               }
             }

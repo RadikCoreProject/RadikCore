@@ -17,7 +17,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
 
     @Override
     public void buildRegistry(RegistryBuilder registryBuilder) {
-        registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, WorldGenRegister::bootstrapConfigured);
-        registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, WorldGenRegister::bootstrapPlaced);
+//        registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, WorldGenRegister::bootstrapConfigured);
+//        registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, WorldGenRegister::bootstrapPlaced);
     }
 }

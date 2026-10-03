@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "radik:block/rainbow/blue_grass"
+      },
+      {
+        "model": "radik:block/rainbow/blue_grass",
+        "y": 90
+      },
+      {
+        "model": "radik:block/rainbow/blue_grass",
+        "y": 180
+      },
+      {
+        "model": "radik:block/rainbow/blue_grass",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "minecraft:block/snowy_grass_block"
+    }
+  }
+}

@@ -16,9 +16,9 @@ public class Quadriplet<T, P, C, Q> implements Nplet<T, P> {
         this.q = queue;
     }
 
-    public T getType() { return this.t; }
+    public T type() { return this.t; }
 
-    public P getParametrize() { return this.p; }
+    public P parametrize() { return this.p; }
 
     public C getCount() { return this.c; }
 

@@ -93,7 +93,7 @@
       "minecraft:spring_lava"
     ],
     [
-      "radik:hydrogen_radioactive_lake",
+      "radik:hydrogen_radioactive_lake_placed",
       "radik:ginger_forest_trees",
       "minecraft:patch_grass_forest",
       "minecraft:patch_grass_badlands",

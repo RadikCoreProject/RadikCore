@@ -1,10 +1,8 @@
 {
     "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item": "minecraft:purple_concrete"
-    },
+    "ingredient": "minecraft:purple_concrete",
     "result": {
         "count": 1,
         "id": "radik:circular_114"
     }
-    }
+}

@@ -1,0 +1,89 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/helmet/quartz"
+        },
+        "when": "minecraft:quartz"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/helmet/iron"
+        },
+        "when": "minecraft:iron"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/helmet/netherite"
+        },
+        "when": "minecraft:netherite"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/helmet/redstone"
+        },
+        "when": "minecraft:redstone"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/helmet/copper"
+        },
+        "when": "minecraft:copper"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/helmet/gold"
+        },
+        "when": "minecraft:gold"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/helmet/emerald"
+        },
+        "when": "minecraft:emerald"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/helmet/diamond"
+        },
+        "when": "minecraft:diamond"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/helmet/lapis"
+        },
+        "when": "minecraft:lapis"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/helmet/amethyst"
+        },
+        "when": "minecraft:amethyst"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/helmet/resin"
+        },
+        "when": "minecraft:resin"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "radik:item/radioactive/lead/helmet"
+    },
+    "property": "minecraft:trim_material"
+  }
+}

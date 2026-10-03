@@ -1,10 +1,8 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:coal_block"
-  },
-  "result": {
-    "count": 2,
-    "id": "radik:braid_slab_112"
-  }
+    "type": "minecraft:stonecutting",
+    "ingredient": "minecraft:coal_block",
+    "result": {
+        "count": 2,
+        "id": "radik:braid_slab_112"
+    }
 }

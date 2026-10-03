@@ -14,11 +14,11 @@ public class Duplet<T, P> implements Nplet<T, P> {
         this.p = parametrize;
     }
 
-    public @Nullable T getType() {
+    public @Nullable T type() {
         return this.t;
     }
 
-    public @Nullable P getParametrize() {
+    public @Nullable P parametrize() {
         return this.p;
     }
 

@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "radik:block/radioactive/grass"
+      },
+      {
+        "model": "radik:block/radioactive/grass",
+        "y": 90
+      },
+      {
+        "model": "radik:block/radioactive/grass",
+        "y": 180
+      },
+      {
+        "model": "radik:block/radioactive/grass",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "minecraft:block/grass_block_snow"
+    }
+  }
+}

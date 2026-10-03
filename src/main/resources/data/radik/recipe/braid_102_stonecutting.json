@@ -1,10 +1,8 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:andesite"
-  },
-  "result": {
-    "count": 1,
-    "id": "radik:braid_102"
-  }
+    "type": "minecraft:stonecutting",
+    "ingredient": "minecraft:andesite",
+    "result": {
+        "count": 1,
+        "id": "radik:braid_102"
+    }
 }

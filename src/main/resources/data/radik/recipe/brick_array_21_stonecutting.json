@@ -1,10 +1,8 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:quartz_block"
-  },
-  "result": {
-    "count": 1,
-    "id": "radik:brick_array_21"
-  }
+    "type": "minecraft:stonecutting",
+    "ingredient": "minecraft:quartz_block",
+    "result": {
+        "count": 1,
+        "id": "radik:brick_array_21"
+    }
 }

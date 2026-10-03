@@ -1,0 +1,22 @@
+{
+  "structures": [
+    {
+      "structure": "radik:bunker1",
+      "weight": 1
+    },
+    {
+      "structure": "radik:bunker2",
+      "weight": 4
+    },
+    {
+      "structure": "radik:ladle",
+      "weight": 15
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 5,
+    "separation": 4,
+    "salt": 1649307470
+  }
+}

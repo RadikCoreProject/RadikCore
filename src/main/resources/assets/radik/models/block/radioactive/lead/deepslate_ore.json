@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "radik:block/radioactive/lead/deepslate_top",
+    "side": "radik:block/radioactive/lead/deepslate"
+  }
+}

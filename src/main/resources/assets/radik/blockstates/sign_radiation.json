@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "radik:block/radioactive/sign",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "radik:block/radioactive/sign",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "radik:block/radioactive/sign"
+    },
+    "facing=west": {
+      "model": "radik:block/radioactive/sign",
+      "y": 90
+    }
+  }
+}

@@ -1,10 +1,8 @@
 {
     "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item": "minecraft:light_blue_concrete"
-    },
+    "ingredient": "minecraft:light_blue_concrete",
     "result": {
         "count": 1,
         "id": "radik:chaotic_1_112"
     }
-    }
+}

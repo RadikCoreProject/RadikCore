@@ -1,21 +1,17 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "Q": {
-      "item": "radik:fonar_stolb2"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "Q": "radik:fonar_stolb2",
+        "R": "radik:lamp_sodium"
     },
-    "R": {
-      "item": "radik:lamp_sodium"
+    "pattern": [
+        "   ",
+        " R ",
+        " Q "
+    ],
+    "result": {
+        "count": 1,
+        "id": "radik:fonar_lamp20"
     }
-  },
-  "pattern": [
-    "   ",
-    " R ",
-    " Q "
-  ],
-  "result": {
-    "count": 1,
-    "id": "radik:fonar_lamp20"
-  }
 }

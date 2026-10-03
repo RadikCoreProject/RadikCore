@@ -1,10 +1,8 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "radik:brick32"
-  },
-  "result": {
-    "count": 1,
-    "id": "radik:brick_wall32"
-  }
+    "type": "minecraft:stonecutting",
+    "ingredient": "radik:brick32",
+    "result": {
+        "count": 1,
+        "id": "radik:brick_wall32"
+    }
 }

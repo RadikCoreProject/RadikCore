@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=0,count=1": { "model": "radik:block/winter/decor/garland" },
+    "facing=1,count=1": { "model": "radik:block/winter/decor/garland", "y": 90 },
+    "facing=2,count=1": { "model": "radik:block/winter/decor/garland", "y": 180 },
+    "facing=3,count=1": { "model": "radik:block/winter/decor/garland", "y": 270 },
+
+    "facing=0,count=2": { "model": "radik:block/winter/decor/garland_2" },
+    "facing=1,count=2": { "model": "radik:block/winter/decor/garland_2", "y": 90 },
+    "facing=2,count=2": { "model": "radik:block/winter/decor/garland_2", "y": 180 },
+    "facing=3,count=2": { "model": "radik:block/winter/decor/garland_2", "y": 270 },
+
+    "facing=0,count=3": { "model": "radik:block/winter/decor/garland_3" },
+    "facing=1,count=3": { "model": "radik:block/winter/decor/garland_3", "y": 90 },
+    "facing=2,count=3": { "model": "radik:block/winter/decor/garland_3", "y": 180 },
+    "facing=3,count=3": { "model": "radik:block/winter/decor/garland_3", "y": 270 },
+
+    "facing=0,count=4": { "model": "radik:block/winter/decor/garland_4" },
+    "facing=1,count=4": { "model": "radik:block/winter/decor/garland_4", "y": 90 },
+    "facing=2,count=4": { "model": "radik:block/winter/decor/garland_4", "y": 180 },
+    "facing=3,count=4": { "model": "radik:block/winter/decor/garland_4", "y": 270 },
+
+    "facing=0,count=5": { "model": "radik:block/winter/decor/garland_5" },
+    "facing=1,count=5": { "model": "radik:block/winter/decor/garland_5", "y": 90 },
+    "facing=2,count=5": { "model": "radik:block/winter/decor/garland_5", "y": 180 },
+    "facing=3,count=5": { "model": "radik:block/winter/decor/garland_5", "y": 270 }
+  }
+}

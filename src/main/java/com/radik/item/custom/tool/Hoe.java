@@ -7,11 +7,16 @@ import com.radik.item.RegisterItems;
 import com.radik.property.base.EventProperty;
 import net.minecraft.block.*;
 import net.minecraft.component.type.TooltipDisplayComponent;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -92,8 +97,13 @@ public class Hoe extends HoeItem implements Tools {
                 }
                 case SUMMER -> {
                     Item item = LEAVES.get(block);
-                    if (item == null) break;
+                    DynamicRegistryManager registryManager = world.getRegistryManager();
+                    RegistryEntry<Enchantment> silkEntry = registryManager
+                            .getOrThrow(RegistryKeys.ENCHANTMENT)
+                            .getOrThrow(Enchantments.SILK_TOUCH);
+                    if (item == null || stack.getEnchantments().getLevel(silkEntry) != 0) break;
                     if (Radik.RANDOM.nextInt(1, EVENT_PROPERTY.getInt(EventProperty.LEAVE_DROP_CHANCE) + 1) == 1) {
+                        Radik.sendEventToPlayers(0, pos, 3, (ServerWorld) world);
                         world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(),
                                 new ItemStack(item, 1)));
                     }

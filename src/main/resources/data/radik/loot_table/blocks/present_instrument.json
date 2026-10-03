@@ -17,7 +17,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -25,7 +25,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -48,7 +48,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -56,7 +56,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -79,7 +79,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -87,7 +87,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -110,7 +110,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -118,7 +118,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -141,7 +141,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -149,7 +149,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -172,7 +172,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -180,7 +180,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -203,7 +203,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -211,7 +211,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -234,7 +234,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -242,7 +242,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -265,7 +265,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -273,7 +273,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -296,7 +296,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -304,7 +304,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -327,7 +327,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -335,7 +335,162 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
+                "min": 25
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ],
+          "name": "radik:lead_hoe",
+          "weight": 1
+        },
+
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 0.2
+              },
+              "function": "minecraft:set_damage"
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 35,
+                "min": 25
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ],
+          "name": "radik:lead_axe",
+          "weight": 1
+        },
+
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 0.2
+              },
+              "function": "minecraft:set_damage"
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 35,
+                "min": 25
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ],
+          "name": "radik:lead_sword",
+          "weight": 1
+        },
+
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 0.2
+              },
+              "function": "minecraft:set_damage"
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 35,
+                "min": 25
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ],
+          "name": "radik:lead_shovel",
+          "weight": 1
+        },
+
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 0.2
+              },
+              "function": "minecraft:set_damage"
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 35,
+                "min": 25
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ],
+          "name": "radik:lead_pickaxe",
+          "weight": 1
+        },
+
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 0.2
+              },
+              "function": "minecraft:set_damage"
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -358,7 +513,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -366,7 +521,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -389,7 +544,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -397,7 +552,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -420,7 +575,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -428,7 +583,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -451,7 +606,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -459,7 +614,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -485,7 +640,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -493,7 +648,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -516,7 +671,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -524,7 +679,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -547,7 +702,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -555,7 +710,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -578,7 +733,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -586,7 +741,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -609,7 +764,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -617,7 +772,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -640,7 +795,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -648,7 +803,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -671,7 +826,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -679,7 +834,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -702,7 +857,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -710,7 +865,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -733,7 +888,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -741,7 +896,131 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
+                "min": 25
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ],
+          "name": "radik:lead_helmet",
+          "weight": 1
+        },
+
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 0.2
+              },
+              "function": "minecraft:set_damage"
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 35,
+                "min": 25
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ],
+          "name": "radik:lead_chestplate",
+          "weight": 1
+        },
+
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 0.2
+              },
+              "function": "minecraft:set_damage"
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 35,
+                "min": 25
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ],
+          "name": "radik:lead_leggings",
+          "weight": 1
+        },
+
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 0.2
+              },
+              "function": "minecraft:set_damage"
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 35,
+                "min": 25
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ],
+          "name": "radik:lead_boots",
+          "weight": 1
+        },
+
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 0.2
+              },
+              "function": "minecraft:set_damage"
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -764,7 +1043,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -772,7 +1051,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -795,7 +1074,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -803,7 +1082,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -826,7 +1105,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -834,7 +1113,7 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 40,
+                "max": 35,
                 "min": 25
               },
               "options": "#minecraft:on_random_loot"
@@ -857,7 +1136,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -888,7 +1167,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 1,
-                "min": 0.8
+                "min": 0.2
               },
               "function": "minecraft:set_damage"
             },
@@ -908,40 +1187,8 @@
 
         {
           "type": "minecraft:item",
-          "name": "minecraft:golden_apple",
-          "weight": 3,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 16
-              }
-            }
-          ]
-        },
-
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:enchanted_golden_apple",
-          "weight": 3,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 3
-              }
-            }
-          ]
-        },
-
-        {
-          "type": "minecraft:item",
           "name": "minecraft:book",
-          "weight": 3,
+          "weight": 1,
           "functions": [
             {
               "function": "minecraft:enchant_randomly",

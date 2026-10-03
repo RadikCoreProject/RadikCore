@@ -1,18 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "R": {
-      "item": "radik:brick12"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "R": "radik:brick12"
+    },
+    "pattern": [
+        "RRR",
+        "RRR",
+        "   "
+    ],
+    "result": {
+        "count": 6,
+        "id": "radik:brick_wall12"
     }
-  },
-  "pattern": [
-    "RRR",
-    "RRR",
-    "   "
-  ],
-  "result": {
-    "count": 6,
-    "id": "radik:brick_wall12"
-  }
 }

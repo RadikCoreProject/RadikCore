@@ -1,0 +1,29 @@
+{
+  "type": "radik:lake_feature",
+  "config": {
+    "hydrogen_block": {
+      "Name": "radik:helium",
+      "Properties": {
+        "level": "0"
+      }
+    },
+    "max_blocks": 25,
+    "replace_block": {
+      "Name": "minecraft:end_stone"
+    },
+    "wall_blocks": [
+      {
+        "Name": "radik:chaotic_1_8"
+      },
+      {
+        "Name": "radik:chaotic_2_8"
+      },
+      {
+        "Name": "radik:chaotic_3_8"
+      },
+      {
+        "Name": "minecraft:end_stone"
+      }
+    ]
+  }
+}

@@ -1,25 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "group": "christmas",
-  "key": {
-    "L": {
-      "item": "minecraft:sugar"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "christmas",
+    "key": {
+        "L": "minecraft:sugar",
+        "Q": "minecraft:egg",
+        "R": "minecraft:apple"
     },
-    "Q": {
-      "item": "minecraft:egg"
-    },
-    "R": {
-      "item": "minecraft:apple"
+    "pattern": [
+        "RRR",
+        "QLQ",
+        "   "
+    ],
+    "result": {
+        "count": 3,
+        "id": "radik:winter_apple_pie"
     }
-  },
-  "pattern": [
-    "RRR",
-    "QLQ",
-    "   "
-  ],
-  "result": {
-    "count": 3,
-    "id": "radik:winter_apple_pie"
-  }
 }

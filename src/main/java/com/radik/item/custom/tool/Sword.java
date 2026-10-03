@@ -80,6 +80,7 @@ public class Sword extends Item implements Tools {
                         if (target instanceof CreakingEntity) {
                             target.kill(world);
                             stack.damage(19, p);
+                            Radik.sendEventToPlayers(0, target.getBlockPos(), 3, world);
                         }
                     }
                     case null, default -> {}
@@ -91,9 +92,11 @@ public class Sword extends Item implements Tools {
     @Override
     public float getBonusAttackDamage(Entity target, float baseAttackDamage, DamageSource damageSource) {
         ItemStack stack = damageSource.getWeaponStack();
-        return Tools.activedPower(stack) &&
-                Tools.toolType(stack) == ChallengeEvent.SUMMER &&
-                FOREST_ENTITIES.contains(target.getType()) ? baseAttackDamage : super.getBonusAttackDamage(target, baseAttackDamage, damageSource);
+        if (Tools.activedPower(stack) && Tools.toolType(stack) == ChallengeEvent.SUMMER && FOREST_ENTITIES.contains(target.getType())) {
+            Radik.sendEventToPlayers(0, target.getBlockPos(), 3, (ServerWorld) target.getEntityWorld());
+            return baseAttackDamage;
+        }
+        return super.getBonusAttackDamage(target, baseAttackDamage, damageSource);
     }
 
 

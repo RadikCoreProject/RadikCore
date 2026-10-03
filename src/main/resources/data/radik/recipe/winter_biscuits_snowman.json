@@ -1,22 +1,18 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "group": "christmas",
-  "key": {
-    "L": {
-      "item": "minecraft:sugar"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "christmas",
+    "key": {
+        "L": "minecraft:sugar",
+        "R": "radik:winter_gingerbread"
     },
-    "R": {
-      "item": "radik:winter_gingerbread"
+    "pattern": [
+        " R ",
+        "RLR",
+        " R "
+    ],
+    "result": {
+        "count": 3,
+        "id": "radik:winter_biscuits_snowman"
     }
-  },
-  "pattern": [
-    " R ",
-    "RLR",
-    " R "
-  ],
-  "result": {
-    "count": 3,
-    "id": "radik:winter_biscuits_snowman"
-  }
 }

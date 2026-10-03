@@ -3,7 +3,6 @@ package com.radik.block.custom.blockentity.event;
 import com.radik.Radik;
 import com.radik.packets.PacketType;
 import com.radik.packets.payload.IntegerPayload;
-import com.radik.util.Triplet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -32,11 +31,11 @@ public class LeaderboardScreen extends HandledScreen<LeaderboardScreenHandler> {
 
     public LeaderboardScreen(LeaderboardScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
-        if (LEADERBOARD == null || LEADERBOARD.getCount() == null || LEADERBOARD.getParametrize() == null || LEADERBOARD.getType() == null) return;
+        if (LEADERBOARD == null || LEADERBOARD.getCount() == null || LEADERBOARD.parametrize() == null || LEADERBOARD.type() == null) return;
 
         this.name = inventory.player.getName().getString();
-        this.points = LEADERBOARD.getType();
-        this.top = LEADERBOARD.getParametrize();
+        this.points = LEADERBOARD.type();
+        this.top = LEADERBOARD.parametrize();
         this.top10 = LEADERBOARD.getCount().entrySet().stream().toList();
         this.backgroundWidth = 180;
         this.backgroundHeight = 256;
@@ -153,10 +152,10 @@ public class LeaderboardScreen extends HandledScreen<LeaderboardScreenHandler> {
 
     public void updateLeaderboardData() {
         if (this.client == null || this.client.player == null) return;
-        if (LEADERBOARD.getCount() == null || LEADERBOARD.getParametrize() == null || LEADERBOARD.getType() == null) return;
+        if (LEADERBOARD.getCount() == null || LEADERBOARD.parametrize() == null || LEADERBOARD.type() == null) return;
 
-        this.points = LEADERBOARD.getType();
-        this.top = LEADERBOARD.getParametrize();
+        this.points = LEADERBOARD.type();
+        this.top = LEADERBOARD.parametrize();
         this.top10 = LEADERBOARD.getCount().entrySet().stream().toList();
     }
 

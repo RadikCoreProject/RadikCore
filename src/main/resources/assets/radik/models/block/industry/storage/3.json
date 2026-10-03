@@ -1,0 +1,6 @@
+{
+  "parent": "radik:block/industry/storage/storage",
+  "textures": {
+    "outline": "block/gold_block"
+  }
+}

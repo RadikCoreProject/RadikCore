@@ -1,20 +1,16 @@
 {
   "replace": false,
   "values": [
-    "radik:bismuth_1",
-    "radik:bismuth_2",
-    "radik:braid_114",
-    "radik:braid_stair_114",
-    "radik:braid_slab_114",
-    "radik:brick_gold",
     "radik:brick_iron",
-    "radik:chaotic_2_17",
-    "radik:chaotic_3_17",
-    "radik:circular_17",
-    "radik:circular_18",
-    "radik:cell_1",
-    "radik:cell_3",
-    "radik:cell_4",
-    "radik:cell_5"
+    "radik:old_iron_block",
+    "radik:cell_5",
+    "radik:old_iron_block",
+    "radik:old_coal_block",
+    "radik:old_netherrack",
+    "radik:old_mossy_cobblestone",
+    "radik:old_cobblestone",
+    "radik:old_lapis_block",
+    "radik:radioactive_copper_block",
+    "radik:radioactive_iron_block"
   ]
 }

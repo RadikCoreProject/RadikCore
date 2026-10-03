@@ -1,10 +1,8 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:light_gray_concrete"
-  },
-  "result": {
-    "count": 1,
-    "id": "radik:braid_stair_202"
-  }
+    "type": "minecraft:stonecutting",
+    "ingredient": "minecraft:light_gray_concrete",
+    "result": {
+        "count": 1,
+        "id": "radik:braid_stair_202"
+    }
 }

@@ -1,10 +1,8 @@
 {
     "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item": "minecraft:end_stone"
-    },
+    "ingredient": "minecraft:end_stone",
     "result": {
         "count": 1,
         "id": "radik:chaotic_3_8"
     }
-    }
+}

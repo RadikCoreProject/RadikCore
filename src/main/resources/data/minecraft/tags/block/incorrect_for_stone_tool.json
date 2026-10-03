@@ -1,5 +1,28 @@
 {
   "replace": false,
   "values": [
+    "radik:old_gold_block",
+    "radik:old_emerald_block",
+    "radik:old_diamond_block",
+    "radik:cell_1",
+    "radik:cell_3",
+    "radik:cell_4",
+    "radik:circular_17",
+    "radik:circular_18",
+    "radik:chaotic_2_17",
+    "radik:chaotic_3_17",
+    "radik:chaotic_stair_2_17",
+    "radik:chaotic_stair_3_17",
+    "radik:chaotic_slab_2_17",
+    "radik:chaotic_slab_3_17",
+    "radik:chaotic_wall_2_17",
+    "radik:chaotic_wall_3_17",
+    "radik:brick_gold",
+    "radik:bismuth_1",
+    "radik:bismuth_2",
+    "radik:braid_114",
+    "radik:braid_stair_114",
+    "radik:braid_slab_114",
+    "radik:braid_wall_114"
   ]
 }

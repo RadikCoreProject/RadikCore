@@ -94,6 +94,7 @@ public class Shovel extends ShovelItem implements Tools {
                     if (DROPPING_CLEVER.contains(block) || stack.getEnchantments().getLevel(silkEntry) != 0) break;
                     int f = Radik.RANDOM.nextInt(1, EVENT_PROPERTY.getInt(EventProperty.CLEVER_DROP_CHANCE) + 1);
                     if (f == 1) {
+                        Radik.sendEventToPlayers(0, pos, 0, (ServerWorld) world);
                         int s = Radik.RANDOM.nextInt(1, EVENT_PROPERTY.getInt(EventProperty.CLEVER_DROP_CHANCE) + 1);
                         world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(),
                                 new ItemStack(s == 1 ? RegisterItems.CLEVER4 : RegisterItems.CLEVER3, 1)));

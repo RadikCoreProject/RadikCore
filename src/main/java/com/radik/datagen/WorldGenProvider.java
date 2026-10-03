@@ -32,7 +32,7 @@ public class WorldGenProvider extends FabricDynamicRegistryProvider {
                 return registries.getOrThrow(registryRef);
             }
         };
-        WorldGenRegister.bootstrapConfigured(configuredRegisterable);
+//        WorldGenRegister.bootstrapConfigured(configuredRegisterable);
 
         Registerable<PlacedFeature> placedRegisterable = new Registerable<>() {
             @Override
@@ -46,7 +46,7 @@ public class WorldGenProvider extends FabricDynamicRegistryProvider {
                 return registries.getOrThrow(registryRef);
             }
         };
-        WorldGenRegister.bootstrapPlaced(placedRegisterable);
+//        WorldGenRegister.bootstrapPlaced(placedRegisterable);
     }
 
     @Override

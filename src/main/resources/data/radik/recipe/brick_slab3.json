@@ -1,18 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "R": {
-      "item": "radik:brick3"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "R": "radik:brick3"
+    },
+    "pattern": [
+        "RRR",
+        "   ",
+        "   "
+    ],
+    "result": {
+        "count": 6,
+        "id": "radik:brick_slab3"
     }
-  },
-  "pattern": [
-    "RRR",
-    "   ",
-    "   "
-  ],
-  "result": {
-    "count": 6,
-    "id": "radik:brick_slab3"
-  }
 }

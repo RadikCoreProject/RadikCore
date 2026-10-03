@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "radik:block/industry/storage/1",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "radik:block/industry/storage/1",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "radik:block/industry/storage/1"
+    },
+    "facing=west": {
+      "model": "radik:block/industry/storage/1",
+      "y": 90
+    }
+  }
+}

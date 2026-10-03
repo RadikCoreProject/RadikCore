@@ -27,8 +27,6 @@ import java.time.LocalDateTime;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static com.radik.Data.*;
-import static com.radik.packets.EmbassyAction.EXCHANGE;
-import static com.radik.packets.EmbassyAction.TP;
 
 public class PacketRegistration {
     public static final ConcurrentHashMap<String, LocalDateTime> TELEPORTER_MAP = new ConcurrentHashMap<>();

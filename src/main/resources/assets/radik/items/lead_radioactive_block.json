@@ -1,0 +1,7 @@
+
+{
+    "model": {
+        "type": "minecraft:model",
+        "model": "radik:block/radioactive/lead/radioactive_block"
+    }
+}

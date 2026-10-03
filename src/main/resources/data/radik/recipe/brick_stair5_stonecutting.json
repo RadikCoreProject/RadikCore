@@ -1,10 +1,8 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "radik:brick5"
-  },
-  "result": {
-    "count": 1,
-    "id": "radik:brick_stair5"
-  }
+    "type": "minecraft:stonecutting",
+    "ingredient": "radik:brick5",
+    "result": {
+        "count": 1,
+        "id": "radik:brick_stair5"
+    }
 }

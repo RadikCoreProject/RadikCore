@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "radik:lead"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "radik:lead"
+      }
+    ]
+  }
+}

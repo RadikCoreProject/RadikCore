@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "radik:old_grass_block",
+    "radik:radioactive_grass",
+    "radik:blue_grass",
+    "radik:red_grass"
+  ]
+}

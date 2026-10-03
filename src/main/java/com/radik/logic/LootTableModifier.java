@@ -1,5 +1,6 @@
 package com.radik.logic;
 
+import com.radik.Radik;
 import com.radik.block.RegisterBlocks;
 import com.radik.item.RegisterItems;
 import com.radik.item.custom.tool.Tools;
@@ -19,6 +20,7 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.world.ServerWorld;
 
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +55,8 @@ public class LootTableModifier {
         ItemStack tool = lootContext.get(LootContextParameters.TOOL);
         if (tool == null || !tool.isOf(RegisterItems.SUMMER_PICKAXE) || !Tools.activedPower(tool)) return;
 
-        var manager = lootContext.getWorld().getRegistryManager();
+        ServerWorld world = lootContext.getWorld();
+        var manager = world.getRegistryManager();
         BlockState state = lootContext.get(LootContextParameters.BLOCK_STATE);
         var enchantmentRegistry = manager.getOrThrow(RegistryKeys.ENCHANTMENT);
         RegistryEntry<Enchantment> silkEntry = enchantmentRegistry.getOrThrow(Enchantments.SILK_TOUCH);
@@ -70,6 +73,7 @@ public class LootTableModifier {
             if (fortuneLevel > 0) count = count * (1 + fortuneLevel);
 
             itemStacks.set(i, new ItemStack(smeltedItem, count));
+            Radik.sendEventToPlayers(0, lootContext.get(LootContextParameters.INTERACTING_ENTITY).getBlockPos(), 0, world);
         }
     }
 }

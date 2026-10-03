@@ -101,8 +101,8 @@ public class TeleporterScreen extends Screen {
                 .build();
         ButtonWidget widget5 = ButtonWidget.builder(Text.translatable("text.radik.teleporter.calculate"), button -> {
                     Triplet<Text, Integer, Vec3d> d = calculate();
-                    if (d.getParametrize() == null) return;
-                    TeleporterScreen screen = new TeleporterScreen(this.parent, d.getParametrize(), d.getType(), d.getCount());
+                    if (d.parametrize() == null) return;
+                    TeleporterScreen screen = new TeleporterScreen(this.parent, d.parametrize(), d.type(), d.getCount());
                     screen.cooldownAfter = this.cooldownAfter;
                     CLIENT.setScreen(screen);
                 })

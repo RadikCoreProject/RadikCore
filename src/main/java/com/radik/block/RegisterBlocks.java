@@ -36,7 +36,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import static com.radik.ModGroup.BLOCK_LIST;
 import static net.minecraft.block.Blocks.createLeavesSettings;

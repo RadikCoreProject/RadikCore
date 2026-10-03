@@ -1,20 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "#P#",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "tag": "radik:bricks_item"
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "#P#",
+        "###"
+    ],
+    "key": {
+        "#": "#radik:bricks_item",
+        "P": "radik:dye_tan"
     },
-    "P": {
-      "item": "radik:dye_tan"
+    "result": {
+        "id": "radik:brick30",
+        "count": 8
     }
-  },
-  "result": {
-    "id": "radik:brick30",
-    "count": 8
-  }
 }

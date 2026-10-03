@@ -1,0 +1,89 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/leggings/quartz"
+        },
+        "when": "minecraft:quartz"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/leggings/iron"
+        },
+        "when": "minecraft:iron"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/leggings/netherite"
+        },
+        "when": "minecraft:netherite"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/leggings/redstone"
+        },
+        "when": "minecraft:redstone"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/leggings/copper"
+        },
+        "when": "minecraft:copper"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/leggings/gold"
+        },
+        "when": "minecraft:gold"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/leggings/emerald"
+        },
+        "when": "minecraft:emerald"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/leggings/diamond"
+        },
+        "when": "minecraft:diamond"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/leggings/lapis"
+        },
+        "when": "minecraft:lapis"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/leggings/amethyst"
+        },
+        "when": "minecraft:amethyst"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/radioactive/lead/trim/leggings/resin"
+        },
+        "when": "minecraft:resin"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "radik:item/radioactive/lead/leggings"
+    },
+    "property": "minecraft:trim_material"
+  }
+}

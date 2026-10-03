@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "radik:block/fluid/helium_still"
+  },
+  "render_type": "translucent"
+}

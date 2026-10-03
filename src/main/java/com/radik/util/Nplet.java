@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 public interface Nplet<T, P> {
     boolean isEmpty();
 
-    @Nullable T getType();
+    @Nullable T type();
 
-    @Nullable P getParametrize();
+    @Nullable P parametrize();
 }

@@ -84,7 +84,6 @@ public class Pickaxe extends Item implements Tools {
                         miner.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 100, 1, true, false));
                     }
                 }
-                case SUMMER -> {}
                 case null, default -> {}
             }
         }

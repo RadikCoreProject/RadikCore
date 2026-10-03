@@ -1,6 +1,6 @@
 {
   "variants": {
-    "facing=true": { "model": "radik:block/fonar/4" },
-    "facing=false": { "model": "radik:block/fonar/4" }
+    "facing=true": { "model": "radik:block/industry/fonar/4" },
+    "facing=false": { "model": "radik:block/industry/fonar/4" }
   }
 }

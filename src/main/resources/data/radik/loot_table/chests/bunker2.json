@@ -1,0 +1,244 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 3,
+        "max": 5
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "radik:present_small",
+          "weight": 128,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:present_medium",
+          "weight": 128,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:present_big",
+          "weight": 72
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:uranus_ingot",
+          "weight": 80,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4,
+                "max": 8
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:lead_ingot",
+          "weight": 80,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4,
+                "max": 8
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:uranus_raw",
+          "weight": 112,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 5
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:lead_raw",
+          "weight": 112,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 5
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:cigarette_pack",
+          "weight": 64,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:jar_cucumbers",
+          "weight": 96,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:lead_brick",
+          "weight": 144,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 4
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:sign_radiation",
+          "weight": 100,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:disc_reactor",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:lead_helmet",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:lead_chestplate",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:lead_leggings",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:lead_boots",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:lead_sword",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:lead_pickaxe",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:lead_axe",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:lead_shovel",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:lead_hoe",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:storage_upgrade_iron",
+          "weight": 80
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:storage_upgrade_gold",
+          "weight": 30
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:storage_upgrade_diamond",
+          "weight": 16
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:storage_upgrade_emerald",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:storage_upgrade_obsidian",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

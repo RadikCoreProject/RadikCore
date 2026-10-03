@@ -1,22 +1,18 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "group": "christmas",
-  "key": {
-    "L": {
-      "item": "minecraft:red_dye"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "christmas",
+    "key": {
+        "L": "minecraft:red_dye",
+        "R": "radik:winter_gingerbread"
     },
-    "R": {
-      "item": "radik:winter_gingerbread"
+    "pattern": [
+        "RRR",
+        "RLR",
+        "   "
+    ],
+    "result": {
+        "count": 2,
+        "id": "radik:winter_christmas_reindeer_biscuits"
     }
-  },
-  "pattern": [
-    "RRR",
-    "RLR",
-    "   "
-  ],
-  "result": {
-    "count": 2,
-    "id": "radik:winter_christmas_reindeer_biscuits"
-  }
 }

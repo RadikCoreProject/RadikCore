@@ -1,22 +1,18 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "group": "ledenets",
-  "key": {
-    "L": {
-      "item": "minecraft:sugar"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "ledenets",
+    "key": {
+        "L": "minecraft:sugar",
+        "R": "radik:sugar_red"
     },
-    "R": {
-      "item": "radik:sugar_red"
+    "pattern": [
+        "LR ",
+        "R  ",
+        "L  "
+    ],
+    "result": {
+        "count": 2,
+        "id": "radik:ledenets"
     }
-  },
-  "pattern": [
-    "LR ",
-    "R  ",
-    "L  "
-  ],
-  "result": {
-    "count": 2,
-    "id": "radik:ledenets"
-  }
 }

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "radik:block/radioactive/metals/copper/slab"
+    },
+    "type=double": {
+      "model": "radik:block/radioactive/metals/copper"
+    },
+    "type=top": {
+      "model": "radik:block/radioactive/metals/copper/slab"
+    }
+  }
+}

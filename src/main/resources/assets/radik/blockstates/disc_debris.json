@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "radik:custom/disc_debris"
+      "model": "radik:block/reward/disc_debris"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "radik:block/pix"
+      "model": "radik:block/reward/pix"
     }
   }
 }

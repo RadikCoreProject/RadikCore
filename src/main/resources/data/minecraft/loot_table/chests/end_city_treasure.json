@@ -13,14 +13,66 @@
           "type": "minecraft:item",
           "name": "radik:disc_nosk",
           "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "radik:star",
-          "weight": 2
         }
       ],
       "rolls": 1
+    },
+    {
+      "bonus_rolls": 0,
+      "conditions": [],
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 66
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:present_small",
+          "weight": 20,
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 5.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:present_medium",
+          "weight": 8,
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:present_big",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "radik:present_instrument",
+          "weight": 1
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 1.0
+      }
     },
     {
       "bonus_rolls": 0.0,
@@ -140,8 +192,8 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
+                "max": 30.0,
+                "min": 10.0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -156,8 +208,8 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
+                "max": 30.0,
+                "min": 10.0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -172,8 +224,8 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
+                "max": 30.0,
+                "min": 10.0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -188,8 +240,8 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
+                "max": 30.0,
+                "min": 10.0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -204,8 +256,8 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
+                "max": 30.0,
+                "min": 10.0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -220,8 +272,8 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
+                "max": 30.0,
+                "min": 10.0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -236,8 +288,8 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
+                "max": 30.0,
+                "min": 10.0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -252,8 +304,8 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
+                "max": 30.0,
+                "min": 10.0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -268,8 +320,8 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
+                "max": 30.0,
+                "min": 10.0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -284,8 +336,8 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
+                "max": 30.0,
+                "min": 10.0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -300,8 +352,8 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
+                "max": 30.0,
+                "min": 10.0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -316,8 +368,8 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
+                "max": 30.0,
+                "min": 10.0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -332,8 +384,8 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
+                "max": 30.0,
+                "min": 10.0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -348,8 +400,8 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
+                "max": 30.0,
+                "min": 10.0
               },
               "options": "#minecraft:on_random_loot"
             }

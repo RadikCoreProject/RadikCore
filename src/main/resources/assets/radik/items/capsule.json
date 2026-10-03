@@ -1,0 +1,66 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:component",
+    "component": "radik:fluid",
+    "cases": [
+      {
+        "when": 0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/industry/capsule/0"
+        }
+      },
+      {
+        "when": 1,
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/industry/capsule/100"
+        }
+      },
+      {
+        "when": 2,
+        "model": {
+          "type": "minecraft:model",
+          "model": "radik:item/industry/capsule/200"
+        }
+      },
+      {
+        "when": 3,
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:component",
+          "component": "radik:level",
+          "cases": [
+            {"when": 1, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/301"}},
+            {"when": 2, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/302"}},
+            {"when": 3, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/303"}},
+            {"when": 4, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/304"}},
+            {"when": 5, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/305"}},
+            {"when": 6, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/306"}},
+            {"when": 7, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/307"}},
+            {"when": 8, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/308"}}
+          ]
+        }
+      },
+      {
+        "when": 4,
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:component",
+          "component": "radik:level",
+          "cases": [
+            {"when": 1, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/401"}},
+            {"when": 2, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/402"}},
+            {"when": 3, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/403"}},
+            {"when": 4, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/404"}},
+            {"when": 5, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/405"}},
+            {"when": 6, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/406"}},
+            {"when": 7, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/407"}},
+            {"when": 8, "model": {"type": "minecraft:model", "model": "radik:item/industry/capsule/408"}}
+          ]
+        }
+      }
+    ]
+  }
+}
