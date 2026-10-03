@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "Q": "minecraft:paper",
+        "R": "minecraft:short_grass"
+    },
+    "pattern": [
+        " Q ",
+        "QRQ",
+        " Q "
+    ],
+    "result": {
+        "count": 4,
+        "id": "radik:cigarette"
+    }
+}

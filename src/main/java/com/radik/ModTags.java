@@ -1,17 +1,20 @@
 package com.radik;
 
 import net.minecraft.block.Block;
-import net.minecraft.fluid.Fluid;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.biome.Biome;
 
-public class ModTags {
+public final class ModTags {
     public static class Blocks {
         public static final TagKey<Block> FROGLIGHTS_BLOCK = createTag("froglights_block");
         public static final TagKey<Block> BRICKS_BLOCK = createTag("bricks_block");
 
+        public static final TagKey<Block> STAFFABLE = createTag("staffable");
 
         private static TagKey<net.minecraft.block.Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, Identifier.of(Radik.MOD_ID, name));
@@ -19,6 +22,8 @@ public class ModTags {
     }
 
     public static class Items {
+//        public static final TagKey<Item> LUCKY_MATERIAL = createTag("lucky_material");
+//        public static final TagKey<Item> SUMMER_MATERIAL = createTag("summer_material");
         public static final TagKey<Item> FROGLIGHTS_ITEM = createTag("froglights_item");
         public static final TagKey<Item> BRICKS_ITEM = createTag("bricks_item");
         public static final TagKey<Item> WINTER_STONE = createTag("winter_stone");
@@ -27,13 +32,38 @@ public class ModTags {
         public static final TagKey<Item> CONCRETE = createTag("concrete");
         public static final TagKey<Item> CONCRETE_POWDER = createTag("concrete_powder");
         public static final TagKey<Item> CHRISTMAS_FOOD = createTag("christmas_food");
+        public static final TagKey<Item> HARVESTABLES_WITHOUT_NETHERITE = createTag("custom_harvestables");
+        public static final TagKey<Item> ANTI_RADIOACTIVE = createTag("anti_radioactive");
+        public static final TagKey<Item> LEAD_INSTRUMENT = createTag("lead_instrument");
+        public static final TagKey<Item> CORRODIBLE = createTag("corrodible");
+        public static final TagKey<Item> LEAD_ARMOR = createTag("lead_armor");
+        public static final TagKey<Item> BRAIDED_PLANKS = createTag("braided_planks");
 
+        public static final TagKey<Item> STAFF_ENCHANTABLE = createTag("staff_enchantable");
+        public static final TagKey<Item> WIND_STAFF_ENCHANTABLE = createTag("wind_staff_enchantable");
+        public static final TagKey<Item> STAFFABLE = createTag("staffable");
+
+        public static final TagKey<Item> REPAIRS_LEAD_ARMOR = createTag("repair_lead");
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(Radik.MOD_ID, name));
         }
     }
 
+    public static class Biomes {
+        public static final TagKey<Biome> HOUSE = createTag("house_biomes");
 
+        private static TagKey<Biome> createTag(String name) {
+            return TagKey.of(RegistryKeys.BIOME, Identifier.of(Radik.MOD_ID, name));
+        }
+    }
 
-    public static void registerTags() {}
+    public static class Entities {
+        public static final TagKey<EntityType<?>> BREEDABLE = createTag("breedable");
+
+        private static TagKey<EntityType<?>> createTag(String name) {
+            return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(Radik.MOD_ID, name));
+        }
+    }
+
+    public static void initialize() {}
 }

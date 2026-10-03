@@ -19,3 +19,12 @@ gradle-app.setting
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+/out/
+/.continue/
+/run/
+/build/
+/.gradle/
+/.idea/
+/eula.txt
+/src.zip
+/src (2).zip

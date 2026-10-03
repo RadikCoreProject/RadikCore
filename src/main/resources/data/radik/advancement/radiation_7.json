@@ -1,0 +1,151 @@
+{
+  "parent": "radik:radiation_5",
+  "criteria": {
+    "event1": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:lead_helmet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "event2": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:lead_chestplate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "event3": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:lead_leggings"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "event4": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:lead_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "event5": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:lead_hoe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "event6": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:lead_sword"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "event7": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:lead_pickaxe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "event8": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:lead_axe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "event9": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:lead_shovel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.radiation_7.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "radik:lead_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.radik.radiation_7.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event1"
+    ],
+    [
+      "event2"
+    ],
+    [
+      "event3"
+    ],
+    [
+      "event4"
+    ],
+    [
+      "event5"
+    ],
+    [
+      "event6"
+    ],
+    [
+      "event7"
+    ],
+    [
+      "event8"
+    ],
+    [
+      "event9"
+    ]
+  ],
+  "rewards": {
+    "experience": 500,
+    "function": "radik:advancements/base/radiation/7"
+  },
+  "sends_telemetry_event": true
+}

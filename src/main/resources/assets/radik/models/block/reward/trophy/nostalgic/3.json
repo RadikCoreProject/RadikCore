@@ -1,0 +1,6 @@
+{
+  "parent": "radik:block/reward/trophy/nostalgic/0",
+  "textures": {
+    "type": "radik:block/super/base/gold"
+  }
+}

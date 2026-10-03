@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " #S",
+        "  #",
+        "   "
+    ],
+    "key": {
+        "#": "radik:radioactive_copper_block",
+        "S": "radik:storage_upgrade_wood"
+    },
+    "result": {
+        "id": "radik:storage_upgrade_copper",
+        "count": 1
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " A ",
+        "PQP",
+        " A "
+    ],
+    "key": {
+        "A": "minecraft:diamond_block",
+        "P": "radik:uranus_block",
+        "Q": "radik:storage_upgrade_gold"
+    },
+    "result": {
+        "id": "radik:storage_upgrade_diamond",
+        "count": 1
+    }
+}

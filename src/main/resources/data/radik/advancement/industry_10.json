@@ -1,0 +1,47 @@
+{
+  "parent": "radik:industry_9",
+  "criteria": {
+    "event": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:storage_diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.industry_10.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "radik:storage_diamond"
+    },
+    "title": {
+      "translate": "advancements.radik.industry_10.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event"
+    ]
+  ],
+  "rewards": {
+    "experience": 300,
+    "function": "radik:advancements/base/industry/10"
+  },
+  "sends_telemetry_event": true
+}

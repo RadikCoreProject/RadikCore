@@ -1,0 +1,11 @@
+{
+    "type": "minecraft:smelting",
+    "category": "misc",
+    "cookingtime": 1000,
+    "experience": 5,
+    "group": "ingot",
+    "ingredient": "radik:lead_raw",
+    "result": {
+        "id": "radik:lead_ingot"
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "group": "winter_2026",
+    "ingredients": [
+        "minecraft:glowstone_dust",
+        "minecraft:glowstone_dust",
+        "minecraft:blaze_powder",
+        "radik:sugar_block_yellow"
+    ],
+    "result": {
+        "id": "minecraft:light",
+        "count": 4,
+        "components": {
+            "minecraft:block_state": {
+                "level": "15"
+            }
+        }
+    }
+}

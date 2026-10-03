@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " # ",
+        "#P#",
+        " # "
+    ],
+    "key": {
+        "#": "radik:storage_upgrade_diamond",
+        "P": "radik:storage_gold"
+    },
+    "result": {
+        "id": "radik:storage_diamond",
+        "count": 1
+    }
+}

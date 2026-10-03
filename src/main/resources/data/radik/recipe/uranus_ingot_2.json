@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        "radik:uranus_nugget",
+        "radik:uranus_nugget",
+        "radik:uranus_nugget",
+        "radik:uranus_nugget",
+        "radik:uranus_nugget",
+        "radik:uranus_nugget",
+        "radik:uranus_nugget",
+        "radik:uranus_nugget",
+        "radik:uranus_nugget"
+    ],
+    "result": {
+        "count": 1,
+        "id": "radik:uranus_ingot"
+    }
+}

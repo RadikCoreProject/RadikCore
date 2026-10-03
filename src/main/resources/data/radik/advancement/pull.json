@@ -1,0 +1,31 @@
+{
+  "criteria": {
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "radik:block/chisel/array/1",
+    "description": {
+      "translate": "advancements.radik.RadikCore.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "radik:frog1"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.radik.RadikCore.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

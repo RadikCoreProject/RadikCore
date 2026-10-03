@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "group": "sugar",
+    "ingredients": [
+        "radik:lead_ingot"
+    ],
+    "result": {
+        "count": 9,
+        "id": "radik:lead_nugget"
+    }
+}

@@ -1,0 +1,27 @@
+{
+  "required": true,
+  "package": "com.radik.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "book.BookUpdateC2SPacketMixin",
+    "book.WritableBookContentComponentMixin",
+    "book.WrittenBookContentComponentMixin",
+    "entity.LivingEntityMixin",
+    "entity.PlayerEntityMixin",
+    "features.BlockItemMixin",
+    "features.ClearAllEffectsConsumeEffectMixin",
+    "features.FarmlandStepMixin",
+    "features.StringHelperMixin",
+    "firework.FireworkRocketEntityLifeMixin",
+    "firework.FireworkRocketEntityMixin",
+    "firework.FireworkRocketEntityParticleMixin",
+    "firework.FireworkRocketItemMixin",
+    "minecart.AbstractMinecartEntityMixin",
+    "minecart.ExperimentalMinecartControllerMixin",
+    "minecart.MinecartControllerAccessor",
+    "render.SlotMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

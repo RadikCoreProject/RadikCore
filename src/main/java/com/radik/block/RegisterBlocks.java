@@ -1,9 +1,28 @@
 package com.radik.block;
 
+import com.radik.Data;
+import com.radik.MainInit;
 import com.radik.Radik;
+import com.radik.block.custom.FacingBlock;
+import com.radik.block.custom.blockentity.embassy.EmbassyBlock;
+import com.radik.block.custom.blockentity.event.EventBlock;
+import com.radik.block.custom.blockentity.storage.StorageBlock;
 import com.radik.block.custom.*;
+import com.radik.block.custom.crop.CucumberCrop;
+import com.radik.block.custom.radioactive.*;
+import com.radik.block.custom.radioactive.SignBlock;
+import com.radik.block.custom.reward.Batut;
+import com.radik.block.custom.reward.Birthday;
+import com.radik.block.custom.reward.JavaProgrammer;
+import com.radik.block.custom.tech.Fonar;
+import com.radik.block.custom.tech.Fonar2;
+import com.radik.block.custom.tech.LampBlock;
+import com.radik.block.custom.winter.*;
+import com.radik.connecting.event.ChallengeEvent;
+import com.radik.item.custom.RadioactiveItem;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -13,11 +32,19 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
+
+import static com.radik.ModGroup.BLOCK_LIST;
+import static net.minecraft.block.Blocks.createLeavesSettings;
+import static net.minecraft.block.Blocks.createLogSettings;
 
 
 public class RegisterBlocks {
+    private static final AbstractBlock.Settings neww = AbstractBlock.Settings.create();
     private static final BlockState a = Blocks.BRICK_STAIRS.getDefaultState();
     private static final Function<AbstractBlock.Settings, Block> brick = properties -> new Block(properties.mapColor(MapColor.RED).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(2.0F, 6.0F));
     private static final Function<AbstractBlock.Settings, Block> brick_stair = properties -> new StairsBlock(a, properties.mapColor(MapColor.RED).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(2.0F, 6.0F));
@@ -98,10 +125,35 @@ public class RegisterBlocks {
     private static final Function<AbstractBlock.Settings, Block> frog = properties -> new PillarBlock(properties.mapColor(MapColor.PALE_YELLOW).strength(0.3F).luminance(state -> 15).sounds(BlockSoundGroup.FROGLIGHT));
     private static final Function<AbstractBlock.Settings, Block> smooth_stone = properties -> new Block(properties.mapColor(MapColor.STONE_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(2.0F, 6.0F));
     private static final Function<AbstractBlock.Settings, Block> stolb = properties -> new Fonar(properties.strength(0.5f, 5).sounds(BlockSoundGroup.METAL).noBlockBreakParticles());
-    private static final Function<AbstractBlock.Settings, Block> present = properties -> new Block(properties.mapColor(MapColor.BRIGHT_TEAL).strength(0.5F).sounds(BlockSoundGroup.SNOW));
+    private static final Function<AbstractBlock.Settings, Block> present = properties -> new Present(properties.mapColor(MapColor.BRIGHT_TEAL).strength(0.5F).sounds(BlockSoundGroup.SNOW));
     private static final Function<AbstractBlock.Settings, Block> ledenets = properties -> new Ledenets(properties.mapColor(MapColor.WHITE).instrument(NoteBlockInstrument.GUITAR).strength(0.8F).sounds(BlockSoundGroup.WOOL).burnable().nonOpaque());
-    private static final Function<AbstractBlock.Settings, Block> birthday = properties -> new Block(properties.sounds(BlockSoundGroup.GLASS).strength(3, 9999999).noBlockBreakParticles());
     private static final Function<AbstractBlock.Settings, Block> trophy = properties -> new Trophy(properties.strength(3, 10).sounds(BlockSoundGroup.AMETHYST_BLOCK).noBlockBreakParticles());
+
+    private static final AbstractBlock.Settings ore_block = neww.mapColor(MapColor.STONE_GRAY).instrument(NoteBlockInstrument.BASS).requiresTool().strength(6.0F, 6.0F).sounds(BlockSoundGroup.STONE);
+    private static final AbstractBlock.Settings ore = Blocks.DIAMOND_ORE.getSettings();
+    private static final AbstractBlock.Settings deepslate_ore = Blocks.DEEPSLATE_DIAMOND_ORE.getSettings();
+    private static final AbstractBlock.Settings radioactive_block = AbstractBlock.Settings.create()
+            .mapColor(MapColor.LIME)
+            .instrument(NoteBlockInstrument.BELL)
+            .requiresTool()
+            .strength(4.0F, 6.0F)
+            .sounds(BlockSoundGroup.METAL)
+            .ticksRandomly();
+    private static final AbstractBlock.Settings radioactive_stair = AbstractBlock.Settings.create()
+            .mapColor(MapColor.LIME)
+            .instrument(NoteBlockInstrument.BELL)
+            .requiresTool()
+            .strength(4.0F, 6.0F)
+            .sounds(BlockSoundGroup.METAL)
+            .ticksRandomly();
+    private static final AbstractBlock.Settings radioactive_slab = AbstractBlock.Settings.create()
+            .mapColor(MapColor.LIME)
+            .instrument(NoteBlockInstrument.BELL)
+            .requiresTool()
+            .strength(4.0F, 6.0F)
+            .sounds(BlockSoundGroup.METAL)
+            .ticksRandomly();
+    private static final Function<AbstractBlock.Settings, Block> block = properties -> new Block(properties.mapColor(MapColor.LIME).instrument(NoteBlockInstrument.BELL).requiresTool().strength(4.0F, 6.0F).sounds(BlockSoundGroup.METAL));
 
     public static final Block FROG0_255_0 = registerBlock(frog, "frog0_255_0");
     public static final Block FROG0_255_255 = registerBlock(frog, "frog0_255_255");
@@ -116,8 +168,22 @@ public class RegisterBlocks {
     public static final Block FROG255_100_0 = registerBlock(frog, "frog255_100_0");
     public static final Block FROG0_0_255 = registerBlock(frog, "frog0_0_255");
     public static final Block FROG100_100_255 = registerBlock(frog, "frog100_100_255");
-
-
+    public static final Block FROG1 = registerBlock(frog, "frog1");
+    public static final Block FROG2 = registerBlock(frog, "frog2");
+    public static final Block FROG3 = registerBlock(frog, "frog3");
+    public static final Block FROG4 = registerBlock(frog, "frog4");
+    public static final Block FROG5 = registerBlock(frog, "frog5");
+    public static final Block FROG6 = registerBlock(frog, "frog6");
+    public static final Block FROG7 = registerBlock(frog, "frog7");
+    public static final Block FROG8 = registerBlock(frog, "frog8");
+    public static final Block FROG9 = registerBlock(frog, "frog9");
+    public static final Block FROG10 = registerBlock(frog, "frog10");
+    public static final Block FROG11 = registerBlock(frog, "frog11");
+    public static final Block FROG12 = registerBlock(frog, "frog12");
+    public static final Block FROG13 = registerBlock(frog, "frog13");
+    public static final Block FROG14 = registerBlock(frog, "frog14");
+    public static final Block FROG15 = registerBlock(frog, "frog15");
+    public static final Block FROG16 = registerBlock(frog, "frog16");
 
     public static final Block BRICK1 = registerBlock(brick, "brick1");
     public static final Block BRICK2 = registerBlock(brick, "brick2");
@@ -277,6 +343,39 @@ public class RegisterBlocks {
     public static final Block BISMUTH_2 = registerBlock(emerald, "bismuth_2");
     public static final Block BISMUTH_3 = registerBlock(glowstone, "bismuth_3");
 
+    public static final Block BRAID_WALL_101 = registerBlock(andesite_wall, "braid_wall_101");
+    public static final Block BRAID_WALL_102 = registerBlock(andesite_wall, "braid_wall_102");
+    public static final Block BRAID_WALL_103 = registerBlock(andesite_wall, "braid_wall_103");
+    public static final Block BRAID_WALL_104 = registerBlock(andesite_wall, "braid_wall_104");
+    public static final Block BRAID_WALL_105 = registerBlock(andesite_wall, "braid_wall_105");
+    public static final Block BRAID_WALL_106 = registerBlock(quartz_wall, "braid_wall_106");
+    public static final Block BRAID_WALL_107 = registerBlock(ice_wall, "braid_wall_107");
+    public static final Block BRAID_WALL_108 = registerBlock(glowstone_wall, "braid_wall_108");
+    public static final Block BRAID_WALL_109 = registerBlock(end_stone_wall, "braid_wall_109");
+    public static final Block BRAID_WALL_110 = registerBlock(deepslate_wall, "braid_wall_110");
+    public static final Block BRAID_WALL_111 = registerBlock(cobblestone_wall, "braid_wall_111");
+    public static final Block BRAID_WALL_112 = registerBlock(coal_block_wall, "braid_wall_112");
+    public static final Block BRAID_WALL_113 = registerBlock(prismarine_wall, "braid_wall_113");
+    public static final Block BRAID_WALL_114 = registerBlock(redstone_wall, "braid_wall_114");
+    public static final Block BRAID_WALL_115 = registerBlock(sandstone_wall, "braid_wall_115");
+    public static final Block BRAID_WALL_116 = registerBlock(sandstone_wall, "braid_wall_116");
+    public static final Block BRAID_WALL_117 = registerBlock(brick_wall, "braid_wall_117");
+    public static final Block BRAID_WALL_201 = registerBlock(concrete_wall, "braid_wall_201");
+    public static final Block BRAID_WALL_202 = registerBlock(concrete_wall, "braid_wall_202");
+    public static final Block BRAID_WALL_203 = registerBlock(concrete_wall, "braid_wall_203");
+    public static final Block BRAID_WALL_204 = registerBlock(concrete_wall, "braid_wall_204");
+    public static final Block BRAID_WALL_205 = registerBlock(concrete_wall, "braid_wall_205");
+    public static final Block BRAID_WALL_206 = registerBlock(concrete_wall, "braid_wall_206");
+    public static final Block BRAID_WALL_207 = registerBlock(concrete_wall, "braid_wall_207");
+    public static final Block BRAID_WALL_208 = registerBlock(concrete_wall, "braid_wall_208");
+    public static final Block BRAID_WALL_209 = registerBlock(concrete_wall, "braid_wall_209");
+    public static final Block BRAID_WALL_210 = registerBlock(concrete_wall, "braid_wall_210");
+    public static final Block BRAID_WALL_211 = registerBlock(concrete_wall, "braid_wall_211");
+    public static final Block BRAID_WALL_212 = registerBlock(concrete_wall, "braid_wall_212");
+    public static final Block BRAID_WALL_213 = registerBlock(concrete_wall, "braid_wall_213");
+    public static final Block BRAID_WALL_214 = registerBlock(concrete_wall, "braid_wall_214");
+    public static final Block BRAID_WALL_215 = registerBlock(concrete_wall, "braid_wall_215");
+    public static final Block BRAID_WALL_216 = registerBlock(concrete_wall, "braid_wall_216");
     public static final Block BRAID_STAIR_1 = registerBlock(acacia_stair, "braid_stair_1");
     public static final Block BRAID_STAIR_2 = registerBlock(acacia_stair, "braid_stair_2");
     public static final Block BRAID_STAIR_3 = registerBlock(acacia_stair, "braid_stair_3");
@@ -435,6 +534,99 @@ public class RegisterBlocks {
     public static final Block CHAOTIC_1_114 = registerBlock(concrete, "chaotic_1_114");
     public static final Block CHAOTIC_1_115 = registerBlock(concrete, "chaotic_1_115");
     public static final Block CHAOTIC_1_116 = registerBlock(concrete, "chaotic_1_116");
+    public static final Block CHAOTIC_STAIR_1_1 = registerBlock(andesite_stair, "chaotic_stair_1_1");
+    public static final Block CHAOTIC_STAIR_1_2 = registerBlock(andesite_stair, "chaotic_stair_1_2");
+    public static final Block CHAOTIC_STAIR_1_3 = registerBlock(andesite_stair, "chaotic_stair_1_3");
+    public static final Block CHAOTIC_STAIR_1_4 = registerBlock(andesite_stair, "chaotic_stair_1_4");
+    public static final Block CHAOTIC_STAIR_1_5 = registerBlock(andesite_stair, "chaotic_stair_1_5");
+    public static final Block CHAOTIC_STAIR_1_6 = registerBlock(quartz_stair, "chaotic_stair_1_6");
+    public static final Block CHAOTIC_STAIR_1_7 = registerBlock(ice_stair, "chaotic_stair_1_7");
+    public static final Block CHAOTIC_STAIR_1_8 = registerBlock(end_stone_stair, "chaotic_stair_1_8");
+    public static final Block CHAOTIC_STAIR_1_9 = registerBlock(deepslate_stair, "chaotic_stair_1_9");
+    public static final Block CHAOTIC_STAIR_1_10 = registerBlock(cobblestone_stair, "chaotic_stair_1_10");
+    public static final Block CHAOTIC_STAIR_1_11 = registerBlock(coal_block_stair, "chaotic_stair_1_11");
+    public static final Block CHAOTIC_STAIR_1_12 = registerBlock(prismarine_stair, "chaotic_stair_1_12");
+    public static final Block CHAOTIC_STAIR_1_13 = registerBlock(sandstone_stair, "chaotic_stair_1_13");
+    public static final Block CHAOTIC_STAIR_1_14 = registerBlock(sandstone_stair, "chaotic_stair_1_14");
+    public static final Block CHAOTIC_STAIR_1_15 = registerBlock(brick_stair, "chaotic_stair_1_15");
+    public static final Block CHAOTIC_STAIR_1_101 = registerBlock(concrete_stair, "chaotic_stair_1_101");
+    public static final Block CHAOTIC_STAIR_1_102 = registerBlock(concrete_stair, "chaotic_stair_1_102");
+    public static final Block CHAOTIC_STAIR_1_103 = registerBlock(concrete_stair, "chaotic_stair_1_103");
+    public static final Block CHAOTIC_STAIR_1_104 = registerBlock(concrete_stair, "chaotic_stair_1_104");
+    public static final Block CHAOTIC_STAIR_1_105 = registerBlock(concrete_stair, "chaotic_stair_1_105");
+    public static final Block CHAOTIC_STAIR_1_106 = registerBlock(concrete_stair, "chaotic_stair_1_106");
+    public static final Block CHAOTIC_STAIR_1_107 = registerBlock(concrete_stair, "chaotic_stair_1_107");
+    public static final Block CHAOTIC_STAIR_1_108 = registerBlock(concrete_stair, "chaotic_stair_1_108");
+    public static final Block CHAOTIC_STAIR_1_109 = registerBlock(concrete_stair, "chaotic_stair_1_109");
+    public static final Block CHAOTIC_STAIR_1_110 = registerBlock(concrete_stair, "chaotic_stair_1_110");
+    public static final Block CHAOTIC_STAIR_1_111 = registerBlock(concrete_stair, "chaotic_stair_1_111");
+    public static final Block CHAOTIC_STAIR_1_112 = registerBlock(concrete_stair, "chaotic_stair_1_112");
+    public static final Block CHAOTIC_STAIR_1_113 = registerBlock(concrete_stair, "chaotic_stair_1_113");
+    public static final Block CHAOTIC_STAIR_1_114 = registerBlock(concrete_stair, "chaotic_stair_1_114");
+    public static final Block CHAOTIC_STAIR_1_115 = registerBlock(concrete_stair, "chaotic_stair_1_115");
+    public static final Block CHAOTIC_STAIR_1_116 = registerBlock(concrete_stair, "chaotic_stair_1_116");
+    public static final Block CHAOTIC_SLAB_1_1 = registerBlock(andesite_slab, "chaotic_slab_1_1");
+    public static final Block CHAOTIC_SLAB_1_2 = registerBlock(andesite_slab, "chaotic_slab_1_2");
+    public static final Block CHAOTIC_SLAB_1_3 = registerBlock(andesite_slab, "chaotic_slab_1_3");
+    public static final Block CHAOTIC_SLAB_1_4 = registerBlock(andesite_slab, "chaotic_slab_1_4");
+    public static final Block CHAOTIC_SLAB_1_5 = registerBlock(andesite_slab, "chaotic_slab_1_5");
+    public static final Block CHAOTIC_SLAB_1_6 = registerBlock(quartz_slab, "chaotic_slab_1_6");
+    public static final Block CHAOTIC_SLAB_1_7 = registerBlock(ice_slab, "chaotic_slab_1_7");
+    public static final Block CHAOTIC_SLAB_1_8 = registerBlock(end_stone_slab, "chaotic_slab_1_8");
+    public static final Block CHAOTIC_SLAB_1_9 = registerBlock(deepslate_slab, "chaotic_slab_1_9");
+    public static final Block CHAOTIC_SLAB_1_10 = registerBlock(cobblestone_slab, "chaotic_slab_1_10");
+    public static final Block CHAOTIC_SLAB_1_11 = registerBlock(coal_block_slab, "chaotic_slab_1_11");
+    public static final Block CHAOTIC_SLAB_1_12 = registerBlock(prismarine_slab, "chaotic_slab_1_12");
+    public static final Block CHAOTIC_SLAB_1_13 = registerBlock(sandstone_slab, "chaotic_slab_1_13");
+    public static final Block CHAOTIC_SLAB_1_14 = registerBlock(sandstone_slab, "chaotic_slab_1_14");
+    public static final Block CHAOTIC_SLAB_1_15 = registerBlock(brick_slab, "chaotic_slab_1_15");
+    public static final Block CHAOTIC_SLAB_1_101 = registerBlock(concrete_slab, "chaotic_slab_1_101");
+    public static final Block CHAOTIC_SLAB_1_102 = registerBlock(concrete_slab, "chaotic_slab_1_102");
+    public static final Block CHAOTIC_SLAB_1_103 = registerBlock(concrete_slab, "chaotic_slab_1_103");
+    public static final Block CHAOTIC_SLAB_1_104 = registerBlock(concrete_slab, "chaotic_slab_1_104");
+    public static final Block CHAOTIC_SLAB_1_105 = registerBlock(concrete_slab, "chaotic_slab_1_105");
+    public static final Block CHAOTIC_SLAB_1_106 = registerBlock(concrete_slab, "chaotic_slab_1_106");
+    public static final Block CHAOTIC_SLAB_1_107 = registerBlock(concrete_slab, "chaotic_slab_1_107");
+    public static final Block CHAOTIC_SLAB_1_108 = registerBlock(concrete_slab, "chaotic_slab_1_108");
+    public static final Block CHAOTIC_SLAB_1_109 = registerBlock(concrete_slab, "chaotic_slab_1_109");
+    public static final Block CHAOTIC_SLAB_1_110 = registerBlock(concrete_slab, "chaotic_slab_1_110");
+    public static final Block CHAOTIC_SLAB_1_111 = registerBlock(concrete_slab, "chaotic_slab_1_111");
+    public static final Block CHAOTIC_SLAB_1_112 = registerBlock(concrete_slab, "chaotic_slab_1_112");
+    public static final Block CHAOTIC_SLAB_1_113 = registerBlock(concrete_slab, "chaotic_slab_1_113");
+    public static final Block CHAOTIC_SLAB_1_114 = registerBlock(concrete_slab, "chaotic_slab_1_114");
+    public static final Block CHAOTIC_SLAB_1_115 = registerBlock(concrete_slab, "chaotic_slab_1_115");
+    public static final Block CHAOTIC_SLAB_1_116 = registerBlock(concrete_slab, "chaotic_slab_1_116");
+    public static final Block CHAOTIC_WALL_1_1 = registerBlock(andesite_wall, "chaotic_wall_1_1");
+    public static final Block CHAOTIC_WALL_1_2 = registerBlock(andesite_wall, "chaotic_wall_1_2");
+    public static final Block CHAOTIC_WALL_1_3 = registerBlock(andesite_wall, "chaotic_wall_1_3");
+    public static final Block CHAOTIC_WALL_1_4 = registerBlock(andesite_wall, "chaotic_wall_1_4");
+    public static final Block CHAOTIC_WALL_1_5 = registerBlock(andesite_wall, "chaotic_wall_1_5");
+    public static final Block CHAOTIC_WALL_1_6 = registerBlock(quartz_wall, "chaotic_wall_1_6");
+    public static final Block CHAOTIC_WALL_1_7 = registerBlock(ice_wall, "chaotic_wall_1_7");
+    public static final Block CHAOTIC_WALL_1_8 = registerBlock(end_stone_wall, "chaotic_wall_1_8");
+    public static final Block CHAOTIC_WALL_1_9 = registerBlock(deepslate_wall, "chaotic_wall_1_9");
+    public static final Block CHAOTIC_WALL_1_10 = registerBlock(cobblestone_wall, "chaotic_wall_1_10");
+    public static final Block CHAOTIC_WALL_1_11 = registerBlock(coal_block_wall, "chaotic_wall_1_11");
+    public static final Block CHAOTIC_WALL_1_12 = registerBlock(prismarine_wall, "chaotic_wall_1_12");
+    public static final Block CHAOTIC_WALL_1_13 = registerBlock(sandstone_wall, "chaotic_wall_1_13");
+    public static final Block CHAOTIC_WALL_1_14 = registerBlock(sandstone_wall, "chaotic_wall_1_14");
+    public static final Block CHAOTIC_WALL_1_15 = registerBlock(brick_wall, "chaotic_wall_1_15");
+    public static final Block CHAOTIC_WALL_1_101 = registerBlock(concrete_wall, "chaotic_wall_1_101");
+    public static final Block CHAOTIC_WALL_1_102 = registerBlock(concrete_wall, "chaotic_wall_1_102");
+    public static final Block CHAOTIC_WALL_1_103 = registerBlock(concrete_wall, "chaotic_wall_1_103");
+    public static final Block CHAOTIC_WALL_1_104 = registerBlock(concrete_wall, "chaotic_wall_1_104");
+    public static final Block CHAOTIC_WALL_1_105 = registerBlock(concrete_wall, "chaotic_wall_1_105");
+    public static final Block CHAOTIC_WALL_1_106 = registerBlock(concrete_wall, "chaotic_wall_1_106");
+    public static final Block CHAOTIC_WALL_1_107 = registerBlock(concrete_wall, "chaotic_wall_1_107");
+    public static final Block CHAOTIC_WALL_1_108 = registerBlock(concrete_wall, "chaotic_wall_1_108");
+    public static final Block CHAOTIC_WALL_1_109 = registerBlock(concrete_wall, "chaotic_wall_1_109");
+    public static final Block CHAOTIC_WALL_1_110 = registerBlock(concrete_wall, "chaotic_wall_1_110");
+    public static final Block CHAOTIC_WALL_1_111 = registerBlock(concrete_wall, "chaotic_wall_1_111");
+    public static final Block CHAOTIC_WALL_1_112 = registerBlock(concrete_wall, "chaotic_wall_1_112");
+    public static final Block CHAOTIC_WALL_1_113 = registerBlock(concrete_wall, "chaotic_wall_1_113");
+    public static final Block CHAOTIC_WALL_1_114 = registerBlock(concrete_wall, "chaotic_wall_1_114");
+    public static final Block CHAOTIC_WALL_1_115 = registerBlock(concrete_wall, "chaotic_wall_1_115");
+    public static final Block CHAOTIC_WALL_1_116 = registerBlock(concrete_wall, "chaotic_wall_1_116");
     public static final Block CHAOTIC_2_1 = registerBlock(andesite, "chaotic_2_1");
     public static final Block CHAOTIC_2_2 = registerBlock(andesite, "chaotic_2_2");
     public static final Block CHAOTIC_2_3 = registerBlock(andesite, "chaotic_2_3");
@@ -468,6 +660,105 @@ public class RegisterBlocks {
     public static final Block CHAOTIC_2_114 = registerBlock(concrete, "chaotic_2_114");
     public static final Block CHAOTIC_2_115 = registerBlock(concrete, "chaotic_2_115");
     public static final Block CHAOTIC_2_116 = registerBlock(concrete, "chaotic_2_116");
+    public static final Block CHAOTIC_STAIR_2_1 = registerBlock(andesite_stair, "chaotic_stair_2_1");
+    public static final Block CHAOTIC_STAIR_2_2 = registerBlock(andesite_stair, "chaotic_stair_2_2");
+    public static final Block CHAOTIC_STAIR_2_3 = registerBlock(andesite_stair, "chaotic_stair_2_3");
+    public static final Block CHAOTIC_STAIR_2_4 = registerBlock(andesite_stair, "chaotic_stair_2_4");
+    public static final Block CHAOTIC_STAIR_2_5 = registerBlock(andesite_stair, "chaotic_stair_2_5");
+    public static final Block CHAOTIC_STAIR_2_6 = registerBlock(quartz_stair, "chaotic_stair_2_6");
+    public static final Block CHAOTIC_STAIR_2_7 = registerBlock(ice_stair, "chaotic_stair_2_7");
+    public static final Block CHAOTIC_STAIR_2_8 = registerBlock(end_stone_stair, "chaotic_stair_2_8");
+    public static final Block CHAOTIC_STAIR_2_9 = registerBlock(deepslate_stair, "chaotic_stair_2_9");
+    public static final Block CHAOTIC_STAIR_2_10 = registerBlock(cobblestone_stair, "chaotic_stair_2_10");
+    public static final Block CHAOTIC_STAIR_2_11 = registerBlock(coal_block_stair, "chaotic_stair_2_11");
+    public static final Block CHAOTIC_STAIR_2_12 = registerBlock(prismarine_stair, "chaotic_stair_2_12");
+    public static final Block CHAOTIC_STAIR_2_13 = registerBlock(sandstone_stair, "chaotic_stair_2_13");
+    public static final Block CHAOTIC_STAIR_2_14 = registerBlock(sandstone_stair, "chaotic_stair_2_14");
+    public static final Block CHAOTIC_STAIR_2_15 = registerBlock(brick_stair, "chaotic_stair_2_15");
+    public static final Block CHAOTIC_STAIR_2_16 = registerBlock(glowstone_stair, "chaotic_stair_2_16");
+    public static final Block CHAOTIC_STAIR_2_17 = registerBlock(redstone_stair, "chaotic_stair_2_17");
+    public static final Block CHAOTIC_STAIR_2_101 = registerBlock(concrete_stair, "chaotic_stair_2_101");
+    public static final Block CHAOTIC_STAIR_2_102 = registerBlock(concrete_stair, "chaotic_stair_2_102");
+    public static final Block CHAOTIC_STAIR_2_103 = registerBlock(concrete_stair, "chaotic_stair_2_103");
+    public static final Block CHAOTIC_STAIR_2_104 = registerBlock(concrete_stair, "chaotic_stair_2_104");
+    public static final Block CHAOTIC_STAIR_2_105 = registerBlock(concrete_stair, "chaotic_stair_2_105");
+    public static final Block CHAOTIC_STAIR_2_106 = registerBlock(concrete_stair, "chaotic_stair_2_106");
+    public static final Block CHAOTIC_STAIR_2_107 = registerBlock(concrete_stair, "chaotic_stair_2_107");
+    public static final Block CHAOTIC_STAIR_2_108 = registerBlock(concrete_stair, "chaotic_stair_2_108");
+    public static final Block CHAOTIC_STAIR_2_109 = registerBlock(concrete_stair, "chaotic_stair_2_109");
+    public static final Block CHAOTIC_STAIR_2_110 = registerBlock(concrete_stair, "chaotic_stair_2_110");
+    public static final Block CHAOTIC_STAIR_2_111 = registerBlock(concrete_stair, "chaotic_stair_2_111");
+    public static final Block CHAOTIC_STAIR_2_112 = registerBlock(concrete_stair, "chaotic_stair_2_112");
+    public static final Block CHAOTIC_STAIR_2_113 = registerBlock(concrete_stair, "chaotic_stair_2_113");
+    public static final Block CHAOTIC_STAIR_2_114 = registerBlock(concrete_stair, "chaotic_stair_2_114");
+    public static final Block CHAOTIC_STAIR_2_115 = registerBlock(concrete_stair, "chaotic_stair_2_115");
+    public static final Block CHAOTIC_STAIR_2_116 = registerBlock(concrete_stair, "chaotic_stair_2_116");
+    public static final Block CHAOTIC_SLAB_2_1 = registerBlock(andesite_slab, "chaotic_slab_2_1");
+    public static final Block CHAOTIC_SLAB_2_2 = registerBlock(andesite_slab, "chaotic_slab_2_2");
+    public static final Block CHAOTIC_SLAB_2_3 = registerBlock(andesite_slab, "chaotic_slab_2_3");
+    public static final Block CHAOTIC_SLAB_2_4 = registerBlock(andesite_slab, "chaotic_slab_2_4");
+    public static final Block CHAOTIC_SLAB_2_5 = registerBlock(andesite_slab, "chaotic_slab_2_5");
+    public static final Block CHAOTIC_SLAB_2_6 = registerBlock(quartz_slab, "chaotic_slab_2_6");
+    public static final Block CHAOTIC_SLAB_2_7 = registerBlock(ice_slab, "chaotic_slab_2_7");
+    public static final Block CHAOTIC_SLAB_2_8 = registerBlock(end_stone_slab, "chaotic_slab_2_8");
+    public static final Block CHAOTIC_SLAB_2_9 = registerBlock(deepslate_slab, "chaotic_slab_2_9");
+    public static final Block CHAOTIC_SLAB_2_10 = registerBlock(cobblestone_slab, "chaotic_slab_2_10");
+    public static final Block CHAOTIC_SLAB_2_11 = registerBlock(coal_block_slab, "chaotic_slab_2_11");
+    public static final Block CHAOTIC_SLAB_2_12 = registerBlock(prismarine_slab, "chaotic_slab_2_12");
+    public static final Block CHAOTIC_SLAB_2_13 = registerBlock(sandstone_slab, "chaotic_slab_2_13");
+    public static final Block CHAOTIC_SLAB_2_14 = registerBlock(sandstone_slab, "chaotic_slab_2_14");
+    public static final Block CHAOTIC_SLAB_2_15 = registerBlock(brick_slab, "chaotic_slab_2_15");
+    public static final Block CHAOTIC_SLAB_2_16 = registerBlock(glowstone_slab, "chaotic_slab_2_16");
+    public static final Block CHAOTIC_SLAB_2_17 = registerBlock(redstone_slab, "chaotic_slab_2_17");
+    public static final Block CHAOTIC_SLAB_2_101 = registerBlock(concrete_slab, "chaotic_slab_2_101");
+    public static final Block CHAOTIC_SLAB_2_102 = registerBlock(concrete_slab, "chaotic_slab_2_102");
+    public static final Block CHAOTIC_SLAB_2_103 = registerBlock(concrete_slab, "chaotic_slab_2_103");
+    public static final Block CHAOTIC_SLAB_2_104 = registerBlock(concrete_slab, "chaotic_slab_2_104");
+    public static final Block CHAOTIC_SLAB_2_105 = registerBlock(concrete_slab, "chaotic_slab_2_105");
+    public static final Block CHAOTIC_SLAB_2_106 = registerBlock(concrete_slab, "chaotic_slab_2_106");
+    public static final Block CHAOTIC_SLAB_2_107 = registerBlock(concrete_slab, "chaotic_slab_2_107");
+    public static final Block CHAOTIC_SLAB_2_108 = registerBlock(concrete_slab, "chaotic_slab_2_108");
+    public static final Block CHAOTIC_SLAB_2_109 = registerBlock(concrete_slab, "chaotic_slab_2_109");
+    public static final Block CHAOTIC_SLAB_2_110 = registerBlock(concrete_slab, "chaotic_slab_2_110");
+    public static final Block CHAOTIC_SLAB_2_111 = registerBlock(concrete_slab, "chaotic_slab_2_111");
+    public static final Block CHAOTIC_SLAB_2_112 = registerBlock(concrete_slab, "chaotic_slab_2_112");
+    public static final Block CHAOTIC_SLAB_2_113 = registerBlock(concrete_slab, "chaotic_slab_2_113");
+    public static final Block CHAOTIC_SLAB_2_114 = registerBlock(concrete_slab, "chaotic_slab_2_114");
+    public static final Block CHAOTIC_SLAB_2_115 = registerBlock(concrete_slab, "chaotic_slab_2_115");
+    public static final Block CHAOTIC_SLAB_2_116 = registerBlock(concrete_slab, "chaotic_slab_2_116");
+    public static final Block CHAOTIC_WALL_2_1 = registerBlock(andesite_wall, "chaotic_wall_2_1");
+    public static final Block CHAOTIC_WALL_2_2 = registerBlock(andesite_wall, "chaotic_wall_2_2");
+    public static final Block CHAOTIC_WALL_2_3 = registerBlock(andesite_wall, "chaotic_wall_2_3");
+    public static final Block CHAOTIC_WALL_2_4 = registerBlock(andesite_wall, "chaotic_wall_2_4");
+    public static final Block CHAOTIC_WALL_2_5 = registerBlock(andesite_wall, "chaotic_wall_2_5");
+    public static final Block CHAOTIC_WALL_2_6 = registerBlock(quartz_wall, "chaotic_wall_2_6");
+    public static final Block CHAOTIC_WALL_2_7 = registerBlock(ice_wall, "chaotic_wall_2_7");
+    public static final Block CHAOTIC_WALL_2_8 = registerBlock(end_stone_wall, "chaotic_wall_2_8");
+    public static final Block CHAOTIC_WALL_2_9 = registerBlock(deepslate_wall, "chaotic_wall_2_9");
+    public static final Block CHAOTIC_WALL_2_10 = registerBlock(cobblestone_wall, "chaotic_wall_2_10");
+    public static final Block CHAOTIC_WALL_2_11 = registerBlock(coal_block_wall, "chaotic_wall_2_11");
+    public static final Block CHAOTIC_WALL_2_12 = registerBlock(prismarine_wall, "chaotic_wall_2_12");
+    public static final Block CHAOTIC_WALL_2_13 = registerBlock(sandstone_wall, "chaotic_wall_2_13");
+    public static final Block CHAOTIC_WALL_2_14 = registerBlock(sandstone_wall, "chaotic_wall_2_14");
+    public static final Block CHAOTIC_WALL_2_15 = registerBlock(brick_wall, "chaotic_wall_2_15");
+    public static final Block CHAOTIC_WALL_2_16 = registerBlock(glowstone_wall, "chaotic_wall_2_16");
+    public static final Block CHAOTIC_WALL_2_17 = registerBlock(redstone_wall, "chaotic_wall_2_17");
+    public static final Block CHAOTIC_WALL_2_101 = registerBlock(concrete_wall, "chaotic_wall_2_101");
+    public static final Block CHAOTIC_WALL_2_102 = registerBlock(concrete_wall, "chaotic_wall_2_102");
+    public static final Block CHAOTIC_WALL_2_103 = registerBlock(concrete_wall, "chaotic_wall_2_103");
+    public static final Block CHAOTIC_WALL_2_104 = registerBlock(concrete_wall, "chaotic_wall_2_104");
+    public static final Block CHAOTIC_WALL_2_105 = registerBlock(concrete_wall, "chaotic_wall_2_105");
+    public static final Block CHAOTIC_WALL_2_106 = registerBlock(concrete_wall, "chaotic_wall_2_106");
+    public static final Block CHAOTIC_WALL_2_107 = registerBlock(concrete_wall, "chaotic_wall_2_107");
+    public static final Block CHAOTIC_WALL_2_108 = registerBlock(concrete_wall, "chaotic_wall_2_108");
+    public static final Block CHAOTIC_WALL_2_109 = registerBlock(concrete_wall, "chaotic_wall_2_109");
+    public static final Block CHAOTIC_WALL_2_110 = registerBlock(concrete_wall, "chaotic_wall_2_110");
+    public static final Block CHAOTIC_WALL_2_111 = registerBlock(concrete_wall, "chaotic_wall_2_111");
+    public static final Block CHAOTIC_WALL_2_112 = registerBlock(concrete_wall, "chaotic_wall_2_112");
+    public static final Block CHAOTIC_WALL_2_113 = registerBlock(concrete_wall, "chaotic_wall_2_113");
+    public static final Block CHAOTIC_WALL_2_114 = registerBlock(concrete_wall, "chaotic_wall_2_114");
+    public static final Block CHAOTIC_WALL_2_115 = registerBlock(concrete_wall, "chaotic_wall_2_115");
+    public static final Block CHAOTIC_WALL_2_116 = registerBlock(concrete_wall, "chaotic_wall_2_116");
     public static final Block CHAOTIC_3_1 = registerBlock(andesite, "chaotic_3_1");
     public static final Block CHAOTIC_3_2 = registerBlock(andesite, "chaotic_3_2");
     public static final Block CHAOTIC_3_3 = registerBlock(andesite, "chaotic_3_3");
@@ -501,11 +792,110 @@ public class RegisterBlocks {
     public static final Block CHAOTIC_3_114 = registerBlock(concrete, "chaotic_3_114");
     public static final Block CHAOTIC_3_115 = registerBlock(concrete, "chaotic_3_115");
     public static final Block CHAOTIC_3_116 = registerBlock(concrete, "chaotic_3_116");
+    public static final Block CHAOTIC_STAIR_3_1 = registerBlock(andesite_stair, "chaotic_stair_3_1");
+    public static final Block CHAOTIC_STAIR_3_2 = registerBlock(andesite_stair, "chaotic_stair_3_2");
+    public static final Block CHAOTIC_STAIR_3_3 = registerBlock(andesite_stair, "chaotic_stair_3_3");
+    public static final Block CHAOTIC_STAIR_3_4 = registerBlock(andesite_stair, "chaotic_stair_3_4");
+    public static final Block CHAOTIC_STAIR_3_5 = registerBlock(andesite_stair, "chaotic_stair_3_5");
+    public static final Block CHAOTIC_STAIR_3_6 = registerBlock(quartz_stair, "chaotic_stair_3_6");
+    public static final Block CHAOTIC_STAIR_3_7 = registerBlock(ice_stair, "chaotic_stair_3_7");
+    public static final Block CHAOTIC_STAIR_3_8 = registerBlock(end_stone_stair, "chaotic_stair_3_8");
+    public static final Block CHAOTIC_STAIR_3_9 = registerBlock(deepslate_stair, "chaotic_stair_3_9");
+    public static final Block CHAOTIC_STAIR_3_10 = registerBlock(cobblestone_stair, "chaotic_stair_3_10");
+    public static final Block CHAOTIC_STAIR_3_11 = registerBlock(coal_block_stair, "chaotic_stair_3_11");
+    public static final Block CHAOTIC_STAIR_3_12 = registerBlock(prismarine_stair, "chaotic_stair_3_12");
+    public static final Block CHAOTIC_STAIR_3_13 = registerBlock(sandstone_stair, "chaotic_stair_3_13");
+    public static final Block CHAOTIC_STAIR_3_14 = registerBlock(sandstone_stair, "chaotic_stair_3_14");
+    public static final Block CHAOTIC_STAIR_3_15 = registerBlock(brick_stair, "chaotic_stair_3_15");
+    public static final Block CHAOTIC_STAIR_3_16 = registerBlock(glowstone_stair, "chaotic_stair_3_16");
+    public static final Block CHAOTIC_STAIR_3_17 = registerBlock(redstone_stair, "chaotic_stair_3_17");
+    public static final Block CHAOTIC_STAIR_3_101 = registerBlock(concrete_stair, "chaotic_stair_3_101");
+    public static final Block CHAOTIC_STAIR_3_102 = registerBlock(concrete_stair, "chaotic_stair_3_102");
+    public static final Block CHAOTIC_STAIR_3_103 = registerBlock(concrete_stair, "chaotic_stair_3_103");
+    public static final Block CHAOTIC_STAIR_3_104 = registerBlock(concrete_stair, "chaotic_stair_3_104");
+    public static final Block CHAOTIC_STAIR_3_105 = registerBlock(concrete_stair, "chaotic_stair_3_105");
+    public static final Block CHAOTIC_STAIR_3_106 = registerBlock(concrete_stair, "chaotic_stair_3_106");
+    public static final Block CHAOTIC_STAIR_3_107 = registerBlock(concrete_stair, "chaotic_stair_3_107");
+    public static final Block CHAOTIC_STAIR_3_108 = registerBlock(concrete_stair, "chaotic_stair_3_108");
+    public static final Block CHAOTIC_STAIR_3_109 = registerBlock(concrete_stair, "chaotic_stair_3_109");
+    public static final Block CHAOTIC_STAIR_3_110 = registerBlock(concrete_stair, "chaotic_stair_3_110");
+    public static final Block CHAOTIC_STAIR_3_111 = registerBlock(concrete_stair, "chaotic_stair_3_111");
+    public static final Block CHAOTIC_STAIR_3_112 = registerBlock(concrete_stair, "chaotic_stair_3_112");
+    public static final Block CHAOTIC_STAIR_3_113 = registerBlock(concrete_stair, "chaotic_stair_3_113");
+    public static final Block CHAOTIC_STAIR_3_114 = registerBlock(concrete_stair, "chaotic_stair_3_114");
+    public static final Block CHAOTIC_STAIR_3_115 = registerBlock(concrete_stair, "chaotic_stair_3_115");
+    public static final Block CHAOTIC_STAIR_3_116 = registerBlock(concrete_stair, "chaotic_stair_3_116");
+    public static final Block CHAOTIC_SLAB_3_1 = registerBlock(andesite_slab, "chaotic_slab_3_1");
+    public static final Block CHAOTIC_SLAB_3_2 = registerBlock(andesite_slab, "chaotic_slab_3_2");
+    public static final Block CHAOTIC_SLAB_3_3 = registerBlock(andesite_slab, "chaotic_slab_3_3");
+    public static final Block CHAOTIC_SLAB_3_4 = registerBlock(andesite_slab, "chaotic_slab_3_4");
+    public static final Block CHAOTIC_SLAB_3_5 = registerBlock(andesite_slab, "chaotic_slab_3_5");
+    public static final Block CHAOTIC_SLAB_3_6 = registerBlock(quartz_slab, "chaotic_slab_3_6");
+    public static final Block CHAOTIC_SLAB_3_7 = registerBlock(ice_slab, "chaotic_slab_3_7");
+    public static final Block CHAOTIC_SLAB_3_8 = registerBlock(end_stone_slab, "chaotic_slab_3_8");
+    public static final Block CHAOTIC_SLAB_3_9 = registerBlock(deepslate_slab, "chaotic_slab_3_9");
+    public static final Block CHAOTIC_SLAB_3_10 = registerBlock(cobblestone_slab, "chaotic_slab_3_10");
+    public static final Block CHAOTIC_SLAB_3_11 = registerBlock(coal_block_slab, "chaotic_slab_3_11");
+    public static final Block CHAOTIC_SLAB_3_12 = registerBlock(prismarine_slab, "chaotic_slab_3_12");
+    public static final Block CHAOTIC_SLAB_3_13 = registerBlock(sandstone_slab, "chaotic_slab_3_13");
+    public static final Block CHAOTIC_SLAB_3_14 = registerBlock(sandstone_slab, "chaotic_slab_3_14");
+    public static final Block CHAOTIC_SLAB_3_15 = registerBlock(brick_slab, "chaotic_slab_3_15");
+    public static final Block CHAOTIC_SLAB_3_16 = registerBlock(glowstone_slab, "chaotic_slab_3_16");
+    public static final Block CHAOTIC_SLAB_3_17 = registerBlock(redstone_slab, "chaotic_slab_3_17");
+    public static final Block CHAOTIC_SLAB_3_101 = registerBlock(concrete_slab, "chaotic_slab_3_101");
+    public static final Block CHAOTIC_SLAB_3_102 = registerBlock(concrete_slab, "chaotic_slab_3_102");
+    public static final Block CHAOTIC_SLAB_3_103 = registerBlock(concrete_slab, "chaotic_slab_3_103");
+    public static final Block CHAOTIC_SLAB_3_104 = registerBlock(concrete_slab, "chaotic_slab_3_104");
+    public static final Block CHAOTIC_SLAB_3_105 = registerBlock(concrete_slab, "chaotic_slab_3_105");
+    public static final Block CHAOTIC_SLAB_3_106 = registerBlock(concrete_slab, "chaotic_slab_3_106");
+    public static final Block CHAOTIC_SLAB_3_107 = registerBlock(concrete_slab, "chaotic_slab_3_107");
+    public static final Block CHAOTIC_SLAB_3_108 = registerBlock(concrete_slab, "chaotic_slab_3_108");
+    public static final Block CHAOTIC_SLAB_3_109 = registerBlock(concrete_slab, "chaotic_slab_3_109");
+    public static final Block CHAOTIC_SLAB_3_110 = registerBlock(concrete_slab, "chaotic_slab_3_110");
+    public static final Block CHAOTIC_SLAB_3_111 = registerBlock(concrete_slab, "chaotic_slab_3_111");
+    public static final Block CHAOTIC_SLAB_3_112 = registerBlock(concrete_slab, "chaotic_slab_3_112");
+    public static final Block CHAOTIC_SLAB_3_113 = registerBlock(concrete_slab, "chaotic_slab_3_113");
+    public static final Block CHAOTIC_SLAB_3_114 = registerBlock(concrete_slab, "chaotic_slab_3_114");
+    public static final Block CHAOTIC_SLAB_3_115 = registerBlock(concrete_slab, "chaotic_slab_3_115");
+    public static final Block CHAOTIC_SLAB_3_116 = registerBlock(concrete_slab, "chaotic_slab_3_116");
+    public static final Block CHAOTIC_WALL_3_1 = registerBlock(andesite_wall, "chaotic_wall_3_1");
+    public static final Block CHAOTIC_WALL_3_2 = registerBlock(andesite_wall, "chaotic_wall_3_2");
+    public static final Block CHAOTIC_WALL_3_3 = registerBlock(andesite_wall, "chaotic_wall_3_3");
+    public static final Block CHAOTIC_WALL_3_4 = registerBlock(andesite_wall, "chaotic_wall_3_4");
+    public static final Block CHAOTIC_WALL_3_5 = registerBlock(andesite_wall, "chaotic_wall_3_5");
+    public static final Block CHAOTIC_WALL_3_6 = registerBlock(quartz_wall, "chaotic_wall_3_6");
+    public static final Block CHAOTIC_WALL_3_7 = registerBlock(ice_wall, "chaotic_wall_3_7");
+    public static final Block CHAOTIC_WALL_3_8 = registerBlock(end_stone_wall, "chaotic_wall_3_8");
+    public static final Block CHAOTIC_WALL_3_9 = registerBlock(deepslate_wall, "chaotic_wall_3_9");
+    public static final Block CHAOTIC_WALL_3_10 = registerBlock(cobblestone_wall, "chaotic_wall_3_10");
+    public static final Block CHAOTIC_WALL_3_11 = registerBlock(coal_block_wall, "chaotic_wall_3_11");
+    public static final Block CHAOTIC_WALL_3_12 = registerBlock(prismarine_wall, "chaotic_wall_3_12");
+    public static final Block CHAOTIC_WALL_3_13 = registerBlock(sandstone_wall, "chaotic_wall_3_13");
+    public static final Block CHAOTIC_WALL_3_14 = registerBlock(sandstone_wall, "chaotic_wall_3_14");
+    public static final Block CHAOTIC_WALL_3_15 = registerBlock(brick_wall, "chaotic_wall_3_15");
+    public static final Block CHAOTIC_WALL_3_16 = registerBlock(glowstone_wall, "chaotic_wall_3_16");
+    public static final Block CHAOTIC_WALL_3_17 = registerBlock(redstone_wall, "chaotic_wall_3_17");
+    public static final Block CHAOTIC_WALL_3_101 = registerBlock(concrete_wall, "chaotic_wall_3_101");
+    public static final Block CHAOTIC_WALL_3_102 = registerBlock(concrete_wall, "chaotic_wall_3_102");
+    public static final Block CHAOTIC_WALL_3_103 = registerBlock(concrete_wall, "chaotic_wall_3_103");
+    public static final Block CHAOTIC_WALL_3_104 = registerBlock(concrete_wall, "chaotic_wall_3_104");
+    public static final Block CHAOTIC_WALL_3_105 = registerBlock(concrete_wall, "chaotic_wall_3_105");
+    public static final Block CHAOTIC_WALL_3_106 = registerBlock(concrete_wall, "chaotic_wall_3_106");
+    public static final Block CHAOTIC_WALL_3_107 = registerBlock(concrete_wall, "chaotic_wall_3_107");
+    public static final Block CHAOTIC_WALL_3_108 = registerBlock(concrete_wall, "chaotic_wall_3_108");
+    public static final Block CHAOTIC_WALL_3_109 = registerBlock(concrete_wall, "chaotic_wall_3_109");
+    public static final Block CHAOTIC_WALL_3_110 = registerBlock(concrete_wall, "chaotic_wall_3_110");
+    public static final Block CHAOTIC_WALL_3_111 = registerBlock(concrete_wall, "chaotic_wall_3_111");
+    public static final Block CHAOTIC_WALL_3_112 = registerBlock(concrete_wall, "chaotic_wall_3_112");
+    public static final Block CHAOTIC_WALL_3_113 = registerBlock(concrete_wall, "chaotic_wall_3_113");
+    public static final Block CHAOTIC_WALL_3_114 = registerBlock(concrete_wall, "chaotic_wall_3_114");
+    public static final Block CHAOTIC_WALL_3_115 = registerBlock(concrete_wall, "chaotic_wall_3_115");
+    public static final Block CHAOTIC_WALL_3_116 = registerBlock(concrete_wall, "chaotic_wall_3_116");
 
     public static final Block FONAR_STOLB = registerBlock(stolb, "fonar_stolb");
     public static final Block FONAR_BASE = registerBlock(stolb, "fonar_base");
     public static final Block FONAR_STOLB2 = registerBlock(stolb, "fonar_stolb2");
-    public static final Block FONAR_LAMP20 = registerBlock(properties -> new Fonar(properties.strength(0.5f, 5).sounds(BlockSoundGroup.METAL).noBlockBreakParticles().luminance(state -> 15)), "fonar_lamp20");
+    public static final Block FONAR_LAMP20 = registerBlock(properties -> new Fonar2(properties.strength(0.5f, 5).sounds(BlockSoundGroup.METAL).noBlockBreakParticles().luminance(state -> 15)), "fonar_lamp20");
     public static final Block FONAR_LAMP1 = registerBlock(properties -> new Fonar(properties.strength(0.5f, 5).sounds(BlockSoundGroup.METAL).noBlockBreakParticles().luminance(state -> 8)), "fonar_lamp1");
     public static final Block FONAR_LAMP2 = registerBlock(properties -> new Fonar(properties.strength(0.5f, 5).sounds(BlockSoundGroup.METAL).noBlockBreakParticles().luminance(state -> 11)), "fonar_lamp2");
     public static final Block FONAR_LAMP3 = registerBlock(properties -> new Fonar(properties.strength(0.5f, 5).sounds(BlockSoundGroup.METAL).noBlockBreakParticles().luminance(state -> 13)), "fonar_lamp3");
@@ -561,6 +951,7 @@ public class RegisterBlocks {
     public static final Block PRESENT_BIG = registerBlock(present, "present_big");
     public static final Block PRESENT_INSTRUMENT = registerBlock(present, "present_instrument");
     public static final Block PRESENT_WINTER = registerBlock(present, "present_winter");
+    public static final Block PRESENT_OLD = registerBlock(present, "present_old");
     public static final Block ELKA = registerBlock(properties -> new Block(properties.mapColor(MapColor.ORANGE).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD).burnable().luminance(state -> 15).nonOpaque()), "elka");
     public static final Block LEDENETS = registerBlockWithoutBlockItem(ledenets, "ledenets");
     public static final Block LEDENETS1 = registerBlockWithoutBlockItem(ledenets, "ledenets1");
@@ -586,34 +977,220 @@ public class RegisterBlocks {
     public static final Block SUGAR_BLOCK_YELLOW = registerBlock(dirt, "sugar_block_yellow");
     public static final Block SUGAR_BLOCK_RED = registerBlock(dirt, "sugar_block_red");
     public static final Block SUGAR_BLOCK_BROWN = registerBlock(dirt, "sugar_block_brown");
+    public static final Block GARLAND = registerEventBlock(settings -> new Garland(settings.strength(0, 0).luminance(t -> 14).noCollision().nonOpaque()), "garland", ChallengeEvent.WINTER);
+    public static final Block RAINBOW_WOOL = registerBlock(settings -> new Block(settings.mapColor(MapColor.BLACK).instrument(NoteBlockInstrument.GUITAR).strength(0.8F).sounds(BlockSoundGroup.WOOL).burnable()), "rainbow_wool");
+    public static final Block RAINBOW_STAINED_GLASS = registerBlock(settings -> new StainedGlassBlock(DyeColor.WHITE, settings.mapColor(DyeColor.RED).instrument(NoteBlockInstrument.HAT).strength(0.3F).sounds(BlockSoundGroup.GLASS).nonOpaque().allowsSpawning(Blocks::never).solidBlock(Blocks::never).suffocates(Blocks::never).blockVision(Blocks::never)), "rainbow_stained_glass");
+    public static final Block RAINBOW_STAINED_GLASS_PANE = registerBlock(settings -> new StainedGlassPaneBlock(DyeColor.WHITE, settings.mapColor(DyeColor.RED).instrument(NoteBlockInstrument.HAT).strength(0.3F).sounds(BlockSoundGroup.GLASS).nonOpaque().allowsSpawning(Blocks::never).solidBlock(Blocks::never).suffocates(Blocks::never).blockVision(Blocks::never)), "rainbow_stained_glass_pane");
 
-    public static final Block LAMP = registerBlock(birthday, "lamp");
-    public static final Block BICYCLE = registerBlock(birthday, "bicycle");
-    public static final Block PIX = registerBlock(birthday, "pix");
-    public static final Block BATUT = registerBlock(properties -> new Block(properties.sounds(BlockSoundGroup.GLASS).strength(-1, 9999999).noBlockBreakParticles()), "batut");
+    public static final Block OLD_GRASS_BLOCK = registerBlock(settings -> new GrassBlock(settings.mapColor(MapColor.PALE_GREEN).ticksRandomly().strength(0.6F).sounds(BlockSoundGroup.GRASS)), "old_grass_block");
+    public static final Block OLD_CRYING_OBSIDIAN = registerBlock(settings -> new CryingObsidianBlock(settings.mapColor(MapColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(50.0F, 1200.0F).luminance(state -> 10)), "old_crying_obsidian");
+    public static final Block OLD_DIAMOND_BLOCK  = registerBlock(settings -> new Block(settings.mapColor(MapColor.DIAMOND_BLUE).requiresTool().strength(5.0F, 6.0F).sounds(BlockSoundGroup.METAL)), "old_diamond_block");
+    public static final Block OLD_EMERALD_BLOCK = registerBlock(settings -> new Block(settings.mapColor(MapColor.EMERALD_GREEN).instrument(NoteBlockInstrument.BIT).requiresTool().strength(5.0F, 6.0F).sounds(BlockSoundGroup.METAL)), "old_emerald_block");
+    public static final Block OLD_GOLD_BLOCK = registerBlock(settings -> new Block(settings.mapColor(MapColor.GOLD).instrument(NoteBlockInstrument.BELL).requiresTool().strength(3.0F, 6.0F).sounds(BlockSoundGroup.METAL)), "old_gold_block");
+    public static final Block OLD_LAPIS_BLOCK = registerBlock(settings -> new Block(settings.mapColor(MapColor.LAPIS_BLUE).requiresTool().strength(3.0F, 3.0F)), "old_lapis_block");
+    public static final Block OLD_IRON_BLOCK = registerBlock(settings -> new Block(settings.mapColor(MapColor.IRON_GRAY).instrument(NoteBlockInstrument.IRON_XYLOPHONE).requiresTool().strength(5.0F, 6.0F).sounds(BlockSoundGroup.IRON)), "old_iron_block");
+    public static final Block OLD_COAL_BLOCK = registerBlock(settings -> new Block(settings.mapColor(MapColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(5.0F, 6.0F)), "old_coal_block");
+    public static final Block OLD_GLOWSTONE = registerBlock(settings -> new Block(settings.mapColor(MapColor.PALE_YELLOW).instrument(NoteBlockInstrument.PLING).strength(0.3F).sounds(BlockSoundGroup.GLASS).luminance(state -> 15).solidBlock(Blocks::never)), "old_glowstone");
+    public static final Block OLD_NETHERRACK = registerBlock(settings -> new NetherrackBlock(settings.mapColor(MapColor.DARK_RED).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(0.4F).sounds(BlockSoundGroup.NETHERRACK)), "old_netherrack");
+    public static final Block OLD_MOSSY_COBBLESTONE = registerBlock(settings -> new Block(settings.mapColor(MapColor.STONE_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(2.0F, 6.0F)), "old_mossy_cobblestone");
+    public static final Block OLD_COBBLESTONE = registerBlock(settings -> new Block(settings.mapColor(MapColor.STONE_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(2.0F, 6.0F)), "old_cobblestone");
+    public static final Block OLD_BEDROCK = registerBlock(settings -> new Block(settings.mapColor(MapColor.STONE_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(2F, 3600000.0F).allowsSpawning(Blocks::never)), "old_bedrock");
+
+    public static final Block LAMP = registerBlock(properties -> new LampBlock(properties.sounds(BlockSoundGroup.GLASS).strength(3, 5).noBlockBreakParticles().nonOpaque().luminance(t -> 15)), "lamp");
+    public static final Block BATUT = registerBlock(properties -> new Batut(properties.sounds(BlockSoundGroup.GLASS).strength(7, 9999999).noBlockBreakParticles().nonOpaque()), "batut", new Item.Settings().equippable(EquipmentSlot.HEAD).maxCount(1));
+    public static final Block JAVA_PROGRAMMER = registerBlock(properties -> new JavaProgrammer(properties, "Yar1kGG"), "java_programmer", new Item.Settings().equippable(EquipmentSlot.HEAD).maxCount(1));
+    public static final Block BICYCLE = registerBlock(properties -> new Birthday(properties, "Boomboxcuff"), "bicycle");
+    public static final Block PIX = registerBlock(properties -> new Birthday(properties, "X_xPIXx_X"), "pix");
+    public static final Block BAG = registerBlock(properties -> new Birthday(properties, "Boomboxcuff"), "bag", new Item.Settings().equippable(EquipmentSlot.CHEST));
+    public static final Block HOUSE = registerBlock(properties -> new Birthday(properties, "Xreped"), "house");
+    public static final Block FARM = registerBlock(properties -> new Birthday(properties, "Bulbatrah"), "farm");
 
     public static final Block TROPHY_NOSTALGIC_BRONZE = registerBlock(trophy, "trophy_nostalgic_bronze");
     public static final Block TROPHY_NOSTALGIC_SILVER = registerBlock(trophy, "trophy_nostalgic_silver");
     public static final Block TROPHY_NOSTALGIC_GOLD = registerBlock(trophy, "trophy_nostalgic_gold");
+    public static final Block TROPHY_PARKOUR_BRONZE = registerBlock(trophy, "trophy_parkour_bronze");
+    public static final Block TROPHY_PARKOUR_SILVER = registerBlock(trophy, "trophy_parkour_silver");
+    public static final Block TROPHY_PARKOUR_GOLD = registerBlock(trophy, "trophy_parkour_gold");
+    public static final Block TROPHY_HIDE_AND_SEEK = registerBlock(trophy, "trophy_hide_and_seek");
+    public static final Block TROPHY_PAINTER = registerBlock(trophy, "trophy_painter");
 
-    private static Block registerBlockWithoutBlockItem(Function<AbstractBlock.Settings, Block> function, String name) {
+//    public static final Block ELECTROLYZER = registerBlock(Electrolyzer::new, "electrolyzer");
+    public static final Block EVENT_BLOCK = registerBlock(EventBlock::new, "event_block");
+    public static final Block EMBASSY_BLOCK = registerBlock(EmbassyBlock::new, "embassy_block");
+    public static final Block WOOD_STORAGE_BLOCK = registerBlock(StorageBlock::new, "storage_wood", new Item.Settings().component(Data.STORAGE_LEVEL, 0));
+    public static final Block COPPER_STORAGE_BLOCK = registerBlock(StorageBlock::new, "storage_copper", new Item.Settings().component(Data.STORAGE_LEVEL, 1));
+    public static final Block IRON_STORAGE_BLOCK = registerBlock(StorageBlock::new, "storage_iron", new Item.Settings().component(Data.STORAGE_LEVEL, 2));
+    public static final Block GOLD_STORAGE_BLOCK = registerBlock(StorageBlock::new, "storage_gold", new Item.Settings().component(Data.STORAGE_LEVEL, 3));
+    public static final Block DIAMOND_STORAGE_BLOCK = registerBlock(StorageBlock::new, "storage_diamond", new Item.Settings().component(Data.STORAGE_LEVEL, 4));
+    public static final Block EMERALD_STORAGE_BLOCK = registerBlock(StorageBlock::new, "storage_emerald", new Item.Settings().component(Data.STORAGE_LEVEL, 5));
+    public static final Block OBSIDIAN_STORAGE_BLOCK = registerBlock(StorageBlock::new, "storage_obsidian", new Item.Settings().component(Data.STORAGE_LEVEL, 6));
+    public static final Block PEDESTAL = registerBlock(Pedestal::new, "freezer");
+
+    public static final Block CUCUMBER = registerCropBlock(CucumberCrop::new, "crop_cucumber");
+
+    public static final Block BLUE_GRASS = registerBlock(GrassBlock::new, "blue_grass");
+    public static final Block RED_GRASS = registerBlock(GrassBlock::new, "red_grass");
+    public static final Block RADIOACTIVE_GRASS = registerBlock("radioactive_grass", Blocks.GRASS_BLOCK.getSettings().mapColor(DyeColor.ORANGE), RadioactiveGrass::new, (b, s) -> new RadioactiveItem(b, s, 3));
+    public static final Block RADIOACTIVE_LOG = registerBlock("radioactive_log", RadioactiveLog::new, createLogSettings(MapColor.ORANGE, MapColor.SPRUCE_BROWN, BlockSoundGroup.WOOD), (b, s) -> new RadioactiveItem(b, s, 2));
+    public static final Block RADIOACTIVE_LEAVES = registerBlock("radioactive_leaves", s -> new RadioactiveLeaves(0.01F, s), createLeavesSettings(BlockSoundGroup.GRASS), (b, s) -> new RadioactiveItem(b, s, 1));
+    public static final Block URANUS_ORE = registerBlock("uranus_ore", ore, Block::new);
+    public static final Block DEEPSLATE_URANUS_ORE = registerBlock("uranus_deepslate_ore", deepslate_ore, PillarBlock::new);
+    public static final Block URANUS_ORE_BLOCK = registerBlock("uranus_ore_block", ore, Block::new);
+    public static final Block URANUS_BLOCK = registerBlock("uranus_block", radioactive_block, settings -> new RadioactiveBlock(settings, 8), (b, s) -> new RadioactiveItem(b, s, 500));
+    public static final Block LEAD_ORE = registerBlock("lead_ore", ore, Block::new);
+    public static final Block DEEPSLATE_LEAD_ORE = registerBlock("lead_deepslate_ore", deepslate_ore, PillarBlock::new);
+    public static final Block LEAD_ORE_BLOCK = registerBlock("lead_ore_block", ore_block, Block::new);
+    public static final Block LEAD_BLOCK = registerBlock(block, "lead_block");
+    public static final Block LEAD_BRICK = registerBlock(block, "lead_brick");
+    public static final Block LEAD_RADIOACTIVE_BLOCK = registerBlock("lead_radioactive_block", radioactive_block, settings -> new RadioactiveBlock(settings, 4), (b, s) -> new RadioactiveItem(b, s, 15));
+    public static final Block RADIOACTIVE_COPPER_BLOCK = registerBlock("radioactive_copper_block", radioactive_block, settings -> new RadioactiveBlock(settings, 3), (b, s) -> new RadioactiveItem(b, s, 15));
+    public static final Block RADIOACTIVE_IRON_BLOCK = registerBlock("radioactive_iron_block", radioactive_block, settings -> new RadioactiveBlock(settings, 3), (b, s) -> new RadioactiveItem(b, s, 17));
+    public static final Block RADIOACTIVE_COPPER_STAIRS = registerBlock("radioactive_copper_stairs", radioactive_stair, settings -> new RadioactiveStairs(RADIOACTIVE_COPPER_BLOCK.getDefaultState(), settings), (b, s) -> new RadioactiveItem(b, s, 12));
+    public static final Block RADIOACTIVE_COPPER_SLAB = registerBlock("radioactive_copper_slab", radioactive_slab, RadioactiveSlab::new, (b, s) -> new RadioactiveItem(b, s, 8));
+    public static final Block RADIATION_SIGN = registerBlock(SignBlock::new, "sign_radiation");
+
+    public static final Block ANEVRIZM_YELLOW_AND_BLUE_STONE = registerBlock(concrete, "anevrizm_yellow_and_blue_stone");
+    public static final Block ANEVRIZM_MARBLE = registerBlock(concrete, "anevrizm_marble");
+    public static final Block ANEVRIZM_ERROR_TILES = registerBlock(concrete, "anevrizm_error_tiles");
+    public static final Block ANEVRIZM_POOL_TILES = registerBlock(concrete, "anevrizm_pool_tiles");
+    public static final Block ANEVRIZM_BLUE_AND_WHITE_TILES = registerBlock(concrete, "anevrizm_blue_and_white_tiles");
+    public static final Block ANEVRIZM_RED_AND_GREEN_TILES = registerBlock(concrete, "anevrizm_red_and_green_tiles");
+    public static final Block ANEVRIZM_MONEY_STACK = registerBlock(properties -> new PillarBlock(properties.mapColor(DyeColor.CYAN).instrument(NoteBlockInstrument.BASEDRUM).strength(0.4F)), "anevrizm_money_stack");
+    public static final Block ANEVRIZM_ASSASIN_TERMINAL = registerBlock(properties -> new FacingBlock(properties.mapColor(MapColor.STONE_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(3.5F)), "anevrizm_assasin_terminal");
+
+    static {
+//        registerAndAdd16x4Blocks(concrete, concrete_stair, concrete_slab, concrete_wall, "braid_2");
+    }
+
+    private static Block registerCropBlock(Function<AbstractBlock.Settings, Block> function, String name) {
+        Block block = function.apply(AbstractBlock.Settings.create()
+            .registryKey(RegistryKey.of(RegistryKeys.BLOCK,
+                Identifier.of(Radik.MOD_ID, name))));
+        return Registry.register(Registries.BLOCK,
+            Identifier.of(Radik.MOD_ID, name), block);
+    }
+
+    private static <T extends Block> T registerBlock(
+        String name,
+        AbstractBlock.Settings blockSettings,
+        BlockFactory<T> blockFactory,
+        ItemFactory<T> itemFactory) {
+
+        RegistryKey<Block> blockKey = RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Radik.MOD_ID, name));
+        T block = blockFactory.create(blockSettings.registryKey(blockKey));
+        Registry.register(Registries.BLOCK, blockKey, block);
+        RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Radik.MOD_ID, name));
+        BlockItem item = itemFactory.create(block, new Item.Settings()
+            .registryKey(itemKey)
+            .useBlockPrefixedTranslationKey());
+
+        Registry.register(Registries.ITEM, itemKey, item);
+
+        return block;
+    }
+
+    private static <T extends Block> T registerBlock(String name, AbstractBlock.Settings blockSettings, BlockFactory<T> blockFactory) {
+        return registerBlock(name, blockSettings, blockFactory, BlockItem::new);
+    }
+
+
+    private static Block registerBlockWithoutBlockItem(@NotNull Function<AbstractBlock.Settings, Block> function, String name) {
         return Registry.register(Registries.BLOCK, Identifier.of(Radik.MOD_ID, name),
                 function.apply(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Radik.MOD_ID, name)))));
     }
 
-    private static Block registerBlock(Function<AbstractBlock.Settings, Block> function, String name) {
+    private static Block registerBlock(@NotNull Function<AbstractBlock.Settings, Block> function, String name, Item.Settings settings) {
         Block toRegister = function.apply(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Radik.MOD_ID, name))));
-        registerBlockItem(name, toRegister);
+        registerBlockItem(name, toRegister, settings);
         return Registry.register(Registries.BLOCK, Identifier.of(Radik.MOD_ID, name), toRegister);
     }
 
-    private static void registerBlockItem(String name, Block block) {
+    private static Block registerEventBlock(@NotNull Function<AbstractBlock.Settings, Block> function, String name, ChallengeEvent event) {
+        Block toRegister = function.apply(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Radik.MOD_ID, name))));
+        registerEventBlockItem(name, toRegister, new Item.Settings(), event);
+        return Registry.register(Registries.BLOCK, Identifier.of(Radik.MOD_ID, name), toRegister);
+    }
+
+    private static void registerEventBlockItem(String name, Block block, Item.@NotNull Settings settings, ChallengeEvent event) {
         Registry.register(Registries.ITEM, Identifier.of(Radik.MOD_ID, name),
-                new BlockItem(block, new Item.Settings().useBlockPrefixedTranslationKey()
+            new EventBlockItem(block, settings.useBlockPrefixedTranslationKey()
+                .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Radik.MOD_ID, name))), event));
+    }
+
+    private static Block registerBlock(@NotNull Function<AbstractBlock.Settings, Block> function, String name) {
+        return registerBlock(function, name, new Item.Settings());
+    }
+
+    private static void registerBlockItem(String name, Block block, Item.@NotNull Settings settings) {
+        Registry.register(Registries.ITEM, Identifier.of(Radik.MOD_ID, name),
+                new BlockItem(block, settings.useBlockPrefixedTranslationKey()
                         .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Radik.MOD_ID, name)))));
     }
 
-    public static void registerBlock() {
-        Radik.LOGGER.info("BLOCK INCLUDED");
+    private static void registerAndAdd16x4Blocks(
+            Function<AbstractBlock.Settings, Block> function1,
+            Function<AbstractBlock.Settings, Block> function2,
+            Function<AbstractBlock.Settings, Block> function3,
+            Function<AbstractBlock.Settings, Block> function4,
+            String name) {
+
+        String[] suffixes = {"", "stair", "slab", "wall"};
+        Function<AbstractBlock.Settings, Block>[] functions = new Function[]{function1, function2, function3, function4};
+
+        for (int idx = 0; idx < suffixes.length; idx++) {
+            String suffix = suffixes[idx];
+            Function<AbstractBlock.Settings, Block> func = functions[idx];
+            for (int j = 17; j < 33; j++) {
+                String blockName = suffix.isEmpty() ? name + "_" + j : name + "_" + suffix + "_" + j;
+                Block block = registerBlock(func, blockName);
+                BLOCK_LIST.add(block);
+            }
+        }
     }
+
+    private static Block registerBlock(String id, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
+        Block block1 = Blocks.register(keyOf(id), factory, settings);
+        registerBlockItem(id, block1, new Item.Settings());
+        return block1;
+    }
+
+    private static <T extends BlockItem> Block registerBlock(
+        String id,
+        Function<AbstractBlock.Settings, Block> blockFactory,
+        AbstractBlock.Settings blockSettings,
+        BiFunction<Block, Item.Settings, T> itemFactory,
+        Item.Settings itemSettings) {
+
+        Block block = Blocks.register(keyOf(id), blockFactory, blockSettings);
+        T item = itemFactory.apply(block, itemSettings.useBlockPrefixedTranslationKey()
+            .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Radik.MOD_ID, id))));
+        Registry.register(Registries.ITEM, Identifier.of(Radik.MOD_ID, id), item);
+        return block;
+    }
+
+    private static <T extends BlockItem> Block registerBlock(
+        String id,
+        Function<AbstractBlock.Settings, Block> blockFactory,
+        AbstractBlock.Settings blockSettings,
+        BiFunction<Block, Item.Settings, T> itemFactory) {
+
+        return registerBlock(id, blockFactory, blockSettings, itemFactory, new Item.Settings());
+    }
+
+    private static RegistryKey<Block> keyOf(String id) {
+        return RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Radik.MOD_ID, id));
+    }
+
+    @FunctionalInterface
+    public interface BlockFactory<T extends Block> {
+        T create(AbstractBlock.Settings settings);
+    }
+
+    @FunctionalInterface
+    public interface ItemFactory<T extends Block> {
+        BlockItem create(T block, Item.Settings settings);
+    }
+
+    @MainInit
+    public static void initialize() {}
 }

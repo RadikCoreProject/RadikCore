@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " #Q",
+        " P#",
+        "   "
+    ],
+    "key": {
+        "P": "minecraft:gunpowder",
+        "#": "minecraft:iron_ingot",
+        "Q": "radik:lead_ingot"
+    },
+    "result": {
+        "id": "radik:cartridge",
+        "count": 16
+    }
+}

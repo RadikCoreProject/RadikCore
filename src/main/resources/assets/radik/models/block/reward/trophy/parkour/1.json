@@ -1,0 +1,6 @@
+{
+  "parent": "radik:block/reward/trophy/parkour/0",
+  "textures": {
+    "type": "radik:block/super/base/bronze"
+  }
+}

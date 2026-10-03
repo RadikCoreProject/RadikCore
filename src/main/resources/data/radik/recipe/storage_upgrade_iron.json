@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " Q ",
+        "#P#",
+        " S "
+    ],
+    "key": {
+        "#": "radik:radioactive_iron_block",
+        "P": "radik:uranus_ingot",
+        "S": "radik:storage_upgrade_wood",
+        "Q": "radik:storage_upgrade_copper"
+    },
+    "result": {
+        "id": "radik:storage_upgrade_iron",
+        "count": 1
+    }
+}

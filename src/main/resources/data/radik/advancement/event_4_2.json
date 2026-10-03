@@ -1,0 +1,46 @@
+{
+  "parent": "radik:event_4_1",
+  "criteria": {
+    "leave": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:leave_dead"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_4_2.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "radik:leave_dead"
+    },
+    "title": {
+      "translate": "advancements.radik.event_4_2.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "leave"
+    ]
+  ],
+  "rewards": {
+    "experience": 30,
+    "function": "radik:advancements/event/block/4/2"
+  },
+  "sends_telemetry_event": true
+}

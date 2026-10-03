@@ -1,15 +1,14 @@
 package com.radik.logic;
 
-public class LogicInitialize {
-    public static void registerLogic() {
-        // serveronly
-//        OnLogin.register();
-//        TransChatMessages.register();
-//        OnUse.register();
+import com.radik.MainInit;
 
-        OnWorldTick.register();
+public class LogicInitialize {
+    @MainInit
+    public static void initialize() {
+        OnUse.register();
+        WorldTick.register();
         OnBreak.register();
-        OnPlace.initialize();
-        OnEntityUse.initialize();
+        ArmorListener.register();
+        LootTableModifier.register();
     }
 }

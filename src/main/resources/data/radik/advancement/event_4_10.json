@@ -1,0 +1,44 @@
+{
+  "parent": "radik:event_4_3",
+  "criteria": {
+    "instrument": {
+      "conditions": {
+        "elite": true,
+        "item": "radik:summer_axe"
+      },
+      "trigger": "radik:trade_criterion"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_4_10.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "radik:summer_axe"
+    },
+    "title": {
+      "translate": "advancements.radik.event_4_10.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "instrument"
+    ]
+  ],
+  "rewards": {
+    "experience": 300,
+    "function": "radik:advancements/event/block/4/10"
+  },
+  "sends_telemetry_event": true
+}

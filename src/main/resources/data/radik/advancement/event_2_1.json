@@ -1,0 +1,46 @@
+{
+  "parent": "radik:event_2",
+  "criteria": {
+    "event": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:dye_rainbow"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_2_1.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "radik:dye_rainbow"
+    },
+    "title": {
+      "translate": "advancements.radik.event_2_1.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event"
+    ]
+  ],
+  "rewards": {
+    "experience": 10,
+    "function": "radik:advancements/event/block/2/1"
+  },
+  "sends_telemetry_event": true
+}

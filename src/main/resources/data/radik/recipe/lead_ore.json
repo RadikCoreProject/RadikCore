@@ -1,0 +1,11 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        "radik:lead_ore_block"
+    ],
+    "result": {
+        "count": 9,
+        "id": "radik:lead_ore"
+    }
+}

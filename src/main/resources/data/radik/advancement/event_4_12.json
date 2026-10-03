@@ -1,0 +1,44 @@
+{
+  "parent": "radik:event_4_3",
+  "criteria": {
+    "instrument": {
+      "conditions": {
+        "elite": true,
+        "item": "radik:summer_hoe"
+      },
+      "trigger": "radik:trade_criterion"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_4_12.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "radik:summer_hoe"
+    },
+    "title": {
+      "translate": "advancements.radik.event_4_12.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "instrument"
+    ]
+  ],
+  "rewards": {
+    "experience": 300,
+    "function": "radik:advancements/event/block/4/12"
+  },
+  "sends_telemetry_event": true
+}

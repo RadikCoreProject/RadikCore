@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " P ",
+        " R ",
+        " Q "
+    ],
+    "key": {
+        "R": "minecraft:gold_block",
+        "Q": "radik:storage_upgrade_iron",
+        "P": "radik:storage_upgrade_copper"
+    },
+    "result": {
+        "id": "radik:storage_upgrade_gold",
+        "count": 1
+    }
+}

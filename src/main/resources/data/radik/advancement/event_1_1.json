@@ -1,0 +1,85 @@
+{
+  "parent": "radik:event_1",
+  "criteria": {
+    "blue_candy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:halloween_candy_blue"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "green_candy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:halloween_candy_green"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    },
+    "red_candy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:halloween_candy_red"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "yellow_candy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:halloween_candy_yellow"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_1_1.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "radik:halloween_candy_blue"
+    },
+    "title": {
+      "translate": "advancements.radik.event_1_1.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "red_candy"
+    ],
+    [
+      "blue_candy"
+    ],
+    [
+      "yellow_candy"
+    ],
+    [
+      "green_candy"
+    ]
+  ],
+  "rewards": {
+    "experience": 30,
+    "function": "radik:advancements/event/block/1/1"
+  },
+  "sends_telemetry_event": true
+}

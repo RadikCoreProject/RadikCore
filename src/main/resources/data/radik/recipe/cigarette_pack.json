@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        "minecraft:paper",
+        "radik:cigarette",
+        "radik:cigarette",
+        "radik:cigarette",
+        "radik:cigarette",
+        "radik:cigarette",
+        "radik:cigarette",
+        "radik:cigarette",
+        "radik:cigarette"
+    ],
+    "result": {
+        "count": 1,
+        "id": "radik:cigarette_pack"
+    }
+}

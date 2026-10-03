@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "minecraft:stick",
+    "X": "#minecraft:diamond_tool_materials",
+	"P": "minecraft:feather"
+  },
+  "pattern": [
+    " X ",
+    " XP",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:diamond_sword",
+	"components": {
+		"minecraft:item_name": "Боевая котлета из бургера Ярика",
+		"minecraft:item_model": "minecraft:cooked_beef",
+		"minecraft:lore": [
+			{
+				"text": "Для петушков Мушрума",
+				"italic": false
+			}
+		],
+		"minecraft:attribute_modifiers": [
+			{
+				"type": "minecraft:attack_damage",
+				"slot": "hand",
+				"id": "radik:mushroom_special",
+				"amount": 0,
+				"operation": "add_value",
+				"display": {
+					"type": "hidden"
+				}
+			}
+		]
+	}
+  }
+}

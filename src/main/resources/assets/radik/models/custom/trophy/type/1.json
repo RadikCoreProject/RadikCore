@@ -1,6 +1,0 @@
-{
-  "parent": "radik:custom/trophy/nostalgic",
-  "textures": {
-    "type": "radik:item/custom/trophy/nostalgic/bronze"
-  }
-}

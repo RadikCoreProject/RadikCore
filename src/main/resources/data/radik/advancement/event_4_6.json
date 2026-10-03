@@ -1,0 +1,73 @@
+{
+  "parent": "radik:event_4",
+  "criteria": {
+    "banana_1": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:banana_open"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "banana_2": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:banana_close"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "banana_3": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:banana_peel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_4_6.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "radik:banana_peel"
+    },
+    "title": {
+      "translate": "advancements.radik.event_4_6.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "banana_1"
+    ],
+    [
+      "banana_2"
+    ],
+    [
+      "banana_3"
+    ]
+  ],
+  "rewards": {
+    "experience": 50,
+    "function": "radik:advancements/event/block/4/6"
+  },
+  "sends_telemetry_event": true
+}

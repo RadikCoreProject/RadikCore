@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " # ",
+        "#P#",
+        " # "
+    ],
+    "key": {
+        "#": "radik:storage_upgrade_obsidian",
+        "P": "radik:storage_emerald"
+    },
+    "result": {
+        "id": "radik:storage_obsidian",
+        "count": 1
+    }
+}

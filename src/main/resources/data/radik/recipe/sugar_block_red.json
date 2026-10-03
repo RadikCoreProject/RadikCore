@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "group": "sugar",
+    "ingredients": [
+        "radik:sugar_red",
+        "radik:sugar_red",
+        "radik:sugar_red",
+        "radik:sugar_red",
+        "radik:sugar_red",
+        "radik:sugar_red",
+        "radik:sugar_red",
+        "radik:sugar_red",
+        "radik:sugar_red"
+    ],
+    "result": {
+        "count": 1,
+        "id": "radik:sugar_block_red"
+    }
+}

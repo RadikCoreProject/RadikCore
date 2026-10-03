@@ -1,0 +1,48 @@
+{
+  "parent": "radik:event_participant",
+  "criteria": {
+    "get_medal": {
+      "conditions": {
+        "type": 1,
+        "material": 1
+      },
+      "trigger": "radik:medal_criterion"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_winner_1.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "components": {
+        "radik:material": 1,
+        "radik:medal": 1
+      },
+      "count": 1,
+      "id": "radik:medal"
+    },
+    "title": {
+      "translate": "advancements.radik.event_winner_1.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "get_medal"
+    ]
+  ],
+  "rewards": {
+    "experience": 30,
+    "function": "radik:advancements/event/medal/event_winner_1"
+  },
+  "sends_telemetry_event": true
+}

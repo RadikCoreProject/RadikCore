@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "radik:block/anevrizm/money_stack_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "radik:block/anevrizm/money_stack"
+    },
+    "axis=z": {
+      "model": "radik:block/anevrizm/money_stack_horizontal",
+      "x": 90
+    }
+  }
+}

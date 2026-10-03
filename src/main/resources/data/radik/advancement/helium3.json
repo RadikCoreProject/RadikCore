@@ -1,0 +1,48 @@
+{
+  "parent": "radik:helium2",
+  "criteria": {
+    "get_helium": {
+      "conditions": {
+        "count": 256,
+        "value": 4
+      },
+      "trigger": "radik:capsule_fluid_criterion"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.helium3.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "components": {
+        "radik:fluid": 4,
+        "radik:level": 8
+      },
+      "count": 1,
+      "id": "radik:capsule"
+    },
+    "title": {
+      "translate": "advancements.radik.helium3.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "get_helium"
+    ]
+  ],
+  "rewards": {
+    "experience": 500,
+    "function": "radik:advancements/base/helium_reward3"
+  },
+  "sends_telemetry_event": true
+}

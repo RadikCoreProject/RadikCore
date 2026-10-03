@@ -1,0 +1,48 @@
+{
+  "parent": "radik:old_5",
+  "criteria": {
+    "get_medal": {
+      "conditions": {
+        "type": 5,
+        "material": 6
+      },
+      "trigger": "radik:medal_criterion"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.old_6.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "components": {
+        "radik:material": 6,
+        "radik:medal": 5
+      },
+      "count": 1,
+      "id": "radik:medal"
+    },
+    "title": {
+      "translate": "advancements.radik.old_6.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "get_medal"
+    ]
+  ],
+  "rewards": {
+    "experience": 500,
+    "function": "radik:advancements/event/medal/old_6"
+  },
+  "sends_telemetry_event": true
+}

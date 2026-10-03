@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "group": "dye",
+    "ingredients": [
+        "minecraft:red_dye",
+        "minecraft:orange_dye",
+        "minecraft:yellow_dye",
+        "minecraft:green_dye",
+        "minecraft:light_blue_dye",
+        "minecraft:blue_dye",
+        "minecraft:purple_dye"
+    ],
+    "result": {
+        "count": 1,
+        "id": "radik:dye_rainbow"
+    }
+}

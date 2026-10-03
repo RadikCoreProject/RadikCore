@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:magenta_concrete",
+  "result": {
+    "count": 1,
+    "id": "radik:chaotic_stair_2_115"
+  }
+}

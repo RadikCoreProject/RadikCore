@@ -1,0 +1,47 @@
+{
+  "parent": "radik:industry_3",
+  "criteria": {
+    "event": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:fonar_lamp20"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.industry_6.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "radik:fonar_lamp20"
+    },
+    "title": {
+      "translate": "advancements.radik.industry_6.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event"
+    ]
+  ],
+  "rewards": {
+    "experience": 40,
+    "function": "radik:advancements/base/industry/6"
+  },
+  "sends_telemetry_event": true
+}

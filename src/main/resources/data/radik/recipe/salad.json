@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "#Q#",
+        "QPQ"
+    ],
+    "key": {
+        "#": "radik:crop_cucumber",
+        "Q": "radik:crop_tomato",
+        "P": "minecraft:bowl"
+    },
+    "result": {
+        "id": "radik:salad",
+        "count": 1
+    }
+}

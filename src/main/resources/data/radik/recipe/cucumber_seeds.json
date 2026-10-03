@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "group": "dye",
+    "ingredients": [
+        "radik:crop_cucumber"
+    ],
+    "result": {
+        "count": 1,
+        "id": "radik:crop_cucumber_seeds"
+    }
+}

@@ -1,0 +1,44 @@
+{
+  "parent": "radik:radiation_1",
+  "criteria": {
+    "event": {
+      "conditions": {
+        "effects": {
+          "radik:radiation": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.radiation_2.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "radik:radioactive_iron_block"
+    },
+    "title": {
+      "translate": "advancements.radik.radiation_2.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event"
+    ]
+  ],
+  "rewards": {
+    "experience": 50,
+    "function": "radik:advancements/base/radiation/2"
+  },
+  "sends_telemetry_event": true
+}

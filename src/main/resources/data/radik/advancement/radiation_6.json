@@ -1,0 +1,112 @@
+{
+  "parent": "radik:radiation_2",
+  "criteria": {
+    "event1": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:radioactive_grass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "event2": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:radioactive_log"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "event3": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:radioactive_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "event4": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:radioactive_copper_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "event5": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:radioactive_iron_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "event6": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:lead_radioactive_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.radiation_6.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "radik:lead_brick"
+    },
+    "title": {
+      "translate": "advancements.radik.radiation_6.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event1"
+    ],
+    [
+      "event2"
+    ],
+    [
+      "event3"
+    ],
+    [
+      "event4"
+    ],
+    [
+      "event5"
+    ],
+    [
+      "event6"
+    ]
+  ],
+  "rewards": {
+    "experience": 200,
+    "function": "radik:advancements/base/radiation/6"
+  },
+  "sends_telemetry_event": true
+}

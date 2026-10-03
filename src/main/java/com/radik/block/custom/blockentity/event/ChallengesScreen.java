@@ -1,0 +1,280 @@
+package com.radik.block.custom.blockentity.event;
+
+import com.radik.Radik;
+import com.radik.connecting.event.Event;
+import com.radik.connecting.event.Eventer;
+import com.radik.connecting.event.factory.BlockEventData;
+import com.radik.connecting.event.factory.EntityEventData;
+import com.radik.connecting.event.factory.EventData;
+import com.radik.connecting.event.factory.ItemEventData;
+import com.radik.packets.PacketType;
+import com.radik.packets.payload.IntegerPayload;
+import com.radik.util.Triplet;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.gl.RenderPipelines;
+import net.minecraft.client.gui.Click;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
+import net.minecraft.client.gui.widget.PressableWidget;
+import net.minecraft.client.input.AbstractInput;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.radik.Data.getColor;
+import static com.radik.client.RadikClient.CHALLENGES;
+import static com.radik.client.RadikClient.GLOBAL_CHALLENGE;
+
+@Environment(EnvType.CLIENT)
+public class ChallengesScreen extends HandledScreen<ChallengesScreenHandler> {
+    private static final Identifier CHECK_TEXTURE = Identifier.of(Radik.MOD_ID, "textures/gui/butts/check.png");
+    private static final Identifier CROSS_TEXTURE = Identifier.of(Radik.MOD_ID, "textures/gui/butts/cross.png");
+
+    private final List<Eventer> challenges = new ArrayList<>();
+    private final List<RewardButton> rewardButtons = new ArrayList<>();
+
+    public ChallengesScreen(ChallengesScreenHandler handler, PlayerInventory inventory, Text title) {
+        super(handler, inventory, title);
+        this.backgroundWidth = 256;
+        this.backgroundHeight = 166;
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        if (client == null || client.player == null) return;
+
+        rewardButtons.clear();
+        this.clearChildren();
+        load();
+        createButtons();
+    }
+
+    private void load() {
+        if (client == null || client.player == null) return;
+        challenges.clear();
+        EventBlockEntity be = handler.getBlockEntity();
+        if (be == null) return;
+        if (CHALLENGES != null) challenges.addAll(Arrays.asList(CHALLENGES));
+        challenges.add(GLOBAL_CHALLENGE);
+    }
+
+    private void createButtons() {
+        int startY = this.y + 40;
+        int space = 25;
+
+        for (int i = 0; i < challenges.size(); i++) {
+            Eventer challenge = challenges.get(i);
+            if (challenge == null) continue;
+
+            int buttonY = startY + i * space;
+            RewardButton button = new RewardButton(i, this.x + 200, buttonY, 20, 20, challenge);
+            rewardButtons.add(button);
+            this.addDrawableChild(button);
+        }
+    }
+
+    @Override
+    protected void drawBackground(@NotNull DrawContext context, float delta, int mouseX, int mouseY) {
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, EventScreen.BACKGROUND_TEXTURE, this.x, this.y, 0.0F, 0.0F, this.backgroundWidth, this.backgroundHeight, 256, 256);
+        drawProgressBars(context);
+    }
+
+    private void drawProgressBars(DrawContext context) {
+        int startY = this.y + 40;
+        int space = 25;
+        int w = 120;
+        int h = 7;
+
+        for (int i = 0; i < challenges.size(); i++) {
+            Eventer challenge = challenges.get(i);
+            if (challenge == null) continue;
+
+            int barX = this.x + 75;
+            int barY = startY + i * space + 6;
+
+            context.fill(barX, barY, barX + w, barY + h, 0xFF555555);
+
+            float progress = (float) challenge.getValue() / challenge.getCount();
+            int fw = (int) (w * progress);
+            if (fw > 0) context.fill(barX, barY, barX + fw, barY + h, getColor(progress));
+
+            String text = challenge.getValue() + "/" + challenge.getCount();
+            int tw = textRenderer.getWidth(text);
+            context.drawText(textRenderer, text, barX + (w - tw) / 2, barY, 0xFF111111, false);
+        }
+    }
+
+    @Override
+    protected void drawForeground(@NotNull DrawContext context, int mouseX, int mouseY) {
+        Text task = Text.translatable("text.radik.event.task") ;
+        context.drawText(this.textRenderer, task,
+            (this.backgroundWidth - this.textRenderer.getWidth(task)) / 2 - 10,
+            15, 0xFF00FF00, true);
+
+        drawDis(context);
+    }
+
+    private void drawDis(DrawContext context) {
+        int startY = 55;
+        int textSpacing = 29;
+
+        for (int i = 0; i < challenges.size(); i++) {
+            Event challenge = (Event) challenges.get(i);
+            if (challenge == null) continue;
+            int textY = startY + i * textSpacing;
+
+            context.getMatrices().pushMatrix();
+            context.getMatrices().scale(0.85f, 0.85f);
+            context.drawText(textRenderer, getText(challenge), 10, textY, 0xFFFFFFFF, true);
+            context.getMatrices().popMatrix();
+
+            EventData data = challenge.data();
+            Text name = switch (data.getType()) {
+                case "item" -> ((ItemEventData) data).item().getName();
+                case "block" -> ((BlockEventData) data).block().getName();
+                case "entity" -> ((EntityEventData) data).entityType().getName();
+                default -> Text.of("ERROR");
+            };
+
+            context.getMatrices().pushMatrix();
+            context.getMatrices().scale(0.7f, 0.7f);
+            Text description = Text.translatable(challenge.getText().getString()).append(" ").append(String.valueOf(challenge.count())).append(" ").append(name);
+            context.drawText(textRenderer, description, 107, (int) (textY * 1.25 - 14), 0xFFCCCCCC, false);
+            context.getMatrices().popMatrix();
+        }
+    }
+
+    private @NotNull Text getText(Eventer challenge) {
+        int index = challenges.indexOf(challenge);
+        return switch (index) {
+            case 3 -> Text.translatable("text.radik.event.weekly");
+            case 4 -> Text.translatable("text.radik.event.global");
+            default -> Text.translatable("text.radik.event.daily").append(String.valueOf(index + 1));
+        };
+    }
+
+    @Override
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        super.render(context, mouseX, mouseY, delta);
+
+        for (RewardButton button : rewardButtons) {
+            if (button.isHovered()) button.renderTooltip(context, mouseX, mouseY);
+        }
+
+        this.drawMouseoverTooltip(context, mouseX, mouseY);
+    }
+
+    @Override
+    public void close() {
+        super.close();
+        ClientPlayNetworking.send(new IntegerPayload(-1, 0, PacketType.OPEN_SCREEN));
+    }
+
+    private class RewardButton extends PressableWidget {
+        private final int challengeIndex;
+        private final Eventer challenge;
+        private boolean showingRewardTooltip = false;
+
+        public RewardButton(int challengeIndex, int x, int y, int width, int height, Eventer challenge) {
+            super(x, y, width, height, Text.empty());
+            this.challengeIndex = challengeIndex;
+            this.challenge = challenge;
+            update();
+        }
+
+        private void update() {
+            this.active = challenge.isCompleted() && !challenge.isClaimed();
+        }
+
+        @Override
+        public void onPress(AbstractInput input) {
+            if (client == null || client.player == null) return;
+            EventBlockEntity be = handler.getBlockEntity();
+
+            if (be != null) {
+                String playerName = client.player.getName().getString();
+                if (EventBlockEntity.claimReward(be, playerName, challengeIndex)) {
+                    ClientPlayNetworking.send(new IntegerPayload(challengeIndex, 0, PacketType.GET_REWARD));
+                }
+                update();
+            }
+        }
+
+        @Override
+        protected void drawIcon(DrawContext context, int mouseX, int mouseY, float deltaTicks) {
+            Identifier texture = challenge.isClaimed() ? CHECK_TEXTURE : challenge.isCompleted() ? CHECK_TEXTURE : CROSS_TEXTURE;
+            context.drawTexture(RenderPipelines.GUI_TEXTURED, texture, getX(), getY(), 0, 0, width, height, width, height);
+            if (!this.active) context.fill(getX(), getY(), getX() + width, getY() + height, 0x80000000);
+        }
+
+        @Override
+        protected void appendClickableNarrations(NarrationMessageBuilder builder) {
+            this.appendDefaultNarrations(builder);
+        }
+
+        public void renderTooltip(DrawContext context, int mouseX, int mouseY) {
+            Text tooltip;
+            if (challenge.isClaimed()) {
+                tooltip = Text.literal("Награда получена");
+                context.drawTooltip(textRenderer, tooltip, mouseX, mouseY);
+            } else if (challenge.isCompleted()) {
+                tooltip = Text.literal("Получить награду");
+                context.drawTooltip(textRenderer, tooltip, mouseX, mouseY);
+            } else {
+                showRewardTooltip(context, mouseX, mouseY);
+            }
+        }
+
+        private void showRewardTooltip(DrawContext context, int mouseX, int mouseY) {
+            ItemStack reward = challenge.getReward();
+
+            if (reward.isEmpty()) {
+                context.drawTooltip(textRenderer, Text.literal("Задание не завершено"), mouseX, mouseY);
+                return;
+            }
+
+            int count = reward.getCount();
+            ItemStack stack = reward.copy();
+
+            if (count > reward.getMaxCount()) stack.setCount(count);
+
+            int tooltipX = mouseX + 5;
+            int tooltipY = mouseY - 20;
+
+            context.fill(tooltipX - 3, tooltipY - 3, tooltipX + 19, tooltipY + 19, 0xFF000000);
+            context.fill(tooltipX - 2, tooltipY - 2, tooltipX + 18, tooltipY + 18, 0xFF404040);
+
+            context.drawItem(stack, tooltipX, tooltipY);
+            context.drawStackOverlay(textRenderer, stack, tooltipX, tooltipY, String.valueOf(count));
+
+            long last = 0;
+            if (System.currentTimeMillis() - last > 1000 && !showingRewardTooltip) {
+                showingRewardTooltip = true;
+            }
+        }
+
+        @Override
+        public boolean mouseClicked(Click click, boolean doubled) {
+            showingRewardTooltip = false;
+            return super.mouseClicked(click, doubled);
+        }
+
+        @Override
+        public void setFocused(boolean focused) {
+            if (!focused) {
+                showingRewardTooltip = false;
+            }
+            super.setFocused(focused);
+        }
+    }
+}

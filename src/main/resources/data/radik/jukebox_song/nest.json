@@ -1,0 +1,8 @@
+{
+  "comparator_output": 12,
+  "description": {
+    "translate": "item.radik.disc_nest.desc"
+  },
+  "length_in_seconds": 502.0,
+  "sound_event": "radik:nest"
+}

@@ -1,0 +1,44 @@
+{
+  "parent": "radik:event_4_5",
+  "criteria": {
+    "disc": {
+      "conditions": {
+        "elite": true,
+        "item": "radik:disc_calm"
+      },
+      "trigger": "radik:trade_criterion"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_4_7.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "radik:disc_calm"
+    },
+    "title": {
+      "translate": "advancements.radik.event_4_7.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "disc"
+    ]
+  ],
+  "rewards": {
+    "experience": 200,
+    "function": "radik:advancements/event/block/4/7"
+  },
+  "sends_telemetry_event": true
+}

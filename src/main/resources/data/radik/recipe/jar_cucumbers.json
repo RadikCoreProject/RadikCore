@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        "radik:jar",
+        "radik:crop_cucumber",
+        "radik:crop_cucumber",
+        "radik:crop_cucumber",
+        "radik:crop_cucumber",
+        "radik:crop_cucumber",
+        "radik:crop_cucumber",
+        "radik:crop_cucumber",
+        "radik:crop_cucumber"
+    ],
+    "result": {
+        "count": 1,
+        "id": "radik:jar_cucumbers"
+    }
+}

@@ -1,0 +1,60 @@
+{
+  "parent": "radik:radiation_4",
+  "criteria": {
+    "block2": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:lead_brick"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "event": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:lead_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.radiation_5.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "radik:lead_radioactive_block"
+    },
+    "title": {
+      "translate": "advancements.radik.radiation_5.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event"
+    ],
+    [
+      "block2"
+    ]
+  ],
+  "rewards": {
+    "experience": 120,
+    "function": "radik:advancements/base/radiation/5"
+  },
+  "sends_telemetry_event": true
+}

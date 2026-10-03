@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "radik:block/anevrizm/assasin_terminal",
+    "side": "radik:block/anevrizm/assasin_terminal_side",
+    "top": "radik:block/anevrizm/assasin_terminal_side"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "parent": "radik:industry_1",
+  "criteria": {
+    "event": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_bars"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.industry_2.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:iron_bars"
+    },
+    "title": {
+      "translate": "advancements.radik.industry_2.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event"
+    ]
+  ],
+  "rewards": {
+    "experience": 10,
+    "function": "radik:advancements/base/industry/2"
+  },
+  "sends_telemetry_event": true
+}

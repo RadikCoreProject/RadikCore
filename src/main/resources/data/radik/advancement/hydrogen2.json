@@ -1,0 +1,48 @@
+{
+  "parent": "radik:hydrogen1",
+  "criteria": {
+    "get_hydrogen": {
+      "conditions": {
+        "count": 16,
+        "value": 3
+      },
+      "trigger": "radik:capsule_fluid_criterion"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.hydrogen2.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "components": {
+        "radik:fluid": 3,
+        "radik:level": 5
+      },
+      "count": 1,
+      "id": "radik:capsule"
+    },
+    "title": {
+      "translate": "advancements.radik.hydrogen2.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "get_hydrogen"
+    ]
+  ],
+  "rewards": {
+    "experience": 50,
+    "function": "radik:advancements/base/hydrogen_reward2"
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,46 @@
+{
+  "parent": "radik:event_4",
+  "criteria": {
+    "leave": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:leave_oak"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_4_1.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "radik:leave_oak"
+    },
+    "title": {
+      "translate": "advancements.radik.event_4_1.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "leave"
+    ]
+  ],
+  "rewards": {
+    "experience": 10,
+    "function": "radik:advancements/event/block/4/1"
+  },
+  "sends_telemetry_event": true
+}

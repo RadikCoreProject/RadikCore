@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "package": "com.radik.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "anvil.AnvilScreenHandlerMixin",
+    "anvil.AnvilScreenMixin",
+    "book.BookEditScreenMixin",
+    "render.ArmorFeatureRendererMixin",
+    "render.LivingEntityRendererMixin",
+    "render.LivingEntityRenderStateMixin",
+    "render.ModelPartMixin",
+    "screen.CreditsAndAttributionScreenMixin",
+    "screen.RealmsMainScreenMixin",
+    "screen.TitleScreenMixin"
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "parent": "radik:event_2_1",
+  "criteria": {
+    "glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:rainbow_stained_glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "glass_pane": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:rainbow_stained_glass_pane"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    },
+    "wool": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:rainbow_wool"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_2_3.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "radik:rainbow_stained_glass"
+    },
+    "title": {
+      "translate": "advancements.radik.event_2_3.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "glass"
+    ],
+    [
+      "glass_pane"
+    ],
+    [
+      "wool"
+    ]
+  ],
+  "rewards": {
+    "experience": 40,
+    "function": "radik:advancements/event/block/2/3"
+  },
+  "sends_telemetry_event": true
+}

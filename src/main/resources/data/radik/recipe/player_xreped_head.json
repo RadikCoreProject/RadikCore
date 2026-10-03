@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "head",
+  "key": {
+    "#": "minecraft:skeleton_skull",
+    "X": "minecraft:clay_ball",
+	"Q": "radik:dye_aqua",
+	"T": "minecraft:white_dye",
+	"Y": "minecraft:black_dye",
+	"B": "minecraft:light_blue_dye"
+  },
+  "pattern": [
+    "QXT",
+    "X#X",
+    "YXB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:player_head",
+	"components": {
+		"minecraft:lore": [
+			{
+				"text": "Cтаж игры: 3 годa",
+				"italic": false,
+				"color": "gold"
+			}
+		],
+		"minecraft:profile": "Xreped"
+	}
+  }
+}

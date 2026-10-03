@@ -1,0 +1,46 @@
+{
+  "parent": "radik:pull",
+  "criteria": {
+    "event": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:storage_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.industry_9.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "radik:storage_wood"
+    },
+    "title": {
+      "translate": "advancements.radik.industry_9.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event"
+    ]
+  ],
+  "rewards": {
+    "experience": 50,
+    "function": "radik:advancements/base/industry/9"
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,86 @@
+{
+  "parent": "radik:event_4_4",
+  "criteria": {
+    "ice_cream_1": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:ice_cream_vanilla"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "ice_cream_2": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:ice_cream_banana"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "ice_cream_3": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:ice_cream_berry"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "ice_cream_4": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:ice_cream_chocolate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_4_5.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "radik:ice_cream_chocolate"
+    },
+    "title": {
+      "translate": "advancements.radik.event_4_5.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "ice_cream_1"
+    ],
+    [
+      "ice_cream_2"
+    ],
+    [
+      "ice_cream_3"
+    ],
+    [
+      "ice_cream_4"
+    ]
+  ],
+  "rewards": {
+    "experience": 60,
+    "function": "radik:advancements/event/block/4/5"
+  },
+  "sends_telemetry_event": true
+}

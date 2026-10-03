@@ -1,0 +1,53 @@
+{
+  "parent": "radik:pull",
+  "criteria": {
+    "event": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "radik:ginger_forest"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.radiation_1.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "radik:radioactive_grass"
+    },
+    "title": {
+      "translate": "advancements.radik.radiation_1.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event"
+    ]
+  ],
+  "rewards": {
+    "experience": 50,
+    "function": "radik:advancements/base/radiation/1"
+  },
+  "sends_telemetry_event": true
+}

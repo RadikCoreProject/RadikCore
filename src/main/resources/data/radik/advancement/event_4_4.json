@@ -1,0 +1,46 @@
+{
+  "parent": "radik:event_4",
+  "criteria": {
+    "ice_cream": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:ice_cream_vanilla"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_4_4.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "radik:ice_cream_vanilla"
+    },
+    "title": {
+      "translate": "advancements.radik.event_4_4.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "ice_cream"
+    ]
+  ],
+  "rewards": {
+    "experience": 30,
+    "function": "radik:advancements/event/block/4/4"
+  },
+  "sends_telemetry_event": true
+}

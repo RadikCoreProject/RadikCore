@@ -1,6 +1,8 @@
 package com.radik;
 
+import com.radik.item.RegisterItems;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -8,12 +10,35 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import com.radik.item.RegisterItems;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.radik.Data.*;
 import static com.radik.block.RegisterBlocks.*;
+import static com.radik.block.RegisterBlocks.PEDESTAL;
 import static com.radik.item.RegisterItems.*;
+import static com.radik.item.RegisterItems.CUCUMBER;
+import static com.radik.item.RegisterItems.JAR;
 
-public class ModGroup {
+public final class ModGroup {
+    public static final List<Block> BLOCK_LIST = new ArrayList<>();
+    private static final ItemStack CAPSULE_WATER = CAPSULE.getDefaultStack();
+    private static final ItemStack CAPSULE_LAVA;
+    private static final ItemStack CAPSULE_HYDROGEN;
+    private static final ItemStack CAPSULE_HELIUM;
+
+    static {
+        CAPSULE_WATER.set(CAPSULE_LEVEL, 8);
+        CAPSULE_LAVA = CAPSULE_WATER.copy();
+        CAPSULE_HYDROGEN = CAPSULE_WATER.copy();
+        CAPSULE_HELIUM = CAPSULE_WATER.copy();
+        CAPSULE_WATER.set(CAPSULE_FLUID, 1);
+        CAPSULE_LAVA.set(CAPSULE_FLUID, 2);
+        CAPSULE_HYDROGEN.set(CAPSULE_FLUID, 3);
+        CAPSULE_HELIUM.set(CAPSULE_FLUID, 4);
+    }
+
     public static final ItemGroup RADIK_BLOCKS = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(Radik.MOD_ID, "radik_blocks"),
             FabricItemGroup.builder().icon(() -> new ItemStack(FROG0_255_0))
@@ -35,6 +60,22 @@ public class ModGroup {
                         entries.add(FROG255_0_255);
                         entries.add(Blocks.PEARLESCENT_FROGLIGHT);
                         entries.add(FROG255_0_0);
+                        entries.add(FROG1);
+                        entries.add(FROG2);
+                        entries.add(FROG3);
+                        entries.add(FROG4);
+                        entries.add(FROG5);
+                        entries.add(FROG6);
+                        entries.add(FROG7);
+                        entries.add(FROG8);
+                        entries.add(FROG9);
+                        entries.add(FROG10);
+                        entries.add(FROG11);
+                        entries.add(FROG12);
+                        entries.add(FROG13);
+                        entries.add(FROG14);
+                        entries.add(FROG15);
+                        entries.add(FROG16);
 
                         entries.add(BRICK1);
                         entries.add(BRICK2);
@@ -164,6 +205,8 @@ public class ModGroup {
                         entries.add(BRICK_WALL30);
                         entries.add(BRICK_WALL31);
                         entries.add(BRICK_WALL32);
+
+                        BLOCK_LIST.forEach(entries::add);
 
                         entries.add(BRICK_ARRAY_1);
                         entries.add(BRICK_ARRAY_2);
@@ -312,7 +355,40 @@ public class ModGroup {
                         entries.add(BRAID_STAIR_214);
                         entries.add(BRAID_STAIR_215);
                         entries.add(BRAID_STAIR_216);
-                        
+                        entries.add(BRAID_WALL_101);
+                        entries.add(BRAID_WALL_102);
+                        entries.add(BRAID_WALL_103);
+                        entries.add(BRAID_WALL_104);
+                        entries.add(BRAID_WALL_105);
+                        entries.add(BRAID_WALL_106);
+                        entries.add(BRAID_WALL_107);
+                        entries.add(BRAID_WALL_108);
+                        entries.add(BRAID_WALL_109);
+                        entries.add(BRAID_WALL_110);
+                        entries.add(BRAID_WALL_111);
+                        entries.add(BRAID_WALL_112);
+                        entries.add(BRAID_WALL_113);
+                        entries.add(BRAID_WALL_114);
+                        entries.add(BRAID_WALL_115);
+                        entries.add(BRAID_WALL_116);
+                        entries.add(BRAID_WALL_117);
+                        entries.add(BRAID_WALL_201);
+                        entries.add(BRAID_WALL_202);
+                        entries.add(BRAID_WALL_203);
+                        entries.add(BRAID_WALL_204);
+                        entries.add(BRAID_WALL_205);
+                        entries.add(BRAID_WALL_206);
+                        entries.add(BRAID_WALL_207);
+                        entries.add(BRAID_WALL_208);
+                        entries.add(BRAID_WALL_209);
+                        entries.add(BRAID_WALL_210);
+                        entries.add(BRAID_WALL_211);
+                        entries.add(BRAID_WALL_212);
+                        entries.add(BRAID_WALL_213);
+                        entries.add(BRAID_WALL_214);
+                        entries.add(BRAID_WALL_215);
+                        entries.add(BRAID_WALL_216);
+
                         entries.add(BRICK_DIRT_1);
                         entries.add(BRICK_DIRT_2);
                         entries.add(BRICK_DIRT_3);
@@ -350,6 +426,99 @@ public class ModGroup {
                         entries.add(CHAOTIC_1_114);
                         entries.add(CHAOTIC_1_115);
                         entries.add(CHAOTIC_1_116);
+                        entries.add(CHAOTIC_STAIR_1_1);
+                        entries.add(CHAOTIC_STAIR_1_2);
+                        entries.add(CHAOTIC_STAIR_1_3);
+                        entries.add(CHAOTIC_STAIR_1_4);
+                        entries.add(CHAOTIC_STAIR_1_5);
+                        entries.add(CHAOTIC_STAIR_1_6);
+                        entries.add(CHAOTIC_STAIR_1_7);
+                        entries.add(CHAOTIC_STAIR_1_8);
+                        entries.add(CHAOTIC_STAIR_1_9);
+                        entries.add(CHAOTIC_STAIR_1_10);
+                        entries.add(CHAOTIC_STAIR_1_11);
+                        entries.add(CHAOTIC_STAIR_1_12);
+                        entries.add(CHAOTIC_STAIR_1_13);
+                        entries.add(CHAOTIC_STAIR_1_14);
+                        entries.add(CHAOTIC_STAIR_1_15);
+                        entries.add(CHAOTIC_STAIR_1_101);
+                        entries.add(CHAOTIC_STAIR_1_102);
+                        entries.add(CHAOTIC_STAIR_1_103);
+                        entries.add(CHAOTIC_STAIR_1_104);
+                        entries.add(CHAOTIC_STAIR_1_105);
+                        entries.add(CHAOTIC_STAIR_1_106);
+                        entries.add(CHAOTIC_STAIR_1_107);
+                        entries.add(CHAOTIC_STAIR_1_108);
+                        entries.add(CHAOTIC_STAIR_1_109);
+                        entries.add(CHAOTIC_STAIR_1_110);
+                        entries.add(CHAOTIC_STAIR_1_111);
+                        entries.add(CHAOTIC_STAIR_1_112);
+                        entries.add(CHAOTIC_STAIR_1_113);
+                        entries.add(CHAOTIC_STAIR_1_114);
+                        entries.add(CHAOTIC_STAIR_1_115);
+                        entries.add(CHAOTIC_STAIR_1_116);
+                        entries.add(CHAOTIC_SLAB_1_1);
+                        entries.add(CHAOTIC_SLAB_1_2);
+                        entries.add(CHAOTIC_SLAB_1_3);
+                        entries.add(CHAOTIC_SLAB_1_4);
+                        entries.add(CHAOTIC_SLAB_1_5);
+                        entries.add(CHAOTIC_SLAB_1_6);
+                        entries.add(CHAOTIC_SLAB_1_7);
+                        entries.add(CHAOTIC_SLAB_1_8);
+                        entries.add(CHAOTIC_SLAB_1_9);
+                        entries.add(CHAOTIC_SLAB_1_10);
+                        entries.add(CHAOTIC_SLAB_1_11);
+                        entries.add(CHAOTIC_SLAB_1_12);
+                        entries.add(CHAOTIC_SLAB_1_13);
+                        entries.add(CHAOTIC_SLAB_1_14);
+                        entries.add(CHAOTIC_SLAB_1_15);
+                        entries.add(CHAOTIC_SLAB_1_101);
+                        entries.add(CHAOTIC_SLAB_1_102);
+                        entries.add(CHAOTIC_SLAB_1_103);
+                        entries.add(CHAOTIC_SLAB_1_104);
+                        entries.add(CHAOTIC_SLAB_1_105);
+                        entries.add(CHAOTIC_SLAB_1_106);
+                        entries.add(CHAOTIC_SLAB_1_107);
+                        entries.add(CHAOTIC_SLAB_1_108);
+                        entries.add(CHAOTIC_SLAB_1_109);
+                        entries.add(CHAOTIC_SLAB_1_110);
+                        entries.add(CHAOTIC_SLAB_1_111);
+                        entries.add(CHAOTIC_SLAB_1_112);
+                        entries.add(CHAOTIC_SLAB_1_113);
+                        entries.add(CHAOTIC_SLAB_1_114);
+                        entries.add(CHAOTIC_SLAB_1_115);
+                        entries.add(CHAOTIC_SLAB_1_116);
+                        entries.add(CHAOTIC_WALL_1_1);
+                        entries.add(CHAOTIC_WALL_1_2);
+                        entries.add(CHAOTIC_WALL_1_3);
+                        entries.add(CHAOTIC_WALL_1_4);
+                        entries.add(CHAOTIC_WALL_1_5);
+                        entries.add(CHAOTIC_WALL_1_6);
+                        entries.add(CHAOTIC_WALL_1_7);
+                        entries.add(CHAOTIC_WALL_1_8);
+                        entries.add(CHAOTIC_WALL_1_9);
+                        entries.add(CHAOTIC_WALL_1_10);
+                        entries.add(CHAOTIC_WALL_1_11);
+                        entries.add(CHAOTIC_WALL_1_12);
+                        entries.add(CHAOTIC_WALL_1_13);
+                        entries.add(CHAOTIC_WALL_1_14);
+                        entries.add(CHAOTIC_WALL_1_15);
+                        entries.add(CHAOTIC_WALL_1_101);
+                        entries.add(CHAOTIC_WALL_1_102);
+                        entries.add(CHAOTIC_WALL_1_103);
+                        entries.add(CHAOTIC_WALL_1_104);
+                        entries.add(CHAOTIC_WALL_1_105);
+                        entries.add(CHAOTIC_WALL_1_106);
+                        entries.add(CHAOTIC_WALL_1_107);
+                        entries.add(CHAOTIC_WALL_1_108);
+                        entries.add(CHAOTIC_WALL_1_109);
+                        entries.add(CHAOTIC_WALL_1_110);
+                        entries.add(CHAOTIC_WALL_1_111);
+                        entries.add(CHAOTIC_WALL_1_112);
+                        entries.add(CHAOTIC_WALL_1_113);
+                        entries.add(CHAOTIC_WALL_1_114);
+                        entries.add(CHAOTIC_WALL_1_115);
+                        entries.add(CHAOTIC_WALL_1_116);
                         entries.add(CHAOTIC_2_1);
                         entries.add(CHAOTIC_2_2);
                         entries.add(CHAOTIC_2_3);
@@ -383,6 +552,105 @@ public class ModGroup {
                         entries.add(CHAOTIC_2_114);
                         entries.add(CHAOTIC_2_115);
                         entries.add(CHAOTIC_2_116);
+                        entries.add(CHAOTIC_STAIR_2_1);
+                        entries.add(CHAOTIC_STAIR_2_2);
+                        entries.add(CHAOTIC_STAIR_2_3);
+                        entries.add(CHAOTIC_STAIR_2_4);
+                        entries.add(CHAOTIC_STAIR_2_5);
+                        entries.add(CHAOTIC_STAIR_2_6);
+                        entries.add(CHAOTIC_STAIR_2_7);
+                        entries.add(CHAOTIC_STAIR_2_8);
+                        entries.add(CHAOTIC_STAIR_2_9);
+                        entries.add(CHAOTIC_STAIR_2_10);
+                        entries.add(CHAOTIC_STAIR_2_11);
+                        entries.add(CHAOTIC_STAIR_2_12);
+                        entries.add(CHAOTIC_STAIR_2_13);
+                        entries.add(CHAOTIC_STAIR_2_14);
+                        entries.add(CHAOTIC_STAIR_2_15);
+                        entries.add(CHAOTIC_STAIR_2_16);
+                        entries.add(CHAOTIC_STAIR_2_17);
+                        entries.add(CHAOTIC_STAIR_2_101);
+                        entries.add(CHAOTIC_STAIR_2_102);
+                        entries.add(CHAOTIC_STAIR_2_103);
+                        entries.add(CHAOTIC_STAIR_2_104);
+                        entries.add(CHAOTIC_STAIR_2_105);
+                        entries.add(CHAOTIC_STAIR_2_106);
+                        entries.add(CHAOTIC_STAIR_2_107);
+                        entries.add(CHAOTIC_STAIR_2_108);
+                        entries.add(CHAOTIC_STAIR_2_109);
+                        entries.add(CHAOTIC_STAIR_2_110);
+                        entries.add(CHAOTIC_STAIR_2_111);
+                        entries.add(CHAOTIC_STAIR_2_112);
+                        entries.add(CHAOTIC_STAIR_2_113);
+                        entries.add(CHAOTIC_STAIR_2_114);
+                        entries.add(CHAOTIC_STAIR_2_115);
+                        entries.add(CHAOTIC_STAIR_2_116);
+                        entries.add(CHAOTIC_SLAB_2_1);
+                        entries.add(CHAOTIC_SLAB_2_2);
+                        entries.add(CHAOTIC_SLAB_2_3);
+                        entries.add(CHAOTIC_SLAB_2_4);
+                        entries.add(CHAOTIC_SLAB_2_5);
+                        entries.add(CHAOTIC_SLAB_2_6);
+                        entries.add(CHAOTIC_SLAB_2_7);
+                        entries.add(CHAOTIC_SLAB_2_8);
+                        entries.add(CHAOTIC_SLAB_2_9);
+                        entries.add(CHAOTIC_SLAB_2_10);
+                        entries.add(CHAOTIC_SLAB_2_11);
+                        entries.add(CHAOTIC_SLAB_2_12);
+                        entries.add(CHAOTIC_SLAB_2_13);
+                        entries.add(CHAOTIC_SLAB_2_14);
+                        entries.add(CHAOTIC_SLAB_2_15);
+                        entries.add(CHAOTIC_SLAB_2_16);
+                        entries.add(CHAOTIC_SLAB_2_17);
+                        entries.add(CHAOTIC_SLAB_2_101);
+                        entries.add(CHAOTIC_SLAB_2_102);
+                        entries.add(CHAOTIC_SLAB_2_103);
+                        entries.add(CHAOTIC_SLAB_2_104);
+                        entries.add(CHAOTIC_SLAB_2_105);
+                        entries.add(CHAOTIC_SLAB_2_106);
+                        entries.add(CHAOTIC_SLAB_2_107);
+                        entries.add(CHAOTIC_SLAB_2_108);
+                        entries.add(CHAOTIC_SLAB_2_109);
+                        entries.add(CHAOTIC_SLAB_2_110);
+                        entries.add(CHAOTIC_SLAB_2_111);
+                        entries.add(CHAOTIC_SLAB_2_112);
+                        entries.add(CHAOTIC_SLAB_2_113);
+                        entries.add(CHAOTIC_SLAB_2_114);
+                        entries.add(CHAOTIC_SLAB_2_115);
+                        entries.add(CHAOTIC_SLAB_2_116);
+                        entries.add(CHAOTIC_WALL_2_1);
+                        entries.add(CHAOTIC_WALL_2_2);
+                        entries.add(CHAOTIC_WALL_2_3);
+                        entries.add(CHAOTIC_WALL_2_4);
+                        entries.add(CHAOTIC_WALL_2_5);
+                        entries.add(CHAOTIC_WALL_2_6);
+                        entries.add(CHAOTIC_WALL_2_7);
+                        entries.add(CHAOTIC_WALL_2_8);
+                        entries.add(CHAOTIC_WALL_2_9);
+                        entries.add(CHAOTIC_WALL_2_10);
+                        entries.add(CHAOTIC_WALL_2_11);
+                        entries.add(CHAOTIC_WALL_2_12);
+                        entries.add(CHAOTIC_WALL_2_13);
+                        entries.add(CHAOTIC_WALL_2_14);
+                        entries.add(CHAOTIC_WALL_2_15);
+                        entries.add(CHAOTIC_WALL_2_16);
+                        entries.add(CHAOTIC_WALL_2_17);
+                        entries.add(CHAOTIC_WALL_2_101);
+                        entries.add(CHAOTIC_WALL_2_102);
+                        entries.add(CHAOTIC_WALL_2_103);
+                        entries.add(CHAOTIC_WALL_2_104);
+                        entries.add(CHAOTIC_WALL_2_105);
+                        entries.add(CHAOTIC_WALL_2_106);
+                        entries.add(CHAOTIC_WALL_2_107);
+                        entries.add(CHAOTIC_WALL_2_108);
+                        entries.add(CHAOTIC_WALL_2_109);
+                        entries.add(CHAOTIC_WALL_2_110);
+                        entries.add(CHAOTIC_WALL_2_111);
+                        entries.add(CHAOTIC_WALL_2_112);
+                        entries.add(CHAOTIC_WALL_2_113);
+                        entries.add(CHAOTIC_WALL_2_114);
+                        entries.add(CHAOTIC_WALL_2_115);
+                        entries.add(CHAOTIC_WALL_2_116);
                         entries.add(CHAOTIC_3_1);
                         entries.add(CHAOTIC_3_2);
                         entries.add(CHAOTIC_3_3);
@@ -416,6 +684,105 @@ public class ModGroup {
                         entries.add(CHAOTIC_3_114);
                         entries.add(CHAOTIC_3_115);
                         entries.add(CHAOTIC_3_116);
+                        entries.add(CHAOTIC_STAIR_3_1);
+                        entries.add(CHAOTIC_STAIR_3_2);
+                        entries.add(CHAOTIC_STAIR_3_3);
+                        entries.add(CHAOTIC_STAIR_3_4);
+                        entries.add(CHAOTIC_STAIR_3_5);
+                        entries.add(CHAOTIC_STAIR_3_6);
+                        entries.add(CHAOTIC_STAIR_3_7);
+                        entries.add(CHAOTIC_STAIR_3_8);
+                        entries.add(CHAOTIC_STAIR_3_9);
+                        entries.add(CHAOTIC_STAIR_3_10);
+                        entries.add(CHAOTIC_STAIR_3_11);
+                        entries.add(CHAOTIC_STAIR_3_12);
+                        entries.add(CHAOTIC_STAIR_3_13);
+                        entries.add(CHAOTIC_STAIR_3_14);
+                        entries.add(CHAOTIC_STAIR_3_15);
+                        entries.add(CHAOTIC_STAIR_3_16);
+                        entries.add(CHAOTIC_STAIR_3_17);
+                        entries.add(CHAOTIC_STAIR_3_101);
+                        entries.add(CHAOTIC_STAIR_3_102);
+                        entries.add(CHAOTIC_STAIR_3_103);
+                        entries.add(CHAOTIC_STAIR_3_104);
+                        entries.add(CHAOTIC_STAIR_3_105);
+                        entries.add(CHAOTIC_STAIR_3_106);
+                        entries.add(CHAOTIC_STAIR_3_107);
+                        entries.add(CHAOTIC_STAIR_3_108);
+                        entries.add(CHAOTIC_STAIR_3_109);
+                        entries.add(CHAOTIC_STAIR_3_110);
+                        entries.add(CHAOTIC_STAIR_3_111);
+                        entries.add(CHAOTIC_STAIR_3_112);
+                        entries.add(CHAOTIC_STAIR_3_113);
+                        entries.add(CHAOTIC_STAIR_3_114);
+                        entries.add(CHAOTIC_STAIR_3_115);
+                        entries.add(CHAOTIC_STAIR_3_116);
+                        entries.add(CHAOTIC_SLAB_3_1);
+                        entries.add(CHAOTIC_SLAB_3_2);
+                        entries.add(CHAOTIC_SLAB_3_3);
+                        entries.add(CHAOTIC_SLAB_3_4);
+                        entries.add(CHAOTIC_SLAB_3_5);
+                        entries.add(CHAOTIC_SLAB_3_6);
+                        entries.add(CHAOTIC_SLAB_3_7);
+                        entries.add(CHAOTIC_SLAB_3_8);
+                        entries.add(CHAOTIC_SLAB_3_9);
+                        entries.add(CHAOTIC_SLAB_3_10);
+                        entries.add(CHAOTIC_SLAB_3_11);
+                        entries.add(CHAOTIC_SLAB_3_12);
+                        entries.add(CHAOTIC_SLAB_3_13);
+                        entries.add(CHAOTIC_SLAB_3_14);
+                        entries.add(CHAOTIC_SLAB_3_15);
+                        entries.add(CHAOTIC_SLAB_3_16);
+                        entries.add(CHAOTIC_SLAB_3_17);
+                        entries.add(CHAOTIC_SLAB_3_101);
+                        entries.add(CHAOTIC_SLAB_3_102);
+                        entries.add(CHAOTIC_SLAB_3_103);
+                        entries.add(CHAOTIC_SLAB_3_104);
+                        entries.add(CHAOTIC_SLAB_3_105);
+                        entries.add(CHAOTIC_SLAB_3_106);
+                        entries.add(CHAOTIC_SLAB_3_107);
+                        entries.add(CHAOTIC_SLAB_3_108);
+                        entries.add(CHAOTIC_SLAB_3_109);
+                        entries.add(CHAOTIC_SLAB_3_110);
+                        entries.add(CHAOTIC_SLAB_3_111);
+                        entries.add(CHAOTIC_SLAB_3_112);
+                        entries.add(CHAOTIC_SLAB_3_113);
+                        entries.add(CHAOTIC_SLAB_3_114);
+                        entries.add(CHAOTIC_SLAB_3_115);
+                        entries.add(CHAOTIC_SLAB_3_116);
+                        entries.add(CHAOTIC_WALL_3_1);
+                        entries.add(CHAOTIC_WALL_3_2);
+                        entries.add(CHAOTIC_WALL_3_3);
+                        entries.add(CHAOTIC_WALL_3_4);
+                        entries.add(CHAOTIC_WALL_3_5);
+                        entries.add(CHAOTIC_WALL_3_6);
+                        entries.add(CHAOTIC_WALL_3_7);
+                        entries.add(CHAOTIC_WALL_3_8);
+                        entries.add(CHAOTIC_WALL_3_9);
+                        entries.add(CHAOTIC_WALL_3_10);
+                        entries.add(CHAOTIC_WALL_3_11);
+                        entries.add(CHAOTIC_WALL_3_12);
+                        entries.add(CHAOTIC_WALL_3_13);
+                        entries.add(CHAOTIC_WALL_3_14);
+                        entries.add(CHAOTIC_WALL_3_15);
+                        entries.add(CHAOTIC_WALL_3_16);
+                        entries.add(CHAOTIC_WALL_3_17);
+                        entries.add(CHAOTIC_WALL_3_101);
+                        entries.add(CHAOTIC_WALL_3_102);
+                        entries.add(CHAOTIC_WALL_3_103);
+                        entries.add(CHAOTIC_WALL_3_104);
+                        entries.add(CHAOTIC_WALL_3_105);
+                        entries.add(CHAOTIC_WALL_3_106);
+                        entries.add(CHAOTIC_WALL_3_107);
+                        entries.add(CHAOTIC_WALL_3_108);
+                        entries.add(CHAOTIC_WALL_3_109);
+                        entries.add(CHAOTIC_WALL_3_110);
+                        entries.add(CHAOTIC_WALL_3_111);
+                        entries.add(CHAOTIC_WALL_3_112);
+                        entries.add(CHAOTIC_WALL_3_113);
+                        entries.add(CHAOTIC_WALL_3_114);
+                        entries.add(CHAOTIC_WALL_3_115);
+                        entries.add(CHAOTIC_WALL_3_116);
 
                         entries.add(CIRCULAR_1);
                         entries.add(CIRCULAR_2);
@@ -458,19 +825,22 @@ public class ModGroup {
                         entries.add(CELL_4);
                         entries.add(CELL_5);
 
-                        entries.add(FONAR_BASE);
-                        entries.add(FONAR_STOLB);
-                        entries.add(FONAR_STOLB2);
-                        entries.add(FONAR_LAMP1);
-                        entries.add(FONAR_LAMP2);
-                        entries.add(FONAR_LAMP3);
-                        entries.add(FONAR_LAMP4);
-                        entries.add(FONAR_LAMP11);
-                        entries.add(FONAR_LAMP12);
-                        entries.add(FONAR_LAMP13);
-                        entries.add(FONAR_LAMP14);
-                        entries.add(FONAR_LAMP20);
-                        entries.add(LAMP);
+                        entries.add(OLD_GRASS_BLOCK);
+                        entries.add(OLD_COBBLESTONE);
+                        entries.add(OLD_MOSSY_COBBLESTONE);
+                        entries.add(OLD_COAL_BLOCK);
+                        entries.add(OLD_IRON_BLOCK);
+                        entries.add(OLD_GOLD_BLOCK);
+                        entries.add(OLD_EMERALD_BLOCK);
+                        entries.add(OLD_LAPIS_BLOCK);
+                        entries.add(OLD_DIAMOND_BLOCK);
+                        entries.add(OLD_NETHERRACK);
+                        entries.add(OLD_GLOWSTONE);
+                        entries.add(OLD_CRYING_OBSIDIAN);
+                        entries.add(OLD_BEDROCK);
+
+                        entries.add(RED_GRASS);
+                        entries.add(BLUE_GRASS);
                     }).build());
 
     public static final ItemGroup RADIK_ITEMS = Registry.register(Registries.ITEM_GROUP,
@@ -505,8 +875,21 @@ public class ModGroup {
                         entries.add(DISC_SAVIOR_OF_THE_WAKING_WORLD);
                         entries.add(DISC_THE_LAST_HUMAN);
 
-                        entries.add(SODIUM_LAMP);
-                        entries.add(MERCURY_LAMP);
+                        entries.add(CAPSULE);
+                        entries.add(CAPSULE_WATER);
+                        entries.add(CAPSULE_LAVA);
+                        entries.add(CAPSULE_HYDROGEN);
+                        entries.add(CAPSULE_HELIUM);
+
+                        entries.add(CUCUMBER_SEEDS);
+                        entries.add(CUCUMBER);
+                        entries.add(TOMATO);
+                        entries.add(JAR);
+                        entries.add(JAR_CUCMBERS);
+                        entries.add(CIGARETTE);
+                        entries.add(CIGARETTE_PACK);
+                        entries.add(CARTRIDGE);
+                        entries.add(MAGAZINE);
                     }).build());
 
     public static final ItemGroup RADIK_WINTER = Registry.register(Registries.ITEM_GROUP,
@@ -514,11 +897,6 @@ public class ModGroup {
             FabricItemGroup.builder().icon(() -> new ItemStack(PRESENT_SMALL))
                     .displayName(Text.translatable("itemGroup.radikwinter"))
                     .entries((displayContext, entries) -> {
-                        entries.add(PRESENT_SMALL);
-                        entries.add(PRESENT_MEDIUM);
-                        entries.add(PRESENT_BIG);
-                        entries.add(PRESENT_INSTRUMENT);
-                        entries.add(PRESENT_WINTER);
                         entries.add(ELKA);
                         entries.add(STAR);
                         entries.add(RegisterItems.LEDENETS);
@@ -581,25 +959,254 @@ public class ModGroup {
                         entries.add(SUGAR_BLOCK_RED);
                         entries.add(SUGAR_BROWN);
                         entries.add(SUGAR_BLOCK_BROWN);
+
+                        entries.add(GARLAND);
+                        entries.add(CHRISTMAS_BALLS);
+                        entries.add(SNOWFLAKE);
+                        entries.add(WINTER_HAT);
+                        entries.add(DYE_RAINBOW);
+                        entries.add(RAINBOW_WOOL);
+                        entries.add(RAINBOW_STAINED_GLASS);
+                        entries.add(RAINBOW_STAINED_GLASS_PANE);
+                        entries.add(PEDESTAL);
+                        entries.add(ICE_SHARD);
+                        entries.add(SALAD);
+                        entries.add(CHAMPAGNE);
+                        entries.add(RED_WINE);
+                        entries.add(ORANGE);
                     }).build());
+
+    public static final ItemGroup RADIK_HALLOWEEN = Registry.register(Registries.ITEM_GROUP,
+            Identifier.of(Radik.MOD_ID, "radik_halloween"),
+            FabricItemGroup.builder().icon(() -> new ItemStack(HALLOWEEN_PICKAXE))
+                    .displayName(Text.translatable("itemGroup.radikhalloween"))
+                    .entries((displayContext, entries) -> {
+                        entries.add(HALLOWEEN_PICKAXE);
+                        entries.add(HALLOWEEN_SHOVEL);
+                        entries.add(HALLOWEEN_HOE);
+                        entries.add(HALLOWEEN_AXE);
+                        entries.add(HALLOWEEN_SWORD);
+                        entries.add(CANDY_RED);
+                        entries.add(CANDY_YELLOW);
+                        entries.add(CANDY_GREEN);
+                        entries.add(CANDY_BLUE);
+                        entries.add(CANDY_BASKET_RED);
+                        entries.add(CANDY_BASKET_YELLOW);
+                        entries.add(CANDY_BASKET_GREEN);
+                        entries.add(CANDY_BASKET_BLUE);
+                        entries.add(CANDY_BASKET_EMPTY);
+                        entries.add(CANDY_BASKET_LUCKY);
+                        entries.add(CANDY_BASKET_SUPER);
+                        entries.add(DISC_NETHER);
+                        entries.add(DISC_NEST);
+                    }).build());
+
+    public static final ItemGroup RADIK_FLOWERY = Registry.register(Registries.ITEM_GROUP,
+        Identifier.of(Radik.MOD_ID, "radik_flowery"),
+        FabricItemGroup.builder().icon(() -> new ItemStack(FLOWERY_PICKAXE))
+            .displayName(Text.translatable("itemGroup.radikflowery"))
+            .entries((displayContext, entries) -> {
+                entries.add(FLOWERY_PICKAXE);
+                entries.add(FLOWERY_SHOVEL);
+                entries.add(FLOWERY_HOE);
+                entries.add(FLOWERY_AXE);
+                entries.add(FLOWERY_SWORD);
+            }).build());
+
+    public static final ItemGroup RADIK_SUMMER = Registry.register(Registries.ITEM_GROUP,
+        Identifier.of(Radik.MOD_ID, "radik_summer"),
+        FabricItemGroup.builder().icon(() -> new ItemStack(BANANA))
+            .displayName(Text.translatable("itemGroup.radiklucky"))
+            .entries((displayContext, entries) -> {
+                entries.add(SUMMER_PICKAXE);
+                entries.add(SUMMER_SHOVEL);
+                entries.add(SUMMER_HOE);
+                entries.add(SUMMER_AXE);
+                entries.add(SUMMER_SWORD);
+                entries.add(PANAMA);
+                entries.add(WATER_PISTOL);
+                entries.add(DISC_CALM);
+                entries.add(DISC_FOREST);
+                entries.add(DISC_HOLIDAY);
+                entries.add(LEAVE_AZALEA);
+                entries.add(LEAVE_BIRCH);
+                entries.add(LEAVE_CHERRY);
+                entries.add(LEAVE_JUNGLE);
+                entries.add(LEAVE_MANGROVE);
+                entries.add(LEAVE_DARK_OAK);
+                entries.add(LEAVE_OAK);
+                entries.add(LEAVE_PALE_OAK);
+                entries.add(LEAVE_ACACIA);
+                entries.add(LEAVE_SPRUCE);
+                entries.add(LEAVE_DEAD);
+                entries.add(CLEVER3);
+                entries.add(CLEVER4);
+                entries.add(BANANA);
+                entries.add(BANANA_PEEL);
+                entries.add(BANANA_CLOSE);
+                entries.add(ICE_CREAM_BANANA);
+                entries.add(ICE_CREAM_BERRY);
+                entries.add(ICE_CREAM_CHOCOLATE);
+                entries.add(ICE_CREAM_VANILLA);
+            }).build());
 
     public static final ItemGroup RADIK_PRESENTS = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(Radik.MOD_ID, "radik_presents"),
             FabricItemGroup.builder().icon(() -> new ItemStack(ADVENTURE_HAT))
                     .displayName(Text.translatable("itemGroup.radikpresents"))
                     .entries((displayContext, entries) -> {
+                        entries.add(PRESENT_SMALL);
+                        entries.add(PRESENT_MEDIUM);
+                        entries.add(PRESENT_BIG);
+                        entries.add(PRESENT_INSTRUMENT);
+                        entries.add(PRESENT_WINTER);
+                        entries.add(PRESENT_OLD);
                         entries.add(ADVENTURE_HAT);
+                        entries.add(ADVENTURE_1M_HAT);
                         entries.add(PIX);
+                        entries.add(DISC_PRESIDENT_IS_DEAD);
                         entries.add(BICYCLE);
+                        entries.add(BAG);
+                        entries.add(HOUSE);
+                        entries.add(DISC_JORDANAIRES);
+                        entries.add(JAVA_PROGRAMMER);
                         entries.add(TASHERS_CRONE);
                         entries.add(DISK_PENIS_BOLSHOY);
                         entries.add(DISK_BOLSHOY_KUSH);
-                        entries.add(DISK_DEBRIS);
+                        entries.add(DISC_DEBRIS);
                         entries.add(BATUT);
+                        entries.add(TOMMY);
+//                        entries.add(SOUR_CREAM);
+                        entries.add(FARM);
                         entries.add(TROPHY_NOSTALGIC_BRONZE);
                         entries.add(TROPHY_NOSTALGIC_SILVER);
                         entries.add(TROPHY_NOSTALGIC_GOLD);
+                        entries.add(TROPHY_PARKOUR_BRONZE);
+                        entries.add(TROPHY_PARKOUR_SILVER);
+                        entries.add(TROPHY_PARKOUR_GOLD);
+                        entries.add(TROPHY_HIDE_AND_SEEK);
+                        entries.add(TROPHY_PAINTER);
                     }).build());
 
-    public static void registerGroup() {}
+    public static final ItemGroup RADIK_RADIOACTIVE = Registry.register(Registries.ITEM_GROUP,
+        Identifier.of(Radik.MOD_ID, "radik_radioactive"),
+        FabricItemGroup.builder().icon(() -> new ItemStack(LEAD_ORE))
+            .displayName(Text.literal("Radiation"))
+            .entries((displayContext, entries) -> {
+                entries.add(RADIOACTIVE_GRASS);
+                entries.add(RADIOACTIVE_LOG);
+                entries.add(RADIOACTIVE_LEAVES);
+                entries.add(RADIOACTIVE_COPPER_BLOCK);
+                entries.add(RADIOACTIVE_COPPER_STAIRS);
+                entries.add(RADIOACTIVE_COPPER_SLAB);
+                entries.add(RADIOACTIVE_IRON_BLOCK);
+//                entries.add(RADIATION_SUIT_HELMET);
+//                entries.add(RADIATION_SUIT_CHESTPLATE);
+//                entries.add(RADIATION_SUIT_LEGGINGS);
+//                entries.add(RADIATION_SUIT_BOOTS);
+                entries.add(URANUS_ORE);
+                entries.add(URANUS_ORE_BLOCK);
+                entries.add(DEEPSLATE_URANUS_ORE);
+                entries.add(URANUS_BLOCK);
+                entries.add(LEAD_ORE);
+                entries.add(LEAD_ORE_BLOCK);
+                entries.add(DEEPSLATE_LEAD_ORE);
+                entries.add(LEAD_BLOCK);
+                entries.add(LEAD_RADIOACTIVE_BLOCK);
+                entries.add(LEAD_BRICK);
+                entries.add(LEAD_HELMET);
+                entries.add(LEAD_CHESTPLATE);
+                entries.add(LEAD_LEGGINGS);
+                entries.add(LEAD_BOOTS);
+                entries.add(LEAD_AXE);
+                entries.add(LEAD_SWORD);
+                entries.add(LEAD_SHOVEL);
+                entries.add(LEAD_HOE);
+                entries.add(LEAD_PICKAXE);
+                entries.add(URANUS_INGOT);
+                entries.add(URANUS_NUGGET);
+                entries.add(URANUS_RAW);
+                entries.add(LEAD_INGOT);
+                entries.add(LEAD_NUGGET);
+                entries.add(LEAD_RAW);
+                entries.add(RADIATION_SIGN);
+                entries.add(DISC_REACTOR);
+            }).build());
+
+    public static final ItemGroup RADIK_TEST = Registry.register(Registries.ITEM_GROUP,
+            Identifier.of(Radik.MOD_ID, "radik_test"),
+            FabricItemGroup.builder().icon(() -> new ItemStack(WIND_STAFF))
+                    .displayName(Text.literal("RadikCore test"))
+                    .entries((displayContext, entries) -> {
+                        entries.add(PEDESTAL);
+                        entries.add(WIND_STAFF);
+//                        entries.add(ELECTROLYZER);
+                        entries.add(EVENT_BLOCK);
+//                        entries.add(TEST_SWORD);
+
+                    }).build());
+
+    public static final ItemGroup RADIK_ANEVRIZM = Registry.register(Registries.ITEM_GROUP,
+            Identifier.of(Radik.MOD_ID, "radik_anevrizm"),
+            FabricItemGroup.builder().icon(() -> new ItemStack(ANEVRIZM_PUFFERGUM_FISH))
+                    .displayName(Text.literal("Anevrizm content"))
+                    .entries((displayContext, entries) -> {
+                        entries.add(ANEVRIZM_CHOCOLATE_CRAB);
+                        entries.add(ANEVRIZM_COOKED_CRAB);
+                        entries.add(ANEVRIZM_ENERGY_DRINK);
+                        entries.add(ANEVRIZM_EYEFISH);
+                        entries.add(ANEVRIZM_COOKED_EYEFISH);
+                        entries.add(ANEVRIZM_PUFFERGUM_FISH);
+                        entries.add(ANEVRIZM_PUFFERGUM_FISH_COOKED);
+                        entries.add(ANEVRIZM_SOUR_SARDINE);
+                        entries.add(ANEVRIZM_SOUR_SARDINE_COOKED);
+                        entries.add(ANEVRIZM_EMERALD);
+                        entries.add(ANEVRIZM_MONEY_STACK);
+                        entries.add(ANEVRIZM_ASSASIN_TERMINAL);
+                        entries.add(ANEVRIZM_BLUE_AND_WHITE_TILES);
+                        entries.add(ANEVRIZM_RED_AND_GREEN_TILES);
+                        entries.add(ANEVRIZM_ERROR_TILES);
+                        entries.add(ANEVRIZM_POOL_TILES);
+                        entries.add(ANEVRIZM_MARBLE);
+                        entries.add(ANEVRIZM_YELLOW_AND_BLUE_STONE);
+                    }).build());
+
+    public static final ItemGroup RADIK_INDUSTRY = Registry.register(Registries.ITEM_GROUP,
+        Identifier.of(Radik.MOD_ID, "radik_industry"),
+        FabricItemGroup.builder().icon(() -> new ItemStack(FONAR_LAMP20))
+            .displayName(Text.literal("RadikCore industrial"))
+            .entries((displayContext, entries) -> {
+                entries.add(SODIUM_LAMP);
+                entries.add(MERCURY_LAMP);
+                entries.add(FONAR_BASE);
+                entries.add(FONAR_STOLB);
+                entries.add(FONAR_STOLB2);
+                entries.add(FONAR_LAMP1);
+                entries.add(FONAR_LAMP2);
+                entries.add(FONAR_LAMP3);
+                entries.add(FONAR_LAMP4);
+                entries.add(FONAR_LAMP11);
+                entries.add(FONAR_LAMP12);
+                entries.add(FONAR_LAMP13);
+                entries.add(FONAR_LAMP14);
+                entries.add(FONAR_LAMP20);
+                entries.add(LAMP);
+                entries.add(STORAGE_UPGRADE_WOOD);
+                entries.add(STORAGE_UPGRADE_COPPER);
+                entries.add(STORAGE_UPGRADE_IRON);
+                entries.add(STORAGE_UPGRADE_GOLD);
+                entries.add(STORAGE_UPGRADE_DIAMOND);
+                entries.add(STORAGE_UPGRADE_EMERALD);
+                entries.add(STORAGE_UPGRADE_OBSIDIAN);
+                entries.add(WOOD_STORAGE_BLOCK);
+                entries.add(COPPER_STORAGE_BLOCK);
+                entries.add(IRON_STORAGE_BLOCK);
+                entries.add(GOLD_STORAGE_BLOCK);
+                entries.add(DIAMOND_STORAGE_BLOCK);
+                entries.add(EMERALD_STORAGE_BLOCK);
+                entries.add(OBSIDIAN_STORAGE_BLOCK);
+            }).build());
+
+    @MainInit
+    public static void initialize() {}
 }

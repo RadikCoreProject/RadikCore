@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "radik:block/anevrizm/blue_and_white_tiles"
+  }
+}

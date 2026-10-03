@@ -1,0 +1,177 @@
+{
+  "parent": "radik:event_4_2",
+  "criteria": {
+    "leave_1": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:leave_oak"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "leave_10": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:leave_pale_oak"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "leave_11": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:leave_spruce"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "leave_2": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:leave_acacia"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "leave_3": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:leave_dead"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "leave_4": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:leave_azalea"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "leave_5": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:leave_birch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "leave_6": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:leave_cherry"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "leave_7": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:leave_dark_oak"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "leave_8": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:leave_jungle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "leave_9": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:leave_mangrove"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.event_4_3.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "radik:leave_cherry"
+    },
+    "title": {
+      "translate": "advancements.radik.event_4_3.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "leave_1"
+    ],
+    [
+      "leave_2"
+    ],
+    [
+      "leave_3"
+    ],
+    [
+      "leave_4"
+    ],
+    [
+      "leave_5"
+    ],
+    [
+      "leave_6"
+    ],
+    [
+      "leave_7"
+    ],
+    [
+      "leave_8"
+    ],
+    [
+      "leave_9"
+    ],
+    [
+      "leave_10"
+    ],
+    [
+      "leave_11"
+    ]
+  ],
+  "rewards": {
+    "experience": 90,
+    "function": "radik:advancements/event/block/4/3"
+  },
+  "sends_telemetry_event": true
+}

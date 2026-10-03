@@ -1,0 +1,46 @@
+{
+  "parent": "radik:radiation_2",
+  "criteria": {
+    "event": {
+      "conditions": {
+        "items": [
+          {
+            "items": "radik:uranus_raw"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pull": {
+      "conditions": {
+        "matches": 1
+      },
+      "trigger": "radik:first_join_criterion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.radik.radiation_3.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "radik:uranus_ore"
+    },
+    "title": {
+      "translate": "advancements.radik.radiation_3.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull"
+    ],
+    [
+      "event"
+    ]
+  ],
+  "rewards": {
+    "experience": 80,
+    "function": "radik:advancements/base/radiation/3"
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "group": "sugar",
+    "ingredients": [
+        "radik:lead_raw",
+        "radik:lead_raw",
+        "radik:lead_raw",
+        "radik:lead_raw",
+        "radik:lead_raw",
+        "radik:lead_raw",
+        "radik:lead_raw",
+        "radik:lead_raw",
+        "radik:lead_raw"
+    ],
+    "result": {
+        "count": 1,
+        "id": "radik:lead_ore_block"
+    }
+}

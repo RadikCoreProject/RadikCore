@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "radik:block/anevrizm/assasin_terminal",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "radik:block/anevrizm/assasin_terminal"
+    },
+    "facing=south": {
+      "model": "radik:block/anevrizm/assasin_terminal",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "radik:block/anevrizm/assasin_terminal",
+      "y": 270
+    }
+  }
+}

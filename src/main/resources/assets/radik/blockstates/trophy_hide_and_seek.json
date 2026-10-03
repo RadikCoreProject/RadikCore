@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=0": { "model": "radik:block/reward/trophy/hide_and_seek" },
+    "facing=1": { "model": "radik:block/reward/trophy/hide_and_seek", "y": 90 },
+    "facing=2": { "model": "radik:block/reward/trophy/hide_and_seek", "y": 180 },
+    "facing=3": { "model": "radik:block/reward/trophy/hide_and_seek", "y": 270 }
+  }
+}

@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " # ",
+        "#P#",
+        " # "
+    ],
+    "key": {
+        "#": "radik:storage_upgrade_wood",
+        "P": "minecraft:chest"
+    },
+    "result": {
+        "id": "radik:storage_wood",
+        "count": 1
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        "radik:uranus_raw",
+        "radik:uranus_raw",
+        "radik:uranus_raw",
+        "radik:uranus_raw",
+        "radik:uranus_raw",
+        "radik:uranus_raw",
+        "radik:uranus_raw",
+        "radik:uranus_raw",
+        "radik:uranus_raw"
+    ],
+    "result": {
+        "count": 1,
+        "id": "radik:uranus_ore_block"
+    }
+}

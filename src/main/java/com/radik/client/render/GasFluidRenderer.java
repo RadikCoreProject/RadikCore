@@ -1,0 +1,135 @@
+package com.radik.client.render;
+
+import com.radik.Radik;
+import com.radik.client.ClientInit;
+import com.radik.fluid.RegisterFluids;
+import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
+import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.BlockRenderLayer;
+import net.minecraft.client.render.LightmapTextureManager;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.texture.AtlasManager;
+import net.minecraft.client.texture.Sprite;
+import net.minecraft.client.texture.SpriteAtlasTexture;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.util.Atlases;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockRenderView;
+import net.minecraft.world.LightType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
+
+public class GasFluidRenderer implements FluidRenderHandler {
+    private final Identifier stillTexture;
+    private final Identifier flowingTexture;
+    private final int color;
+    private Sprite stillSprite;
+    private Sprite flowingSprite;
+
+    public GasFluidRenderer(Identifier still, Identifier flowing, int color) {
+        this.stillTexture = still;
+        this.flowingTexture = flowing;
+        this.color = color;
+    }
+
+    @Override
+    public void renderFluid(BlockPos pos, BlockRenderView world, VertexConsumer vertexConsumer, BlockState blockState, FluidState fluidState) {
+        if (vertexConsumer == null) return;
+
+        int level = fluidState.getLevel();
+        float height = (level + 1) / 9f;
+
+        Sprite[] sprites = getFluidSprites(world, pos, fluidState);
+        if (sprites[0] == null) return;
+
+        int light = world.getLightLevel(LightType.BLOCK, pos);
+        int skyLight = world.getLightLevel(LightType.SKY, pos);
+        int packedLight = LightmapTextureManager.pack(light, skyLight);
+
+        renderLayeredFluid(pos, world, vertexConsumer, sprites[0], height, packedLight);
+    }
+
+    private void renderLayeredFluid(@NotNull BlockPos pos, BlockRenderView world,
+                                    @NotNull VertexConsumer vertexConsumer, @NotNull Sprite sprite,
+                                    float height, int packedLight) {
+        MatrixStack matrix = new MatrixStack();
+        matrix.translate(pos.getX(), pos.getY(), pos.getZ());
+
+        float a = (color >> 24 & 0xFF) / 255f;
+        float r = (color >> 16 & 0xFF) / 255f;
+        float g = (color >> 8 & 0xFF) / 255f;
+        float b = (color & 0xFF) / 255f;
+
+        Vector3f normal = new Vector3f(0, 1, 0);
+
+        vertexConsumer.vertex(matrix.peek().getPositionMatrix(), 0, height, 1)
+                .color(r, g, b, a)
+                .texture(sprite.getMinU(), sprite.getMaxV())
+                .light(packedLight)
+                .normal(normal.x, normal.y, normal.z);
+
+        vertexConsumer.vertex(matrix.peek().getPositionMatrix(), 1, height, 1)
+                .color(r, g, b, a)
+                .texture(sprite.getMaxU(), sprite.getMaxV())
+                .light(packedLight)
+                .normal(normal.x, normal.y, normal.z);
+
+        vertexConsumer.vertex(matrix.peek().getPositionMatrix(), 1, height, 0)
+                .color(r, g, b, a)
+                .texture(sprite.getMaxU(), sprite.getMinV())
+                .light(packedLight)
+                .normal(normal.x, normal.y, normal.z);
+
+        vertexConsumer.vertex(matrix.peek().getPositionMatrix(), 0, height, 0)
+                .color(r, g, b, a)
+                .texture(sprite.getMinU(), sprite.getMinV())
+                .light(packedLight)
+                .normal(normal.x, normal.y, normal.z);
+    }
+
+    @Override
+    public int getFluidColor(BlockRenderView view, BlockPos pos, FluidState state) {
+        return color;
+    }
+
+    @Override
+    public Sprite[] getFluidSprites(@Nullable BlockRenderView view, @Nullable BlockPos pos, FluidState state) {
+        if (stillSprite == null || flowingSprite == null) {
+            MinecraftClient client = MinecraftClient.getInstance();
+            AtlasManager atlasManager = client.getAtlasManager();
+            SpriteAtlasTexture blockAtlas = atlasManager.getAtlasTexture(Atlases.BLOCKS);
+            stillSprite = blockAtlas.getSprite(stillTexture);
+            flowingSprite = blockAtlas.getSprite(flowingTexture);
+        }
+        return new Sprite[]{stillSprite, flowingSprite};
+    }
+
+    @ClientInit
+    public static void gas() {
+        registerGasRenderer(
+            RegisterFluids.STILL_HYDROGEN,
+            RegisterFluids.FLOWING_HYDROGEN,
+            Identifier.of(Radik.MOD_ID, "block/fluid/hydrogen_still"),
+            Identifier.of(Radik.MOD_ID, "block/fluid/hydrogen_flow")
+        );
+
+        registerGasRenderer(
+            RegisterFluids.STILL_HELIUM,
+            RegisterFluids.FLOWING_HELIUM,
+            Identifier.of(Radik.MOD_ID, "block/fluid/helium_still"),
+            Identifier.of(Radik.MOD_ID, "block/fluid/helium_flow")
+        );
+    }
+
+    private static void registerGasRenderer(FlowableFluid still, FlowableFluid flowing, Identifier stillTexture, Identifier flowingTexture) {
+        BlockRenderLayerMap.putFluids(BlockRenderLayer.TRANSLUCENT, still, flowing);
+        FluidRenderHandlerRegistry.INSTANCE.register(still, flowing, new GasFluidRenderer(stillTexture, flowingTexture, 0x30FFFFFF));
+    }
+}

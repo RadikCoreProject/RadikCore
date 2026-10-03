@@ -1,0 +1,11 @@
+{
+    "type": "minecraft:blasting",
+    "category": "misc",
+    "cookingtime": 2000,
+    "experience": 20,
+    "group": "ingot",
+    "ingredient": "radik:uranus_raw",
+    "result": {
+        "id": "radik:uranus_ingot"
+    }
+}

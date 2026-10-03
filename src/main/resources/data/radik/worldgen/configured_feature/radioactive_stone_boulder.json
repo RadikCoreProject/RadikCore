@@ -1,0 +1,19 @@
+{
+  "type": "radik:boulder_feature",
+  "config": {
+    "base": {
+      "Name": "minecraft:stone"
+    },
+    "chance": 20,
+    "ground": false,
+    "ores": [
+      {
+        "Name": "radik:uranus_ore"
+      },
+      {
+        "Name": "radik:lead_ore"
+      }
+    ],
+    "volume": 200
+  }
+}
