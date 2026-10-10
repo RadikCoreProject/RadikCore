@@ -151,12 +151,11 @@ public class PacketRegistration {
         String owner = stack.get(OWNER);
         String dimension = getDimension(world);
         Duplet<Integer, Boolean> duplet = Teleporter.calculateCooldown(stack, pos, player.getEntityPos(), world);
+        Integer cooldown = duplet.type();
+        Boolean b = duplet.parametrize();
 
-        if (duplet.parametrize() == null || duplet.type() == null) {
-            return;
-        }
-        int cooldown = duplet.type();
-        if (teleporter != null && name.equals(owner) && duplet.parametrize() && !dimension.equals("end")) {
+        if (cooldown == null || b == null) return;
+        if (teleporter != null && name.equals(owner) && b && !dimension.equals("end")) {
             stack.set(POSITION, player.getEntityPos());
             player.teleport(
                 world,

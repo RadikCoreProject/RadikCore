@@ -1,8 +1,6 @@
 package com.radik.mixin.book;
 
 import com.radik.MixinData;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.EditBox;
 import net.minecraft.client.gui.screen.ingame.BookEditScreen;
 import net.minecraft.client.gui.widget.EditBoxWidget;
@@ -21,12 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.event.KeyEvent;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Locale;
 
-@Environment(EnvType.CLIENT)
 @Mixin({BookEditScreen.class})
 public class BookEditScreenMixin {
     @Shadow private EditBoxWidget editBox;
@@ -36,50 +30,14 @@ public class BookEditScreenMixin {
     @Shadow private PageTurnWidget nextPageButton;
     @Shadow private void updatePreviousPageButtonVisibility() {}
 
-    @Unique private static Field EDIT_BOX_FIELD;
-
-    @Unique
-    private int getSelectionStart(EditBox editBox) {
-        try {
-            Method getSelection = EditBox.class.getDeclaredMethod("getSelection");
-            getSelection.setAccessible(true);
-            Object selection = getSelection.invoke(editBox);
-            Field beginField = selection.getClass().getDeclaredField("beginIndex");
-            beginField.setAccessible(true);
-            return (int) beginField.get(selection);
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    @Unique
-    private int getSelectionEnd(EditBox editBox) {
-        try {
-            Method getSelection = EditBox.class.getDeclaredMethod("getSelection");
-            getSelection.setAccessible(true);
-            Object selection = getSelection.invoke(editBox);
-            Field endField = selection.getClass().getDeclaredField("endIndex");
-            endField.setAccessible(true);
-            return (int) endField.get(selection);
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    static {
-        try {
-            EDIT_BOX_FIELD = EditBoxWidget.class.getDeclaredField("editBox");
-            EDIT_BOX_FIELD.setAccessible(true);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Inject(method = "keyPressed", at = @At("HEAD"), cancellable = true)
-    private void onKeyPressed(KeyInput input, CallbackInfoReturnable<Boolean> cir) throws IllegalAccessException {
+    @Inject(
+            method = "keyPressed(Lnet/minecraft/client/input/KeyInput;)Z",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private void onKeyPressed(KeyInput input, CallbackInfoReturnable<Boolean> cir) {
         if (this.editBox.active && input.hasCtrl()) {
-            Object innerEditBoxObj = EDIT_BOX_FIELD.get(this.editBox);
-            if (!(innerEditBoxObj instanceof EditBox innerEditBox)) return;
+            EditBox innerEditBox = ((EditBoxWidgetAccessor) this.editBox).getEditBox();
 
             if (input.isPaste()) {
                 String clipboardText = getClipboardText();
@@ -93,14 +51,42 @@ public class BookEditScreenMixin {
                     return;
                 }
             }
+
             switch (input.key()) {
-                case 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 65, 66, 67, 68, 69, 70, 75, 76, 77, 78, 79, 82 -> {
-                    int selStart = getSelectionStart(innerEditBox);
-                    int selEnd = getSelectionEnd(innerEditBox);
-                    if (selStart != selEnd) {
-                        String selected = innerEditBox.getText().substring(selStart, selEnd);
+                case 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
+                     65, 66, 67, 68, 69, 70,
+                     75, 76, 77, 78, 79, 82 -> {
+                    if (innerEditBox.hasSelection()) {
+                        EditBoxSubstringAccessor line = (EditBoxSubstringAccessor)(Object)innerEditBox.getSelection();
+                        int selStart = line.getBeginIndex();
+                        int selEnd = line.getEndIndex();
+                        String text = innerEditBox.getText();
                         String s = "§" + KeyEvent.getKeyText(input.key()).toLowerCase();
-                        innerEditBox.replaceSelection(s + selected.replace("\n", "\n" + s) + "§r");
+
+                        StringBuilder sb = new StringBuilder();
+                        int lastEnd = 0;
+
+                        for (Object line1 : innerEditBox.getLines()) {
+                            int lineStart = ((EditBoxSubstringAccessor) line1).getBeginIndex();
+                            int lineEnd = ((EditBoxSubstringAccessor) line1).getEndIndex();
+
+                            int from = Math.max(lineStart, selStart);
+                            int to = Math.min(lineEnd, selEnd);
+
+                            if (from >= to) continue;
+
+                            sb.append(s);
+                            sb.append(text, from, to);
+                            if (to != selEnd) sb.append("\n");
+                            lastEnd = to;
+                        }
+
+                        if (lastEnd < selEnd) {
+                            sb.append(text, lastEnd, selEnd);
+                        }
+                        sb.append("§r");
+
+                        innerEditBox.replaceSelection(sb.toString());
                         splitPagesIfNeeded();
                         this.updatePage();
                         this.updatePreviousPageButtonVisibility();
@@ -153,8 +139,8 @@ public class BookEditScreenMixin {
 //    }
 
     @ModifyConstant(
-        method = {"appendNewPage"},
-        constant = @Constant(intValue = 100)
+            method = "appendNewPage()V",
+            constant = @Constant(intValue = 100)
     )
     private int maxPages(int original) {
         return MixinData.MAX_BOOK_PAGES;

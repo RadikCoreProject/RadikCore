@@ -6,6 +6,8 @@
     "anvil.AnvilScreenHandlerMixin",
     "anvil.AnvilScreenMixin",
     "book.BookEditScreenMixin",
+    "book.EditBoxSubstringAccessor",
+    "book.EditBoxWidgetAccessor",
     "render.ArmorFeatureRendererMixin",
     "render.LivingEntityRendererMixin",
     "render.LivingEntityRenderStateMixin",
@@ -18,5 +20,7 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+  ]
 }
